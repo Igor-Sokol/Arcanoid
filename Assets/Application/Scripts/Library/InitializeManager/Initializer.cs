@@ -10,7 +10,7 @@ namespace Application.Scripts.Library.InitializeManager
         
         [SerializeField] private MonoBehaviour[] initializing;
 
-        private void Awake()
+        private void Start()
         {
             _initializing = initializing.OfType<IInitializing>().ToArray();
 
