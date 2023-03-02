@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents
 {
-    public class BlockRenderer : MonoBehaviour
+    public class BlockView : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer spriteRenderer;
         

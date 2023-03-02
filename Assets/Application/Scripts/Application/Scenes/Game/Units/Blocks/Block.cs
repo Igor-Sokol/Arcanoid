@@ -1,12 +1,13 @@
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Blocks
 {
     public class Block : MonoBehaviour
     {
-        [SerializeField] private BlockRenderer blockRenderer;
+        [SerializeField] private BlockView blockView;
 
-        public BlockRenderer BlockRenderer => blockRenderer;
+        public BlockView BlockView => blockView;
     }
 }
