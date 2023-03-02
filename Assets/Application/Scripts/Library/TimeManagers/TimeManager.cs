@@ -8,8 +8,14 @@ namespace Application.Scripts.Library.TimeManagers
         [SerializeField] private TimeScaler[] timeScales;
 
         public float DeltaTime => GetDeltaTime();
+        public float Scale => GetScale();
 
         private float GetDeltaTime()
+        {
+            return Time.deltaTime * GetScale();
+        }
+
+        private float GetScale()
         {
             float scale = 1f;
 
@@ -17,8 +23,8 @@ namespace Application.Scripts.Library.TimeManagers
             {
                 scale *= scaler.Scale;
             }
-            
-            return Time.deltaTime * scale;
+
+            return scale;
         }
     }
 }
