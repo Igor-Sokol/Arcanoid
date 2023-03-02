@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1b0ccb905f4e588f05c8ea13cc00e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockRenderer: {fileID: 7432533128270861923}
+  blockView: {fileID: 7432533128270861923}
 --- !u!114 &7432533128270861923
 MonoBehaviour:
   m_ObjectHideFlags: 0
