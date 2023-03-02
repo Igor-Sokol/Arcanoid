@@ -1,4 +1,5 @@
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents;
+using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.BlockView;
 using UnityEngine;
 using UnityEngine.Serialization;
 

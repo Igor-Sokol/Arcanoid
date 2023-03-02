@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents
+namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.BlockView
 {
     public class BlockView : MonoBehaviour
     {
