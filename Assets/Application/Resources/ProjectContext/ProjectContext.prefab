@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4624181201063074744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7626166789666988111}
+  - component: {fileID: 2353485706838721185}
+  - component: {fileID: 1488778516023876904}
+  m_Layer: 0
+  m_Name: Localization
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7626166789666988111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624181201063074744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5427200369247593891}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2353485706838721185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624181201063074744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97273c3dd090456691bf23fee7f8ae9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 11400000, guid: d94e9b66872687f418752d311a63dd25, type: 2}
+--- !u!114 &1488778516023876904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4624181201063074744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5bd65dc42fd426381fc9ee2236cbf05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localizationManager: {fileID: 2353485706838721185}
 --- !u!1 &5149058031068642428
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,6 +85,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 7626166789666988111}
   - {fileID: 7193273675133619233}
   m_Father: {fileID: 9074700651947529679}
   m_RootOrder: 0
@@ -41,6 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7193273675133619233}
   - component: {fileID: 95883461274466270}
+  - component: {fileID: 2723743177023435461}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -60,7 +120,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5427200369247593891}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &95883461274466270
 MonoBehaviour:
@@ -85,11 +145,11 @@ MonoBehaviour:
     SerializationNodes:
     - Name: scenes
       Entry: 7
-      Data: 0|System.Collections.Generic.Dictionary`2[[Application.Scripts.Library.SceneManagers.Scene,
+      Data: 0|System.Collections.Generic.Dictionary`2[[Application.Scripts.Library.SceneManagers.Contracts.SceneInfo.Scene,
         Assembly-CSharp],[System.String, mscorlib]], mscorlib
     - Name: comparer
       Entry: 7
-      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Application.Scripts.Library.SceneManagers.Scene,
+      Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Application.Scripts.Library.SceneManagers.Contracts.SceneInfo.Scene,
         Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
@@ -147,6 +207,19 @@ MonoBehaviour:
       Data: 
   loadings:
   - {fileID: 0}
+--- !u!114 &2723743177023435461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8819566560391021929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e631ad4da254b50a00d1ddfbb3ecf11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneManager: {fileID: 95883461274466270}
 --- !u!1 &9074700651947529681
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,4 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb53d87cfd6ba0b42bb3cda711807136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serviceInstallers: []
+  serviceInstallers:
+  - {fileID: 1488778516023876904}
+  - {fileID: 2723743177023435461}
