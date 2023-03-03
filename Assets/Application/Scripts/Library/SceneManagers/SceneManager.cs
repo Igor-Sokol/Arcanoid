@@ -9,6 +9,7 @@ namespace Application.Scripts.Library.SceneManagers
     public class SceneManager : MonoBehaviour
     {
         private AsyncOperation _sceneLoadingHandler;
+        private Coroutine _sceneLoading;
         
         [SerializeField] private SceneInfo[] scenes;
         [SerializeField] private SceneLoading[] loadings;
@@ -19,14 +20,21 @@ namespace Application.Scripts.Library.SceneManagers
             where TScene : SceneInfo
             where TLoading : SceneLoading
         {
-            SceneArgs = sceneArgs;
-
-            SceneInfo sceneInfo = scenes.OfType<TScene>().FirstOrDefault();
-            SceneLoading loading = loadings.OfType<TLoading>().FirstOrDefault();
-
-            if (sceneInfo && loading)
+            if (_sceneLoading == null)
             {
-                StartCoroutine(LoadScene(sceneInfo, loading));
+                SceneArgs = sceneArgs;
+
+                SceneInfo sceneInfo = scenes.OfType<TScene>().FirstOrDefault();
+                SceneLoading loading = loadings.OfType<TLoading>().FirstOrDefault();
+
+                if (sceneInfo && loading)
+                {
+                    _sceneLoading = StartCoroutine(LoadScene(sceneInfo, loading));
+                }
+            }
+            else
+            {
+                Debug.LogError("Scene already loading.");
             }
         }
         
@@ -39,6 +47,7 @@ namespace Application.Scripts.Library.SceneManagers
 
             yield return loading.Disable();
             _sceneLoadingHandler = null;
+            _sceneLoading = null;
         }
     }
 }
