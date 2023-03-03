@@ -1,35 +1,35 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Library.SceneManagers.Contracts.Loading;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Application.Scripts.Library.SceneManagers
 {
-    public class SceneManager : MonoBehaviour
+    public class SceneManager : SerializedMonoBehaviour
     {
         private AsyncOperation _sceneLoadingHandler;
         private Coroutine _sceneLoading;
         
-        [SerializeField] private SceneInfo[] scenes;
         [SerializeField] private SceneLoading[] loadings;
-        
+        [SerializeField] private Dictionary<Scene, string> scenes;
+
         public SceneArgs SceneArgs { get; private set; }
         
-        public void LoadScene<TScene, TLoading>(SceneArgs sceneArgs) 
-            where TScene : SceneInfo
+        public void LoadScene<TLoading>(Scene scene, SceneArgs sceneArgs)
             where TLoading : SceneLoading
         {
             if (_sceneLoading == null)
             {
                 SceneArgs = sceneArgs;
-
-                SceneInfo sceneInfo = scenes.OfType<TScene>().FirstOrDefault();
+                
                 SceneLoading loading = loadings.OfType<TLoading>().FirstOrDefault();
 
-                if (sceneInfo && loading)
+                if (loading && scenes.TryGetValue(scene, out string sceneName))
                 {
-                    _sceneLoading = StartCoroutine(LoadScene(sceneInfo, loading));
+                    _sceneLoading = StartCoroutine(LoadScene(sceneName, loading));
                 }
             }
             else
@@ -38,11 +38,11 @@ namespace Application.Scripts.Library.SceneManagers
             }
         }
         
-        private IEnumerator LoadScene(SceneInfo sceneInfo, ISceneLoading loading)
+        private IEnumerator LoadScene(string sceneName, ISceneLoading loading)
         {
             yield return loading.Enable();
 
-            _sceneLoadingHandler = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneInfo.SceneName);
+            _sceneLoadingHandler = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(sceneName);
             yield return _sceneLoadingHandler;
 
             yield return loading.Disable();
