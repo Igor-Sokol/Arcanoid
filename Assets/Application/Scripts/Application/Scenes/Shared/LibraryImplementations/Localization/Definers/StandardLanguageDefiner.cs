@@ -3,7 +3,7 @@ using Application.Scripts.Library.Localization.Configs;
 using Application.Scripts.Library.Localization.LanguageDefiners.Contracts;
 using UnityEngine;
 
-namespace Application.Scripts.Library.Localization.LanguageDefiners.Implementations
+namespace Application.Scripts.Application.Scenes.Shared.LibraryImplementations.Localization.Definers
 {
     public class StandardLanguageDefiner : LanguageDefiner
     {

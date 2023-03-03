@@ -1,18 +1,24 @@
+using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.Localization.LocalizationManagers;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace Application.Scripts.Library.Localization.LocalizeEvents
+namespace Application.Scripts.Application.Scenes.Shared.LibraryImplementations.Localization.LocalizeEvents
 {
     public class LocalizeString : MonoBehaviour
     {
         private LocalizationManager _localizationManager;
         
+        [SerializeField] private TMP_Text updateString;
         [SerializeField] private string stringKey;
-        [SerializeField] private UnityEvent<string> updateString;
 
         private void OnEnable()
         {
+            if (!_localizationManager)
+            {
+                SetLocalizationManager(ProjectContext.Instance.GetService<LocalizationManager>());
+            }
+            
             if (_localizationManager)
             {
                 _localizationManager.OnLanguageChanged += OnUpdateString;
@@ -41,7 +47,7 @@ namespace Application.Scripts.Library.Localization.LocalizeEvents
 
         private void OnUpdateString()
         {
-            updateString?.Invoke(_localizationManager.GetString(stringKey));
+            updateString.text = _localizationManager.GetString(stringKey);
         }
     }
 }
