@@ -9,25 +9,18 @@ namespace Application.Scripts.Library.ObjectPools
     {
         private readonly Stack<T> _items = new Stack<T>();
         private readonly Func<T> _factory;
-        private readonly IObjectRemover<T> _objectRemover;
-        private readonly IGetAction<T> _getAction;
-        private readonly IReturnAction<T> _returnAction;
 
         public int ItemCount => _items.Count;
 
-        public ObjectPool(Func<T> factory, IObjectRemover<T> objectRemover, 
-            IGetAction<T> getAction = null, IReturnAction<T> returnAction = null)
+        public ObjectPool(Func<T> factory)
         {
             _factory = factory ?? throw new ArgumentNullException(nameof(factory));
-            _objectRemover = objectRemover ?? throw new ArgumentNullException(nameof(objectRemover));
-            _getAction = getAction;
-            _returnAction = returnAction;
         }
         
         public T Get()
         {
             var item = _items.Count > 0 ? _items.Pop() : CreateItem();
-            _getAction?.OnGetAction(item);
+            GetAction(item);
 
             return item;
         }
@@ -35,7 +28,7 @@ namespace Application.Scripts.Library.ObjectPools
         public void Return(T item)
         {
             _items.Push(item);
-            _returnAction.OnReturnAction(item);
+            ReturnAction(item);
         }
 
         public void Resize(int itemCount)
@@ -58,13 +51,25 @@ namespace Application.Scripts.Library.ObjectPools
             for (int i = 0; i < count; i++)
             {
                 var item = _items.Pop();
-                _objectRemover.OnRemove(item);
+                RemoveAction(item);
             }
         }
         
         private T CreateItem()
         {
             return _factory?.Invoke();
+        }
+        
+        protected virtual void GetAction(T item)
+        {
+        }
+
+        protected virtual void ReturnAction(T item)
+        {
+        }
+
+        protected virtual void RemoveAction(T item)
+        {
         }
     }
 }
