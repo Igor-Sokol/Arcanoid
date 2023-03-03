@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Library.GameActionManagers.Contracts;
@@ -8,44 +9,63 @@ namespace Application.Scripts.Library.GameActionManagers
 {
     public class GameActionManager : MonoBehaviour
     {
-        private readonly List<ActionTimer> _timers = new List<ActionTimer>();
+        private readonly Dictionary<Type, List<ActionTimer>> _timers = new Dictionary<Type, List<ActionTimer>>();
 
         private void Update()
         {
-            foreach (var timer in _timers)
+            foreach (var timers in _timers)
             {
-                timer.Update(Time.deltaTime);
+                foreach (var timer in timers.Value)
+                {
+                    timer.Update(Time.deltaTime);
+                }
             }
         }
 
         public ActionHandler StartAction(IGameAction gameAction, float time, IActionTimeScale timeScale = null)
         {
-            ActionTimer counter = GetTimer();
+            ActionTimer counter = GetTimer<IGameAction>();
             return counter.Start(gameAction, time, timeScale);
         }
 
         public IEnumerable<ActionHandler> GetGameAction<T>() 
             where T : IGameAction
         {
-            return _timers.Where(t => t.ActionHandler.GetType() == typeof(T)).Select(t => t.ActionHandler);
-        }
-        
-        private ActionTimer GetTimer()
-        {
-            ActionTimer counter = null;
-
-            foreach (var timerCounter in _timers.Where(timerCounter => !timerCounter.Active))
+            if (_timers.TryGetValue(typeof(T), out List<ActionTimer> timers))
             {
-                counter = timerCounter;
+                return timers.Where(t => t.GameAction != null).Select(t => t.ActionHandler);
             }
 
-            return counter ??= CreateTimer();
+            return null;
         }
         
-        private ActionTimer CreateTimer()
+        private ActionTimer GetTimer<T>() 
+            where T : IGameAction
+        {
+            ActionTimer counter = null;
+            
+            if (_timers.TryGetValue(typeof(T), out List<ActionTimer> timers))
+            {
+                counter = timers.FirstOrDefault(t => !t.Active);
+            }
+
+            return counter ??= CreateTimer<T>();
+        }
+        
+        private ActionTimer CreateTimer<T>() 
+            where T : IGameAction
         {
             ActionTimer counter = new ActionTimer();
-            _timers.Add(counter);
+
+            Type key = typeof(T);
+            if (_timers.ContainsKey(key))
+            {
+                _timers[key].Add(counter);
+            }
+            else
+            {
+                _timers.Add(key, new List<ActionTimer>() { counter });
+            }
 
             return counter;
         }

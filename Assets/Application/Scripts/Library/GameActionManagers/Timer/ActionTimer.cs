@@ -46,6 +46,7 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
         public void Stop()
         {
             _gameAction = null;
+            ActionHandler = default;
             Active = false;
         }
 
