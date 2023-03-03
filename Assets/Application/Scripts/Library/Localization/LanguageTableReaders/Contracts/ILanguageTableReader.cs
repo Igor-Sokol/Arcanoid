@@ -5,6 +5,6 @@ namespace Application.Scripts.Library.Localization.LanguageTableReaders.Contract
 {
     public interface ILanguageTableReader
     {
-        IEnumerable<KeyValuePair<string, string>> ReadTable(LanguageInfo languageInfo);
+        Dictionary<string, string> ReadTable(LanguageInfo languageInfo);
     }
 }

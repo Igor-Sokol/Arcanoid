@@ -6,6 +6,6 @@ namespace Application.Scripts.Library.Localization.LanguageTableReaders.Contract
 {
     public abstract class LanguageTableReader : MonoBehaviour, ILanguageTableReader
     {
-        public abstract IEnumerable<KeyValuePair<string, string>> ReadTable(LanguageInfo languageInfo);
+        public abstract Dictionary<string, string> ReadTable(LanguageInfo languageInfo);
     }
 }

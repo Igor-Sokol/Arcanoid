@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Application.Scripts.Library.Localization.Configs;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Application.Scripts.Library.Localization.LocalizationManagers
