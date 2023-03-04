@@ -17,6 +17,8 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         [SerializeField] private Rigidbody2D rigidbody2d;
         [SerializeField] private float speed;
 
+        public Vector2 Velocity => new Vector2(_direction * speed, 0f);
+
         public void Initialize()
         {
             UpdateAvailablePosition(platformSize.Size);
