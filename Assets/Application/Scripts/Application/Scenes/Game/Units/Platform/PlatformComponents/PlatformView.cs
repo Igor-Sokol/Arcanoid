@@ -26,7 +26,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
 
         private void OnPlatformSizeChanged(Vector2 size)
         {
-            boxCollider2d.size = size;
+            boxCollider2d.size = new Vector2(size.x, boxCollider2d.size.y);
             wingSpriteRenderer.size = new Vector2(size.x, wingSpriteRenderer.size.y);
         }
     }
