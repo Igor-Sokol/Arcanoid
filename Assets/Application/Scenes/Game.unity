@@ -151,6 +151,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 245597118}
   - {fileID: 1503443676}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -168,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializing:
+  - {fileID: 245597119}
   - {fileID: 2055855771}
   - {fileID: 2136928610}
   - {fileID: 1419262391}
@@ -404,11 +406,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   row1:
-  - IronBlock
   - StrongBlock
-  - IronBlock
-  - IronBlock
-  - IronBlock
+  - StrongBlock
+  - null
+  - StrongBlock
+  - StrongBlock
   row2:
   - IronBlock
   - StrongBlock
@@ -418,9 +420,53 @@ MonoBehaviour:
   row3:
   - IronBlock
   - IronBlock
+  - null
   - IronBlock
-  - StrongBlock
   - IronBlock
+--- !u!1 &245597117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 245597118}
+  - component: {fileID: 245597119}
+  m_Layer: 0
+  m_Name: DependencyInstallers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &245597118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245597117}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 62773538}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &245597119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245597117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91a95800e5948aebcf26093cb648801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockProvider: {fileID: 2055855771}
 --- !u!1 &272010673
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,7 +955,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 62773538}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1503443677
 MonoBehaviour:
