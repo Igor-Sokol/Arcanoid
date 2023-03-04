@@ -19,5 +19,13 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
                 AddService(service);
             }
         }
+
+        private void OnCollisionEnter2D(Collision2D col)
+        {
+            foreach (var service in Services)
+            {
+                service.OnHitAction();
+            }
+        }
     }
 }
