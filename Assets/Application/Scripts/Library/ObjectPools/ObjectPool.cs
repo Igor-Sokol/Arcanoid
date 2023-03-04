@@ -57,7 +57,9 @@ namespace Application.Scripts.Library.ObjectPools
         
         private T CreateItem()
         {
-            return _factory?.Invoke();
+            var item = _factory?.Invoke();
+            ReturnAction(item);
+            return item;
         }
         
         protected virtual void GetAction(T item)
