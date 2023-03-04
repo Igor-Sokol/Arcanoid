@@ -1,5 +1,5 @@
 using Application.Scripts.Application.Scenes.Game.GameInstallers.LevelInstallers.PackPlacers.Contracts;
-using Application.Scripts.Application.Scenes.Game.Pools.BlockProvider.Contracts;
+using Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Application.Scenes.Game.Units.Levels;
 using Application.Scripts.Application.Scenes.Game.Units.Levels.Services.Readers.Contracts;
