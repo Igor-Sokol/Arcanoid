@@ -9,6 +9,14 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
     {
         [SerializeField] private DestroyService[] destroyServices;
 
+        public void Destroy()
+        {
+            foreach (var service in destroyServices)
+            {
+                service.OnDestroyAction();
+            }
+        }
+        
         public void PrepareReuse()
         {
             Clear();

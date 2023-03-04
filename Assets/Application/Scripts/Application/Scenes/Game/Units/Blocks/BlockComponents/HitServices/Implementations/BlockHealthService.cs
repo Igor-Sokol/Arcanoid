@@ -1,4 +1,5 @@
 using System;
+using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.DestroyServices;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.HitServices.Contracts;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
     {
         private int _actualHealth;
 
+        [SerializeField] private DestroyServiceManager destroyManager;
         [SerializeField] private int startHealth;
 
         public event Action<int> OnHealthRemoved;
@@ -22,6 +24,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
             if (_actualHealth <= 0)
             {
                 OnDead?.Invoke();
+                destroyManager.Destroy();
             }
         }
 
