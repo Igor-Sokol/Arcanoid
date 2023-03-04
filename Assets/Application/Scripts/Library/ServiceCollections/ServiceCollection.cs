@@ -33,8 +33,8 @@ namespace Application.Scripts.Library.ServiceCollections
             
             IEnumerable<TService> Get()
             {
-                int lastIndex = _services.Count - 1;
-                for (int i = lastIndex; i >= 0; i++)
+                int count = _services.Count;
+                for (int i = 0; i < count; i++)
                 {
                     TService service = _services[i];
                     if (service != null)
