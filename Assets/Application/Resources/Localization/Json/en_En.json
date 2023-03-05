@@ -1,4 +1,5 @@
 {
   "button.play":"Play",
-  "button.exit":"Exit"
+  "button.exit":"Exit",
+  "game.button.menu" : "MENU"
 }
