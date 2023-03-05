@@ -1,6 +1,6 @@
 using Application.Scripts.Application.Scenes.Game.GameInstallers.SceneManagers.SceneInfo;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
-using Application.Scripts.Application.Scenes.Shared.LevelManagement.Level.ScriptableObjects;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.ScriptableObjects;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.SceneManagers;

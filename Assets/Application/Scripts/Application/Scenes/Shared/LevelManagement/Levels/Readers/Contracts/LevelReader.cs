@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Level.Readers.Contracts
+namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts
 {
     public abstract class LevelReader : MonoBehaviour, ILevelReader
     {

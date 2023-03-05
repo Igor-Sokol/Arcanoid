@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using Application.Scripts.Application.Scenes.Shared.LevelManagement.Level.Readers.Contracts;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Level.Readers.Implementations.Json
+namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Implementations.Json
 {
     public class JsonLevelReader : LevelReader
     {

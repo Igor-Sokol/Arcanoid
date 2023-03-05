@@ -1,8 +1,8 @@
 using System;
-using Application.Scripts.Application.Scenes.Shared.LevelManagement.Level.Readers.Contracts;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts;
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Level
+namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels
 {
     [Serializable]
     public struct LevelInfo

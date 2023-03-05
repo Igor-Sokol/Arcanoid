@@ -1,7 +1,7 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers;
 using Application.Scripts.Application.Scenes.Game.Units.Platform;
-using Application.Scripts.Application.Scenes.Shared.LevelManagement.Level;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers
