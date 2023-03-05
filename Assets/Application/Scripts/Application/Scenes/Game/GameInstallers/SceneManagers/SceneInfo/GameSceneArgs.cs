@@ -1,4 +1,4 @@
-using Application.Scripts.Application.Scenes.Game.Units.Levels;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Level;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 
 namespace Application.Scripts.Application.Scenes.Game.GameInstallers.SceneManagers.SceneInfo
