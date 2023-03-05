@@ -15,13 +15,19 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         [SerializeField] private BlockProvider blockProvider;
         [SerializeField] private PackPlacer packPlacer;
 
-        public IEnumerable<Block> Blocks => _blocks.SelectMany(blocks => blocks);
+        public IEnumerable<Block> Blocks => _blocks?.SelectMany(blocks => blocks);
 
         public void PrepareReuse()
         {
-            foreach (var block in Blocks)
+            if (_blocks != null)
             {
-                block.PrepareReuse();
+                foreach (var block in Blocks)
+                {
+                    block.PrepareReuse();
+                    blockProvider.Return(block);
+                }
+                
+                _blocks = null;
             }
         }
         
@@ -39,6 +45,22 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
             }
             
             packPlacer.Place(_blocks);
+        }
+
+        public void RemoveBlock(Block block)
+        {
+            foreach (var blocks in _blocks)
+            {
+                for (int i = 0; i < blocks.Length; i++)
+                {
+                    if (blocks[i] == block)
+                    {
+                        blocks[i] = null;
+                        blockProvider.Return(block);
+                        return;
+                    }
+                }
+            }
         }
     }
 }

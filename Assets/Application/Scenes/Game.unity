@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91a95800e5948aebcf26093cb648801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockProvider: {fileID: 2055855771}
+  blockManager: {fileID: 1892767360}
 --- !u!1 &255428926
 GameObject:
   m_ObjectHideFlags: 0

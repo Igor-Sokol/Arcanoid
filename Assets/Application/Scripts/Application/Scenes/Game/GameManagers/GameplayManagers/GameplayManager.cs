@@ -16,6 +16,9 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
 
         public void StartGame(LevelInfo levelInfo)
         {
+            blockManager.PrepareReuse();
+            ballsManager.PrepareReuse();
+
             blockManager.SetBlocks(levelReader.ReadPack(levelInfo));
             platform.BallLauncher.SetBall(ballsManager.GetBall());
         }

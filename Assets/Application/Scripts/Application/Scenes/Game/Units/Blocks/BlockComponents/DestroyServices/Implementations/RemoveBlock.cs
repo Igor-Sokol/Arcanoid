@@ -1,24 +1,24 @@
-using Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Contracts;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.DestroyServices.Contracts;
 using Application.Scripts.Library.DependencyInjection;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.DestroyServices.Implementations
 {
-    public class ReturnToPool : DestroyService
+    public class RemoveBlock : DestroyService
     {
-        private IBlockProvider _blockProvider;
+        private BlockManager _blockManager;
 
         [SerializeField] private Block block;
         
         public override void PrepareReuse()
         {
-            _blockProvider = ProjectContext.Instance.GetService<IBlockProvider>();
+            _blockManager = ProjectContext.Instance.GetService<BlockManager>();
         }
 
         public override void OnDestroyAction()
         {
-            _blockProvider.Return(block);
+            _blockManager.RemoveBlock(block);
         }
     }
 }
