@@ -1,10 +1,10 @@
 using System.Linq;
-using Application.Scripts.Application.Scenes.Game.GameInstallers.LevelInstallers.PackPlacers.Contracts;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlacers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Library.ScreenInfo;
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Game.GameInstallers.LevelInstallers.PackPlacers.Implementations
+namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlacers.Implementations
 {
     public class LeftAnchorPlacer : PackPlacer
     {
