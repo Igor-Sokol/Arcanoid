@@ -76,7 +76,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1.6, y: 0.48}
+  m_Size: {x: 1.184, y: 0.384}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -227,7 +227,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6, y: 0.48}
+  m_Size: {x: 1.184, y: 0.384}
   m_EdgeRadius: 0
 --- !u!50 &4132521968533964720
 Rigidbody2D:
@@ -295,8 +295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minSizePercentage: {x: 0.6, y: 1}
   maxSizePercentage: {x: 1, y: 1}
-  startSizePercentage: {x: 0.8, y: 1}
-  maxSize: {x: 2, y: 0.48}
+  startSizePercentage: {x: 0.74, y: 1}
+  maxSize: {x: 1.6, y: 0.384}
 --- !u!114 &2136928608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,7 +329,7 @@ MonoBehaviour:
   initializing:
   - {fileID: 2136928607}
   - {fileID: 2136928608}
-  - {fileID: 2136928609}
+  - {fileID: 2136928606}
 --- !u!1 &4132521969056398906
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7304863887221703823}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.38, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4132521968533964735}
@@ -407,4 +407,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultLaunchDirection: {x: 0, y: 1}
   playerInput: {fileID: 0}
-  platformMover: {fileID: 0}
+  platformMover: {fileID: 2136928608}
