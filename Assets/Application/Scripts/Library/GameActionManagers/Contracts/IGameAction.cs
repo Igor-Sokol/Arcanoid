@@ -5,5 +5,6 @@ namespace Application.Scripts.Library.GameActionManagers.Contracts
         void OnBegin(float secondsLeft);
         void OnUpdate(float secondsLeft);
         void OnComplete();
+        void OnStop();
     }
 }
