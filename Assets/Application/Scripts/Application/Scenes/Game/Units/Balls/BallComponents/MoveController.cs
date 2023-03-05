@@ -1,9 +1,10 @@
 using Application.Scripts.Library.Extensions.Vector;
+using Application.Scripts.Library.Reusable;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
 {
-    public class MoveController : MonoBehaviour
+    public class MoveController : MonoBehaviour, IReusable
     {
         private Vector2 _previousDirection;
         private Vector2 _currentDirection;
@@ -14,6 +15,13 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         
         public bool PhysicActive { get => rigidbody2d.isKinematic; set => rigidbody2d.isKinematic = !value; }
 
+        public void PrepareReuse()
+        {
+            _currentDirection = default;
+            _previousDirection = default;
+            PhysicActive = false;
+        }
+        
         public void SetDirection(Vector2 direction)
         {
             direction = direction.normalized;
