@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 2136928606}
   - component: {fileID: 2136928607}
   - component: {fileID: 2136928608}
-  - component: {fileID: 505191698335225743}
+  - component: {fileID: 2291090291181938515}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -314,7 +314,7 @@ MonoBehaviour:
   playerInput: {fileID: 0}
   rigidbody2d: {fileID: 4132521968533964720}
   speed: 4
---- !u!114 &505191698335225743
+--- !u!114 &2291090291181938515
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -323,13 +323,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4132521968533964732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 532ec220e5cc482baee3d23357fdec14, type: 3}
+  m_Script: {fileID: 11500000, guid: 5eba19aa66ea40ecb6811a841f5a2987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initializing:
   - {fileID: 2136928607}
   - {fileID: 2136928608}
-  - {fileID: 2136928606}
+  - {fileID: 2136928609}
 --- !u!1 &4132521969056398906
 GameObject:
   m_ObjectHideFlags: 0
