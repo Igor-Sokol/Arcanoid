@@ -1,5 +1,6 @@
 using Application.Scripts.Application.Scenes.Game.GameInstallers.SceneManagers.SceneInfo;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Level.ScriptableObjects;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.SceneManagers;
@@ -13,6 +14,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.SceneManage
         private GameSceneArgs _sceneArgs;
 
         [SerializeField] private GameplayManager gameplayManager;
+        [SerializeField] private ScriptableLevelInfo defaultLevelInfo;
         
         public void Initialize()
         {
@@ -22,7 +24,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.SceneManage
         public override void StartScene()
         {
             _sceneArgs = ProjectContext.Instance.GetService<SceneManager>().SceneArgs as GameSceneArgs;
-            gameplayManager.StartGame(_sceneArgs?.LevelInfo ?? default);
+            gameplayManager.StartGame(_sceneArgs?.LevelInfo ?? defaultLevelInfo.LevelInfo);
         }
     }
 }
