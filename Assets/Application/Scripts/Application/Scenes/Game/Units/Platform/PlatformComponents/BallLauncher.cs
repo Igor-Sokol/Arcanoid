@@ -1,5 +1,5 @@
 using System;
-using Application.Scripts.Application.Scenes.Game.PlayingField.PlayerInputs;
+using Application.Scripts.Application.Scenes.Game.Screen.UI.PlayerInputs;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
 using UnityEngine;
 

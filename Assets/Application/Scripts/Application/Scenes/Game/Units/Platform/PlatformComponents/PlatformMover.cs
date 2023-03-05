@@ -1,4 +1,4 @@
-using Application.Scripts.Application.Scenes.Game.PlayingField.PlayerInputs;
+using Application.Scripts.Application.Scenes.Game.Screen.UI.PlayerInputs;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.ScreenInfo;
 using UnityEngine;

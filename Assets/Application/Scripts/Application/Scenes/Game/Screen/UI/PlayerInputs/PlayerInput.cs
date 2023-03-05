@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Application.Scripts.Application.Scenes.Game.PlayingField.PlayerInputs
+namespace Application.Scripts.Application.Scenes.Game.Screen.UI.PlayerInputs
 {
     public class PlayerInput : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
     {
