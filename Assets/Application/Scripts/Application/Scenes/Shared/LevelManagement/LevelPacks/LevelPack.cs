@@ -17,6 +17,7 @@ namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPac
         public string PackNameKey => packNameKey;
         public Sprite PackImage => packImage;
         public LevelInfo[] Levels => ReadLevels();
+        public int LevelCount => levelNames.Length;
 
         private LevelInfo[] ReadLevels()
         {
