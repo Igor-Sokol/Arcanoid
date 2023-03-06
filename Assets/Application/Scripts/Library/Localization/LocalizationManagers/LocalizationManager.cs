@@ -30,14 +30,8 @@ namespace Application.Scripts.Library.Localization.LocalizationManagers
                 languageConfig = config.DefaultLanguage;
             }
             _currentLanguage = languageConfig;
-
-            _languageTable = new Dictionary<string, string>();
             
-            var keyValuePairs = _currentLanguage.LanguageTableReader.ReadTable(_currentLanguage.LanguageInfo);
-            foreach (var pair in keyValuePairs)
-            {
-                _languageTable.Add(pair.Key, pair.Value);
-            }
+            _languageTable = _currentLanguage.LanguageTableReader.ReadTable(_currentLanguage.LanguageInfo);
 
             OnLanguageChanged?.Invoke();
         }
