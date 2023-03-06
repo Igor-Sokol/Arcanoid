@@ -12,5 +12,11 @@ namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels
 
         public string Path => path;
         public LevelReader LevelReader => levelReader;
+
+        public LevelInfo(string path, LevelReader levelReader)
+        {
+            this.path = path;
+            this.levelReader = levelReader;
+        }
     }
 }

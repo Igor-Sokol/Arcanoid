@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.TransferObjects;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.TransferObjects.BlockInfo;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.TransferObjects.Level;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -22,12 +26,12 @@ namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.R
         {
             TextAsset levelInfo = Resources.Load<TextAsset>(level.Path);
 
-            JObject file = JObject.Parse(levelInfo.text);
+            var levelTransferObject = JsonConvert.DeserializeObject<LevelTransferObject>(levelInfo.text);
 
-            int height = file["height"].Value<int>();
-            int width = file["width"].Value<int>();
-            
-            int[] data = file["data"].Select(d => d.Value<int>()).ToArray();
+            int height = levelTransferObject.Height;
+            int width = levelTransferObject.Width;
+
+            int[] data = levelTransferObject.Data;
 
             string[][] blockKeys = new string[height][];
             for (int i = 0, index = 0; i < height; i++)
@@ -54,20 +58,14 @@ namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.R
         private void ReadBlocksInfo()
         {
             TextAsset blocksInfo = Resources.Load<TextAsset>(blocksInfoPath);
-            
-            JObject file = JObject.Parse(blocksInfo.text);
-            JToken blocks = file["tiles"];
-            
-            foreach (var block in blocks)
-            {
-                int id = block["id"].Value<int>();
 
-                foreach (var blockKeyProperty in block["properties"].Where(p => p["name"].Value<string>() == "BlockKey"))
-                {
-                    _blocks.Add(++id, blockKeyProperty["value"].Value<string>());
-                }
+            BlockInfoTransfer block = JsonConvert.DeserializeObject<BlockInfoTransfer>(blocksInfo.text);
+
+            foreach (var tile in block.Blocks)
+            {
+                _blocks.Add(tile.Id + 1, tile.Properties.FirstOrDefault(p => p.Name == "BlockKey").Value);
             }
-            
+
             Resources.UnloadAsset(blocksInfo);
         }
     }

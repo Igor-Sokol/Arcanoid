@@ -1,6 +1,7 @@
-using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.ScriptableObjects;
+using System.Linq;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPacks
 {
@@ -9,10 +10,17 @@ namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPac
     {
         [SerializeField] private string packNameKey;
         [SerializeField] private Sprite packImage;
-        [SerializeField] private ScriptableLevelInfo[] levels;
+        [SerializeField] private LevelReader levelReader;
+        [SerializeField] private string packPath;
+        [SerializeField] private string[] levelNames;
 
         public string PackNameKey => packNameKey;
         public Sprite PackImage => packImage;
-        public ScriptableLevelInfo[] Levels => levels;
+        public LevelInfo[] Levels => ReadLevels();
+
+        private LevelInfo[] ReadLevels()
+        {
+            return levelNames.Select(p => new LevelInfo(packPath + p, levelReader)).ToArray();
+        }
     }
 }

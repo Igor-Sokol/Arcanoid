@@ -2504,7 +2504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameplayManager: {fileID: 255428928}
-  defaultLevelInfo: {fileID: 11400000, guid: 88d29731f1a752f43ba023bd429ae474, type: 2}
+  defaultLevelInfo: {fileID: 11400000, guid: 615138ef7036e3a4f9d54afae6f6eec5, type: 2}
 --- !u!1 &1747601525
 GameObject:
   m_ObjectHideFlags: 0
