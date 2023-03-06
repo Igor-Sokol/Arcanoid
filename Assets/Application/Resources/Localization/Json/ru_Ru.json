@@ -1,5 +1,9 @@
 {
+  "pack1.name" : "Сигара",
+  "pack2.name" : "Сомбреро",
   "button.play":"Играть",
-  "button.exit":"Выход",
-  "game.button.menu" : "МЕНЮ"
+  "game.button.menu" : "МЕНЮ",
+  "button.back" : "НАЗАД",
+  "pack.galaxy" : "ГАЛАКТИКА",
+  "choose.pack.closeName" : "НЕ ОБНАРУЖЕНА"
 }

@@ -1,5 +1,9 @@
 {
+  "pack1.name" : "Cigar",
+  "pack2.name" : "Sombrero",
   "button.play":"Play",
-  "button.exit":"Exit",
-  "game.button.menu" : "MENU"
+  "game.button.menu" : "MENU",
+  "button.back" : "BACK",
+  "pack.galaxy" : "Galaxy",
+  "choose.pack.closeName" : "NOT DETECTED"
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LocalizationManager
   m_EditorClassIdentifier: 
   languageSettings:
-  - {fileID: 11400000, guid: aed6428d69dc30d40b18059e1fea7724, type: 2}
+  - {fileID: 11400000, guid: efb87b7b7cc597b4c9e620bb767d0830, type: 2}
   - {fileID: 11400000, guid: 534ebf8919ce4d642882ba280c53a600, type: 2}
-  defaultLanguage: {fileID: 11400000, guid: aed6428d69dc30d40b18059e1fea7724, type: 2}
+  defaultLanguage: {fileID: 11400000, guid: efb87b7b7cc597b4c9e620bb767d0830, type: 2}
   languageDefiner: {fileID: 2590149231190875267, guid: 67473b583e03b7749bb682dbcfd34731, type: 3}
