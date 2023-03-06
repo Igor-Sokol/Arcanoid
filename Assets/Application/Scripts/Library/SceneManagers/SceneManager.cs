@@ -3,28 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Library.SceneManagers.Contracts.Loading;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
+using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Application.Scripts.Library.SceneManagers
 {
-    public class SceneManager : SerializedMonoBehaviour
+    public class SceneManager : SerializedMonoBehaviour, ISceneManager
     {
         private AsyncOperation _sceneLoadingHandler;
         private Coroutine _sceneLoading;
         
         [SerializeField] private SceneLoading[] loadings;
         [SerializeField] private Dictionary<Scene, string> scenes;
-
-        public SceneArgs SceneArgs { get; private set; }
         
-        public void LoadScene<TLoading>(Scene scene, SceneArgs sceneArgs)
+        public void LoadScene<TLoading>(Scene scene)
             where TLoading : SceneLoading
         {
             if (_sceneLoading == null)
             {
-                SceneArgs = sceneArgs;
-                
                 SceneLoading loading = loadings.OfType<TLoading>().FirstOrDefault();
 
                 if (loading && scenes.TryGetValue(scene, out string sceneName))

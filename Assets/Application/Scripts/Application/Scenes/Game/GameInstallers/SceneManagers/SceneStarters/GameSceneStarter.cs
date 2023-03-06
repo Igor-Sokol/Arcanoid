@@ -1,10 +1,8 @@
-using System.Linq;
-using Application.Scripts.Application.Scenes.Game.GameInstallers.SceneManagers.SceneInfo;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
-using Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPacks;
+using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
+using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Implementations;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
-using Application.Scripts.Library.SceneManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.Starter;
 using UnityEngine;
 
@@ -12,10 +10,10 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.SceneManage
 {
     public class GameSceneStarter : SceneStarter, IInitializing
     {
-        private GameSceneArgs _sceneArgs;
+        private IPackInfo _sceneArgs;
 
         [SerializeField] private GameplayManager gameplayManager;
-        [SerializeField] private LevelPack defaultLevelInfo;
+        [SerializeField] private PackInfoMono defaultPackInfo;
         
         public void Initialize()
         {
@@ -24,8 +22,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.SceneManage
         
         public override void StartScene()
         {
-            _sceneArgs = ProjectContext.Instance.GetService<SceneManager>().SceneArgs as GameSceneArgs;
-            gameplayManager.StartGame(_sceneArgs?.LevelInfo ?? defaultLevelInfo.Levels.First());
+            var packInfo = ProjectContext.Instance.GetService<IPackInfo>();
+            gameplayManager.StartGame(packInfo ?? defaultPackInfo);
         }
     }
 }
