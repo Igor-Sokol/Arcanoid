@@ -1,5 +1,6 @@
 using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlacers.Contracts;
+using Application.Scripts.Application.Scenes.Game.Screen.UI.Header;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Library.ScreenInfo;
 using UnityEngine;
@@ -9,21 +10,25 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
     public class LeftAnchorPlacer : PackPlacer
     {
         [SerializeField] private ScreenInfo screenInfo;
+        [SerializeField] private HeaderSize headerSize;
         [SerializeField] private Vector2 screenOffsetPercentage;
-        [SerializeField] private Vector2 blockSpacePercentage;
+        [SerializeField] private Vector2 blockSpace;
         [SerializeField] private Vector2 fieldSpacePercentage;
 
         public override void Place(Block[][] blocks)
         {
-            Vector2 screenOffset = new Vector2(screenInfo.ScreenSize.x * screenOffsetPercentage.x, screenInfo.ScreenSize.y * screenOffsetPercentage.y);
+            Vector2 screenOffset = new Vector2(screenInfo.ScreenSize.x * screenOffsetPercentage.x,
+                screenInfo.ScreenSize.y * screenOffsetPercentage.y);
+            screenOffset -= new Vector2(0, headerSize.Size.y);
+
             Vector2 fieldSpaceOffset =
-                new Vector2(screenInfo.ScreenSize.x * fieldSpacePercentage.x, screenInfo.ScreenSize.y * fieldSpacePercentage.y);
-            Vector2 blockSpaceOffset =
-                new Vector2(screenInfo.ScreenSize.x * blockSpacePercentage.x, screenInfo.ScreenSize.y * blockSpacePercentage.y);
+                new Vector2(screenInfo.ScreenSize.x * fieldSpacePercentage.x,
+                    (screenInfo.ScreenSize.y - headerSize.Size.y) * fieldSpacePercentage.y);
+
 
             float maxBlocksInRow = blocks.Max(b => b.Length);
             float freeXSpace = screenInfo.ScreenSize.x - (fieldSpaceOffset.x * 2f) -
-                               (blockSpaceOffset.x * maxBlocksInRow + blockSpaceOffset.x);
+                               (blockSpace.x * maxBlocksInRow + blockSpace.x);
             float blockXSize = freeXSpace / maxBlocksInRow;
         
             Vector2 maxBlockSize = FindBiggestBlock(blocks).BlockView.Sprite.bounds.size;
@@ -37,7 +42,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
             for (int row = 0; row < blocks.Length; row++)
             {
                 Vector2 position = positionAnchor - new Vector2(0f, targetBlockSize.y * row);
-                position += new Vector2(blockSpaceOffset.x, -blockSpaceOffset.y * row);
+                position += new Vector2(blockSpace.x, -blockSpace.y * row);
             
                 for (int column = 0; column < blocks[row].Length; column++)
                 {
@@ -53,7 +58,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                         blockTransform.localScale = new Vector3(scale, scale, scale);
                     }
 
-                    position += new Vector2(targetBlockSize.x + blockSpaceOffset.x, 0);
+                    position += new Vector2(targetBlockSize.x + blockSpace.x, 0);
                 }
             }
         }
