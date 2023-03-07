@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers;
@@ -9,9 +10,22 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
 {
     public class GameplayManager : MonoBehaviour
     {
+        [SerializeField] private HealthManager.HealthManager healthManager;
         [SerializeField] private BlockManager blockManager;
         [SerializeField] private BallsManager ballsManager;
         [SerializeField] private Platform platform;
+
+        private void OnEnable()
+        {
+            ballsManager.OnAllBallRemoved += OnMissedBalls;
+            healthManager.OnDead += OnPlayerLose;
+        }
+
+        private void OnDisable()
+        {
+            ballsManager.OnAllBallRemoved -= OnMissedBalls;
+            healthManager.OnDead -= OnPlayerLose;
+        }
 
         public void StartGame(IPackInfo packInfo)
         {
@@ -21,6 +35,26 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
             var level = packInfo.LevelPack.Levels.FirstOrDefault();
             blockManager.SetBlocks(level.LevelReader.ReadPack(level));
             platform.BallLauncher.SetBall(ballsManager.GetBall());
+        }
+
+        private void OnMissedBalls()
+        {
+            healthManager.RemoveHealth();
+
+            if (healthManager.CurrentHealth > 0)
+            {
+                platform.BallLauncher.SetBall(ballsManager.GetBall());
+            }
+        }
+
+        private void OnPlayerLose()
+        {
+            
+        }
+
+        private void OnPlayerWin()
+        {
+            
         }
     }
 }

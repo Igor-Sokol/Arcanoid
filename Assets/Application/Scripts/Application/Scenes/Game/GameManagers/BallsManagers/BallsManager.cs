@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
@@ -14,7 +15,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
 
         public int BallsCount => _activeBalls.Count;
         public IEnumerable<Ball> Balls => _activeBalls;
-
+        public event Action OnAllBallRemoved;
+        
         public Ball GetBall()
         {
             var ball = ballProvider.GetBall();
@@ -27,6 +29,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
         {
             _activeBalls.Remove(ball);
             ballProvider.Return(ball);
+
+            if (_activeBalls.Count <= 0)
+            {
+                OnAllBallRemoved?.Invoke();
+            }
         }
 
         public void PrepareReuse()

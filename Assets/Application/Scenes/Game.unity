@@ -643,6 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9b11b5db704a0c841c0e0188bd2431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthManager: {fileID: 2115584323}
   blockManager: {fileID: 1892767360}
   ballsManager: {fileID: 1014367157}
   platform: {fileID: 2064026646}
@@ -2505,6 +2506,7 @@ GameObject:
   - component: {fileID: 1498065947}
   - component: {fileID: 1498065948}
   - component: {fileID: 1498065949}
+  - component: {fileID: 1498065950}
   m_Layer: 0
   m_Name: BallDeadZone
   m_TagString: Untagged
@@ -2568,6 +2570,19 @@ MonoBehaviour:
   - {x: 0, y: -0.1}
   - {x: 1, y: -0.1}
   - {x: 1, y: 0}
+--- !u!114 &1498065950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498065946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44f9b116c7524d2d8911f4b0eb0b830b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballsManager: {fileID: 1014367157}
 --- !u!1 &1646890860
 GameObject:
   m_ObjectHideFlags: 0
