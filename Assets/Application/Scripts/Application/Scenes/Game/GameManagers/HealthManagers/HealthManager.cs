@@ -1,10 +1,11 @@
 using System;
 using Application.Scripts.Library.InitializeManager.Contracts;
+using Application.Scripts.Library.Reusable;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers
 {
-    public class HealthManager : MonoBehaviour, IInitializing
+    public class HealthManager : MonoBehaviour, IInitializing, IReusable
     {
         private int _currentHealth;
         
@@ -17,10 +18,17 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.HealthManager
         public event Action OnHealthAdded;
         public event Action OnHealthRemoved;
         public event Action OnDead;
+        public event Action OnPrepareReuse;
 
         public void Initialize()
         {
             _currentHealth = Mathf.Clamp(startHealth, 0, maxHealth);
+        }
+
+        public void PrepareReuse()
+        {
+            Initialize();
+            OnPrepareReuse?.Invoke();
         }
         
         public void AddHealth()

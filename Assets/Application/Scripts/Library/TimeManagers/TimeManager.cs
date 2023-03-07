@@ -1,37 +1,39 @@
 using System.Collections.Generic;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Application.Scripts.Library.TimeManagers
 {
     public class TimeManager : MonoBehaviour
     {
-        private List<ITimeScaler> _timeScales;
+        [SerializeField] private List<TimeScaler> timeScales;
 
-        public IEnumerable<ITimeScaler> TimeScales => _timeScales; 
-        public float DeltaTime => GetDeltaTime();
+        public IEnumerable<TimeScaler> TimeScales => timeScales;
+        public float DeltaTime => Time.deltaTime * Scale;
+        public float FixedDeltaTime => Time.fixedDeltaTime * Scale;
         public float Scale => GetScale();
 
-        public void AddTimeScaler(ITimeScaler scaler)
+        public void AddTimeScaler(TimeScaler scaler)
         {
-            _timeScales.Add(scaler);
+            timeScales.Add(scaler);
         }
 
-        public void RemoveTimeScaler(ITimeScaler scaler)
+        public void RemoveTimeScaler(TimeScaler scaler)
         {
-            _timeScales.Remove(scaler);
+            timeScales.Remove(scaler);
         }
-        
-        private float GetDeltaTime()
+
+        public void ClearTimeScales()
         {
-            return Time.deltaTime * GetScale();
+            timeScales.Clear();
         }
 
         private float GetScale()
         {
             float scale = 1f;
 
-            foreach (var scaler in _timeScales)
+            foreach (var scaler in timeScales)
             {
                 scale *= scaler.Scale;
             }

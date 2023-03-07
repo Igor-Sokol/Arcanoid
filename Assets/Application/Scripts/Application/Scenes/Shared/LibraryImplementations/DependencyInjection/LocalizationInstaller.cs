@@ -15,7 +15,7 @@ namespace Application.Scripts.Application.Scenes.Shared.LibraryImplementations.D
         public override void InstallService()
         {
             localizationManager.LoadLanguage();
-            ProjectContext.Instance.SetService<LocalizationManager, LocalizationManager>(localizationManager);
+            ProjectContext.Instance.SetService<ILocalizationManager, LocalizationManager>(localizationManager);
         }
     }
 }

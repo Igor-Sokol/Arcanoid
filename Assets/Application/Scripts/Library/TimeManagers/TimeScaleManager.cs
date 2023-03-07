@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Application.Scripts.Library.TimeManagers
 {
-    public class TimeScaleManager : MonoBehaviour
+    public class TimeScaleManager : MonoBehaviour, ITimeScaleManager
     {
-        private Dictionary<Type, ITimeScaler> _timeScales;
+        private readonly Dictionary<Type, TimeScaler> _timeScales = new Dictionary<Type, TimeScaler>();
 
         [SerializeField] private List<TimeScaler> timeScales;
 
@@ -19,12 +19,12 @@ namespace Application.Scripts.Library.TimeManagers
             }
         }
 
-        public ITimeScaler GetTimeScale<T>()
-            where T : ITimeScaler
+        public T GetTimeScale<T>()
+            where T : TimeScaler
         {
             if (_timeScales.TryGetValue(typeof(T), out var scale))
             {
-                return scale;
+                return (T)scale;
             }
 
             return null;

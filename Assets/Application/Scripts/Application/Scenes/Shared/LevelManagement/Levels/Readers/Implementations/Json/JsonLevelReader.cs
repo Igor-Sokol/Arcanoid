@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts;
-using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.TransferObjects;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.TransferObjects.BlockInfo;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.TransferObjects.Level;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Implementations.Json
@@ -61,6 +59,7 @@ namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.R
 
             BlockInfoTransfer block = JsonConvert.DeserializeObject<BlockInfoTransfer>(blocksInfo.text);
 
+            _blocks.Clear();
             foreach (var tile in block.Blocks)
             {
                 _blocks.Add(tile.Id + 1, tile.Properties.FirstOrDefault(p => p.Name == "BlockKey").Value);

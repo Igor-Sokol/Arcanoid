@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Library.Localization.LocalizationManagers
 {
-    public class LocalizationManager : MonoBehaviour
+    public class LocalizationManager : MonoBehaviour, ILocalizationManager
     {
         private LanguageConfig _currentLanguage;
         private Dictionary<string, string> _languageTable;

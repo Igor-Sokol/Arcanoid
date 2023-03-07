@@ -31,19 +31,21 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
         {
             return _currentLevelIndex >= _levels.Count ? _levels[_levels.Count - 1] : _levels[_currentLevelIndex];
         }
-        
-        public bool TryGetNextLevel(out LevelInfo levelInfo)
-        {
-            _currentLevelIndex++;
 
-            if (_currentLevelIndex >= _levels.Count)
+        public IPackInfo GetCurrentPackInfo()
+        {
+            return new PackInfo(_packInfo.LevelPack, _currentLevelIndex);
+        }
+        
+        public bool TrySetNextLevel()
+        {
+            if (_currentLevelIndex + 1 >= _levels.Count)
             {
-                levelInfo = default;
                 return false;
             }
             else
             {
-                levelInfo = _levels[_currentLevelIndex];
+                _currentLevelIndex++;
                 return true;
             }
         }

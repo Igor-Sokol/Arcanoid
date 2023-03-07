@@ -1,4 +1,5 @@
 using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Components;
+using Application.Scripts.Application.Scenes.Shared.ProgressView;
 using UnityEngine;
 using UnityEngine.UI;
 
