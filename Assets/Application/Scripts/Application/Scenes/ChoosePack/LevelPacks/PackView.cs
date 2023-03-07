@@ -1,25 +1,25 @@
 using System;
 using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Components;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPacks;
+using Application.Scripts.Application.Scenes.Shared.ProgressView;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
 {
     public class PackView : MonoBehaviour, IInitializing
     {
-        private LocalizationManager _localizationManager;
+        private ILocalizationManager _localizationManager;
         private LevelPack _levelPack;
         
         [SerializeField] private Image packBackground;
         [SerializeField] private Image packImage;
         [SerializeField] private TMP_Text packName;
-        [FormerlySerializedAs("progress")] [SerializeField] private ProgressView progressView;
+        [SerializeField] private ProgressView progressView;
         [SerializeField] private Button button;
         [SerializeField] private Sprite closedBackground;
         [SerializeField] private Sprite currentBackground;
@@ -31,7 +31,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
 
         public void Initialize()
         {
-            _localizationManager = ProjectContext.Instance.GetService<LocalizationManager>();
+            _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
         }
         
         public void Configure(LevelPack levelPack, PackState packState, int completedLevel)
