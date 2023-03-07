@@ -1,3 +1,4 @@
+using System;
 using Application.Scripts.Library.PopUpManagers.AnimationContracts;
 
 namespace Application.Scripts.Library.PopUpManagers.PopUpContracts
@@ -6,6 +7,8 @@ namespace Application.Scripts.Library.PopUpManagers.PopUpContracts
     {
         bool Active { get; }
         IPopUpAnimator PopUpAnimator { get; set; }
+        event Action OnShown;
+        event Action OnHidden;
         void Show();
         void Hide();
     }
