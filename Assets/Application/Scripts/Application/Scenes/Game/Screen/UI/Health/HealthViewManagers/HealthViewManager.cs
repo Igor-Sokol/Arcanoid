@@ -4,14 +4,17 @@ using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthViews;
 using Application.Scripts.Library.InitializeManager.Contracts;
+using Application.Scripts.Library.ObjectPools;
+using Application.Scripts.Library.Reusable;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthViewManagers
 {
-    public class HealthViewManager : MonoBehaviour, IInitializing
+    public class HealthViewManager : MonoBehaviour, IInitializing, IReusable
     {
         private readonly List<HealthView> _healthViews = new List<HealthView>();
+        private ObjectPoolMono<HealthView> _healthViewPool;
         private Vector2 _viewImageSize;
 
         [SerializeField] private HealthView healthViewPrefab;
@@ -22,6 +25,19 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthVie
 
         public void Initialize()
         {
+            _healthViewPool = new ObjectPoolMono<HealthView>(() => Instantiate(healthViewPrefab, container), container);
+            healthManager.OnPrepareReuse += PrepareReuse;
+            PrepareReuse();
+        }
+        
+        public void PrepareReuse()
+        {
+            foreach (var healthView in _healthViews)
+            {
+                _healthViewPool.Return(healthView);
+            }
+            _healthViews.Clear();
+            
             SetViewScale(healthManager.MaxHealth);
             GenerateViews(healthManager.MaxHealth);
             InitViews(healthManager.CurrentHealth);
@@ -51,7 +67,9 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthVie
         {
             for (int i = 0; i < viewCount; i++)
             {
-                var view = Instantiate(healthViewPrefab, container);
+                var view = _healthViewPool.Get();
+                view.PrepareReuse();
+                view.transform.SetSiblingIndex(i);
                 _healthViews.Add(view);
             }
         }
@@ -66,7 +84,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthVie
             Vector2 contentSpace;
             contentSpace.x = weigh * gridLayoutGroup.spacing.x;
             contentSpace.y = height * Mathf.CeilToInt(viewCount / (float)gridLayoutGroup.constraintCount) * gridLayoutGroup.spacing.y;
-
+            
             Vector2 spaceSize = rectTransform.rect.size - contentSpace;
             spaceSize /= new Vector2(weigh, height);
 
