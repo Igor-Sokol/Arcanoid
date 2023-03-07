@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlacers.Contracts;
@@ -16,6 +17,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         [SerializeField] private PackPlacer packPlacer;
 
         public IEnumerable<Block> Blocks => _blocks?.SelectMany(blocks => blocks);
+        public event Action<Block> OnBlockRemoved;
 
         public void PrepareReuse()
         {
@@ -23,8 +25,10 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
             {
                 foreach (var block in Blocks)
                 {
-                    block.PrepareReuse();
-                    blockProvider.Return(block);
+                    if (block)
+                    {
+                        blockProvider.Return(block);
+                    }
                 }
                 
                 _blocks = null;
@@ -40,7 +44,9 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                 _blocks[i] = new Block[blockKeys[i].Length];
                 for (int j = 0; j < blockKeys[i].Length; j++)
                 {
-                    _blocks[i][j] = blockProvider.GetBlock(blockKeys[i][j]);
+                    var block = blockProvider.GetBlock(blockKeys[i][j]);
+                    block.PrepareReuse();
+                    _blocks[i][j] = block;
                 }
             }
             
@@ -57,6 +63,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                     {
                         blocks[i] = null;
                         blockProvider.Return(block);
+                        OnBlockRemoved?.Invoke(block);
                         return;
                     }
                 }
