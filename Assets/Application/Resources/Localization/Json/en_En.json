@@ -2,8 +2,13 @@
   "pack1.name" : "Cigar",
   "pack2.name" : "Sombrero",
   "button.play":"Play",
-  "game.button.menu" : "MENU",
-  "button.back" : "BACK",
+  "game.button.menu" : "Menu",
+  "button.back" : "Back",
   "pack.galaxy" : "Galaxy",
-  "choose.pack.closeName" : "NOT DETECTED"
+  "choose.pack.closeName" : "Not detected",
+  "game.popup.menu.restart" : "Restart",
+  "game.popup.menu.continue" : "continue",
+  "game.popup.lose.title" : "You lose!",
+  "game.popup.win.title" : "You win!",
+  "game.popup.menu.next" : "continue"
 }

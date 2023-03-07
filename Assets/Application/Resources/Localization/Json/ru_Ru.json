@@ -2,8 +2,13 @@
   "pack1.name" : "Сигара",
   "pack2.name" : "Сомбреро",
   "button.play":"Играть",
-  "game.button.menu" : "МЕНЮ",
-  "button.back" : "НАЗАД",
-  "pack.galaxy" : "ГАЛАКТИКА",
-  "choose.pack.closeName" : "НЕ ОБНАРУЖЕНА"
+  "game.button.menu" : "Меню",
+  "button.back" : "Назад",
+  "pack.galaxy" : "Галактика",
+  "choose.pack.closeName" : "Не обнаружена",
+  "game.popup.menu.restart" : "Рестарт",
+  "game.popup.menu.continue" : "Продолжить",
+  "game.popup.lose.title" : "Вы проиграли!",
+  "game.popup.win.title" : "Вы выиграли!",
+  "game.popup.menu.next" : "Далее"
 }
