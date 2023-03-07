@@ -719,7 +719,7 @@ MonoBehaviour:
   packBackground: {fileID: 9219491407390467171}
   packImage: {fileID: 7798052127411640697}
   packName: {fileID: 4481076936070531758}
-  progress: {fileID: 9004416117909486349}
+  progressView: {fileID: 9004416117909486349}
   button: {fileID: 3594344654342674293}
   closedBackground: {fileID: 21300000, guid: a91e8f92a0f1b004b8b3d68c3587c193, type: 3}
   currentBackground: {fileID: 21300000, guid: 74daf8e8ec5c0f840b44c2c54bed3efc, type: 3}

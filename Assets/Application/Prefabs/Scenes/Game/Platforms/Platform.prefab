@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 2136928606}
   - component: {fileID: 2136928607}
   - component: {fileID: 2136928608}
+  - component: {fileID: 3131256224245986529}
   - component: {fileID: 2291090291181938515}
   m_Layer: 0
   m_Name: Platform
@@ -266,6 +267,7 @@ MonoBehaviour:
   platformSize: {fileID: 2136928607}
   platformView: {fileID: 2136928606}
   ballLauncher: {fileID: 1970579459887692357}
+  timeManager: {fileID: 3131256224245986529}
 --- !u!114 &2136928606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +315,21 @@ MonoBehaviour:
   platformSize: {fileID: 2136928607}
   playerInput: {fileID: 0}
   rigidbody2d: {fileID: 4132521968533964720}
+  timeManager: {fileID: 3131256224245986529}
   speed: 4
+--- !u!114 &3131256224245986529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4132521968533964732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ca015889014054b32aaaba2aae382d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScales: []
 --- !u!114 &2291090291181938515
 MonoBehaviour:
   m_ObjectHideFlags: 0
