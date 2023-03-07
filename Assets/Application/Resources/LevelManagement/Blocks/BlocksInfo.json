@@ -6,7 +6,7 @@
                 {
                  "name":"BlockKey",
                  "type":"string",
-                 "value":""
+                 "value":"EasyBlock"
                 }]
         }, 
         {
@@ -15,7 +15,7 @@
                 {
                  "name":"BlockKey",
                  "type":"string",
-                 "value":""
+                 "value":"FragileBlock"
                 }]
         }, 
         {
@@ -42,7 +42,7 @@
                 {
                  "name":"BlockKey",
                  "type":"string",
-                 "value":""
+                 "value":"MediumBlock"
                 }]
         }]
 }
