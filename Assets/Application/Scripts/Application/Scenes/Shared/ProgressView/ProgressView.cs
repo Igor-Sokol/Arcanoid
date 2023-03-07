@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Components
 {
-    public class PackProgress : MonoBehaviour
+    public class ProgressView : MonoBehaviour
     {
         [SerializeField] private TMP_Text progressText;
         [SerializeField] private string mask;

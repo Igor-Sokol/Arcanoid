@@ -2,7 +2,7 @@ using System;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Game.GameManagers.HealthManager
+namespace Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers
 {
     public class HealthManager : MonoBehaviour, IInitializing
     {

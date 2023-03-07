@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManager;
+using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthViews;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;

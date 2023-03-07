@@ -1,5 +1,6 @@
 using System;
-using Application.Scripts.Application.Scenes.ChoosePack.Packs;
+using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks;
+using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Components;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPacks;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;

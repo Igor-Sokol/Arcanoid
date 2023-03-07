@@ -6,9 +6,10 @@ using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Application.Scripts.Application.Scenes.ChoosePack.Packs
+namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
 {
     public class PackView : MonoBehaviour, IInitializing
     {
@@ -18,7 +19,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Packs
         [SerializeField] private Image packBackground;
         [SerializeField] private Image packImage;
         [SerializeField] private TMP_Text packName;
-        [SerializeField] private PackProgress progress;
+        [FormerlySerializedAs("progress")] [SerializeField] private ProgressView progressView;
         [SerializeField] private Button button;
         [SerializeField] private Sprite closedBackground;
         [SerializeField] private Sprite currentBackground;
@@ -66,7 +67,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Packs
 
         private void ConfigureProgress(LevelPack levelPack, int completedLevel)
         {
-            progress.SetProgress(completedLevel, levelPack.LevelCount);
+            progressView.SetProgress(completedLevel, levelPack.LevelCount);
         }
         
         private void ConfigureBackground(PackState packState)

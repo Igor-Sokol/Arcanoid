@@ -1,4 +1,4 @@
-namespace Application.Scripts.Application.Scenes.ChoosePack.Packs
+namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Components
 {
     public enum PackState
     {

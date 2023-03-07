@@ -1,16 +1,15 @@
-using System;
-using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Application.Scenes.Game.Units.Platform;
-using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers
 {
     public class GameplayManager : MonoBehaviour
     {
-        [SerializeField] private HealthManager.HealthManager healthManager;
+        [SerializeField] private HealthManager healthManager;
         [SerializeField] private BlockManager blockManager;
         [SerializeField] private BallsManager ballsManager;
         [SerializeField] private Platform platform;
@@ -27,13 +26,12 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
             healthManager.OnDead -= OnPlayerLose;
         }
 
-        public void StartGame(IPackInfo packInfo)
+        public void StartGame(LevelInfo levelInfo)
         {
             blockManager.PrepareReuse();
             ballsManager.PrepareReuse();
 
-            var level = packInfo.LevelPack.Levels.FirstOrDefault();
-            blockManager.SetBlocks(level.LevelReader.ReadPack(level));
+            blockManager.SetBlocks(levelInfo.LevelReader.ReadPack(levelInfo));
             platform.BallLauncher.SetBall(ballsManager.GetBall());
         }
 
