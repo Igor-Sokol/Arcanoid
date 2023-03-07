@@ -77,13 +77,14 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManage
             ballsManager.PrepareReuse();
 
             _winGamePopUp = _popUpManager.Show<WinGamePopUp>();
+            _winGamePopUp.PrepareReuse();
             _winGamePopUp.Configure(levelPackManager.GetCurrentPackInfo());
 
-            if (!levelPackManager.TrySetNextLevel())
+            if (levelPackManager.CurrentLevelIndex >= levelPackManager.LevelsCount - 1)
             {
                 _winGamePopUp.ContinueButton.interactable = false;
             }
-            
+
             _winGamePopUp.OnContinueSelected += OnContinue;
             _winGamePopUp.OnMenuSelected += OnMenu;
 
@@ -99,6 +100,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManage
         private void OnContinue()
         {
             _activePopUp.Hide();
+            levelPackManager.TrySetNextLevel();
             gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
         }
 

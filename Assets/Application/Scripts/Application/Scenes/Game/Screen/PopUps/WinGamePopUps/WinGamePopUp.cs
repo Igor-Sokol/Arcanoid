@@ -2,12 +2,13 @@ using System;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
 using Application.Scripts.Library.PopUpManagers.AnimationContracts;
 using Application.Scripts.Library.PopUpManagers.PopUpContracts;
+using Application.Scripts.Library.Reusable;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps
 {
-    public class WinGamePopUp : PopUp
+    public class WinGamePopUp : PopUp, IReusable
     {
         [SerializeField] private Button continueButton;
         [SerializeField] private Button menuButton;
@@ -25,6 +26,12 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         public void Configure(IPackInfo packInfo)
         {
             popUpView.Configure(packInfo);
+        }
+        
+        public void PrepareReuse()
+        {
+            menuButton.interactable = true;
+            continueButton.interactable = true;
         }
         
         public override void Show()

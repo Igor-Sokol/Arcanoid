@@ -17,13 +17,15 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
 
         [SerializeField] private PackInfoMono defaultPackInfo;
         [SerializeField] private LevelPackView levelPackView;
-        
+
+        public int CurrentLevelIndex => _currentLevelIndex;
+        public int LevelsCount => _levels.Count;
+
         public void Initialize()
         {
             _packInfo = ProjectContext.Instance.GetService<IPackInfo>() ?? defaultPackInfo;
             _levels = new List<LevelInfo>(_packInfo.LevelPack.Levels);
             _currentLevelIndex = _packInfo.CurrentLevelIndex;
-
             RenderView();
         }
 
@@ -46,13 +48,14 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
             else
             {
                 _currentLevelIndex++;
+                RenderView();
                 return true;
             }
         }
 
         private void RenderView()
         {
-            levelPackView.PackProgress.SetProgress(_currentLevelIndex, _packInfo.LevelPack.LevelCount);
+            levelPackView.PackProgress.SetProgress(_currentLevelIndex + 1, _packInfo.LevelPack.LevelCount);
             levelPackView.LevelProgress.SetProgress(0, 0);
             levelPackView.PackImage = _packInfo.LevelPack.PackImage;
         }

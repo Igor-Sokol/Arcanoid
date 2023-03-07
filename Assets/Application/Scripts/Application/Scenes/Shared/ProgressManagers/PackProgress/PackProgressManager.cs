@@ -26,18 +26,22 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
         {
             if (levelPacks.Contains(packInfo.LevelPack))
             {
+                int levelPackIndex = levelPacks.IndexOf(packInfo.LevelPack);
                 var packTransfer = progressRepository.Load();
-                
-                if (packInfo.CurrentLevelIndex + 1 >= packInfo.LevelPack.LevelCount)
+
+                if (levelPackIndex >= packTransfer.PackIndex)
                 {
-                    var transfer = new PackProgressTransfer(levelPacks.IndexOf(packInfo.LevelPack) + 1, 0);
-                    progressRepository.Save(transfer);
-                }
-                else if (packInfo.CurrentLevelIndex + 1 > packTransfer.CurrentLevelIndex)
-                {
-                    var transfer = new PackProgressTransfer(levelPacks.IndexOf(packInfo.LevelPack),
-                        packInfo.CurrentLevelIndex + 1);
-                    progressRepository.Save(transfer);
+                    if (packInfo.CurrentLevelIndex >= packInfo.LevelPack.LevelCount - 1) 
+                    {
+                        var transfer = new PackProgressTransfer(levelPackIndex + 1, 0);
+                        progressRepository.Save(transfer);
+                    }
+                    else if (packInfo.CurrentLevelIndex >= packTransfer.CurrentLevelIndex)
+                    {
+                        var transfer = new PackProgressTransfer(levelPackIndex,
+                            packInfo.CurrentLevelIndex + 1);
+                        progressRepository.Save(transfer);
+                    }
                 }
             }
         }
