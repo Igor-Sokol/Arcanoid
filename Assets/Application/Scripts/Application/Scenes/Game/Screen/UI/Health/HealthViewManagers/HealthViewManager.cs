@@ -65,7 +65,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthVie
             
             Vector2 contentSpace;
             contentSpace.x = weigh * gridLayoutGroup.spacing.x;
-            contentSpace.y = height * Mathf.CeilToInt(viewCount / (float)gridLayoutGroup.constraintCount) * gridLayoutGroup.spacing.x;
+            contentSpace.y = height * Mathf.CeilToInt(viewCount / (float)gridLayoutGroup.constraintCount) * gridLayoutGroup.spacing.y;
 
             Vector2 spaceSize = rectTransform.rect.size - contentSpace;
             spaceSize /= new Vector2(weigh, height);
