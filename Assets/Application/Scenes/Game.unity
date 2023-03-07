@@ -3302,6 +3302,9 @@ MonoBehaviour:
   prefabs:
   - {fileID: 7432533128270861922, guid: 9e95bf883e4379b46bc94fc77cb65abb, type: 3}
   - {fileID: 7432533128270861922, guid: 52a5b1acd5d71564090c95d728f0b22e, type: 3}
+  - {fileID: 7432533128270861922, guid: 98d86aac47e700c4bab4a79f892cdd58, type: 3}
+  - {fileID: 7432533128270861922, guid: 80782b7156f04e648b641cac8994f12a, type: 3}
+  - {fileID: 7432533128270861922, guid: 2cb02e35f94991d4eada9f71dea92e56, type: 3}
 --- !u!114 &2064026646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2136928609, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
