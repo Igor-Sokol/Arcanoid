@@ -7,19 +7,19 @@ namespace Application.Scripts.Application.Scenes.Shared.LibraryImplementations.L
 {
     public class LocalizeString : MonoBehaviour
     {
-        private LocalizationManager _localizationManager;
+        private ILocalizationManager _localizationManager;
         
         [SerializeField] private TMP_Text updateString;
         [SerializeField] private string stringKey;
 
         private void OnEnable()
         {
-            if (!_localizationManager)
+            if (_localizationManager == null)
             {
-                SetLocalizationManager(ProjectContext.Instance.GetService<LocalizationManager>());
+                SetLocalizationManager(ProjectContext.Instance.GetService<ILocalizationManager>());
             }
             
-            if (_localizationManager)
+            if (_localizationManager != null)
             {
                 _localizationManager.OnLanguageChanged += OnUpdateString;
             }
@@ -27,15 +27,15 @@ namespace Application.Scripts.Application.Scenes.Shared.LibraryImplementations.L
 
         private void OnDisable()
         {
-            if (_localizationManager)
+            if (_localizationManager != null)
             {
                 _localizationManager.OnLanguageChanged -= OnUpdateString;
             }
         }
 
-        public void SetLocalizationManager(LocalizationManager localization)
+        public void SetLocalizationManager(ILocalizationManager localization)
         {
-            if (_localizationManager)
+            if (_localizationManager != null)
             {
                 _localizationManager.OnLanguageChanged -= OnUpdateString;
             }
