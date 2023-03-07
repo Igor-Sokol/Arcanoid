@@ -1,6 +1,7 @@
 using Application.Scripts.Application.Scenes.Game.Screen.UI.PlayerInputs;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.ScreenInfo;
+using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformComponents
@@ -15,6 +16,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         [SerializeField] private PlatformSize platformSize;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private Rigidbody2D rigidbody2d;
+        [SerializeField] private TimeManager timeManager;
         [SerializeField] private float speed;
 
         public Vector2 Velocity => new Vector2(_direction * speed, 0f);
@@ -45,7 +47,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
             _direction = Mathf.Clamp(_targetPosition.x - rigidbody2d.position.x, -1, 1);
 
             Vector2 rigidbody2dPosition = rigidbody2d.position;
-            Vector2 newPosition = new Vector2(rigidbody2dPosition.x + _direction * speed * Time.fixedDeltaTime,
+            Vector2 newPosition = new Vector2(rigidbody2dPosition.x + _direction * speed * timeManager.FixedDeltaTime,
                 rigidbody2dPosition.y);
 
             newPosition = new Vector2(Mathf.Clamp(newPosition.x, _availablePositionRange.x, _availablePositionRange.y),

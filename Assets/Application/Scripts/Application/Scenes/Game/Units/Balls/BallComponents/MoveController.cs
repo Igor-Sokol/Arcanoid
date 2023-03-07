@@ -1,5 +1,6 @@
 using Application.Scripts.Library.Extensions.Vector;
 using Application.Scripts.Library.Reusable;
+using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
@@ -10,6 +11,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         private Vector2 _currentDirection;
         
         [SerializeField] private Rigidbody2D rigidbody2d;
+        [SerializeField] private TimeManager ballTimeManager;
         [SerializeField] private float speed;
         [SerializeField] private float minBounceAngel;
         
@@ -33,10 +35,10 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         {
             if (rigidbody2d.velocity.sqrMagnitude == 0f)
             {
-                SetDirection(_previousDirection);
+                SetDirection(_currentDirection);
             }
             
-            rigidbody2d.velocity = rigidbody2d.velocity.normalized * speed;
+            rigidbody2d.velocity = rigidbody2d.velocity.normalized * (speed * ballTimeManager.FixedDeltaTime);
         }
 
         private void OnCollisionEnter2D(Collision2D col)
