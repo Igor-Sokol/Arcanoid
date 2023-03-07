@@ -28,15 +28,15 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
             {
                 var packTransfer = progressRepository.Load();
                 
-                if (packInfo.CurrentLevelIndex >= packInfo.LevelPack.LevelCount)
+                if (packInfo.CurrentLevelIndex + 1 >= packInfo.LevelPack.LevelCount)
                 {
                     var transfer = new PackProgressTransfer(levelPacks.IndexOf(packInfo.LevelPack) + 1, 0);
                     progressRepository.Save(transfer);
                 }
-                else if (packInfo.CurrentLevelIndex > packTransfer.CurrentLevelIndex)
+                else if (packInfo.CurrentLevelIndex + 1 > packTransfer.CurrentLevelIndex)
                 {
                     var transfer = new PackProgressTransfer(levelPacks.IndexOf(packInfo.LevelPack),
-                        packInfo.CurrentLevelIndex);
+                        packInfo.CurrentLevelIndex + 1);
                     progressRepository.Save(transfer);
                 }
             }
