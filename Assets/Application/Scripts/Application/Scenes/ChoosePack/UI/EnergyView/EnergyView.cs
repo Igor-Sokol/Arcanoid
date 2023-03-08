@@ -38,7 +38,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.UI.EnergyView
 
         private void OnTimeUpdate(float time)
         {
-            timeView.SetTime(time);
+            timeView.SetTime(Mathf.CeilToInt(time));
         }
     }
 }
