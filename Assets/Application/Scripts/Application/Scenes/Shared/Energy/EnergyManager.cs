@@ -30,7 +30,6 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy
         {
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             LoadEnergy();
-            StartFillAction();
         }
         
         public void AddEnergy(int energy)
@@ -59,14 +58,19 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy
             OnEnergyRemoved?.Invoke();
         }
 
-        private void StartFillAction()
+        private void StartFillAction(float timeToFill)
         {
             if (_currentEnergy < config.MaxGenerateEnergy)
             {
                 _fillActionHandler.Stop();
                 var fillAction = new EnergyFillAction(this, StartFillAction, ChangeFillTime);
-                _fillActionHandler = _gameActionManager.StartAction(fillAction, config.EnergyGenerateTime);
+                _fillActionHandler = _gameActionManager.StartAction(fillAction, timeToFill);
             }
+        }
+        
+        private void StartFillAction()
+        {
+            StartFillAction(config.EnergyGenerateTime);
         }
 
         private void ChangeFillTime(float leftTime)
@@ -84,16 +88,19 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy
                 {
                     TimeSpan deltaTime = DateTime.Now - energySave.DateTime;
                     int offlineEnergy = (int)(deltaTime.TotalSeconds / config.EnergyGenerateTime);
-                    AddEnergy(Mathf.Clamp(offlineEnergy + energySave.Energy, 0, config.MaxGenerateEnergy));
+                    StartFillAction(config.EnergyGenerateTime - (int)(deltaTime.TotalSeconds % config.EnergyGenerateTime));
+                    _currentEnergy = Mathf.Clamp(offlineEnergy + energySave.Energy, 0, config.MaxGenerateEnergy);
                 }
                 else
                 {
-                    AddEnergy(energySave.Energy);
+                    StartFillAction();
+                    _currentEnergy = energySave.Energy;
                 }
             }
             else
             {
-                AddEnergy(config.StartEnergy);
+                StartFillAction();
+                _currentEnergy = config.StartEnergy;
             }
         }
     }
