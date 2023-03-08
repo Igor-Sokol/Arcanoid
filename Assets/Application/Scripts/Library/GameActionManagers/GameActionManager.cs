@@ -23,7 +23,7 @@ namespace Application.Scripts.Library.GameActionManagers
             {
                 foreach (var timer in timers.Value)
                 {
-                    timer.Update(Time.deltaTime);
+                    timer.Update(Time.unscaledDeltaTime);
                 }
             }
             _counting = false;

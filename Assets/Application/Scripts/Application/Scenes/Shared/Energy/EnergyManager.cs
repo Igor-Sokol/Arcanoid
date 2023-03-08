@@ -30,6 +30,7 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy
         {
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             LoadEnergy();
+            StartFillAction();
         }
         
         public void AddEnergy(int energy)
@@ -60,9 +61,12 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy
 
         private void StartFillAction()
         {
-            _fillActionHandler.Stop();
-            var fillAction = new EnergyFillAction(this, StartFillAction, ChangeFillTime);
-            _fillActionHandler = _gameActionManager.StartAction(fillAction, config.EnergyGenerateTime);
+            if (_currentEnergy < config.MaxGenerateEnergy)
+            {
+                _fillActionHandler.Stop();
+                var fillAction = new EnergyFillAction(this, StartFillAction, ChangeFillTime);
+                _fillActionHandler = _gameActionManager.StartAction(fillAction, config.EnergyGenerateTime);
+            }
         }
 
         private void ChangeFillTime(float leftTime)

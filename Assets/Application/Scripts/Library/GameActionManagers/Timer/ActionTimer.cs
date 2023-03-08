@@ -35,7 +35,7 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
 
             Time -= time;
             
-            _gameAction?.OnUpdate(time);
+            _gameAction?.OnUpdate(Time);
 
             if (Time <= 0f)
             {
@@ -53,8 +53,9 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
 
         public void Complete()
         {
-            _gameAction?.OnComplete();
+            var gameAction = _gameAction;
             Stop();
+            gameAction.OnComplete();
         }
     }
 }
