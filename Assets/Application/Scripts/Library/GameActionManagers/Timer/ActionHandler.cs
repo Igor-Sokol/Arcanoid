@@ -7,7 +7,7 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
         private readonly ActionTimer _actionTimer;
         private readonly IGameAction _gameAction;
 
-        public bool Valid => _actionTimer.GameAction == _gameAction;
+        public bool Valid => ValidCheck();
         
         public ActionHandler(ActionTimer actionTimer)
         {
@@ -37,6 +37,16 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
             {
                 _actionTimer.Stop();
             }
+        }
+
+        private bool ValidCheck()
+        {
+            if (_actionTimer is { GameAction: { } } && _gameAction != null)
+            {
+                return _actionTimer.GameAction == _gameAction;
+            }
+
+            return false;
         }
     }
 }
