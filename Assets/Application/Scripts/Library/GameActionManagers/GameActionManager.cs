@@ -7,12 +7,18 @@ using UnityEngine;
 
 namespace Application.Scripts.Library.GameActionManagers
 {
-    public class GameActionManager : MonoBehaviour
+    public class GameActionManager : MonoBehaviour, IGameActionManager
     {
         private readonly Dictionary<Type, List<ActionTimer>> _timers = new Dictionary<Type, List<ActionTimer>>();
+        private readonly List<ActionTimer> _timersToInstall = new List<ActionTimer>();
+
+        private bool _counting;
 
         private void Update()
         {
+            InstallNewTimers();
+            
+            _counting = true;
             foreach (var timers in _timers)
             {
                 foreach (var timer in timers.Value)
@@ -20,6 +26,7 @@ namespace Application.Scripts.Library.GameActionManagers
                     timer.Update(Time.deltaTime);
                 }
             }
+            _counting = false;
         }
 
         public ActionHandler StartAction(IGameAction gameAction, float time, IActionTimeScale timeScale = null)
@@ -57,17 +64,41 @@ namespace Application.Scripts.Library.GameActionManagers
         {
             ActionTimer counter = new ActionTimer();
 
-            Type key = typeof(T);
-            if (_timers.ContainsKey(key))
+            if (!_counting)
             {
-                _timers[key].Add(counter);
+                Type key = typeof(T);
+                if (_timers.ContainsKey(key))
+                {
+                    _timers[key].Add(counter);
+                }
+                else
+                {
+                    _timers.Add(key, new List<ActionTimer>() { counter });
+                }
             }
             else
             {
-                _timers.Add(key, new List<ActionTimer>() { counter });
+                _timersToInstall.Add(counter);
             }
 
             return counter;
+        }
+
+        private void InstallNewTimers()
+        {
+            foreach (var actionTimer in _timersToInstall)
+            {
+                Type key = actionTimer.GameAction.GetType();
+                if (_timers.ContainsKey(key))
+                {
+                    _timers[key].Add(actionTimer);
+                }
+                else
+                {
+                    _timers.Add(key, new List<ActionTimer>() { actionTimer });
+                }
+            }
+            _timersToInstall.Clear();
         }
     }
 }
