@@ -19,7 +19,14 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
         public IPackInfo GetCurrentLevel()
         {
             var packTransfer = progressRepository.Load();
-            return new PackInfo(levelPacks[packTransfer.PackIndex], packTransfer.CurrentLevelIndex);
+
+
+            if (packTransfer.PackIndex < levelPacks.Count)
+            {
+                return new PackInfo(levelPacks[packTransfer.PackIndex], packTransfer.CurrentLevelIndex);
+            }
+
+            return new PackInfo(null, 0);
         }
 
         public void CompleteLevel(IPackInfo packInfo)
