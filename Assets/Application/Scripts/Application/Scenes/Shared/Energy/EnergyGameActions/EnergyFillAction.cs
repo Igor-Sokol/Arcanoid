@@ -13,6 +13,7 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy.EnergyGameActions
         {
             _energyManager = energyManager;
             _startFillAction = startFillAction;
+            _timeLeftAction = timeLeftAction;
         }
         
         public void OnBegin(float secondsLeft)
