@@ -88,19 +88,19 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy
                 {
                     TimeSpan deltaTime = DateTime.Now - energySave.DateTime;
                     int offlineEnergy = (int)(deltaTime.TotalSeconds / config.EnergyGenerateTime);
-                    StartFillAction(config.EnergyGenerateTime - (int)(deltaTime.TotalSeconds % config.EnergyGenerateTime));
                     _currentEnergy = Mathf.Clamp(offlineEnergy + energySave.Energy, 0, config.MaxGenerateEnergy);
+                    StartFillAction(config.EnergyGenerateTime - (int)(deltaTime.TotalSeconds % config.EnergyGenerateTime));
                 }
                 else
                 {
-                    StartFillAction();
                     _currentEnergy = energySave.Energy;
+                    StartFillAction();
                 }
             }
             else
             {
-                StartFillAction();
                 _currentEnergy = config.StartEnergy;
+                StartFillAction();
             }
         }
     }
