@@ -1,5 +1,6 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.DifficultyManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManagers;
 using Application.Scripts.Application.Scenes.Game.Units.Platform;
@@ -17,6 +18,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
         private IEnergyManager _energyManager;
 
         [SerializeField] private EnergyValueConfig energyPriceConfig;
+        [SerializeField] private DifficultyManager difficultyManager;
         [SerializeField] private HealthManager healthManager;
         [SerializeField] private BlockManager blockManager;
         [SerializeField] private BlockProgressManager blockProgressManager;
@@ -37,6 +39,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
 
             blockManager.SetBlocks(levelInfo.LevelReader.ReadPack(levelInfo));
             blockProgressManager.PrepareReuse();
+            difficultyManager.PrepareReuse();
             
             SetBall();
         }

@@ -19,6 +19,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManage
 
         public int BrokenBlocks => _brokenBlocks;
         public int TotalBlocks => _totalBlocks;
+        public event Action OnBlockBroken;
         public event Action OnAllBlockBroken;
 
         private void OnEnable()
@@ -46,6 +47,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManage
                 _brokenBlocks++;
                 levelPackView.LevelProgress.SetProgress((int)(_brokenBlocks / (float)_totalBlocks * 100f), 100);
 
+                OnBlockBroken?.Invoke();
+                
                 if (_brokenBlocks == _totalBlocks)
                 {
                     OnAllBlockBroken?.Invoke();
