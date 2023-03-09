@@ -44,7 +44,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.HealthManager
 
             if (_currentHealth <= 0)
             {
-                OnDead.Invoke();
+                OnDead?.Invoke();
             }
         }
     }
