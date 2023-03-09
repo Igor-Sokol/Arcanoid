@@ -16,7 +16,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
     {
         private IEnergyManager _energyManager;
 
-        [SerializeField] private EnergyPriceConfig energyPriceConfig;
+        [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private HealthManager healthManager;
         [SerializeField] private BlockManager blockManager;
         [SerializeField] private BlockProgressManager blockProgressManager;

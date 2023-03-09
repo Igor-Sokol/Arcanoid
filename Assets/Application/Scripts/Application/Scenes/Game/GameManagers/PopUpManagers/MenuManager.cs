@@ -29,7 +29,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private GameplayManager gameplayManager;
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private TimeScaleManager timeScaleManager;
-        [SerializeField] private EnergyPriceConfig energyPriceConfig;
+        [SerializeField] private EnergyValueConfig energyPriceConfig;
 
         public void Initialize()
         {

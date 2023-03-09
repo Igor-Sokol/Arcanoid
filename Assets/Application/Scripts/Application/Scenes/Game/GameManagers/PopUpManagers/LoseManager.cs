@@ -24,7 +24,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private GameplayManager gameplayManager;
         [SerializeField] private HealthManager healthManager;
-        [SerializeField] private EnergyPriceConfig energyPriceConfig;
+        [SerializeField] private EnergyValueConfig energyPriceConfig;
 
         public void Initialize()
         {

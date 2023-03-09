@@ -28,7 +28,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private GameplayManager gameplayManager;
         [SerializeField] private BallsManager ballsManager;
-        [SerializeField] private EnergyPriceConfig energyPriceConfig;
+        [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private BlockProgressManager progressManager;
         
         public void Initialize()
@@ -51,6 +51,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void PlayerWin()
         {
             _packProgressManager.CompleteLevel(levelPackManager.GetCurrentPackInfo());
+            _energyManager.AddEnergy(energyPriceConfig.WinGift);
             ballsManager.PrepareReuse();
 
             _winGamePopUp = _popUpManager.Show<WinGamePopUp>();

@@ -30,7 +30,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         
         [SerializeField] private PackView packViewPrefab;
         [SerializeField] private Transform viewContainer;
-        [FormerlySerializedAs("energyPrices")] [SerializeField] private EnergyPriceConfig energyPriceConfig;
+        [FormerlySerializedAs("energyPrices")] [SerializeField] private EnergyValueConfig energyPriceConfig;
         
         public void Initialize()
         {
