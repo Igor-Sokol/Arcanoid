@@ -1,8 +1,8 @@
 using System;
 using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Components;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPacks;
-using Application.Scripts.Application.Scenes.Shared.ProgressView;
 using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
+using Application.Scripts.Application.Scenes.Shared.UI.StringViews;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Localization.LocalizationManagers;

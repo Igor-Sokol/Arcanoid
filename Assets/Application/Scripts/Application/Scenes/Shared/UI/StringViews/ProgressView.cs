@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Shared.ProgressView
+namespace Application.Scripts.Application.Scenes.Shared.UI.StringViews
 {
     public class ProgressView : MonoBehaviour
     {

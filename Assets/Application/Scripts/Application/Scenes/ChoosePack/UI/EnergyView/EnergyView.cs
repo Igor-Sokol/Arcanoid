@@ -1,5 +1,5 @@
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
-using Application.Scripts.Application.Scenes.Shared.StringViews;
+using Application.Scripts.Application.Scenes.Shared.UI.StringViews;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.UI.EnergyView
         private IEnergyManager _energyManager;
         
         [SerializeField] private Slider slider;
-        [SerializeField] private Shared.ProgressView.ProgressView progressView;
+        [SerializeField] private ProgressView progressView;
         [SerializeField] private TimeView timeView;
 
         public void SetProgress(int currentEnergy, int maxEnergy)

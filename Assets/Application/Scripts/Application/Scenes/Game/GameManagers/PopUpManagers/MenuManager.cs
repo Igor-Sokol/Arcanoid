@@ -14,7 +14,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Menu
+namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
     public class MenuManager : MonoBehaviour, IInitializing
     {

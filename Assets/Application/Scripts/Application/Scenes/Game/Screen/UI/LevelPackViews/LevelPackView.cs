@@ -1,4 +1,4 @@
-using Application.Scripts.Application.Scenes.Shared.ProgressView;
+using Application.Scripts.Application.Scenes.Shared.UI.StringViews;
 using UnityEngine;
 using UnityEngine.UI;
 

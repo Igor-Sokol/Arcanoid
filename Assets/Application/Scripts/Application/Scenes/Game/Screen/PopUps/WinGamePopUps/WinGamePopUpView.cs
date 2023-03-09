@@ -1,5 +1,5 @@
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
-using Application.Scripts.Application.Scenes.Shared.ProgressView;
+using Application.Scripts.Application.Scenes.Shared.UI.StringViews;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using TMPro;

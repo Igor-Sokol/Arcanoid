@@ -2,7 +2,7 @@ using System;
 using TMPro;
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Shared.StringViews
+namespace Application.Scripts.Application.Scenes.Shared.UI.StringViews
 {
     public class TimeView : MonoBehaviour
     {
