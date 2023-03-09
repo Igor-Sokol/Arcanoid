@@ -1,6 +1,6 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers;
-using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers.GameScales;
+using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
