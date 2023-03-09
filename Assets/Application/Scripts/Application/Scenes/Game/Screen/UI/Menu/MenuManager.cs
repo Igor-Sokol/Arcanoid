@@ -2,6 +2,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers.GameScales;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps;
+using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
@@ -10,6 +11,7 @@ using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Menu
@@ -25,6 +27,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Menu
         [SerializeField] private GameplayManager gameplayManager;
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private TimeScaleManager timeScaleManager;
+        [FormerlySerializedAs("energyPrices")] [SerializeField] private EnergyPriceConfig energyPriceConfig;
 
         public void Initialize()
         {
@@ -48,6 +51,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Menu
             _gameTimeScale.Scale = 0;
             _menuPopUp = _popUpManager.Show<MenuPopUp>();
 
+            _menuPopUp.RestartPrice.SetPrice(energyPriceConfig.LevelPrice);
+            
             _menuPopUp.OnRestartSelected += OnRestart;
             _menuPopUp.OnBackSelected += OnMenu;
             _menuPopUp.OnContinueSelected += OnContinue;

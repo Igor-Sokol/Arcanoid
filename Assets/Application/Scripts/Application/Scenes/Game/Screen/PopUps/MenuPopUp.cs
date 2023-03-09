@@ -1,4 +1,5 @@
 using System;
+using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
 using Application.Scripts.Library.PopUpManagers.AnimationContracts;
 using Application.Scripts.Library.PopUpManagers.PopUpContracts;
 using UnityEngine;
@@ -9,11 +10,13 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps
     public class MenuPopUp : PopUp
     {
         [SerializeField] private Button restartButton;
+        [SerializeField] private EnergyPriceView restartPrice;
         [SerializeField] private Button backButton;
         [SerializeField] private Button continueButton;
         
         public override bool Active => gameObject.activeSelf;
         public override IPopUpAnimator PopUpAnimator { get; set; }
+        public EnergyPriceView RestartPrice => restartPrice;
         public override event Action OnShown;
         public override event Action OnHidden;
         public event Action OnRestartSelected;
