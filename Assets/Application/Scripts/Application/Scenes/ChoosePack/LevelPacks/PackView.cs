@@ -2,6 +2,7 @@ using System;
 using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Components;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPacks;
 using Application.Scripts.Application.Scenes.Shared.ProgressView;
+using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Localization.LocalizationManagers;
@@ -15,6 +16,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
     {
         private ILocalizationManager _localizationManager;
         private LevelPack _levelPack;
+        private PackState _packState;
         
         [SerializeField] private Image packBackground;
         [SerializeField] private Image packImage;
@@ -26,7 +28,10 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
         [SerializeField] private Sprite completedBackground;
         [SerializeField] private Sprite closePackImage;
         [SerializeField] private string closePackNameKey;
+        [SerializeField] private EnergyPriceView priceView;
 
+        public bool Interactable { get => button.interactable; set => button.interactable = value; }
+        public PackState State => _packState;
         public event Action<PackView, LevelPack> OnSelected;
 
         public void Initialize()
@@ -34,10 +39,12 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
             _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
         }
         
-        public void Configure(LevelPack levelPack, PackState packState, int completedLevel)
+        public void Configure(LevelPack levelPack, PackState packState, int completedLevel, int price)
         {
             Initialize();
+            _packState = packState;
             _levelPack = levelPack;
+            priceView.SetPrice(price);
 
             ConfigureState(levelPack, packState);
             ConfigureBackground(packState);

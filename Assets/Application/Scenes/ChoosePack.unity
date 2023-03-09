@@ -964,6 +964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   packViewPrefab: {fileID: 8155765253878423674, guid: 9b7cafc5c3e99d6428e6601b4f101dc2, type: 3}
   viewContainer: {fileID: 1683788015}
+  energyPrices: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
 --- !u!1 &1059036797
 GameObject:
   m_ObjectHideFlags: 0

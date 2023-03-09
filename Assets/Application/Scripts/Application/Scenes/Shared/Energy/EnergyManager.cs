@@ -48,6 +48,8 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy
         public void RemoveEnergy(int energy)
         {
             _currentEnergy -= energy;
+            _currentEnergy = Mathf.Clamp(_currentEnergy, 0, _currentEnergy);
+            
             config.EnergyRepository.Save(new EnergySaveObject(_currentEnergy, DateTime.Now));
 
             if (_currentEnergy < config.MaxGenerateEnergy)
@@ -100,6 +102,7 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy
             else
             {
                 _currentEnergy = config.StartEnergy;
+                config.EnergyRepository.Save(new EnergySaveObject(_currentEnergy, DateTime.Now));
                 StartFillAction();
             }
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Shared.Energy.Config
 {
-    [CreateAssetMenu(fileName = "EnergyManager", menuName = "EnergyManager/Config")]
+    [CreateAssetMenu(fileName = "EnergyManager", menuName = "Energy/EnergyManagerConfig")]
     public class EnergyManagerConfig : ScriptableObject
     {
         [SerializeField] private int maxGenerateEnergy;
