@@ -3,6 +3,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers.GameScales;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
+using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
@@ -18,6 +19,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
     public class MenuManager : MonoBehaviour, IInitializing
     {
+        private IEnergyManager _energyManager;
         private IPopUpManager _popUpManager;
         private ISceneManager _sceneManager;
         private MenuPopUp _menuPopUp;
@@ -27,10 +29,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private GameplayManager gameplayManager;
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private TimeScaleManager timeScaleManager;
-        [FormerlySerializedAs("energyPrices")] [SerializeField] private EnergyPriceConfig energyPriceConfig;
+        [SerializeField] private EnergyPriceConfig energyPriceConfig;
 
         public void Initialize()
         {
+            _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _gameTimeScale = timeScaleManager.GetTimeScale<GameTimeScale>();
@@ -51,6 +54,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _gameTimeScale.Scale = 0;
             _menuPopUp = _popUpManager.Show<MenuPopUp>();
 
+            _menuPopUp.RestartActive = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
             _menuPopUp.RestartPrice.SetPrice(energyPriceConfig.LevelPrice);
             
             _menuPopUp.OnRestartSelected += OnRestart;

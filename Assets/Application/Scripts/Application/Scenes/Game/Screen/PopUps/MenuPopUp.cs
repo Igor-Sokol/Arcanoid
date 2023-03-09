@@ -16,6 +16,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps
         
         public override bool Active => gameObject.activeSelf;
         public override IPopUpAnimator PopUpAnimator { get; set; }
+        public bool RestartActive { get => restartButton.interactable; set => restartButton.interactable = value; }
         public EnergyPriceView RestartPrice => restartPrice;
         public override event Action OnShown;
         public override event Action OnHidden;
