@@ -9,5 +9,6 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
         IEnumerable<LevelPack> LevelPacks { get; }
         IPackInfo GetCurrentLevel();
         void CompleteLevel(IPackInfo packInfo);
+        bool TryGetPackIndex(LevelPack pack, out int index);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Application.Scripts.Application.Scenes.Game.Screen.UI.LevelPackViews;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
+using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Implementations;
 using Application.Scripts.Library.DependencyInjection;
@@ -11,6 +12,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
 {
     public class LevelPackManager : MonoBehaviour, IInitializing
     {
+        private IPackProgressManager _packProgressManager;
         private IPackInfo _packInfo;
         private List<LevelInfo> _levels;
         private int _currentLevelIndex;
@@ -23,9 +25,9 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
 
         public void Initialize()
         {
-            _packInfo = ProjectContext.Instance.GetService<IPackInfo>() ?? defaultPackInfo;
-            _levels = new List<LevelInfo>(_packInfo.LevelPack.Levels);
-            _currentLevelIndex = _packInfo.CurrentLevelIndex;
+            _packProgressManager = ProjectContext.Instance.GetService<IPackProgressManager>();
+            var pack = ProjectContext.Instance.GetService<IPackInfo>() ?? defaultPackInfo;
+            LoadPack(pack);
             RenderView();
         }
 
@@ -43,20 +45,37 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
         {
             if (_currentLevelIndex + 1 >= _levels.Count)
             {
+                if (_packProgressManager.TryGetPackIndex(_packInfo.LevelPack, out int currentIndex))
+                {
+                    var lastSavedPack = _packProgressManager.GetCurrentLevel();
+                    _packProgressManager.TryGetPackIndex(lastSavedPack.LevelPack, out int savedIndex);
+
+                    if (currentIndex + 1 == savedIndex)
+                    {
+                        LoadPack(lastSavedPack);
+                        return true;
+                    }
+                }
+                
                 return false;
             }
             else
             {
                 _currentLevelIndex++;
-                RenderView();
                 return true;
             }
         }
 
-        private void RenderView()
+        private void LoadPack(IPackInfo packInfo)
+        {
+            _packInfo = packInfo;
+            _levels = new List<LevelInfo>(_packInfo.LevelPack.Levels);
+            _currentLevelIndex = _packInfo.CurrentLevelIndex;
+        }
+        
+        public void RenderView()
         {
             levelPackView.PackProgress.SetProgress(_currentLevelIndex + 1, _packInfo.LevelPack.LevelCount);
-            levelPackView.LevelProgress.SetProgress(0, 0);
             levelPackView.PackImage = _packInfo.LevelPack.PackImage;
         }
     }

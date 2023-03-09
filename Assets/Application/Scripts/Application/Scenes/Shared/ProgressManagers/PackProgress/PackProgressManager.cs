@@ -29,6 +29,18 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
             return new PackInfo(null, 0);
         }
 
+        public bool TryGetPackIndex(LevelPack pack, out int index)
+        {
+            if (levelPacks.Contains(pack))
+            {
+                index = levelPacks.IndexOf(pack);
+                return true;
+            }
+
+            index = -1;
+            return false;
+        }
+        
         public void CompleteLevel(IPackInfo packInfo)
         {
             if (levelPacks.Contains(packInfo.LevelPack))
