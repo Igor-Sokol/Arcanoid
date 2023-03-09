@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
@@ -22,6 +21,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthVie
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private GridLayoutGroup gridLayoutGroup;
         [SerializeField] private Transform container;
+        [SerializeField] private Vector2 spacePercentage;
 
         public void Initialize()
         {
@@ -77,13 +77,14 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthVie
         private void SetViewScale(int viewCount)
         {
             _viewImageSize = healthViewPrefab.Sprite.rect.size;
+            gridLayoutGroup.spacing = spacePercentage * rectTransform.rect.size;
             
             int weigh = Mathf.Clamp(viewCount, 0, gridLayoutGroup.constraintCount);
             int height = Mathf.CeilToInt(viewCount / (float)gridLayoutGroup.constraintCount);
             
             Vector2 contentSpace;
             contentSpace.x = weigh * gridLayoutGroup.spacing.x;
-            contentSpace.y = height * Mathf.CeilToInt(viewCount / (float)gridLayoutGroup.constraintCount) * gridLayoutGroup.spacing.y;
+            contentSpace.y = height * gridLayoutGroup.spacing.y;
             
             Vector2 spaceSize = rectTransform.rect.size - contentSpace;
             spaceSize /= new Vector2(weigh, height);
