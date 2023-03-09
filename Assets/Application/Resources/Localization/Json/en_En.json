@@ -10,5 +10,6 @@
   "game.popup.menu.continue" : "continue",
   "game.popup.lose.title" : "You lose!",
   "game.popup.win.title" : "You win!",
-  "game.popup.menu.next" : "continue"
+  "game.popup.menu.next" : "continue",
+  "game.button.health" : "Buy health"
 }

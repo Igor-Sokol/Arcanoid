@@ -10,5 +10,6 @@
   "game.popup.menu.continue" : "Продолжить",
   "game.popup.lose.title" : "Вы проиграли!",
   "game.popup.win.title" : "Вы выиграли!",
-  "game.popup.menu.next" : "Далее"
+  "game.popup.menu.next" : "Далее",
+  "game.button.health" : "Купить жизнь"
 }
