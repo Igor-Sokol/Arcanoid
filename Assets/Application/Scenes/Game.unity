@@ -762,6 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressText: {fileID: 101284515}
   mask: '{0}/{1}'
+  progressDuration: 0.3
 --- !u!222 &261240569
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1490,6 +1491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressText: {fileID: 323490400}
   mask: '{0}%'
+  progressDuration: 0.3
 --- !u!222 &562433557
 CanvasRenderer:
   m_ObjectHideFlags: 0

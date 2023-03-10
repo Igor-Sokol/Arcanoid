@@ -625,6 +625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressText: {fileID: 2647132119520416036}
   mask: '{0}/{1}'
+  progressDuration: 0.3
 --- !u!1 &2647132120324099932
 GameObject:
   m_ObjectHideFlags: 0
