@@ -5,7 +5,7 @@ using Application.Scripts.Library.PopUpManagers.PopUpContracts;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps
+namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp
 {
     public class LoseGamePopUp : PopUp
     {
@@ -16,12 +16,10 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps
         [SerializeField] private Button menuButton;
 
         public override bool Active => gameObject.activeSelf;
-        public override IPopUpAnimator PopUpAnimator { get; set; }
         public bool AddHealthActive { get => addHealthButton.interactable; set => addHealthButton.interactable = value; }
         public EnergyPriceView HealthPrice => addHealthPrice;
         public bool RestartActive { get => restartButton.interactable; set => restartButton.interactable = value; }
         public EnergyPriceView RestartPrice => restartPrice;
-        public bool MenuActive { get => menuButton.interactable; set => menuButton.interactable = value; }
         public override event Action OnShown;
         public override event Action OnHidden;
 
@@ -48,29 +46,19 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps
 
         private void OnEnable()
         {
-            addHealthButton.onClick.AddListener(OnAddHealth);
-            restartButton.onClick.AddListener(OnRestart);
-            menuButton.onClick.AddListener(OnMenu);
+            addHealthButton.onClick.AddListener(AddHealthSelected);
+            restartButton.onClick.AddListener(RestartSelected);
+            menuButton.onClick.AddListener(MenuSelected);
         }
         private void OnDisable()
         {
-            addHealthButton.onClick.RemoveListener(OnAddHealth);
-            restartButton.onClick.RemoveListener(OnRestart);
-            menuButton.onClick.RemoveListener(OnMenu);
+            addHealthButton.onClick.RemoveListener(AddHealthSelected);
+            restartButton.onClick.RemoveListener(RestartSelected);
+            menuButton.onClick.RemoveListener(MenuSelected);
         }
-
-        private void OnAddHealth()
-        {
-            OnAddHealthSelected?.Invoke();
-        }
-        private void OnRestart()
-        {
-            OnRestartSelected?.Invoke();
-        }
-
-        private void OnMenu()
-        {
-            OnMenuSelected?.Invoke();
-        }
+        
+        private void AddHealthSelected() => OnAddHealthSelected?.Invoke();
+        private void RestartSelected() => OnRestartSelected?.Invoke();
+        private void MenuSelected() => OnMenuSelected?.Invoke();
     }
 }
