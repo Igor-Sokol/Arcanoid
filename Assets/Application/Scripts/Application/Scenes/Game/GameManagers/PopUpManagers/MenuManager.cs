@@ -2,6 +2,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps;
+using Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
@@ -72,7 +73,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void OnMenu()
         {
             _menuPopUp.Hide();
-            _sceneManager.LoadScene<DefaultSceneLoading>(Scene.ChoosePack);
+            _menuPopUp.OnHidden += () => _sceneManager.LoadScene<DefaultSceneLoading>(Scene.ChoosePack);
         }
 
         private void OnContinue()

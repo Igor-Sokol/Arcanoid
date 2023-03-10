@@ -6,7 +6,6 @@ namespace Application.Scripts.Library.PopUpManagers.PopUpContracts
     public interface IPopUp
     {
         bool Active { get; }
-        IPopUpAnimator PopUpAnimator { get; set; }
         event Action OnShown;
         event Action OnHidden;
         void Show();

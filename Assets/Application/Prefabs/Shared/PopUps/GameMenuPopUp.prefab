@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 6350476264209846079}
   - component: {fileID: 5176197104585649130}
   - component: {fileID: 6350476264209846076}
+  - component: {fileID: 4226665896670484530}
   - component: {fileID: -6174470370873537589}
   m_Layer: 5
   m_Name: GameMenuPopUp
@@ -345,10 +346,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99edfec5803347bd80cfe291e7134ee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuPopUpAnimator: {fileID: 4226665896670484530}
   restartButton: {fileID: 6304754751407161114}
   restartPrice: {fileID: 963749617575622702}
   backButton: {fileID: 6752879945363265283}
   continueButton: {fileID: 6752879945160618293}
+--- !u!114 &4226665896670484530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6350476264209846078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf21969b2a37422797ccf627388ea04c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popUp: {fileID: 6304754749958678589}
+  buttons:
+  - {fileID: 6304754751407161114}
+  - {fileID: 6752879945363265283}
+  - {fileID: 6752879945160618293}
+  popUpDuration: 0.5
+  buttonDelay: 0.05
 --- !u!222 &-6174470370873537589
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -451,6 +472,62 @@ PrefabInstance:
     - target: {fileID: 1815352566475039627, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
       propertyPath: m_Name
       value: EnergyPrice
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567425184526, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567425184526, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567425184526, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567998856802, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_fontSize
+      value: 21.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567998856803, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567998856803, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567998856803, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567998856803, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567998856803, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567998856803, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352567998856803, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352568033455527, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352568033455527, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815352568033455527, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b03f6be3e86c7f4b91bb72add451b8f, type: 3}
