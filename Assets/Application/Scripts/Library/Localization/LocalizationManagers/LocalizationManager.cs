@@ -13,6 +13,8 @@ namespace Application.Scripts.Library.Localization.LocalizationManagers
 
         [SerializeField] private LocalizationManagerConfig config;
         
+        public LanguageConfig[] SupportedLanguages => config.LanguageSettings;
+        public LanguageConfig CurrentLanguage => _currentLanguage;
         public event Action OnLanguageChanged;
 
         public string GetString(string key)

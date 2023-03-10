@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   languageInfo:
     language: 10
+    flag: {fileID: 21300000, guid: 00c54300ec792c140aef6d0bd32df249, type: 3}
+    languageKey: localization.english
     path: Localization/Json/en_En
   languageTableReader: {fileID: 8038829809721335620, guid: 429d8976dbf593e40bcd44d110eb7129, type: 3}
