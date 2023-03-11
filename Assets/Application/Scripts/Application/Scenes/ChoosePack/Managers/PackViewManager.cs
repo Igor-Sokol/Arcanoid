@@ -15,7 +15,6 @@ using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
 {
@@ -30,7 +29,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         
         [SerializeField] private PackView packViewPrefab;
         [SerializeField] private Transform viewContainer;
-        [FormerlySerializedAs("energyPrices")] [SerializeField] private EnergyValueConfig energyPriceConfig;
+        [SerializeField] private EnergyValueConfig energyPriceConfig;
         
         public void Initialize()
         {
@@ -40,14 +39,27 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
 
             GenerateViews();
             PackStateUpdate();
+            
             _energyManager.OnEnergyAdded += PackStateUpdate;
             _energyManager.OnEnergyRemoved += PackStateUpdate;
         }
 
+        private void OnEnable()
+        {
+            if (_energyManager != null)
+            {
+                _energyManager.OnEnergyAdded += PackStateUpdate;
+                _energyManager.OnEnergyRemoved += PackStateUpdate;
+            }
+        }
+
         private void OnDisable()
         {
-            _energyManager.OnEnergyAdded -= PackStateUpdate;
-            _energyManager.OnEnergyRemoved -= PackStateUpdate;
+            if (_energyManager != null)
+            {
+                _energyManager.OnEnergyAdded -= PackStateUpdate;
+                _energyManager.OnEnergyRemoved -= PackStateUpdate;
+            }
         }
 
         private void GenerateViews()

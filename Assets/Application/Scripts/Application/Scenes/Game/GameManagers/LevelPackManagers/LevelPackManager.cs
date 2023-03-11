@@ -40,8 +40,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
         {
             return new PackInfo(_packInfo.LevelPack, _currentLevelIndex);
         }
-        
-        public bool TrySetNextLevel()
+
+        public bool NextLevelExists()
         {
             if (_currentLevelIndex + 1 >= _levels.Count)
             {
@@ -52,7 +52,6 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
 
                     if (currentIndex + 1 == savedIndex)
                     {
-                        LoadPack(lastSavedPack);
                         return true;
                     }
                 }
@@ -61,9 +60,28 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
             }
             else
             {
-                _currentLevelIndex++;
                 return true;
             }
+        }
+        
+        public bool TrySetNextLevel()
+        {
+            if (NextLevelExists())
+            {
+                if (_currentLevelIndex + 1 >= _levels.Count)
+                {
+                    var lastSavedPack = _packProgressManager.GetCurrentLevel();
+                    LoadPack(lastSavedPack);
+                }
+                else
+                {
+                    _currentLevelIndex++;
+                }
+
+                return true;
+            }
+
+            return false;
         }
 
         private void LoadPack(IPackInfo packInfo)
