@@ -2,6 +2,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps;
+using Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
@@ -44,7 +45,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         
         private void PlayerLose()
         {
-            _loseGamePopUp = _popUpManager.Show<LoseGamePopUp>();
+            _loseGamePopUp = _popUpManager.Get<LoseGamePopUp>();
+            _loseGamePopUp.LosePopUpAnimator.Configure(_energyManager.CurrentEnergy, _energyManager.MaxEnergy);
 
             _loseGamePopUp.AddHealthActive = _energyManager.CurrentEnergy >= energyPriceConfig.HealthPrice;
             _loseGamePopUp.RestartActive = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
@@ -55,6 +57,22 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _loseGamePopUp.OnAddHealthSelected += OnAddHealth;
             _loseGamePopUp.OnRestartSelected += OnRestart;
             _loseGamePopUp.OnMenuSelected += OnMenu;
+
+            _loseGamePopUp.OnShown += () =>
+            {
+                _energyManager.OnEnergyAdded += UpdateEnergy;
+                _energyManager.OnEnergyRemoved += UpdateEnergy;
+                _energyManager.OnFillTimeChanged += UpdateEnergyTime;
+            };
+            
+            _loseGamePopUp.OnHidden += () =>
+            {
+                _energyManager.OnEnergyAdded -= UpdateEnergy;
+                _energyManager.OnEnergyRemoved -= UpdateEnergy;
+                _energyManager.OnFillTimeChanged -= UpdateEnergyTime;
+            };
+            
+            _loseGamePopUp.Show();
         }
         
         private void OnAddHealth()
@@ -62,19 +80,27 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _loseGamePopUp.Hide();
             _energyManager.RemoveEnergy(energyPriceConfig.HealthPrice);
             healthManager.AddHealth();
-            gameplayManager.SetBall();
+            _loseGamePopUp.OnHidden += () => gameplayManager.SetBall();
         }
-        
         private void OnRestart()
         {
             _loseGamePopUp.Hide();
-            gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
+            _loseGamePopUp.OnHidden += () => gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
         }
-        
         private void OnMenu()
         {
             _loseGamePopUp.Hide();
-            _sceneManager.LoadScene<DefaultSceneLoading>(Scene.ChoosePack);
+            _loseGamePopUp.OnHidden += () => _sceneManager.LoadScene<DefaultSceneLoading>(Scene.ChoosePack);
+        }
+        private void UpdateEnergy()
+        {
+            _loseGamePopUp.EnergyView.SetProgress(_energyManager.CurrentEnergy, _energyManager.MaxEnergy);
+            _loseGamePopUp.AddHealthActive = _energyManager.CurrentEnergy >= energyPriceConfig.HealthPrice;
+            _loseGamePopUp.RestartActive = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
+        }
+        private void UpdateEnergyTime(float time)
+        {
+            _loseGamePopUp.EnergyView.SetTimeLeft(time);
         }
     }
 }
