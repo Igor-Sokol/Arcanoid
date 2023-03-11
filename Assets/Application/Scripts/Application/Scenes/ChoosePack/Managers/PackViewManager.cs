@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks;
@@ -15,6 +14,7 @@ using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
 {
@@ -31,6 +31,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         [SerializeField] private Transform viewContainer;
         [SerializeField] private PackViewAnimator packViewAnimator;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
+        [SerializeField] private Image graphicRayBlock;
         
         public void Initialize()
         {
@@ -99,7 +100,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         private void LoadPack(PackView packView, LevelPack levelPack)
         {
             packView.OnSelected -= LoadPack;
-            
+
             if (levelPack == _packInfo.LevelPack)
             {
                 ProjectContext.Instance.SetService<IPackInfo, IPackInfo>(_packInfo);
@@ -109,7 +110,9 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
                 ProjectContext.Instance.SetService<IPackInfo, PackInfo>(new PackInfo(levelPack, 0));
             }
             
-            _sceneManager.LoadScene<DefaultSceneLoading>(Scene.Game);
+            packViewAnimator.Hide(packView);
+            graphicRayBlock.enabled = true;
+            packViewAnimator.OnAnimationHidden += () => _sceneManager.LoadScene<DefaultSceneLoading>(Scene.Game);
         }
 
         private void PackStateUpdate()
