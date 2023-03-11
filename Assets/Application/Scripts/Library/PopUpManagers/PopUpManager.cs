@@ -16,13 +16,13 @@ namespace Application.Scripts.Library.PopUpManagers
         public IEnumerable<IPopUp> ActivePopUps =>
             GetActivePopups().OrderBy(p => ((MonoBehaviour)p).transform.GetSiblingIndex());
 
-        public T Show<T>() 
+        public T Get<T>() 
             where T : MonoBehaviour, IPopUp
         {
             T popUp = null;
             if (_loadedPopUps.TryGetValue(typeof(T), out List<IPopUp> popUpList))
             {
-                popUp = popUpList.FirstOrDefault(p => !p.Active) as T;
+                popUp = popUpList.FirstOrDefault(p => !p.Reserved) as T;
             }
 
             if (!popUp)
@@ -30,9 +30,7 @@ namespace Application.Scripts.Library.PopUpManagers
                 popUp = CreatePopUp<T>();
             }
             
-            popUp.transform.SetSiblingIndex(0);
-            popUp.Show();
-            
+            popUp.Reserve();
             return popUp;
         }
 

@@ -7,6 +7,6 @@ namespace Application.Scripts.Library.PopUpManagers
     public interface IPopUpManager
     {
         IEnumerable<IPopUp> ActivePopUps { get; }
-        T Show<T>() where T : MonoBehaviour, IPopUp;
+        T Get<T>() where T : MonoBehaviour, IPopUp;
     }
 }

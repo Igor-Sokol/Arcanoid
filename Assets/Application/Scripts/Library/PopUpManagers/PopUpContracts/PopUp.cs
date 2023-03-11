@@ -6,10 +6,27 @@ namespace Application.Scripts.Library.PopUpManagers.PopUpContracts
 {
     public abstract class PopUp : MonoBehaviour, IPopUp
     {
+        public bool Reserved { get; private set; }
         public abstract bool Active { get; }
         public abstract event Action OnShown;
         public abstract event Action OnHidden;
-        public abstract void Show();
-        public abstract void Hide();
+        protected abstract void ShowAction();
+        protected abstract void HideAction();
+        public void Show()
+        {
+            transform.SetSiblingIndex(0);
+            ShowAction();
+        }
+
+        public void Hide()
+        {
+            HideAction();
+            Reserved = false;
+        }
+
+        public void Reserve()
+        {
+            Reserved = true;
+        }
     }
 }
