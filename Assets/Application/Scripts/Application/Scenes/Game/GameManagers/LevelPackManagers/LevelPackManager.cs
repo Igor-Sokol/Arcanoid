@@ -50,7 +50,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
                     var lastSavedPack = _packProgressManager.GetCurrentLevel();
                     _packProgressManager.TryGetPackIndex(lastSavedPack.LevelPack, out int savedIndex);
 
-                    if (currentIndex + 1 == savedIndex)
+                    if (currentIndex + 1 == savedIndex && lastSavedPack.CurrentLevelIndex == 0)
                     {
                         return true;
                     }

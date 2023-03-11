@@ -93,6 +93,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             {
                 levelPackManager.RenderView();
                 levelPackManager.TrySetNextLevel();
+                levelPackManager.RenderView();
                 gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
             };
         }
