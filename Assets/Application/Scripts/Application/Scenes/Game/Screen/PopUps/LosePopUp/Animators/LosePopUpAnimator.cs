@@ -51,6 +51,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
             _activeAnimation.Append(title.DOText(titleText, textDuration));
 
             energyView.SetProgressImmediately(0, _maxEnergy);
+            energyView.SetTimeLeft(0);
             _activeAnimation.Append(energyView.transform
                 .DOMoveX(center.x, energyShowDuration)
                 .From(rightOffscreenPosition));

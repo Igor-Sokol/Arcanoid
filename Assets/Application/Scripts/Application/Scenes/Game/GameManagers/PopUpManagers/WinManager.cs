@@ -61,7 +61,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _winGamePopUp.WinPopUpAnimator.Configure(_energyManager.CurrentEnergy, _energyManager.MaxEnergy,
                 energyPriceConfig.WinGift);
 
-            _winGamePopUp.ContinueActive = levelPackManager.TrySetNextLevel() &&
+            _winGamePopUp.ContinueActive = levelPackManager.NextLevelExists() &&
                                            _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
             _winGamePopUp.ContinuePrice.SetPrice(energyPriceConfig.LevelPrice);
             
@@ -92,6 +92,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _winGamePopUp.OnHidden += () =>
             {
                 levelPackManager.RenderView();
+                levelPackManager.TrySetNextLevel();
                 gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
             };
         }

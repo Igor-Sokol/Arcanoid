@@ -77,6 +77,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
             _activeAnimation.Append(packProgress.SetProgress(_packProgress, _packLevelCount));
             
             energyView.SetProgressImmediately(0, _maxEnergy);
+            energyView.SetTimeLeft(0);
             _activeAnimation.Append(energyView.transform
                 .DOMoveX(center.x, energyShowDuration)
                 .From(rightOffscreenPosition));
