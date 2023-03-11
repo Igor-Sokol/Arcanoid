@@ -20,7 +20,11 @@ namespace Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Imple
 
             foreach (var block in prefabs)
             {
-                _blockPool.Add(block.Key, new ObjectPoolMono<Block>(() => Instantiate(block), container));
+                _blockPool.Add(block.Key, new ObjectPoolMono<Block>(() => {
+                    var instance = Instantiate(block);
+                    instance.Initialize();
+                    return instance;
+                }, container));
             }
         }
         
