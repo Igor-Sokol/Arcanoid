@@ -3,6 +3,7 @@ using Application.Scripts.Application.Scenes.Game.Pools.BoostObjectProviders;
 using Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers
 {
@@ -10,20 +11,20 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectMa
     {
         private readonly List<BoostObject> _activeBoostsView = new List<BoostObject>();
 
-        [SerializeField] private BoostViewProvider boostViewProvider;
+        [FormerlySerializedAs("boostViewProvider")] [SerializeField] private BoostObjectProvider boostObjectProvider;
 
         public void PrepareReuse()
         {
             foreach (var boostView in _activeBoostsView)
             {
-                boostViewProvider.Return(boostView);
+                boostObjectProvider.Return(boostView);
             }
             _activeBoostsView.Clear();
         }
         
         public BoostObject GetBoostView(string key)
         {
-            var boostView = boostViewProvider.GetBoostView(key);
+            var boostView = boostObjectProvider.GetBoostObject(key);
             _activeBoostsView.Add(boostView);
             boostView.PrepareReuse();
 
@@ -33,7 +34,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectMa
         public void ReturnBoostView(BoostObject boostObject)
         {
             _activeBoostsView.Remove(boostObject);
-            boostViewProvider.Return(boostObject);
+            boostObjectProvider.Return(boostObject);
         }
     }
 }

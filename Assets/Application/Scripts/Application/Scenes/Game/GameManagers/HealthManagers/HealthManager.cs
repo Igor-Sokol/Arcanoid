@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers
 {
-    public class HealthManager : MonoBehaviour, IInitializing, IReusable
+    public class HealthManager : MonoBehaviour, IHealthManager, IInitializing, IReusable
     {
         private int _currentHealth;
         
@@ -33,8 +33,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.HealthManager
         
         public void AddHealth()
         {
-            _currentHealth++;
-            OnHealthAdded?.Invoke();
+            if (_currentHealth + 1 <= MaxHealth)
+            {
+                _currentHealth++;
+                OnHealthAdded?.Invoke();
+            }
         }
 
         public void RemoveHealth()

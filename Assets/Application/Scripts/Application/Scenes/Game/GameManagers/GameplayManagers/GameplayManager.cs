@@ -1,5 +1,6 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.DifficultyManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManagers;
@@ -10,6 +11,7 @@ using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers
 {
@@ -23,6 +25,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
         [SerializeField] private BlockManager blockManager;
         [SerializeField] private BlockProgressManager blockProgressManager;
         [SerializeField] private BallsManager ballsManager;
+        [FormerlySerializedAs("boostViewManager")] [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private Platform platform;
 
         public void Initialize()
@@ -36,6 +39,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
             healthManager.PrepareReuse();
             blockManager.PrepareReuse();
             ballsManager.PrepareReuse();
+            boostObjectManager.PrepareReuse();
 
             blockManager.SetBlocks(levelInfo.LevelReader.ReadPack(levelInfo));
             blockProgressManager.PrepareReuse();
