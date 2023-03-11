@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlacers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Screen.UI.Header;
@@ -15,7 +16,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         [SerializeField] private Vector2 blockSpace;
         [SerializeField] private Vector2 fieldSpacePercentage;
 
-        public override void Place(Block[][] blocks)
+        public override Vector3[][] Place(Block[][] blocks)
         {
             Vector2 screenOffset = new Vector2(screenInfo.ScreenSize.x * screenOffsetPercentage.x,
                 screenInfo.ScreenSize.y * screenOffsetPercentage.y);
@@ -39,19 +40,21 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
             positionAnchor += fieldSpaceOffset;
             positionAnchor += new Vector2(targetBlockSize.x / 2f, -targetBlockSize.y / 2f);
 
+            Vector3[][] positions = new Vector3[blocks.Length][];
             for (int row = 0; row < blocks.Length; row++)
             {
                 Vector2 position = positionAnchor - new Vector2(0f, targetBlockSize.y * row);
                 position += new Vector2(blockSpace.x, -blockSpace.y * row);
-            
+
+                positions[row] = new Vector3[blocks[row].Length];
                 for (int column = 0; column < blocks[row].Length; column++)
                 {
                     Block block = blocks[row][column];
                     if (block)
                     {
                         var blockTransform = block.transform;
-                        blockTransform.position = position;
-
+                        positions[row][column] = position;
+                        
                         Vector2 blockSize = block.BlockView.Sprite.bounds.size;
                         Vector2 blockScale = targetBlockSize / blockSize;
                         float scale = blockScale.x < blockScale.y ? blockScale.x : blockScale.y;
@@ -61,6 +64,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                     position += new Vector2(targetBlockSize.x + blockSpace.x, 0);
                 }
             }
+
+            return positions;
         }
 
         private Block FindBiggestBlock(Block[][] blockTable)

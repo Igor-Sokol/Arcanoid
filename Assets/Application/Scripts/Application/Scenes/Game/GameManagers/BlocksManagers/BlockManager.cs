@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlaceAnimators;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlacers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Contracts;
+using Application.Scripts.Application.Scenes.Game.Screen.UI.PlayerInputs;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
@@ -12,9 +14,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
     public class BlockManager : MonoBehaviour, IReusable
     {
         private Block[][] _blocks;
-        
+
+        [SerializeField] private PlayerInput playerInput;
         [SerializeField] private BlockProvider blockProvider;
         [SerializeField] private PackPlacer packPlacer;
+        [SerializeField] private PackPlaceAnimator packPlaceAnimator;
 
         public IEnumerable<Block> Blocks => _blocks?.SelectMany(blocks => blocks);
         public event Action<Block> OnBlockRemoved;
@@ -50,7 +54,10 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                 }
             }
             
-            packPlacer.Place(_blocks);
+            var  positions = packPlacer.Place(_blocks);
+            playerInput.enabled = false;
+            packPlaceAnimator.Place(_blocks, positions);
+            packPlaceAnimator.OnEndAnimation += () => playerInput.enabled = true;
         }
 
         public void RemoveBlock(Block block)

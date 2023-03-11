@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using UnityEngine;
 
@@ -5,6 +6,6 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
 {
     public abstract class PackPlacer : MonoBehaviour, IPackPlacer
     {
-        public abstract void Place(Block[][] blocks);
+        public abstract Vector3[][] Place(Block[][] blocks);
     }
 }
