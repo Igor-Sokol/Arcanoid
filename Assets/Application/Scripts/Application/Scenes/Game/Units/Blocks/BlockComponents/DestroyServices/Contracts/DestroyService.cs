@@ -4,6 +4,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
 {
     public abstract class DestroyService : MonoBehaviour, IDestroyService
     {
+        public abstract void Initialize();
         public abstract void PrepareReuse();
         public abstract void OnDestroyAction();
     }

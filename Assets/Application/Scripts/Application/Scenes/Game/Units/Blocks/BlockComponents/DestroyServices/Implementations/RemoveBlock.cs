@@ -11,9 +11,13 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
 
         [SerializeField] private Block block;
         
-        public override void PrepareReuse()
+        public override void Initialize()
         {
             _blockManager = ProjectContext.Instance.GetService<BlockManager>();
+        }
+        
+        public override void PrepareReuse()
+        {
         }
 
         public override void OnDestroyAction()
