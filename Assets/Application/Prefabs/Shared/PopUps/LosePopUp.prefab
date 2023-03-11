@@ -451,7 +451,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd7495932cd4b35a51b2999fa29e60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUp: {fileID: 1164283680796735046}
+  popUp: {fileID: 1164283680796735049}
+  popUpImage: {fileID: 1164283680796735046}
   popUpPositionOffset: {x: 0, y: -68}
   title: {fileID: 1164283681626159691}
   energyView: {fileID: 4938209448472500400}

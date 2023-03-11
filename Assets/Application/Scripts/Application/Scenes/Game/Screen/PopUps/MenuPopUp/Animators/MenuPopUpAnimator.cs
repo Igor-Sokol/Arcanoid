@@ -10,7 +10,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp.An
     {
         private Sequence _activeAnimation;
         
-        [SerializeField] private Image popUp;
+        [SerializeField] private RectTransform popUp;
+        [SerializeField] private Image popUpImage;
         [SerializeField] private Button[] buttons;
         [SerializeField] private float popUpDuration;
         [SerializeField] private float buttonDelay;
@@ -20,8 +21,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp.An
         
         public override void ShowAnimation()
         {
-            var pixelRect = popUp.canvas.pixelRect;
-            float startPosition = popUp.rectTransform.rect.width * popUp.rectTransform.lossyScale.x / 2 +
+            var pixelRect = popUpImage.canvas.pixelRect;
+            float startPosition = popUp.rect.width * popUp.lossyScale.x / 2 +
                                   pixelRect.width;
             float center = pixelRect.width / 2;
 
@@ -46,8 +47,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp.An
 
         public override void HideAnimation()
         {
-            float targetPosition = popUp.rectTransform.rect.width * popUp.rectTransform.lossyScale.x / 2 +
-                                   popUp.canvas.pixelRect.width;
+            float targetPosition = popUp.rect.width * popUp.lossyScale.x / 2 +
+                                   popUpImage.canvas.pixelRect.width;
             
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();

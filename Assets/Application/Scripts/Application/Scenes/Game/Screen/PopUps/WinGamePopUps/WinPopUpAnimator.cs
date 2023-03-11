@@ -7,6 +7,7 @@ using Application.Scripts.Library.PopUpManagers.AnimationContracts;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps
@@ -22,7 +23,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         private int _packProgress;
         private int _packLevelCount;
         
-        [SerializeField] private Image popUp;
+        [SerializeField] private RectTransform popUp;
+        [SerializeField] private Image popUpImage;
         [SerializeField] private Vector2 popUpPositionOffset;
         [SerializeField] private TMP_Text title;
         [SerializeField] private EnergyView energyView;
@@ -44,9 +46,9 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         
         public override void ShowAnimation()
         {
-            var pixelRect = popUp.canvas.pixelRect;
-            var rect = popUp.rectTransform.rect;
-            var lossyScale = popUp.rectTransform.lossyScale.x;
+            var pixelRect = popUpImage.canvas.pixelRect;
+            var rect = popUp.rect;
+            var lossyScale = popUp.lossyScale.x;
             float rightOffscreenPosition = rect.width * lossyScale / 2 + pixelRect.width;
             float leftOffscreenPosition = 0 - rect.width * lossyScale / 2;
             float downOffscreenPosition = 0 - rect.height * lossyScale / 2;
@@ -55,7 +57,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
 
-            _activeAnimation.Append(popUp.transform
+            _activeAnimation.Append(popUpImage.transform
                 .DOMove(center + popUpPositionOffset, popUpDuration)
                 .From(new Vector3(center.x, downOffscreenPosition, 0)));
 
@@ -97,14 +99,14 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
 
         public override void HideAnimation()
         {
-            float rightOffscreenPosition = popUp.rectTransform.rect.width * popUp.rectTransform.lossyScale.x / 2 +
-                                           popUp.canvas.pixelRect.width;
+            float rightOffscreenPosition = popUp.rect.width * popUp.lossyScale.x / 2 +
+                                           popUpImage.canvas.pixelRect.width;
             
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
 
             _activeAnimation.AppendInterval(hideDelay);
-            _activeAnimation.Append(popUp.transform
+            _activeAnimation.Append(popUpImage.transform
                 .DOMoveX(rightOffscreenPosition, popUpDuration));
 
             for (int i = 1; i <= buttons.Length; i++)

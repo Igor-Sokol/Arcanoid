@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popUp: {fileID: 6304754749958678589}
+  popUpImage: {fileID: 6304754749958678578}
   buttons:
   - {fileID: 6304754751407161114}
   - {fileID: 6752879945363265283}
