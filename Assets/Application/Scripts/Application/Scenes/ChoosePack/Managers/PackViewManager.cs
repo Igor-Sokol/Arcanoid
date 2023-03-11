@@ -29,6 +29,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         
         [SerializeField] private PackView packViewPrefab;
         [SerializeField] private Transform viewContainer;
+        [SerializeField] private PackViewAnimator packViewAnimator;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         
         public void Initialize()
@@ -42,6 +43,8 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
             
             _energyManager.OnEnergyAdded += PackStateUpdate;
             _energyManager.OnEnergyRemoved += PackStateUpdate;
+            
+            packViewAnimator.Show(_packs);
         }
 
         private void OnEnable()

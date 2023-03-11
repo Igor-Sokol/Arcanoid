@@ -17,7 +17,8 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
         private ILocalizationManager _localizationManager;
         private LevelPack _levelPack;
         private PackState _packState;
-        
+
+        [SerializeField] private RectTransform packContainer;
         [SerializeField] private Image packBackground;
         [SerializeField] private Image packImage;
         [SerializeField] private TMP_Text packName;
@@ -31,6 +32,9 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
         [SerializeField] private EnergyPriceView priceView;
 
         public bool Interactable { get => button.interactable; set => button.interactable = value; }
+
+        public RectTransform PackContainer => packContainer;
+
         public PackState State => _packState;
         public event Action<PackView, LevelPack> OnSelected;
 
