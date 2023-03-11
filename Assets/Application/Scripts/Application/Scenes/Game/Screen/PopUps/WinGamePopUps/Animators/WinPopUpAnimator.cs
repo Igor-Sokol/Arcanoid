@@ -7,10 +7,9 @@ using Application.Scripts.Library.PopUpManagers.AnimationContracts;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps
+namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps.Animators
 {
     public class WinPopUpAnimator : PopUpAnimator
     {
