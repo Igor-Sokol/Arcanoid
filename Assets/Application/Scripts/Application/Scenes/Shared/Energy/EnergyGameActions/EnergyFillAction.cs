@@ -1,5 +1,6 @@
 using System;
 using Application.Scripts.Library.GameActionManagers.Contracts;
+using Application.Scripts.Library.GameActionManagers.Timer;
 
 namespace Application.Scripts.Application.Scenes.Shared.Energy.EnergyGameActions
 {
@@ -15,24 +16,24 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy.EnergyGameActions
             _startFillAction = startFillAction;
             _timeLeftAction = timeLeftAction;
         }
-        
-        public void OnBegin(float secondsLeft)
+
+        public void OnBegin(ActionInfo actionInfo)
         {
-            _timeLeftAction?.Invoke(secondsLeft);
+            _timeLeftAction?.Invoke(actionInfo.SecondsLeft);
         }
 
-        public void OnUpdate(float secondsLeft)
+        public void OnUpdate(ActionInfo actionInfo)
         {
-            _timeLeftAction?.Invoke(secondsLeft);
+            _timeLeftAction?.Invoke(actionInfo.SecondsLeft);
         }
 
-        public void OnComplete()
+        public void OnComplete(ActionInfo actionInfo)
         {
             _energyManager.AddEnergy(1);
             _startFillAction?.Invoke();
         }
 
-        public void OnStop()
+        public void OnStop(ActionInfo actionInfo)
         {
         }
     }
