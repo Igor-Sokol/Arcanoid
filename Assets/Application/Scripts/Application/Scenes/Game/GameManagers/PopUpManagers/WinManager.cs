@@ -10,6 +10,7 @@ using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.Scene
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
+using Application.Scripts.Library.Localization.LocalizationManagers;
 using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
@@ -21,6 +22,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
     {
         private IEnergyManager _energyManager;
         private IPackProgressManager _packProgressManager;
+        private ILocalizationManager _localizationManager;
         private IPopUpManager _popUpManager;
         private ISceneManager _sceneManager;
         private WinGamePopUp _winGamePopUp;
@@ -35,6 +37,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         {
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
+            _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
             _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
             _packProgressManager = ProjectContext.Instance.GetService<IPackProgressManager>();
         }
@@ -51,12 +54,12 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void PlayerWin()
         {
             _packProgressManager.CompleteLevel(levelPackManager.GetCurrentPackInfo());
-            _energyManager.AddEnergy(energyPriceConfig.WinGift);
             ballsManager.PrepareReuse();
 
-            _winGamePopUp = _popUpManager.Show<WinGamePopUp>();
-            _winGamePopUp.PrepareReuse();
-            _winGamePopUp.Configure(levelPackManager.GetCurrentPackInfo());
+            _winGamePopUp = _popUpManager.Get<WinGamePopUp>();
+            _winGamePopUp.WinPopUpAnimator.Configure(levelPackManager.GetCurrentPackInfo(), _localizationManager);
+            _winGamePopUp.WinPopUpAnimator.Configure(_energyManager.CurrentEnergy, _energyManager.MaxEnergy,
+                energyPriceConfig.WinGift);
 
             _winGamePopUp.ContinueActive = levelPackManager.TrySetNextLevel() &&
                                            _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
@@ -64,19 +67,48 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             
             _winGamePopUp.OnContinueSelected += OnContinue;
             _winGamePopUp.OnMenuSelected += OnMenu;
+            
+            _winGamePopUp.OnShown += () =>
+            {
+                _energyManager.OnEnergyAdded += UpdateEnergy;
+                _energyManager.OnEnergyRemoved += UpdateEnergy;
+                _energyManager.OnFillTimeChanged += UpdateEnergyTime;
+                _energyManager.AddEnergy(energyPriceConfig.WinGift);
+            };
+            
+            _winGamePopUp.OnHidden += () =>
+            {
+                _energyManager.OnEnergyAdded -= UpdateEnergy;
+                _energyManager.OnEnergyRemoved -= UpdateEnergy;
+                _energyManager.OnFillTimeChanged -= UpdateEnergyTime;
+            };
+            
+            _winGamePopUp.Show();
         }
         
         private void OnContinue()
         {
             _winGamePopUp.Hide();
-            levelPackManager.RenderView();
-            gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
+            _winGamePopUp.OnHidden += () =>
+            {
+                levelPackManager.RenderView();
+                gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
+            };
         }
-
         private void OnMenu()
         {
             _winGamePopUp.Hide();
-            _sceneManager.LoadScene<DefaultSceneLoading>(Scene.ChoosePack);
+            _winGamePopUp.OnHidden += () => _sceneManager.LoadScene<DefaultSceneLoading>(Scene.ChoosePack);
+        }
+        private void UpdateEnergy()
+        {
+            _winGamePopUp.EnergyView.SetProgress(_energyManager.CurrentEnergy, _energyManager.MaxEnergy);
+            _winGamePopUp.ContinueActive = levelPackManager.NextLevelExists() &&
+                                           _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
+        }
+        private void UpdateEnergyTime(float time)
+        {
+            _winGamePopUp.EnergyView.SetTimeLeft(time);
         }
     }
 }
