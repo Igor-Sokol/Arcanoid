@@ -615,6 +615,7 @@ MonoBehaviour:
   - {fileID: 1832296592}
   - {fileID: 255428928}
   - {fileID: 35500677}
+  - {fileID: 1615502427}
 --- !u!1 &245597117
 GameObject:
   m_ObjectHideFlags: 0
@@ -3275,6 +3276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1615502426}
+  - component: {fileID: 1615502428}
   - component: {fileID: 1615502427}
   m_Layer: 0
   m_Name: PlaceAnimator
@@ -3310,6 +3312,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeDuration: 1
+  timeManager: {fileID: 1615502428}
+--- !u!114 &1615502428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615502425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3808c4a9764065971d82c0689be10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScales:
+  - {fileID: 1870447184}
 --- !u!1 &1646890860
 GameObject:
   m_ObjectHideFlags: 0
