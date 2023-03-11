@@ -1,21 +1,37 @@
 using System;
 using System.Linq;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
+using Application.Scripts.Application.Scenes.Shared.DoTweenGameActions;
+using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
+using Application.Scripts.Library.DependencyInjection;
+using Application.Scripts.Library.GameActionManagers.Contracts;
+using Application.Scripts.Library.GameActionManagers.Timer;
+using Application.Scripts.Library.InitializeManager.Contracts;
 using DG.Tweening;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlaceAnimators
 {
-    public class PackPlaceAnimator : MonoBehaviour
+    public class PackPlaceAnimator : MonoBehaviour, IInitializing
     {
+        private IGameActionManager _gameActionManager;
         private Sequence _activeAnimation;
+        private ActionHandler _animation;
 
         [SerializeField] private float placeDuration;
+        [SerializeField] private ActionTimeManager timeManager;
         
         public event Action OnEndAnimation;
+        
+        public void Initialize()
+        {
+            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
+        }
 
         public void Place(Block[][] blocks, Vector3[][] positions)
         {
+            StopTweenAction();
+            
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
 
@@ -35,6 +51,16 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                 OnEndAnimation?.Invoke();
                 OnEndAnimation = null;
             });
+            _activeAnimation.OnComplete(StopTweenAction);
+
+            _animation = _gameActionManager.StartAction(new DoTweenGameAction(_activeAnimation), -1, timeManager);
         }
+
+        private void OnDisable()
+        {
+            StopTweenAction();
+        }
+
+        private void StopTweenAction() => _animation.Stop();
     }
 }
