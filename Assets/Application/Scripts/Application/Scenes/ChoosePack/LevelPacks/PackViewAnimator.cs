@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Application.Scripts.Library.ScreenInfo;
 using DG.Tweening;
@@ -23,7 +22,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
                 var pack = packs[i - 1];
 
                 var startPosition = pack.PackContainer.position;
-                pack.PackContainer.position = new Vector3(screenInfo.ScreenSize.x + screenInfo.ScreenRightUpper.y,
+                pack.PackContainer.position = new Vector3(screenInfo.ScreenSize.x / 2 + screenInfo.ScreenRightUpper.y,
                     startPosition.y, startPosition.z);
 
                 _activeAnimation.Join(pack.PackContainer

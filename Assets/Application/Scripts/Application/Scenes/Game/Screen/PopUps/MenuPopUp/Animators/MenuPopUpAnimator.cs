@@ -21,7 +21,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp.An
         public override void ShowAnimation()
         {
             var pixelRect = popUp.canvas.pixelRect;
-            float startPosition = popUp.rectTransform.rect.width / 2 + pixelRect.width;
+            float startPosition = popUp.rectTransform.rect.width * popUp.rectTransform.lossyScale.x / 2 +
+                                  pixelRect.width;
             float center = pixelRect.width / 2;
 
             _activeAnimation?.Kill();
@@ -45,7 +46,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp.An
 
         public override void HideAnimation()
         {
-            float targetPosition = popUp.rectTransform.rect.width / 2 + popUp.canvas.pixelRect.width;
+            float targetPosition = popUp.rectTransform.rect.width * popUp.rectTransform.lossyScale.x / 2 +
+                                   popUp.canvas.pixelRect.width;
             
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();

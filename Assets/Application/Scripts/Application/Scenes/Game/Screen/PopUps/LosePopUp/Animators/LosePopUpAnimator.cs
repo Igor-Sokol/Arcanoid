@@ -32,9 +32,10 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
         {
             var pixelRect = popUp.canvas.pixelRect;
             var rect = popUp.rectTransform.rect;
-            float rightOffscreenPosition = rect.width / 2 + pixelRect.width;
-            float leftOffscreenPosition = 0 - rect.width / 2;
-            float downOffscreenPosition = 0 - rect.height / 2;
+            var lossyScale = popUp.rectTransform.lossyScale.x;
+            float rightOffscreenPosition = rect.width * lossyScale / 2 + pixelRect.width;
+            float leftOffscreenPosition = 0 - rect.width * lossyScale / 2;
+            float downOffscreenPosition = 0 - rect.height * lossyScale / 2;
             Vector2 center = new Vector2(pixelRect.width / 2, pixelRect.height / 2);
             
             _activeAnimation?.Kill();
@@ -69,7 +70,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
 
         public override void HideAnimation()
         {
-            float rightOffscreenPosition = popUp.rectTransform.rect.width / 2 + popUp.canvas.pixelRect.width;
+            float rightOffscreenPosition = popUp.rectTransform.rect.width * popUp.rectTransform.lossyScale.x / 2 +
+                                           popUp.canvas.pixelRect.width;
             
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
