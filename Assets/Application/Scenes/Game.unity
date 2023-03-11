@@ -1437,7 +1437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8998b7c2c0148ef9d7dfe70eb8942dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelPack: {fileID: 11400000, guid: 8b2c93431806aa147b512a73d19e1a27, type: 2}
+  levelPack: {fileID: 11400000, guid: 615138ef7036e3a4f9d54afae6f6eec5, type: 2}
   levelIndex: 0
 --- !u!1 &562433554
 GameObject:
@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressText: {fileID: 323490400}
   mask: '{0}%'
-  progressDuration: 0.3
+  progressDuration: 0.8
 --- !u!222 &562433557
 CanvasRenderer:
   m_ObjectHideFlags: 0

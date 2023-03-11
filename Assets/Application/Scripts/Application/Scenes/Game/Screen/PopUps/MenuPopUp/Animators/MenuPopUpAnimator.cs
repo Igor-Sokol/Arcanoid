@@ -15,6 +15,9 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp.An
         [SerializeField] private float popUpDuration;
         [SerializeField] private float buttonDelay;
         
+        public override event Action OnAnimationShown;
+        public override event Action OnAnimationHidden;
+        
         public override void ShowAnimation()
         {
             var pixelRect = popUp.canvas.pixelRect;
@@ -59,9 +62,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp.An
             }
             
             _activeAnimation.AppendCallback(() => OnAnimationHidden?.Invoke());
+            _activeAnimation.SetEase(Ease.InQuad);
         }
-
-        public override event Action OnAnimationShown;
-        public override event Action OnAnimationHidden;
     }
 }

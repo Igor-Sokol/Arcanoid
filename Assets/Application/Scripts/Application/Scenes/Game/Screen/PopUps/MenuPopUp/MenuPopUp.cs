@@ -1,11 +1,8 @@
 using System;
-using System.Reflection;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp.Animators;
 using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
-using Application.Scripts.Library.PopUpManagers.AnimationContracts;
 using Application.Scripts.Library.PopUpManagers.PopUpContracts;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp
@@ -17,6 +14,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp
         [SerializeField] private EnergyPriceView restartPrice;
         [SerializeField] private Button backButton;
         [SerializeField] private Button continueButton;
+        [SerializeField] private Image noninteractive;
         
         public override bool Active => gameObject.activeSelf;
         public bool RestartActive { get => restartButton.interactable; set => restartButton.interactable = value; }
@@ -28,14 +26,16 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp
         public event Action OnBackSelected;
         public event Action OnContinueSelected;
 
-        public override void Show()
+        protected override void ShowAction()
         {
             gameObject.SetActive(true);
+            noninteractive.enabled = false;
             menuPopUpAnimator.ShowAnimation();
         }
 
-        public override void Hide()
+        protected override void HideAction()
         {
+            noninteractive.enabled = true;
             menuPopUpAnimator.HideAnimation();
         }
         

@@ -53,7 +53,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void OpenMenu()
         {
             _gameTimeScale.Scale = 0;
-            _menuPopUp = _popUpManager.Show<MenuPopUp>();
+            _menuPopUp = _popUpManager.Get<MenuPopUp>();
 
             _menuPopUp.RestartActive = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
             _menuPopUp.RestartPrice.SetPrice(energyPriceConfig.LevelPrice);
@@ -62,6 +62,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _menuPopUp.OnBackSelected += OnMenu;
             _menuPopUp.OnContinueSelected += OnContinue;
             _menuPopUp.OnHidden += () => _gameTimeScale.Scale = 1;
+            
+            _menuPopUp.Show();
         }
         
         private void OnRestart()
