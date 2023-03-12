@@ -36,7 +36,7 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
                 scaledTime *= _timeScale.TimeScale;
             }
 
-            Time -= _looped ? 0 : time;
+            Time -= _looped ? 0 : scaledTime;
             
             _gameAction?.OnUpdate(new ActionInfo(Time, scaledTime, time));
 
