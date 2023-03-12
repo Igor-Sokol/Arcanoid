@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.DestroyServices.Implementations
 {
-    public class BoostViewActivator : DestroyService
+    public class BoostObjectActivator : DestroyService
     {
         private IBoostObjectManager _boostObjectManager;
         
