@@ -64,6 +64,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _winGamePopUp.WinPopUpAnimator.Configure(_energyManager.CurrentEnergy, _energyManager.MaxEnergy,
                 energyPriceConfig.WinGift);
 
+            _energyManager.AddEnergy(energyPriceConfig.WinGift);
             _winGamePopUp.ContinueActive = levelPackManager.NextLevelExists() &&
                                            _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
             _winGamePopUp.ContinuePrice.SetPrice(energyPriceConfig.LevelPrice);
@@ -86,7 +87,6 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             };
             
             _winGamePopUp.Show();
-            _energyManager.AddEnergy(energyPriceConfig.WinGift);
         }
         
         private void OnContinue()
