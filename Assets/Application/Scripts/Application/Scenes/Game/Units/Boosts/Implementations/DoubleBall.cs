@@ -1,6 +1,7 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Library.DependencyInjection;
+using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations
 {
@@ -20,12 +21,17 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 
             foreach (var ball in currentBalls)
             {
-                var newBall = _ballManager.GetBall();
+                if (ball.MoveController.PhysicActive)
+                {
+                    var newBall = _ballManager.GetBall();
 
-                newBall.transform.position = ball.transform.position;
+                    newBall.transform.position = ball.transform.position;
                 
-                newBall.MoveController.PhysicActive = true;
-                newBall.MoveController.SetDirection(ball.MoveController.CurrentDirection * -1f);
+                    newBall.MoveController.PhysicActive = true;
+
+                    Vector2 originDirection = ball.MoveController.CurrentDirection;
+                    newBall.MoveController.SetDirection(new Vector2(-originDirection.x, originDirection.y));
+                }
             }
         }
 

@@ -15,7 +15,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         [SerializeField] private float speed;
         [SerializeField] private float minBounceAngel;
         
-        public bool PhysicActive { get => rigidbody2d.isKinematic; set => rigidbody2d.isKinematic = !value; }
+        public bool PhysicActive { get => !rigidbody2d.isKinematic; set => rigidbody2d.isKinematic = !value; }
         public Vector2 CurrentDirection => _currentDirection.normalized;
 
         public void PrepareReuse()
