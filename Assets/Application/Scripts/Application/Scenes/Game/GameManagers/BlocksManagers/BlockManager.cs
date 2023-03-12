@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlaceAnimators;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlacers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Contracts;
@@ -11,7 +12,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers
 {
-    public class BlockManager : MonoBehaviour, IReusable
+    public class BlockManager : MonoBehaviour, IBlockManager, IReusable
     {
         private Block[][] _blocks;
 
