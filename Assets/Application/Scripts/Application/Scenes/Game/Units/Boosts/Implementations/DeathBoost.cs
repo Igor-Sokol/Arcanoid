@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations
 {
-    public class LifeBoost : Boost
+    public class DeathBoost : Boost
     {
         private IHealthManager _healthManager;
 
@@ -17,12 +17,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         }
 
         public override float Duration => 0f;
-        
         public override void Enable()
         {
             for (int i = 0; i < lifeCount; i++)
             {
-                _healthManager.AddHealth();
+                _healthManager.RemoveHealth();
             }
         }
 

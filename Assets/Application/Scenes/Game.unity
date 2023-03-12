@@ -1266,6 +1266,7 @@ MonoBehaviour:
   levelPackManager: {fileID: 1832296592}
   gameplayManager: {fileID: 255428928}
   healthManager: {fileID: 2115584323}
+  ballsManager: {fileID: 1014367157}
   boostObjectManager: {fileID: 53067910}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
 --- !u!1 &509032113
@@ -3496,6 +3497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container: {fileID: 1601448396}
   prefabs:
+  - {fileID: 4959455157867721413, guid: 061831196d642884aaefcf541cdee30c, type: 3}
   - {fileID: 4959455157867721413, guid: 94c10045924af714c9abc84001590419, type: 3}
 --- !u!1 &1615502425
 GameObject:
@@ -4010,6 +4012,7 @@ MonoBehaviour:
   - {fileID: 7432533128270861922, guid: 80782b7156f04e648b641cac8994f12a, type: 3}
   - {fileID: 7432533128270861922, guid: 2cb02e35f94991d4eada9f71dea92e56, type: 3}
   - {fileID: 7432533128270861922, guid: 59b01e290316ef54db2ee03606c1f17d, type: 3}
+  - {fileID: 7432533128270861922, guid: 961a2d9f467d88d41b607bd00805110a, type: 3}
 --- !u!114 &2064026646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2136928609, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}

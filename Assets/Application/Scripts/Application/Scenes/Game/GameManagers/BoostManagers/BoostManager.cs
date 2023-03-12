@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.BoostActions;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Library.DependencyInjection;
@@ -13,12 +13,25 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
 {
     public class BoostManager : MonoBehaviour, IBoostManager, IInitializing, IReusable
     {
-        private readonly List<ActionHandler> _boosts = new List<ActionHandler>();
+        private readonly Dictionary<Type, List<ActionHandler>> _boosts = new Dictionary<Type, List<ActionHandler>>();
         private IGameActionManager _gameActionManager;
 
         public void Initialize()
         {
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
+        }
+        
+        public void PrepareReuse()
+        {
+            foreach (var boosts in _boosts)
+            {
+                foreach (var boost in boosts.Value)
+                {
+                    boost.Stop();
+                }
+                boosts.Value.Clear();
+            }
+            _boosts.Clear();
         }
         
         public void Execute<T>(IEnumerable<T> boosts) 
@@ -33,19 +46,39 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
         public void Execute<T>(T boost)
             where T : IBoost
         {
+            ClearInvalid();
+            
             boost.Initialize();
-            _boosts.RemoveAll(h => !h.Valid);
             var handler = _gameActionManager.StartAction(new BoostGameAction(boost), boost.Duration);
-            _boosts.Add(handler);
+
+            if (_boosts.TryGetValue(typeof(T), out var list))
+            {
+                list.Add(handler);
+            }
+            else
+            {
+                _boosts.Add(typeof(T),  new List<ActionHandler>() { handler });
+            }
         }
 
-        public void PrepareReuse()
+        public IEnumerable<ActionHandler> GetActiveBoost<T>()
         {
-            foreach (var handler in _boosts.Where(h => h.Valid))
+            ClearInvalid();
+
+            if (_boosts.TryGetValue(typeof(T), out var list))
             {
-                handler.Stop();
+                return list;
             }
-            _boosts.Clear();
+
+            return null;
+        }
+
+        private void ClearInvalid()
+        {
+            foreach (var boosts in _boosts)
+            {
+                boosts.Value.RemoveAll(h => !h.Valid);
+            }
         }
     }
 }
