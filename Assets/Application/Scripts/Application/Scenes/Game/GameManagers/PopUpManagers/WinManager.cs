@@ -76,7 +76,6 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
                 _energyManager.OnEnergyAdded += UpdateEnergy;
                 _energyManager.OnEnergyRemoved += UpdateEnergy;
                 _energyManager.OnFillTimeChanged += UpdateEnergyTime;
-                _energyManager.AddEnergy(energyPriceConfig.WinGift);
             };
             
             _winGamePopUp.OnHidden += () =>
@@ -87,6 +86,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             };
             
             _winGamePopUp.Show();
+            _energyManager.AddEnergy(energyPriceConfig.WinGift);
         }
         
         private void OnContinue()
