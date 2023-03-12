@@ -17,14 +17,17 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
 
         public override void OnHitAction()
         {
-            _actualHealth--;
-            
-            OnHealthRemoved?.Invoke(_actualHealth);
-
-            if (_actualHealth <= 0)
+            if (_actualHealth > 0)
             {
-                OnDead?.Invoke();
-                destroyManager.Destroy();
+                _actualHealth--;
+            
+                OnHealthRemoved?.Invoke(_actualHealth);
+
+                if (_actualHealth <= 0)
+                {
+                    OnDead?.Invoke();
+                    destroyManager.Destroy();
+                }
             }
         }
 
