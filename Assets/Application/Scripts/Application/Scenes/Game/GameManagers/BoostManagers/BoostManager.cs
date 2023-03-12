@@ -54,13 +54,14 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
             boost.Initialize();
             var handler = _gameActionManager.StartAction(new BoostGameAction(boost), boost.Duration, actionTimeManager);
 
-            if (_boosts.TryGetValue(typeof(T), out var list))
+            var type = boost.GetType();
+            if (_boosts.TryGetValue(type, out var list))
             {
                 list.Add(handler);
             }
             else
             {
-                _boosts.Add(typeof(T),  new List<ActionHandler>() { handler });
+                _boosts.Add(type,  new List<ActionHandler>() { handler });
             }
         }
 
