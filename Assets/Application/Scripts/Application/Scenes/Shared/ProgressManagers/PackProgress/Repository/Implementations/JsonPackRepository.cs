@@ -12,11 +12,7 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
         
         public override void Save(PackProgressTransfer packProgressTransfer)
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
             string path = Path.Combine(UnityEngine.Application.persistentDataPath, filePath);
-#else
-            string path = Path.Combine(UnityEngine.Application.dataPath, filePath);
-#endif
 
             var jsonFile = JsonConvert.SerializeObject(packProgressTransfer);
 
@@ -30,11 +26,7 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
 
         public override PackProgressTransfer Load()
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
             string path = Path.Combine(UnityEngine.Application.persistentDataPath, filePath);
-#else
-            string path = Path.Combine(UnityEngine.Application.dataPath, filePath);
-#endif
 
             if (File.Exists(path))
             {

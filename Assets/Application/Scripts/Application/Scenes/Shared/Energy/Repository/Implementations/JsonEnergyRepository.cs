@@ -11,11 +11,7 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy.Repository.Implem
         
         public override void Save(EnergySaveObject energySave)
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
             string path = Path.Combine(UnityEngine.Application.persistentDataPath, filePath);
-#else
-            string path = Path.Combine(UnityEngine.Application.dataPath, filePath);
-#endif
 
             var jsonFile = JsonConvert.SerializeObject(energySave);
 
@@ -29,11 +25,7 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy.Repository.Implem
 
         public override EnergySaveObject Load()
         {
-#if UNITY_ANDROID && !UNITY_EDITOR
             string path = Path.Combine(UnityEngine.Application.persistentDataPath, filePath);
-#else
-            string path = Path.Combine(UnityEngine.Application.dataPath, filePath);
-#endif
 
             if (File.Exists(path))
             {
