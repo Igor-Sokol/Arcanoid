@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5944319095466658504}
-  - component: {fileID: 3209099813021784711}
+  - component: {fileID: 4959153680506870715}
   m_Layer: 0
   m_Name: TimeManager
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 4132521968533964735}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3209099813021784711
+--- !u!114 &4959153680506870715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,7 +40,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3437532044007033654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35ca015889014054b32aaaba2aae382d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c3808c4a9764065971d82c0689be10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   timeScales: []
@@ -310,7 +310,7 @@ MonoBehaviour:
   platformSize: {fileID: 1925565881761074099}
   platformView: {fileID: 4262270438567086402}
   ballLauncher: {fileID: 1970579459887692357}
-  timeManager: {fileID: 3209099813021784711}
+  timeManager: {fileID: 4959153680506870715}
 --- !u!114 &2136928608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ MonoBehaviour:
   platformSize: {fileID: 1925565881761074099}
   playerInput: {fileID: 0}
   rigidbody2d: {fileID: 4132521968533964720}
-  timeManager: {fileID: 3209099813021784711}
+  timeManager: {fileID: 4959153680506870715}
   speed: 4
 --- !u!114 &7373051976029042777
 MonoBehaviour:
@@ -392,6 +392,7 @@ MonoBehaviour:
   boxCollider2d: {fileID: 4132521968533964734}
   wingSpriteRenderer: {fileID: 4132521967951366217}
   platformSize: {fileID: 1925565881761074099}
+  actionTimeManager: {fileID: 4959153680506870715}
   changeSizeTime: 0.5
 --- !u!114 &1925565881761074099
 MonoBehaviour:
