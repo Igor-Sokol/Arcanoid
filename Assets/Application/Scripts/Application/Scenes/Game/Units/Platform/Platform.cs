@@ -1,10 +1,11 @@
 using Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformComponents;
+using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Platform
 {
-    public class Platform : MonoBehaviour
+    public class Platform : MonoBehaviour, IInitializing
     {
         [SerializeField] private PlatformMover platformMover;
         [SerializeField] private PlatformSize platformSize;
@@ -17,5 +18,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform
         public PlatformView PlatformView => platformView;
         public BallLauncher BallLauncher => ballLauncher;
         public TimeManager TimeManager => timeManager;
+        
+        public void Initialize()
+        {
+            platformSize.Initialize();
+            platformView.Initialize();
+            platformMover.Initialize();
+        }
     }
 }

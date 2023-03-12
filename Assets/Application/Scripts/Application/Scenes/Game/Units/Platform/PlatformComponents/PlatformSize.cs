@@ -14,6 +14,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         [SerializeField] private Vector2 maxSize;
         
         public Vector2 Size => _size;
+        public Vector2 DefaultSize => startSizePercentage;
         public event Action<Vector2> OnSizeChanged;
 
         public void ChangeSize(Vector2 sizePercentage)
