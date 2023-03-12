@@ -358,7 +358,7 @@ MonoBehaviour:
   initializing:
   - {fileID: 245597119}
   - {fileID: 303383099}
-  - {fileID: 1661804864}
+  - {fileID: 1086153037}
   - {fileID: 509032115}
   - {fileID: 226589757}
   - {fileID: 751739476}
@@ -696,6 +696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91a95800e5948aebcf26093cb648801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platform: {fileID: 2064026646}
   blockManager: {fileID: 1892767360}
   boostObjectManager: {fileID: 53067910}
   boostManager: {fileID: 2018377715}
@@ -2685,6 +2686,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   workingCamera: {fileID: 519420031}
+--- !u!114 &1086153037 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3525304485608932870, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
+  m_PrefabInstance: {fileID: 2136928600}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba19aa66ea40ecb6811a841f5a2987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1140233557
 GameObject:
   m_ObjectHideFlags: 0
@@ -3532,6 +3544,8 @@ MonoBehaviour:
   - {fileID: 4959455157867721413, guid: 94c10045924af714c9abc84001590419, type: 3}
   - {fileID: 4959455157867721413, guid: 2b55b4b59bafb964c820620c5b39932d, type: 3}
   - {fileID: 4959455157867721413, guid: 07cca548a3209e349bc98a8be30cf588, type: 3}
+  - {fileID: 4959455157867721413, guid: ec9774dd38ef5974d978a9a1f376ba09, type: 3}
+  - {fileID: 4959455157867721413, guid: e89f1cc70bbacf045970b68be84c197d, type: 3}
 --- !u!1 &1615502425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3646,17 +3660,6 @@ MonoBehaviour:
   packProgress: {fileID: 261240568}
   levelProgress: {fileID: 562433556}
   packImage: {fileID: 646322980}
---- !u!114 &1661804864 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2291090291181938515, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
-  m_PrefabInstance: {fileID: 2136928600}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5eba19aa66ea40ecb6811a841f5a2987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1718323471
 GameObject:
   m_ObjectHideFlags: 0
@@ -4064,6 +4067,8 @@ MonoBehaviour:
   - {fileID: 7432533128270861922, guid: 961a2d9f467d88d41b607bd00805110a, type: 3}
   - {fileID: 7432533128270861922, guid: 6d55b5c2ba323e9419be6c50a8880208, type: 3}
   - {fileID: 7432533128270861922, guid: 94b77eeabd533c849824a73be3e3d1c2, type: 3}
+  - {fileID: 7432533128270861922, guid: be32b453fb6921e468388845c0256000, type: 3}
+  - {fileID: 7432533128270861922, guid: c47bed7a4ba554a41a89b6b45bda51a8, type: 3}
 --- !u!114 &2064026646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2136928609, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
