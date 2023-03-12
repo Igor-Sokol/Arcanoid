@@ -47,6 +47,9 @@ TagManager:
   - name: Block
     uniqueID: 2013171087
     locked: 0
+  - name: Crack
+    uniqueID: 1969739897
+    locked: 0
   - name: BoostObject
     uniqueID: 792409655
     locked: 0
