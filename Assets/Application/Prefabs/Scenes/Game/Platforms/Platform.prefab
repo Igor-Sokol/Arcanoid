@@ -392,6 +392,7 @@ MonoBehaviour:
   boxCollider2d: {fileID: 4132521968533964734}
   wingSpriteRenderer: {fileID: 4132521967951366217}
   platformSize: {fileID: 1925565881761074099}
+  changeSizeTime: 0.5
 --- !u!114 &1925565881761074099
 MonoBehaviour:
   m_ObjectHideFlags: 0
