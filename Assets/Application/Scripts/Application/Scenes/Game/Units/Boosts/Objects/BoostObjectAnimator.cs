@@ -34,7 +34,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects
         {
             _animation.Stop();
             
-            var tween = boostView.DOMoveY(-1f, speed)
+            var tween = boostView.DOMoveY(-1f, 1 / speed)
                 .SetRelative()
                 .SetLoops(-1, LoopType.Incremental)
                 .SetEase(Ease.Linear);

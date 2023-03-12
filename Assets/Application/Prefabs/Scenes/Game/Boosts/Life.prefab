@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostView: {fileID: 2941291563772868992}
-  speed: 1
+  speed: 2
   actionTimeManager: {fileID: 6805253124587291629}
 --- !u!1 &8923680493014148913
 GameObject:

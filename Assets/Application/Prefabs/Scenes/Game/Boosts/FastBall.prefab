@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5294345358559139323}
-  - component: {fileID: 3927103526772234723}
+  - component: {fileID: 7457794790750835339}
   m_Layer: 0
-  m_Name: DeathBoost
+  m_Name: FastBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 7074134090558664326}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3927103526772234723
+--- !u!114 &7457794790750835339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,10 +40,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2666079610212567792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c3d353269f242a2a193f37890679d15, type: 3}
+  m_Script: {fileID: 11500000, guid: 29b8f3cff6794e90982163284d4afea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeCount: 1
+  duration: 3
+  speedMultiple: 2
 --- !u!1 &2941291563772869006
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +59,7 @@ GameObject:
   - component: {fileID: 4959455157867721413}
   - component: {fileID: 6805253124587291629}
   m_Layer: 0
-  m_Name: Death
+  m_Name: FastBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +121,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 67bd4f8090954bf42993509ec6220638, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af6b6c70fe430a44c99b54704ae7f9a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -169,10 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e203557cc82f4ee0924848c7d04b8854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: Death
+  key: FastBall
   boostObjectAnimator: {fileID: 9119410314015535451}
   boosts:
-  - {fileID: 3927103526772234723}
+  - {fileID: 7457794790750835339}
 --- !u!114 &6805253124587291629
 MonoBehaviour:
   m_ObjectHideFlags: 0
