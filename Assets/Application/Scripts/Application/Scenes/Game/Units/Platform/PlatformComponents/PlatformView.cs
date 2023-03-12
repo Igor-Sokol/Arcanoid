@@ -1,3 +1,8 @@
+using Application.Scripts.Application.Scenes.Shared.DoTweenGameActions;
+using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
+using Application.Scripts.Library.DependencyInjection;
+using Application.Scripts.Library.GameActionManagers.Contracts;
+using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using DG.Tweening;
 using UnityEngine;
@@ -6,16 +11,18 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
 {
     public class PlatformView : MonoBehaviour, IInitializing
     {
-        private Sequence _sizeAnimation;
+        private IGameActionManager _gameActionManager;
+        private ActionHandler _sizeAnimationHandler;
         
         [SerializeField] private BoxCollider2D boxCollider2d;
         [SerializeField] private SpriteRenderer wingSpriteRenderer;
         [SerializeField] private PlatformSize platformSize;
+        [SerializeField] private ActionTimeManager actionTimeManager;
         [SerializeField] private float changeSizeTime;
 
         public void Initialize()
         {
-            OnPlatformSizeChanged(platformSize.Size);
+            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
         }
         
         private void OnEnable()
@@ -26,17 +33,25 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         private void OnDisable()
         {
             platformSize.OnSizeChanged -= OnPlatformSizeChanged;
+            StopAnimation();
         }
 
         private void OnPlatformSizeChanged(Vector2 size)
         {
-            _sizeAnimation?.Kill();
-            _sizeAnimation = DOTween.Sequence();
-
-            _sizeAnimation.Append(DOTween.To(() => boxCollider2d.size, (newSize) => boxCollider2d.size = newSize,
+            StopAnimation();
+            
+            var sizeAnimation = DOTween.Sequence();
+            
+            sizeAnimation.Append(DOTween.To(() => boxCollider2d.size, (newSize) => boxCollider2d.size = newSize,
                 new Vector2(size.x, boxCollider2d.size.y), changeSizeTime));
-            _sizeAnimation.Join(DOTween.To(() => wingSpriteRenderer.size, (newSize) => wingSpriteRenderer.size = newSize,
+            sizeAnimation.Join(DOTween.To(() => wingSpriteRenderer.size, (newSize) => wingSpriteRenderer.size = newSize,
                 new Vector2(size.x, wingSpriteRenderer.size.y), changeSizeTime));
+            sizeAnimation.OnComplete(StopAnimation);
+
+            _sizeAnimationHandler =
+                _gameActionManager.StartAction(new DoTweenGameAction(sizeAnimation), -1f, actionTimeManager);
         }
+        
+        private void StopAnimation() => _sizeAnimationHandler.Stop();
     }
 }
