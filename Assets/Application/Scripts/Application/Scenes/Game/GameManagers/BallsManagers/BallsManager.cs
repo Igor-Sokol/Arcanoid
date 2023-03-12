@@ -2,15 +2,16 @@ using System;
 using System.Collections.Generic;
 using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
+using Application.Scripts.Library.EnumerableSafeCollections;
 using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
 {
-    public class BallsManager : MonoBehaviour, IReusable
+    public class BallsManager : MonoBehaviour, IBallManager, IReusable
     {
-        private readonly List<Ball> _activeBalls = new List<Ball>();
+        private readonly SafeList<Ball> _activeBalls = new SafeList<Ball>();
 
         [SerializeField] private BallProvider ballProvider;
         [SerializeField] private TimeManager ballTimeManager;
