@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 595937299
+    locked: 0
+  - name: Block
+    uniqueID: 2013171087
+    locked: 0
+  - name: BoostObject
+    uniqueID: 792409655
+    locked: 0
+  - name: Platorm
+    uniqueID: 3959885309
+    locked: 0
+  - name: Ball
+    uniqueID: 3462189111
+    locked: 0
