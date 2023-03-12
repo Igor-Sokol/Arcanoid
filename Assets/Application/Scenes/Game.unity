@@ -702,6 +702,7 @@ MonoBehaviour:
   boostManager: {fileID: 2018377715}
   healthManager: {fileID: 2115584323}
   timeScaleManager: {fileID: 397341248}
+  ballManager: {fileID: 1014367157}
 --- !u!1 &255428926
 GameObject:
   m_ObjectHideFlags: 0
@@ -3496,7 +3497,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 2
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 7
 --- !u!1 &1601448395
 GameObject:
@@ -3551,6 +3552,7 @@ MonoBehaviour:
   - {fileID: 4959455157867721413, guid: e89f1cc70bbacf045970b68be84c197d, type: 3}
   - {fileID: 4959455157867721413, guid: 67132126ea9642a448adb87ce27f963b, type: 3}
   - {fileID: 4959455157867721413, guid: 3f6a68184147bbe4ebcdefcedf0856f8, type: 3}
+  - {fileID: 4959455157867721413, guid: f21fe693d185eb2439e75860ac1a5507, type: 3}
 --- !u!1 &1615502425
 GameObject:
   m_ObjectHideFlags: 0
@@ -4076,6 +4078,7 @@ MonoBehaviour:
   - {fileID: 7432533128270861922, guid: c47bed7a4ba554a41a89b6b45bda51a8, type: 3}
   - {fileID: 7432533128270861922, guid: be32b453fb6921e468388845c0256000, type: 3}
   - {fileID: 7432533128270861922, guid: aa316845919a89442bcb73ca16cffca3, type: 3}
+  - {fileID: 7432533128270861922, guid: b4a838f0cd2722c48960b1774466035a, type: 3}
 --- !u!114 &2064026646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2136928609, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
