@@ -22,6 +22,24 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         [SerializeField] private PackPlaceAnimator packPlaceAnimator;
 
         public IEnumerable<Block> Blocks => _blocks?.SelectMany(blocks => blocks);
+        public Block[][] BlockArray => _blocks;
+
+        public Vector2 GetBlockIndex(Block block)
+        {
+            for (int i = 0; i < _blocks.Length; i++)
+            {
+                for (int j = 0; j < _blocks[i].Length; j++)
+                {
+                    if (_blocks[i][j] == block)
+                    {
+                        return new Vector2(j, i);
+                    }
+                }
+            }
+
+            return new Vector2(-1, -1);
+        }
+
         public event Action<Block> OnBlockRemoved;
 
         public void PrepareReuse()
@@ -50,7 +68,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                 for (int j = 0; j < blockKeys[i].Length; j++)
                 {
                     var block = blockProvider.GetBlock(blockKeys[i][j]);
-                    block.PrepareReuse();
+                    if (block) block.PrepareReuse();
                     _blocks[i][j] = block;
                 }
             }

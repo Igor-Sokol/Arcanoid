@@ -41,8 +41,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
             {
                 for (int j = 0; j < blocks[i].Length; j++)
                 {
-                    blocks[i][j].transform.position = Vector3.zero;
-                    _activeAnimation.Append(blocks[i][j].transform.DOMove(positions[i][j], blockPlaceDuration));
+                    if (blocks[i][j])
+                    {
+                        blocks[i][j].transform.position = Vector3.zero;
+                        _activeAnimation.Append(blocks[i][j].transform.DOMove(positions[i][j], blockPlaceDuration));
+                    }
                 }
             }
 

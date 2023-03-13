@@ -34,7 +34,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManage
         public void PrepareReuse()
         {
             _totalBlocks =
-                blockManager.Blocks.Count(b => b.HitServiceManager.Services.OfType<BlockHealthService>().Any());
+                blockManager.Blocks.Count(b =>
+                {
+                    if (!b) return false;
+                    return b.HitServiceManager.Services.OfType<BlockHealthService>().Any();
+                });
             _brokenBlocks = 0;
             
             levelPackView.LevelProgress.SetProgress(_brokenBlocks / _totalBlocks * 100, 100);
