@@ -9,6 +9,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
 {
     public class DestroyServiceManager : ServiceCollection<IDestroyService>, IReusable, IInitializing
     {
+        [SerializeField] private Block block;
         [SerializeField] private DestroyService[] destroyServices;
 
         public void Initialize()
@@ -23,7 +24,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
         {
             foreach (var service in destroyServices)
             {
-                service.OnDestroyAction();
+                service.OnDestroyAction(block);
             }
         }
         

@@ -19,8 +19,13 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
         {
         }
 
-        public override void OnDestroyAction()
+        public override void OnDestroyAction(Block block)
         {
+            foreach (var boost in boosts)
+            {
+                boost.Configure(block);
+            }
+            
             _boostManager.Execute(boosts);
         }
     }

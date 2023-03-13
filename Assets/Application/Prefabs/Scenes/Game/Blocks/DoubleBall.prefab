@@ -43,8 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490814c78fe943be91277078765aa0c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyManager: {fileID: 878349664859493960}
-  startHealth: 1
+  blockHealth: {fileID: 2990397176265531598}
 --- !u!1 &3006642270157503928
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +119,52 @@ Transform:
   m_Father: {fileID: 7432533128270861924}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5826538951332036271
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5808085796627907583}
+  - component: {fileID: 6638611897084080501}
+  m_Layer: 0
+  m_Name: BlockServices
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5808085796627907583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826538951332036271}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3491526353636802714}
+  m_Father: {fileID: 7432533128270861924}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6638611897084080501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826538951332036271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b82a95a3584f8aa40f01a8c76a64a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockServices:
+  - {fileID: 2990397176265531598}
 --- !u!1 &6739312437190499524
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dd896f3b0ef408f8edd866a2a0e413c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  block: {fileID: 7432533128270861922}
   destroyServices:
   - {fileID: 8267006364198146796}
   - {fileID: 4342805715356141393}
@@ -202,6 +248,7 @@ Transform:
   m_Children:
   - {fileID: 1898726575762979422}
   - {fileID: 6585225955798731743}
+  - {fileID: 5808085796627907583}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -298,6 +345,7 @@ MonoBehaviour:
   blockView: {fileID: 7432533128270861923}
   hitServiceManager: {fileID: 7597205172337806056}
   destroyServiceManager: {fileID: 878349664859493960}
+  blockServiceManager: {fileID: 6638611897084080501}
 --- !u!114 &7432533128270861923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,3 +417,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boostObject: {fileID: 4959455157867721413, guid: f21fe693d185eb2439e75860ac1a5507, type: 3}
+--- !u!1 &8413754058102488480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3491526353636802714}
+  - component: {fileID: 2990397176265531598}
+  m_Layer: 0
+  m_Name: Health
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3491526353636802714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8413754058102488480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5808085796627907583}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2990397176265531598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8413754058102488480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da3ce83a729415dac9f53e92ed7e1a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyManager: {fileID: 878349664859493960}
+  startHealth: 1

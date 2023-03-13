@@ -20,9 +20,9 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
         {
         }
 
-        public override void OnDestroyAction()
+        public override void OnDestroyAction(Block block)
         {
-            _blockManager.RemoveBlock(block);
+            _blockManager.RemoveBlock(this.block);
         }
     }
 }

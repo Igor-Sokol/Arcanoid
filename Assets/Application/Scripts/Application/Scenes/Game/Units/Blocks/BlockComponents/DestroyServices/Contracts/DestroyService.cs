@@ -6,6 +6,6 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
     {
         public abstract void Initialize();
         public abstract void PrepareReuse();
-        public abstract void OnDestroyAction();
+        public abstract void OnDestroyAction(Block block);
     }
 }

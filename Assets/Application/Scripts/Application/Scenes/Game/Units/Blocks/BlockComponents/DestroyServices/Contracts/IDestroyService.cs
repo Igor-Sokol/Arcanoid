@@ -5,6 +5,6 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
 {
     public interface IDestroyService : IReusable, IInitializing
     {
-        void OnDestroyAction();
+        void OnDestroyAction(Block block);
     }
 }

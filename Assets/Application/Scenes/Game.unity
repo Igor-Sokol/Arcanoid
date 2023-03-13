@@ -3553,6 +3553,7 @@ MonoBehaviour:
   - {fileID: 4959455157867721413, guid: 67132126ea9642a448adb87ce27f963b, type: 3}
   - {fileID: 4959455157867721413, guid: 3f6a68184147bbe4ebcdefcedf0856f8, type: 3}
   - {fileID: 4959455157867721413, guid: f21fe693d185eb2439e75860ac1a5507, type: 3}
+  - {fileID: 4959455157867721413, guid: d830f1db31d94db48bdad1824d5a352d, type: 3}
 --- !u!1 &1615502425
 GameObject:
   m_ObjectHideFlags: 0
@@ -4079,6 +4080,11 @@ MonoBehaviour:
   - {fileID: 7432533128270861922, guid: be32b453fb6921e468388845c0256000, type: 3}
   - {fileID: 7432533128270861922, guid: aa316845919a89442bcb73ca16cffca3, type: 3}
   - {fileID: 7432533128270861922, guid: b4a838f0cd2722c48960b1774466035a, type: 3}
+  - {fileID: 7432533128270861922, guid: 0584b3740c5077642af59e007255b655, type: 3}
+  - {fileID: 7432533128270861922, guid: 005a4b4ec59cd664eaffce694018d52b, type: 3}
+  - {fileID: 7432533128270861922, guid: e5715dc6c712433418eaef6a451ff74c, type: 3}
+  - {fileID: 7432533128270861922, guid: f3d583a950406094e9114b1ba4226665, type: 3}
+  - {fileID: 7432533128270861922, guid: 7fa6ffe8d3976ce4daca62c748b83545, type: 3}
 --- !u!114 &2064026646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2136928609, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
