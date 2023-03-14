@@ -1,4 +1,5 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Library.DependencyInjection;
 using UnityEngine;

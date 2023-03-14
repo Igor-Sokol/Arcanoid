@@ -3,13 +3,13 @@ using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
+namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents.MoveController
 {
     public class MoveController : MonoBehaviour, IReusable
     {
         private Vector2 _previousDirection;
         private Vector2 _currentDirection;
-        
+
         [SerializeField] private Rigidbody2D rigidbody2d;
         [SerializeField] private TimeManager ballTimeManager;
         [SerializeField] private float speed;
@@ -17,6 +17,8 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         
         public bool PhysicActive { get => !rigidbody2d.isKinematic; set => rigidbody2d.isKinematic = !value; }
         public Vector2 CurrentDirection => _currentDirection.normalized;
+        public Vector2 PreviousDirection => _previousDirection;
+
 
         public void PrepareReuse()
         {
@@ -31,7 +33,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
             rigidbody2d.velocity = direction * speed;
             _currentDirection = direction;
         }
-        
+
         private void FixedUpdate()
         {
             if (rigidbody2d.velocity.sqrMagnitude == 0f)
