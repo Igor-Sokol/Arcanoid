@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5294345358559139323}
+  - component: {fileID: 4632625257135384948}
   m_Layer: 0
   m_Name: FireBall
   m_TagString: Untagged
@@ -30,6 +31,19 @@ Transform:
   m_Father: {fileID: 7074134090558664326}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4632625257135384948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2666079610212567792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 715260d53cff4df3953b44a394afb782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 50
 --- !u!1 &2941291563772869006
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: FireBall
   boostObjectAnimator: {fileID: 9119410314015535451}
-  boosts: []
+  boosts:
+  - {fileID: 4632625257135384948}
 --- !u!114 &6805253124587291629
 MonoBehaviour:
   m_ObjectHideFlags: 0

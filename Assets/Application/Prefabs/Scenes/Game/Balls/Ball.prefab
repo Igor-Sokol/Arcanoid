@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3050967322905504494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6679546133719893495}
+  - component: {fileID: 3235218726259321232}
+  m_Layer: 6
+  m_Name: TimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6679546133719893495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3050967322905504494}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8025559415471671174}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3235218726259321232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3050967322905504494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ca015889014054b32aaaba2aae382d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScales: []
 --- !u!1 &8025559415471671172
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,10 +55,11 @@ GameObject:
   - component: {fileID: 8025559415471671174}
   - component: {fileID: 8025559415471671173}
   - component: {fileID: 8025559415471671175}
+  - component: {fileID: 3655949322944863381}
   - component: {fileID: 8025559415471671168}
   - component: {fileID: 375709414}
   - component: {fileID: 375709413}
-  - component: {fileID: 7040518470909456476}
+  - component: {fileID: 4296485177949528460}
   m_Layer: 6
   m_Name: Ball
   m_TagString: Untagged
@@ -32,7 +77,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6679546133719893495}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,6 +149,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!58 &3655949322944863381
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025559415471671172}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.15
 --- !u!50 &8025559415471671168
 Rigidbody2D:
   serializedVersion: 4
@@ -137,7 +199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveController: {fileID: 375709413}
-  timeManager: {fileID: 7040518470909456476}
+  timeManager: {fileID: 3235218726259321232}
+  ballHitManager: {fileID: 4296485177949528460}
 --- !u!114 &375709413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,10 +214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody2d: {fileID: 8025559415471671168}
-  ballTimeManager: {fileID: 7040518470909456476}
+  ballTimeManager: {fileID: 3235218726259321232}
   speed: 250
   minBounceAngel: 25
---- !u!114 &7040518470909456476
+--- !u!114 &4296485177949528460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,7 +226,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8025559415471671172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35ca015889014054b32aaaba2aae382d, type: 3}
+  m_Script: {fileID: 11500000, guid: 422d935777fc40808b0d02f01e383b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScales: []
+  ball: {fileID: 375709414}
