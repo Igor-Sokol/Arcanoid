@@ -715,4 +715,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitServices:
   - {fileID: 7656105543484782539}
-  - {fileID: 0}
