@@ -14,7 +14,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         public override IEnumerable<IEnumerable<Vector2>> GetIndexes(Block[][] blocks, Vector2 startIndex, IEnumerable<string> ignoreKeys)
         {
             yield return ChainFinder.GetLongestChain(blocks, b => b.Key, (b) => b && !ignoreKeys.Contains(b.Key),
-                startIndex, moveRules).Skip(1);
+                startIndex, moveRules)?.Skip(1);
         }
     }
 }

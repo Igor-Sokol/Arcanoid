@@ -24,7 +24,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
                             return !ignoreKeys.Contains(b.Key);
                         }
                         return false;
-                    }).Skip(1);
+                    })?.Skip(1);
             }
         }
     }
