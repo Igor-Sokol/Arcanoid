@@ -87,8 +87,8 @@ namespace Application.Scripts.Library.ChainFinders
         
         private static bool ValidIndex<T>(T[][] table, Vector2 index)
         {
-            if (index.x >= 0 && index.x < table.Length 
-             && index.y >= 0 && index.y < table[(int)index.x].Length)
+            if (index.y >= 0 && index.y < table.Length 
+             && index.x >= 0 && index.x < table[(int)index.x].Length)
             {
                 return true;
             }
