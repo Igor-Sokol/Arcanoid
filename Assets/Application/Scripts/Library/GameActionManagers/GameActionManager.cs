@@ -88,14 +88,17 @@ namespace Application.Scripts.Library.GameActionManagers
         {
             foreach (var actionTimer in _timersToInstall)
             {
-                Type key = actionTimer.GameAction.GetType();
-                if (_timers.ContainsKey(key))
+                if (actionTimer != null)
                 {
-                    _timers[key].Add(actionTimer);
-                }
-                else
-                {
-                    _timers.Add(key, new List<ActionTimer>() { actionTimer });
+                    Type key = actionTimer.GameAction.GetType();
+                    if (_timers.ContainsKey(key))
+                    {
+                        _timers[key].Add(actionTimer);
+                    }
+                    else
+                    {
+                        _timers.Add(key, new List<ActionTimer>() { actionTimer });
+                    }
                 }
             }
             _timersToInstall.Clear();
