@@ -755,6 +755,7 @@ MonoBehaviour:
   boostManager: {fileID: 2018377715}
   boostObjectManager: {fileID: 53067910}
   platform: {fileID: 2064026646}
+  loseManager: {fileID: 490119684}
 --- !u!1 &257514048
 GameObject:
   m_ObjectHideFlags: 0

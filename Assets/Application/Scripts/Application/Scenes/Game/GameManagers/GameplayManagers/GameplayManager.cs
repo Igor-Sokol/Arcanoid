@@ -4,6 +4,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.DifficultyManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManagers;
 using Application.Scripts.Application.Scenes.Game.Units.Platform;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
@@ -29,6 +30,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private Platform platform;
+        [SerializeField] private LoseManager loseManager;
 
         public void Initialize()
         {
@@ -48,12 +50,20 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
             blockProgressManager.PrepareReuse();
             difficultyManager.PrepareReuse();
             
-            SetBall();
+            platform.BallLauncher.SetBall(ballsManager.GetBall());
         }
 
         public void SetBall()
         {
-            platform.BallLauncher.SetBall(ballsManager.GetBall());
+            if (healthManager.CurrentHealth > 0)
+            {
+                platform.BallLauncher.SetBall(ballsManager.GetBall());
+                healthManager.RemoveHealth();
+            }
+            else
+            {
+                loseManager.PlayerLose();
+            }
         }
     }
 }

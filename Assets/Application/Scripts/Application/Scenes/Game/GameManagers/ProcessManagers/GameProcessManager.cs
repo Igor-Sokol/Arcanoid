@@ -22,12 +22,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManage
         
         private void OnMissedBalls()
         {
-            healthManager.RemoveHealth();
-
-            if (healthManager.CurrentHealth > 0)
-            {
-                gameplayManager.SetBall();
-            }
+            gameplayManager.SetBall();
         }
     }
 }

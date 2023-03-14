@@ -37,17 +37,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
         }
-        
-        private void OnEnable()
-        {
-            healthManager.OnDead += PlayerLose;
-        }
-        private void OnDisable()
-        {
-            healthManager.OnDead -= PlayerLose;
-        }
-        
-        private void PlayerLose()
+
+        public void PlayerLose()
         {
             ballsManager.PrepareReuse();
             boostObjectManager.PrepareReuse();
