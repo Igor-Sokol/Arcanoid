@@ -28,9 +28,15 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             _onComplete = onComplete;
             _indexes = new List<List<Vector2>>();
 
-            foreach (var asyncIndexes in indexes)
+            if (indexes != null)
             {
-                _indexes.Add(asyncIndexes.ToList());
+                foreach (var asyncIndexes in indexes)
+                {
+                    if (asyncIndexes != null)
+                    {
+                        _indexes.Add(asyncIndexes.ToList());
+                    }
+                }
             }
         }
         
