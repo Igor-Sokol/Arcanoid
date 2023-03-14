@@ -76,10 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressRepository: {fileID: 6414025323996368015, guid: 8e5e838f441ee3c449fd75393d6ebee3, type: 3}
-  levelPacks:
-  - {fileID: 11400000, guid: 615138ef7036e3a4f9d54afae6f6eec5, type: 2}
-  - {fileID: 11400000, guid: 6dddc3d84ed5730499dff5bb0966b096, type: 2}
-  - {fileID: 11400000, guid: 4c9f0886bd652484fa460c369ba2aeb4, type: 2}
+  levelPacks: {fileID: 11400000, guid: 771f5fe1814f4e84ebcb8d6bde638db1, type: 2}
 --- !u!114 &7024819465222291936
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPacks;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
@@ -12,18 +15,18 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
     public class PackProgressManager : MonoBehaviour, IPackProgressManager
     {
         [SerializeField] private PackProgressRepository progressRepository;
-        [SerializeField] private List<LevelPack> levelPacks;
+        [SerializeField] private PackManager levelPacks;
 
-        public IEnumerable<LevelPack> LevelPacks => levelPacks;
+        public IEnumerable<LevelPack> LevelPacks => levelPacks.LevelPacks;
 
         public IPackInfo GetCurrentLevel()
         {
             var packTransfer = progressRepository.Load();
 
 
-            if (packTransfer.PackIndex < levelPacks.Count)
+            if (packTransfer.PackIndex < levelPacks.LevelPacks.Length)
             {
-                return new PackInfo(levelPacks[packTransfer.PackIndex], packTransfer.CurrentLevelIndex);
+                return new PackInfo(levelPacks.LevelPacks[packTransfer.PackIndex], packTransfer.CurrentLevelIndex);
             }
 
             return new PackInfo(null, 0);
@@ -31,9 +34,9 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
 
         public bool TryGetPackIndex(LevelPack pack, out int index)
         {
-            if (levelPacks.Contains(pack))
+            if (levelPacks.LevelPacks.Contains(pack))
             {
-                index = levelPacks.IndexOf(pack);
+                index = Array.IndexOf(levelPacks.LevelPacks, pack);
                 return true;
             }
 
@@ -43,9 +46,9 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
         
         public void CompleteLevel(IPackInfo packInfo)
         {
-            if (levelPacks.Contains(packInfo.LevelPack))
+            if (levelPacks.LevelPacks.Contains(packInfo.LevelPack))
             {
-                int levelPackIndex = levelPacks.IndexOf(packInfo.LevelPack);
+                int levelPackIndex = Array.IndexOf(levelPacks.LevelPacks, packInfo.LevelPack);
                 var packTransfer = progressRepository.Load();
 
                 if (levelPackIndex >= packTransfer.PackIndex)
