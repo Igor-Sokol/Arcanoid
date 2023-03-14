@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   block: {fileID: 7432533128270861922}
   destroyServices:
-  - {fileID: 8267006364198146796}
+  - {fileID: 4113827693804593333}
   - {fileID: 4342805715356141393}
 --- !u!1 &7432533128270861920
 GameObject:
@@ -382,7 +382,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8010453735187929921}
-  - component: {fileID: 8267006364198146796}
+  - component: {fileID: 4113827693804593333}
+  - component: {fileID: 8477127451908803462}
   m_Layer: 0
   m_Name: Boost
   m_TagString: Untagged
@@ -404,7 +405,7 @@ Transform:
   m_Father: {fileID: 6585225955798731743}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8267006364198146796
+--- !u!114 &4113827693804593333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -413,10 +414,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8025752197536601655}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217c0ca5b9b343ad98db625f87dbce1e, type: 3}
+  m_Script: {fileID: 11500000, guid: a2ae0b8cf2794ffd93eadfa02acff5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostObject: {fileID: 4959455157867721413, guid: f21fe693d185eb2439e75860ac1a5507, type: 3}
+  boosts:
+  - {fileID: 8477127451908803462}
+--- !u!114 &8477127451908803462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025752197536601655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4ad9f148ab479691c3a7e74e68d101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8413754058102488480
 GameObject:
   m_ObjectHideFlags: 0

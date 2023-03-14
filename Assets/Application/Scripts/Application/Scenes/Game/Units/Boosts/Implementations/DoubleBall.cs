@@ -25,13 +25,9 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
                 if (ball.MoveController.PhysicActive)
                 {
                     var newBall = _ballManager.GetBall();
-
                     newBall.transform.position = ball.transform.position;
-                
                     newBall.MoveController.PhysicActive = true;
-
-                    Vector2 originDirection = ball.MoveController.CurrentDirection;
-                    newBall.MoveController.SetDirection(new Vector2(-originDirection.x, originDirection.y));
+                    newBall.MoveController.SetDirection(Random.insideUnitCircle);
                 }
             }
         }
