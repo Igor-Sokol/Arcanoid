@@ -36,12 +36,15 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
 
         private void FixedUpdate()
         {
-            if (rigidbody2d.velocity.sqrMagnitude == 0f)
+            if (PhysicActive)
             {
-                SetDirection(_currentDirection);
-            }
+                if (rigidbody2d.velocity.sqrMagnitude == 0f)
+                {
+                    SetDirection(_currentDirection.sqrMagnitude > 0f ? _currentDirection : Random.insideUnitCircle);
+                }
             
-            rigidbody2d.velocity = rigidbody2d.velocity.normalized * (speed * ballTimeManager.FixedDeltaTime);
+                rigidbody2d.velocity = rigidbody2d.velocity.normalized * (speed * ballTimeManager.FixedDeltaTime);
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D col)
