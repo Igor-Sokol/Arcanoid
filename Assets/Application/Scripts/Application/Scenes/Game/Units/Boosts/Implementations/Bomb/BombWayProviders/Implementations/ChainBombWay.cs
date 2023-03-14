@@ -13,14 +13,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         
         public override IEnumerable<IEnumerable<Vector2>> GetIndexes(Block[][] blocks, Vector2 startIndex, IEnumerable<string> ignoreKeys)
         {
-            yield return ChainFinder.GetLongestChain(blocks, (b1, b2) =>
-                {
-                    if (b1 && b2)
-                    {
-                        return b1.Key == b2.Key && !ignoreKeys.Contains(b2.Key);
-                    }
-                    return false;
-                }, (b) => b,
+            yield return ChainFinder.GetLongestChain(blocks, b => b.Key, (b) => b && !ignoreKeys.Contains(b.Key),
                 startIndex, moveRules).Skip(1);
         }
     }

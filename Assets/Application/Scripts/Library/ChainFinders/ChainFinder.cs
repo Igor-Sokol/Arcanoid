@@ -6,53 +6,70 @@ namespace Application.Scripts.Library.ChainFinders
 {
     public static class ChainFinder
     {
-        public static IEnumerable<Vector2> GetLongestChain<T>(T[][] table, Func<T, T, bool> predicate, Func<T, bool> valid,
-            Vector2 start, Vector2[] moveRules)
+        public static IEnumerable<Vector2> GetLongestChain<T,TKey>(T[][] table, Func<T, TKey> key, Func<T, bool> valid,
+            Vector2 start, Vector2[] moveRules, Comparer<TKey> comparer = null)
         {
-            List<List<Vector2>> ways = new List<List<Vector2>>();
-            Queue<List<Vector2>> iterations = new Queue<List<Vector2>>();
+            comparer ??= Comparer<TKey>.Default;
 
-            ways.Add(new List<Vector2>() { start });
-            iterations.Enqueue(ways[0]);
+            Queue<Vector2> iterations = new Queue<Vector2>();
+            Dictionary<TKey, List<Vector2>> ways = new Dictionary<TKey, List<Vector2>>();
+
+            foreach (var moveRule in moveRules)
+            {
+                Vector2 index = start + moveRule;
+                if (ValidIndex(table, index) && valid(table[(int)index.y][(int)index.x]))
+                {
+                    TKey currentKey = key(table[(int)index.y][(int)index.x]);
+                    
+                    if (ways.TryGetValue(currentKey, out var list))
+                    {
+                        list.Add(index);
+                    }
+                    else
+                    {
+                        ways.Add(currentKey, new List<Vector2>() { start, index });
+                    }
+                    iterations.Enqueue(index);
+                }
+            }
             
             while (iterations.Count > 0)
             {
-                List<Vector2> currentWay = iterations.Dequeue();
-                Vector2 current = currentWay[currentWay.Count - 1];
+                Vector2 current = iterations.Dequeue();
 
                 for (int i = 0; i < moveRules.Length; i++)
                 {
                     Vector2 rule = moveRules[i];
-                    
+
                     Vector2 index = current + rule;
-                    if (ValidIndex(table, index) && valid(table[(int)index.y][(int)index.x]) && !currentWay.Contains(index)
-                        && (current == start || predicate(table[(int)current.y][(int)current.x], table[(int)index.y][(int)index.x])))
+                    if (ValidIndex(table, index))
                     {
-                        if (i == moveRules.Length - 1)
+                        T moveItem = table[(int)index.y][(int)index.x];
+                        TKey moveKey = key(table[(int)index.y][(int)index.x]);
+                        TKey currentKey = key(table[(int)current.y][(int)current.x]);
+
+                        if (valid(moveItem) && ways.ContainsKey(moveKey) &&
+                            comparer.Compare(currentKey, moveKey) == 0 && !ways[moveKey].Contains(index))
                         {
-                            currentWay.Add(index);
-                            iterations.Enqueue(currentWay);
-                        }
-                        else
-                        {
-                            var newWay = new List<Vector2>(currentWay) { index };
-                            ways.Add(newWay);
-                            iterations.Enqueue(newWay);
+                            ways[moveKey].Add(index);
+                            iterations.Enqueue(index);
                         }
                     }
                 }
             }
-
+            
+            
             List<Vector2> longestWay = null;
             foreach (var way in ways)
             {
-                if (way.Count > (longestWay?.Count ?? -1))
+                if (way.Value.Count > (longestWay?.Count ?? -1))
                 {
-                    longestWay = way;
+                    longestWay = way.Value;
                 }
             }
 
             return longestWay;
+
         }
         
         public static IEnumerable<Vector2> GetChain<T>(T[][] table,
