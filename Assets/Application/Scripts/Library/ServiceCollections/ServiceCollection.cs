@@ -22,7 +22,11 @@ namespace Application.Scripts.Library.ServiceCollections
 
         public virtual void RemoveService(TService service)
         {
-            _services[_services.IndexOf(service)] = null;
+            int index = _services.IndexOf(service);
+            if (index >= 0)
+            {
+                _services[_services.IndexOf(service)] = null;
+            }
         }
 
         private IEnumerable<TService> GetServices()
