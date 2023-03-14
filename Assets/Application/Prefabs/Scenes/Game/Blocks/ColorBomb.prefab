@@ -555,7 +555,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombWay: {fileID: 187193108111346879}
   actionTimeManager: {fileID: 3087448958092120975}
-  blockDestroyDelay: 0.2
+  blockDestroyDelay: 0.05
+  damage: 1
   ignoreBlocks:
   - {fileID: 7432533128270861922, guid: 9e95bf883e4379b46bc94fc77cb65abb, type: 3}
 --- !u!114 &187193108111346879

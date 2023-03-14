@@ -534,6 +534,7 @@ MonoBehaviour:
   bombWay: {fileID: 733571600130352656}
   actionTimeManager: {fileID: 2554052794058315492}
   blockDestroyDelay: 0
+  damage: 1
   ignoreBlocks: []
 --- !u!1 &9086947486389461639
 GameObject:
