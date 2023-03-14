@@ -13,16 +13,18 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
     {
         private readonly IBlockManager _blockManager;
         private readonly float _blockRemoveDelay;
+        private readonly int _damage;
         private readonly Action _onComplete;
         private readonly List<List<Vector2>> _indexes;
         
         private float _timer;
         
         public BombGameAction(IBlockManager blockManager, IEnumerable<IEnumerable<Vector2>> indexes, 
-            float blockRemoveDelay, Action onComplete)
+            float blockRemoveDelay, int damage, Action onComplete)
         {
             _blockManager = blockManager;
             _blockRemoveDelay = blockRemoveDelay;
+            _damage = damage;
             _onComplete = onComplete;
             _indexes = new List<List<Vector2>>();
 
@@ -66,7 +68,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
                     
                     if (block)
                     {
-                        block.BlockServiceManager.Services.OfType<BlockHealth>().FirstOrDefault()?.RemoveHealth();
+                        var health = block.BlockServiceManager.Services.OfType<BlockHealth>().FirstOrDefault();
+                        for (int i = 0; i < _damage; i++)
+                        {
+                            if (health) health.RemoveHealth();
+                        }
                     }
 
                     asyncIndexes.RemoveAt(0);
