@@ -42,13 +42,12 @@ namespace Application.Scripts.Library.ChainFinders
                     Vector2 rule = moveRules[i];
 
                     Vector2 index = current + rule;
-                    if (ValidIndex(table, index))
+                    if (ValidIndex(table, index) && valid(table[(int)index.y][(int)index.x]))
                     {
-                        T moveItem = table[(int)index.y][(int)index.x];
                         TKey moveKey = key(table[(int)index.y][(int)index.x]);
                         TKey currentKey = key(table[(int)current.y][(int)current.x]);
 
-                        if (valid(moveItem) && ways.ContainsKey(moveKey) &&
+                        if (ways.ContainsKey(moveKey) &&
                             comparer.Compare(currentKey, moveKey) == 0 && !ways[moveKey].Contains(index))
                         {
                             ways[moveKey].Add(index);
