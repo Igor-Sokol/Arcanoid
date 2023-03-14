@@ -15,12 +15,12 @@ namespace Application.Scripts.Library.ServiceCollections
             _services.Clear();
         }
 
-        public void AddService(TService service)
+        public virtual void AddService(TService service)
         {
             _services.Add(service);
         }
 
-        public void RemoveService(TService service)
+        public virtual void RemoveService(TService service)
         {
             _services[_services.IndexOf(service)] = null;
         }
