@@ -60,12 +60,15 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
 
         public void ReturnBall(Ball ball)
         {
-            _activeBalls.Remove(ball);
-            ballProvider.Return(ball);
-
-            if (_activeBalls.Count <= 0)
+            if (_activeBalls.Count > 0)
             {
-                OnAllBallRemoved?.Invoke();
+                _activeBalls.Remove(ball);
+                ballProvider.Return(ball);
+
+                if (_activeBalls.Count <= 0)
+                {
+                    OnAllBallRemoved?.Invoke();
+                }
             }
         }
 
