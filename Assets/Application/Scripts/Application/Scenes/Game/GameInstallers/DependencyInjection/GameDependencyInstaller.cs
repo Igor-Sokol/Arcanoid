@@ -6,6 +6,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
+using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Platform;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
@@ -24,6 +25,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyI
         [SerializeField] private HealthManager healthManager;
         [SerializeField] private TimeScaleManager timeScaleManager;
         [SerializeField] private BallsManager ballManager;
+        [SerializeField] private BallProvider ballProvider;
         
         public void Initialize()
         {
@@ -34,6 +36,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyI
             ProjectContext.Instance.SetService<IHealthManager, HealthManager>(healthManager);
             ProjectContext.Instance.SetService<ITimeScaleManager, TimeScaleManager>(timeScaleManager);
             ProjectContext.Instance.SetService<IBallManager, BallsManager>(ballManager);
+            ProjectContext.Instance.SetService<IBallProvider, BallProvider>(ballProvider);
         }
     }
 }

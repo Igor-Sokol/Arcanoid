@@ -170,5 +170,14 @@
           "type":"string",
           "value":"VerticalBomb"
         }]
+    },
+    {
+      "id":19,
+      "properties":[
+        {
+          "name":"BlockKey",
+          "type":"string",
+          "value":"WeaponPlatform"
+        }]
     }]
 }
