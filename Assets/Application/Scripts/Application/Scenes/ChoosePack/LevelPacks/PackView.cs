@@ -34,6 +34,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
         public bool Interactable { get => button.interactable; set => button.interactable = value; }
 
         public RectTransform PackContainer => packContainer;
+        public Vector2 Size => packBackground.sprite.rect.size;
 
         public PackState State => _packState;
         public event Action<PackView, LevelPack> OnSelected;
@@ -64,6 +65,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
                     packImage.sprite = closePackImage;
                     packName.text = _localizationManager.GetString(closePackNameKey);
                     button.interactable = false;
+                    priceView.gameObject.SetActive(false);
                 }
                     break;
                 case PackState.Current:

@@ -9,10 +9,12 @@ using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.Scene
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Implementations;
+using Application.Scripts.Application.Scenes.Shared.UI.Header;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,12 +28,16 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         private ISceneManager _sceneManager;
         private IEnergyManager _energyManager;
         private IPackInfo _packInfo;
+        private Tween _activeAnimation;
         
         [SerializeField] private PackView packViewPrefab;
-        [SerializeField] private Transform viewContainer;
+        [SerializeField] private RectTransform viewContainer;
+        [SerializeField] private RectTransform viewport;
+        [SerializeField] private VerticalLayoutGroup verticalLayoutGroup;
         [SerializeField] private PackViewAnimator packViewAnimator;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private Image graphicRayBlock;
+        [SerializeField] private float scrollTime;
         
         public void Initialize()
         {
@@ -40,6 +46,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
 
             GenerateViews();
+            SetViewsPosition();
             PackStateUpdate();
             
             _energyManager.OnEnergyAdded += PackStateUpdate;
@@ -64,6 +71,8 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
                 _energyManager.OnEnergyAdded -= PackStateUpdate;
                 _energyManager.OnEnergyRemoved -= PackStateUpdate;
             }
+            
+            _activeAnimation?.Kill();
         }
 
         private void GenerateViews()
@@ -95,6 +104,26 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
 
                 if (levelPack == _packInfo.LevelPack) packState = PackState.Closed;
             }
+        }
+
+        private void SetViewsPosition()
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(viewContainer);
+            
+            float viewSize = verticalLayoutGroup.preferredHeight / _packs.Count;
+            float position = -verticalLayoutGroup.preferredHeight;
+            _packProgressManager.TryGetPackIndex(_packInfo.LevelPack, out var currentIndex);
+            position += viewSize * (_packs.Count - currentIndex);
+            var viewportRect = viewport.rect;
+            position -= viewportRect.height / 2f;
+            position -= viewSize / 2;
+
+            position = -Mathf.Clamp(Mathf.Abs(position), viewportRect.size.y, verticalLayoutGroup.preferredHeight);
+            
+            Transform viewTransform = viewContainer.transform;
+            _activeAnimation = DOTween.To(() => viewTransform.localPosition.y,
+                (y) => viewTransform.localPosition = new Vector3(viewTransform.localPosition.x, y), position,
+                scrollTime);
         }
 
         private void LoadPack(PackView packView, LevelPack levelPack)
