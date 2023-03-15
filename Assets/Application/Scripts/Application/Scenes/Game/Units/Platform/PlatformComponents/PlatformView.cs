@@ -20,6 +20,8 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         [SerializeField] private ActionTimeManager actionTimeManager;
         [SerializeField] private float changeSizeTime;
 
+        public Vector2 ViewSize => wingSpriteRenderer.size;
+        
         public void Initialize()
         {
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
