@@ -703,6 +703,7 @@ MonoBehaviour:
   healthManager: {fileID: 2115584323}
   timeScaleManager: {fileID: 397341248}
   ballManager: {fileID: 1014367157}
+  ballProvider: {fileID: 1419262391}
 --- !u!1 &255428926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1317,6 +1318,7 @@ MonoBehaviour:
   healthManager: {fileID: 2115584323}
   ballsManager: {fileID: 1014367157}
   boostObjectManager: {fileID: 53067910}
+  boostManager: {fileID: 2018377715}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
 --- !u!1 &509032113
 GameObject:
@@ -3239,6 +3241,7 @@ MonoBehaviour:
   gameplayManager: {fileID: 255428928}
   ballsManager: {fileID: 1014367157}
   boostObjectManager: {fileID: 53067910}
+  boostManager: {fileID: 2018377715}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
   progressManager: {fileID: 826214863}
 --- !u!1 &1419262389
@@ -3611,6 +3614,7 @@ MonoBehaviour:
   - {fileID: 4959455157867721413, guid: 3f6a68184147bbe4ebcdefcedf0856f8, type: 3}
   - {fileID: 4959455157867721413, guid: f21fe693d185eb2439e75860ac1a5507, type: 3}
   - {fileID: 4959455157867721413, guid: d830f1db31d94db48bdad1824d5a352d, type: 3}
+  - {fileID: 4959455157867721413, guid: e78408fd327e96f4a82c3bc6b59b59f8, type: 3}
 --- !u!1 &1615502425
 GameObject:
   m_ObjectHideFlags: 0
@@ -4263,6 +4267,7 @@ MonoBehaviour:
   - {fileID: 7432533128270861922, guid: e5715dc6c712433418eaef6a451ff74c, type: 3}
   - {fileID: 7432533128270861922, guid: f3d583a950406094e9114b1ba4226665, type: 3}
   - {fileID: 7432533128270861922, guid: 7fa6ffe8d3976ce4daca62c748b83545, type: 3}
+  - {fileID: 7432533128270861922, guid: 4549ef1179811d5419a598aaf1e5caf5, type: 3}
 --- !u!114 &2064026646 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2136928609, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}

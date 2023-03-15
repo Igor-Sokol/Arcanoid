@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5294345358559139323}
   - component: {fileID: 4632625257135384948}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 8006369634052615527}
   - component: {fileID: 4959455157867721413}
   - component: {fileID: 6805253124587291629}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FireBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4346760705069356254}
   - component: {fileID: 9119410314015535451}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7074134090558664326}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boosts
   m_TagString: Untagged
   m_Icon: {fileID: 0}

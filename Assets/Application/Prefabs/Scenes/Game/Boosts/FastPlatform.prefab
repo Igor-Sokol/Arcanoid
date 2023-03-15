@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5294345358559139323}
   - component: {fileID: 2236724733371677216}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FastPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 8006369634052615527}
   - component: {fileID: 4959455157867721413}
   - component: {fileID: 6805253124587291629}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FastPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 792409655
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 54238456499f08744801928e4c667f5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -197,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4346760705069356254}
   - component: {fileID: 9119410314015535451}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7074134090558664326}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boosts
   m_TagString: Untagged
   m_Icon: {fileID: 0}

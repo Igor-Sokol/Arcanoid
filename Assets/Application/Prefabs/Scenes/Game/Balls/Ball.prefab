@@ -201,6 +201,8 @@ MonoBehaviour:
   moveController: {fileID: 375709413}
   timeManager: {fileID: 3235218726259321232}
   ballHitManager: {fileID: 4296485177949528460}
+  collisionCollider: {fileID: 8025559415471671175}
+  triggerCollider: {fileID: 3655949322944863381}
 --- !u!114 &375709413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody2d: {fileID: 8025559415471671168}
   ballTimeManager: {fileID: 3235218726259321232}
-  speed: 250
+  defaultSpeed: 250
   minBounceAngel: 25
 --- !u!114 &4296485177949528460
 MonoBehaviour:
