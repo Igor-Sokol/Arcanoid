@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Application.Scripts.Application.Scenes.Game.Screen.UI.Header;
+using Application.Scripts.Application.Scenes.Shared.UI.Header;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.ScreenInfo;
 using UnityEngine;

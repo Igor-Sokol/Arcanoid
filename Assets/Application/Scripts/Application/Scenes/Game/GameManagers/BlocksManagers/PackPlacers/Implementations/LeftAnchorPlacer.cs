@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlacers.Contracts;
-using Application.Scripts.Application.Scenes.Game.Screen.UI.Header;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
+using Application.Scripts.Application.Scenes.Shared.UI.Header;
 using Application.Scripts.Library.ScreenInfo;
 using UnityEngine;
 

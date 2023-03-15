@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Header
+namespace Application.Scripts.Application.Scenes.Shared.UI.Header
 {
     public class HeaderSize : MonoBehaviour
     {
