@@ -42,12 +42,15 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.HealthManager
 
         public void RemoveHealth()
         {
-            _currentHealth--;
-            OnHealthRemoved?.Invoke();
-
-            if (_currentHealth <= 0)
+            if (_currentHealth > 0)
             {
-                OnDead?.Invoke();
+                _currentHealth--;
+                OnHealthRemoved?.Invoke();
+
+                if (_currentHealth <= 0)
+                {
+                    OnDead?.Invoke();
+                }
             }
         }
     }
