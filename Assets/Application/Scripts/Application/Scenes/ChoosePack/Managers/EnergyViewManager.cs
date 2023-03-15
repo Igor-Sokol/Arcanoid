@@ -38,9 +38,9 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         {
             if (_energyManager != null)
             {
-                _energyManager.OnEnergyAdded += EnergyUpdate;
-                _energyManager.OnEnergyRemoved += EnergyUpdate;
-                _energyManager.OnFillTimeChanged += EnergyTimeUpdate;
+                _energyManager.OnEnergyAdded -= EnergyUpdate;
+                _energyManager.OnEnergyRemoved -= EnergyUpdate;
+                _energyManager.OnFillTimeChanged -= EnergyTimeUpdate;
             }
         }
 

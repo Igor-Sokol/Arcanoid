@@ -1323,6 +1323,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3050254744608401095, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050254744608401095, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050254744608401095, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7017482650573991042, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1339,29 +1351,12 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8036999389315809491, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
+      propertyPath: m_fontSize
+      value: 14.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
---- !u!114 &5593639001563177524 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2647132120598986079, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
-  m_PrefabInstance: {fileID: 7573956892878544747}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!224 &5593639002228618255 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2647132119121193828, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
-  m_PrefabInstance: {fileID: 7573956892878544747}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5593639002228618252 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2647132119121193831, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
-  m_PrefabInstance: {fileID: 7573956892878544747}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8826601302879478946 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1396813751172479945, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
@@ -1373,6 +1368,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feabcf1d66734f4b820c23b6af8a18e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5593639001563177524 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2647132120598986079, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
+  m_PrefabInstance: {fileID: 7573956892878544747}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &2652596033664922623 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5608093845617159316, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
+  m_PrefabInstance: {fileID: 7573956892878544747}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5593639002228618252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2647132119121193831, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
+  m_PrefabInstance: {fileID: 7573956892878544747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2838570115109867550 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5654473637668605813, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
@@ -1384,6 +1400,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f84e088f5bc4c5a9d1610db04817eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &5593639002228618255 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2647132119121193828, guid: 8708b59bdbd3c524497661497957d1ff, type: 3}
+  m_PrefabInstance: {fileID: 7573956892878544747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4938209448472500400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1399,4 +1420,6 @@ MonoBehaviour:
   slider: {fileID: 5593639001563177524}
   progressView: {fileID: 8826601302879478946}
   timeView: {fileID: 2838570115109867550}
+  timeContainer: {fileID: 2652596033664922623}
   duration: 0.5
+  showDuration: 0.5
