@@ -5,8 +5,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
 {
     public interface IBallHitService : IReusable
     {
-        Ball Ball { get; set; }
-        void OnCollisionAction(Collision2D col);
-        void OnTriggerAction(Collider2D col);
+        void OnCollisionAction(Collision2D col, Ball ball);
+        void OnTriggerAction(Collider2D col, Ball ball);
     }
 }

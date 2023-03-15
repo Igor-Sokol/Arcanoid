@@ -15,17 +15,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
             Clear();
         }
 
-        public override void AddService(IBallHitService service)
-        {
-            base.AddService(service);
-            service.Ball = ball;
-        }
-
         private void OnCollisionEnter2D(Collision2D col)
         {
             foreach (var service in Services)
             {
-                service.OnCollisionAction(col);
+                service.OnCollisionAction(col, ball);
             }
         }
 
@@ -33,7 +27,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         {
             foreach (var service in Services)
             {
-                service.OnTriggerAction(col);
+                service.OnTriggerAction(col, ball);
             }
         }
     }

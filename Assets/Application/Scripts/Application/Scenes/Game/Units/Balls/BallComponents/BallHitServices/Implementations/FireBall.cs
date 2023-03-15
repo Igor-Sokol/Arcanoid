@@ -6,22 +6,20 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
 {
     public class FireBall : IBallHitService
     {
-        public Ball Ball { get; set; }
-        
         public void PrepareReuse()
         {
         }
 
-        public void OnCollisionAction(Collision2D col)
+        public void OnCollisionAction(Collision2D col, Ball ball)
         {
             if (col.collider.TryGetComponent<Block>(out var block))
             {
                 block.DestroyServiceManager.Destroy();
-                Ball.MoveController.SetDirection(Ball.MoveController.PreviousDirection);
+                ball.MoveController.SetDirection(ball.MoveController.PreviousDirection);
             }
         }
 
-        public void OnTriggerAction(Collider2D col)
+        public void OnTriggerAction(Collider2D col, Ball ball)
         {
             if (col.TryGetComponent<Block>(out var block))
             {
