@@ -9,10 +9,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
     {
         private Vector2 _previousDirection;
         private Vector2 _currentDirection;
+        private float _speed;
 
         [SerializeField] private Rigidbody2D rigidbody2d;
         [SerializeField] private TimeManager ballTimeManager;
-        [SerializeField] private float speed;
+        [SerializeField] private float defaultSpeed;
         [SerializeField] private float minBounceAngel;
         
         public bool PhysicActive { get => !rigidbody2d.isKinematic; set => rigidbody2d.isKinematic = !value; }
@@ -25,12 +26,18 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
             _currentDirection = default;
             _previousDirection = default;
             PhysicActive = false;
+            _speed = defaultSpeed;
+        }
+
+        public void SetSpeed(float speed)
+        {
+            _speed = speed;
         }
         
         public void SetDirection(Vector2 direction)
         {
             direction = direction.normalized;
-            rigidbody2d.velocity = direction * speed;
+            rigidbody2d.velocity = direction * (_speed * ballTimeManager.FixedDeltaTime);
             _currentDirection = direction;
         }
 
@@ -43,7 +50,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
                     SetDirection(_currentDirection.sqrMagnitude > 0f ? _currentDirection : Random.insideUnitCircle);
                 }
             
-                rigidbody2d.velocity = rigidbody2d.velocity.normalized * (speed * ballTimeManager.FixedDeltaTime);
+                rigidbody2d.velocity = rigidbody2d.velocity.normalized * (_speed * ballTimeManager.FixedDeltaTime);
             }
         }
 
