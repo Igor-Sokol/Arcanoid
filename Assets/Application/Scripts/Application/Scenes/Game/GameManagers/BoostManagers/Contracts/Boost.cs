@@ -6,14 +6,9 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
     public abstract class Boost : MonoBehaviour, IBoost
     {
         protected Block Block;
-        
-        public abstract void Initialize();
         public abstract float Duration { get; }
-
-        public virtual void Configure(Block block)
-        {
-            Block = block;
-        }
+        public abstract void Initialize();
+        public virtual void Configure(Block block) => Block = block;
         public abstract void Enable();
         public abstract void Disable();
     }

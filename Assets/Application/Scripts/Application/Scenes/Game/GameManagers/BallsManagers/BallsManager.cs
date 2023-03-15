@@ -23,6 +23,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
 
         public int BallsCount => _activeBalls.Count;
         public IEnumerable<Ball> Balls => _activeBalls;
+        public BallHitManager BallHitManager => ballHitManager;
+        public TimeManager BallTimeManager => ballTimeManager;
         public event Action OnAllBallRemoved;
 
         public void AddBallService<T>(T service) 
