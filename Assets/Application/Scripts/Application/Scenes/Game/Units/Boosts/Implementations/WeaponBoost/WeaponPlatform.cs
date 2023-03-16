@@ -19,7 +19,6 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private IBoostManager _boostManager;
         private ITimeScaleManager _timeScaleManager;
         private GameTimeScale _gameTimeScale;
-        private IBallManager _ballManager;
         private IBallProvider _ballProvider;
         private Platform.Platform _platform;
         private ActionHandler _actionHandler;
@@ -36,11 +35,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         {
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             _boostManager = ProjectContext.Instance.GetService<IBoostManager>();
-            _ballManager = ProjectContext.Instance.GetService<IBallManager>();
             _ballProvider = ProjectContext.Instance.GetService<IBallProvider>();
             _platform = ProjectContext.Instance.GetService<Platform.Platform>();
             _timeScaleManager = ProjectContext.Instance.GetService<ITimeScaleManager>();
-            actionTimeManager.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
+            _gameTimeScale = _timeScaleManager.GetTimeScale<GameTimeScale>();
+            actionTimeManager.AddTimeScaler(_gameTimeScale);
         }
         
         public override void Enable()
@@ -49,7 +48,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             
             _actionHandler.Stop();
             _actionHandler = _gameActionManager.StartAction(
-                new WeaponPlatformAction(_ballManager, _ballProvider, _platform, shootCooldown, ballSpeed, damage), -1f,
+                new WeaponPlatformAction(_gameTimeScale, _ballProvider, _platform, shootCooldown, ballSpeed, damage), -1f,
                 actionTimeManager);
         }
 

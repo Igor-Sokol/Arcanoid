@@ -4,13 +4,14 @@ using Application.Scripts.Application.Scenes.Game.Units.Balls;
 using Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents.BallHitServices.Implementations;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
+using Application.Scripts.Library.TimeManagers.Contracts;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.WeaponBoost.GameActions
 {
     public class WeaponPlatformAction : IGameAction
     {
-        private readonly IBallManager _ballManager;
+        private readonly TimeScaler _timeScaler;
         private readonly IBallProvider _ballProvider;
         private readonly Platform.Platform _platform;
         private readonly float _shootCooldown;
@@ -19,10 +20,10 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 
         private float _timer;
 
-        public WeaponPlatformAction(IBallManager ballManager, IBallProvider ballProvider, Platform.Platform platform,
+        public WeaponPlatformAction(TimeScaler timeScaler, IBallProvider ballProvider, Platform.Platform platform,
             float shootCooldown, float ballSpeed, int damage)
         {
-            _ballManager = ballManager;
+            _timeScaler = timeScaler;
             _ballProvider = ballProvider;
             _platform = platform;
             _shootCooldown = shootCooldown;
@@ -70,10 +71,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             var ball = _ballProvider.GetBall();
             ball.PrepareReuse();
 
-            foreach (var timeScaler in _ballManager.BallTimeManager.TimeScales)
-            {
-                ball.TimeManager.AddTimeScaler(timeScaler);
-            }
+            ball.TimeManager.AddTimeScaler(_timeScaler);
             
             ball.EnableCollision = false;
             ball.BallHitManager.AddService(new BulletBall(_ballProvider, _damage));
