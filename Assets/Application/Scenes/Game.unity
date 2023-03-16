@@ -2524,6 +2524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc4e6043de245caa490d093eec23dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballKey: Ball
   ballProvider: {fileID: 1419262391}
   ballTimeManager: {fileID: 1014367158}
   ballHitManager: {fileID: 1014367159}
@@ -3287,7 +3288,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1348e4ba1bd64a47a92600844e744e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballPrefab: {fileID: 375709414, guid: 09e85c7178cd386468ddb1033e6bea5b, type: 3}
+  container: {fileID: 1419262390}
+  ballPrefabs:
+  - {fileID: 375709414, guid: 09e85c7178cd386468ddb1033e6bea5b, type: 3}
+  - {fileID: 375709414, guid: 6205e2a9dea3b8242ad040958e3976ef, type: 3}
 --- !u!1 &1433168475
 GameObject:
   m_ObjectHideFlags: 0

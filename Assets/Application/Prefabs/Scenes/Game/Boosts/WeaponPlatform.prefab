@@ -48,6 +48,7 @@ MonoBehaviour:
   shootCooldown: 0.2
   ballSpeed: 400
   damage: 1
+  bulletBallKey: BulletBall
 --- !u!1 &2941291563772869006
 GameObject:
   m_ObjectHideFlags: 0

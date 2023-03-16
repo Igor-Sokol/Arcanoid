@@ -198,6 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0eed37a0884eb8a397ada8c43ab67e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  key: Ball
   moveController: {fileID: 375709413}
   timeManager: {fileID: 3235218726259321232}
   ballHitManager: {fileID: 4296485177949528460}

@@ -17,6 +17,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
     {
         private readonly SafeList<Ball> _activeBalls = new SafeList<Ball>();
 
+        [SerializeField] private string ballKey;
         [SerializeField] private BallProvider ballProvider;
         [SerializeField] private TimeManager ballTimeManager;
         [SerializeField] private BallHitManager ballHitManager;
@@ -43,7 +44,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
         
         public Ball GetBall()
         {
-            var ball = ballProvider.GetBall();
+            var ball = ballProvider.GetBall(ballKey);
             _activeBalls.Add(ball);
             ball.PrepareReuse();
 

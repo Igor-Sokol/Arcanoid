@@ -8,12 +8,14 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls
 {
     public class Ball : MonoBehaviour, IReusable
     {
+        [SerializeField] private string key;
         [SerializeField] private MoveController moveController;
         [SerializeField] private TimeManager timeManager;
         [SerializeField] private BallHitManager ballHitManager;
         [SerializeField] private CircleCollider2D collisionCollider;
         [SerializeField] private CircleCollider2D triggerCollider;
 
+        public string Key => key;
         public MoveController MoveController => moveController;
         public TimeManager TimeManager => timeManager;
         public BallHitManager BallHitManager => ballHitManager;

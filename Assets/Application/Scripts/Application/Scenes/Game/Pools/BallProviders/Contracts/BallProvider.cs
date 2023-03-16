@@ -5,7 +5,7 @@ namespace Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contra
 {
     public abstract class BallProvider : MonoBehaviour, IBallProvider
     {
-        public abstract Ball GetBall();
+        public abstract Ball GetBall(string key);
         public abstract void Return(Ball ball);
     }
 }

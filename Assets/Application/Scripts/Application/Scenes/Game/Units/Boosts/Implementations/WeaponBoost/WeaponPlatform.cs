@@ -28,6 +28,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         [SerializeField] private float shootCooldown;
         [SerializeField] private float ballSpeed;
         [SerializeField] private int damage;
+        [SerializeField] private string bulletBallKey;
 
         public override float Duration => duration;
         
@@ -48,7 +49,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             
             _actionHandler.Stop();
             _actionHandler = _gameActionManager.StartAction(
-                new WeaponPlatformAction(_gameTimeScale, _ballProvider, _platform, shootCooldown, ballSpeed, damage), -1f,
+                new WeaponPlatformAction(_gameTimeScale, _ballProvider, _platform, shootCooldown, ballSpeed, damage, bulletBallKey), -1f,
                 actionTimeManager);
         }
 

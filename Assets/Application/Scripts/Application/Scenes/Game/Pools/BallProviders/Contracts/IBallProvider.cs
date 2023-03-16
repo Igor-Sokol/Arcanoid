@@ -4,7 +4,7 @@ namespace Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contra
 {
     public interface IBallProvider
     {
-        Ball GetBall();
+        Ball GetBall(string key);
         void Return(Ball ball);
     }
 }

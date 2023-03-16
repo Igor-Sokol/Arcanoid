@@ -17,11 +17,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private readonly float _shootCooldown;
         private readonly float _ballSpeed;
         private readonly int _damage;
+        private readonly string _ballKey;
 
         private float _timer;
 
         public WeaponPlatformAction(TimeScaler timeScaler, IBallProvider ballProvider, Platform.Platform platform,
-            float shootCooldown, float ballSpeed, int damage)
+            float shootCooldown, float ballSpeed, int damage, string ballKey)
         {
             _timeScaler = timeScaler;
             _ballProvider = ballProvider;
@@ -29,6 +30,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             _shootCooldown = shootCooldown;
             _ballSpeed = ballSpeed;
             _damage = damage;
+            _ballKey = ballKey;
         }
 
         public void OnBegin(ActionInfo actionInfo)
@@ -68,7 +70,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 
         private Ball GetBall()
         {
-            var ball = _ballProvider.GetBall();
+            var ball = _ballProvider.GetBall(_ballKey);
             ball.PrepareReuse();
 
             ball.TimeManager.AddTimeScaler(_timeScaler);

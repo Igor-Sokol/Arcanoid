@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
 using Application.Scripts.Library.InitializeManager.Contracts;
@@ -8,23 +9,42 @@ namespace Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Implem
 {
     public class PoolBallProvider : BallProvider, IInitializing
     {
-        private ObjectPoolMono<Ball> _ballPool;
+        private Dictionary<string, ObjectPoolMono<Ball>> _ballPool;
 
-        [SerializeField] private Ball ballPrefab;
-        
+        [SerializeField] private Transform container;
+        [SerializeField] private Ball[] ballPrefabs;
+
         public void Initialize()
         {
-            _ballPool = new ObjectPoolMono<Ball>(() => Object.Instantiate(ballPrefab), transform);
-        }
+            _ballPool = new Dictionary<string, ObjectPoolMono<Ball>>();
 
-        public override Ball GetBall()
+            foreach (var ball in ballPrefabs)
+            {
+                _ballPool.Add(ball.Key, new ObjectPoolMono<Ball>(() => {
+                    var instance = Instantiate(ball);
+                    return instance;
+                }, container));
+            }
+        }
+        
+        public override Ball GetBall(string key)
         {
-            return _ballPool.Get();
+            if (_ballPool.TryGetValue(key, out var pool))
+            {
+                var ball = pool.Get();
+                ball.PrepareReuse();
+                return ball;
+            }
+
+            return null;
         }
 
         public override void Return(Ball ball)
         {
-            _ballPool.Return(ball);
+            if (_ballPool.TryGetValue(ball.Key, out var pool))
+            {
+                pool.Return(ball);
+            }
         }
     }
 }
