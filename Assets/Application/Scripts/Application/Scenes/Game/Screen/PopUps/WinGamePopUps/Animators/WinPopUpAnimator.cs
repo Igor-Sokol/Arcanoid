@@ -27,7 +27,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         [SerializeField] private Vector2 popUpPositionOffset;
         [SerializeField] private TMP_Text title;
         [SerializeField] private EnergyView energyView;
-        [SerializeField] private Image packBackground;
+        [SerializeField] private RectTransform packBackground;
         [SerializeField] private Image packImage;
         [SerializeField] private TMP_Text packName;
         [SerializeField] private ProgressView packProgress;
