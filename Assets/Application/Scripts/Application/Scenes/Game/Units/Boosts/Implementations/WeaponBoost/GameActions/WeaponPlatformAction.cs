@@ -70,11 +70,6 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             var ball = _ballProvider.GetBall();
             ball.PrepareReuse();
 
-            foreach (var service in _ballManager.BallHitManager.Services)
-            {
-                ball.BallHitManager.AddService(service);
-            }
-
             foreach (var timeScaler in _ballManager.BallTimeManager.TimeScales)
             {
                 ball.TimeManager.AddTimeScaler(timeScaler);
