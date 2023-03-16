@@ -42,6 +42,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
                 }
             }
             
+            ball.PrepareReuse();
             _ballProvider.Return(ball);
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Application.Scripts.Library.EnumerableSafeCollections
         private bool _needClean;
         private bool _executing;
 
-        public int Count => _list.Count(i => i != null);
+        public int Count => _list.Count(i => i != null) + _listToAdd.Count;
 
         public void Add(T item)
         {
