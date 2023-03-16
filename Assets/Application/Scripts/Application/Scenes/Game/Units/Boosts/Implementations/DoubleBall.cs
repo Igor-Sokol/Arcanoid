@@ -1,3 +1,4 @@
+using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
@@ -27,7 +28,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
                     var newBall = _ballManager.GetBall();
                     newBall.transform.position = ball.transform.position;
                     newBall.MoveController.PhysicActive = true;
-                    newBall.MoveController.SetDirection(Random.insideUnitCircle);
+                    newBall.MoveController.SetDirection(Vector2.up);
                 }
             }
         }
