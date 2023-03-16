@@ -8,7 +8,8 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
 {
     public class PackViewAnimator : MonoBehaviour
     {
-        private Sequence _activeAnimation;
+        private Sequence _showAnimation;
+        private Sequence _hideAnimation;
 
         [SerializeField] private ScreenInfo screenInfo;
         [SerializeField] private float packDelay;
@@ -19,8 +20,8 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
         
         public void Show(List<PackView> packs)
         {
-            _activeAnimation?.Kill();
-            _activeAnimation = DOTween.Sequence();
+            _showAnimation?.Kill();
+            _showAnimation = DOTween.Sequence();
 
             for (int i = 1; i <= packs.Count; i++)
             {
@@ -30,25 +31,26 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
                 pack.PackContainer.position = new Vector3(screenInfo.ScreenSize.x / 2 + screenInfo.ScreenRightUpper.y,
                     startPosition.y, startPosition.z);
 
-                _activeAnimation.Join(pack.PackContainer
+                _showAnimation.Join(pack.PackContainer
                     .DOMoveX(startPosition.x, packDelay + betweenPackDelay * i));
             }
 
-            _activeAnimation.AppendCallback(() => OnAnimationShown?.Invoke());
+            _showAnimation.AppendCallback(() => OnAnimationShown?.Invoke());
         }
 
         public void Hide(PackView pack)
         {
-            _activeAnimation?.Kill();
-            _activeAnimation = DOTween.Sequence();
-            _activeAnimation.Append(pack.PackContainer.DOMoveX(screenInfo.ScreenSize.x / 2 + screenInfo.ScreenRightUpper.y,
+            _hideAnimation?.Kill();
+            _hideAnimation = DOTween.Sequence();
+            _hideAnimation.Append(pack.PackContainer.DOMoveX(screenInfo.ScreenSize.x / 2 + screenInfo.ScreenRightUpper.y,
                 packDelay));
-            _activeAnimation.AppendCallback(() => OnAnimationHidden?.Invoke());
+            _hideAnimation.AppendCallback(() => OnAnimationHidden?.Invoke());
         }
 
         private void OnDisable()
         {
-            _activeAnimation?.Kill();
+            _showAnimation?.Kill();
+            _hideAnimation?.Kill();
         }
     }
 }
