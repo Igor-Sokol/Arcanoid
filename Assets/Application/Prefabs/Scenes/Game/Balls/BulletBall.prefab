@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   container: {fileID: 2939674481584927534}
   effects:
-  - {fileID: 4267879081487850499, guid: 2599e494a1792f249b354d51f2937be1, type: 3}
+  - {fileID: 372058600575426454, guid: b46b22b4677b82e49b347551dba3459c, type: 3}
 --- !u!1 &3050967322905504494
 GameObject:
   m_ObjectHideFlags: 0
