@@ -7,7 +7,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
     {
         [SerializeField] private SpriteRenderer sprite;
 
-        public Color SpriteColor => sprite.color;
+        public Color SpriteColor { get => sprite.color; set => sprite.color = value; }
 
         public void PrepareReuse()
         {
