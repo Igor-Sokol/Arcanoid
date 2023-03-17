@@ -10,7 +10,7 @@ namespace Application.Scripts.Library.ServiceCollections
 
         public IEnumerable<TService> Services => GetServices();
 
-        protected void Clear()
+        protected virtual void Clear()
         {
             _services.Clear();
         }

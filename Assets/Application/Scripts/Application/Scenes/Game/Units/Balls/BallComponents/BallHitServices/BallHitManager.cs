@@ -17,6 +17,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         public void PrepareReuse()
         {
             Clear();
+            _ball = null;
         }
 
         private void OnCollisionEnter2D(Collision2D col)
