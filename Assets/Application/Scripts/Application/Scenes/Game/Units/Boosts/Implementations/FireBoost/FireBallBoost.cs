@@ -1,22 +1,22 @@
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
+using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents.BallEffectManagers.Implementations;
-using Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents.BallHitServices.Implementations;
+using Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.FireBoost.FireBallSetUpActions;
 using Application.Scripts.Library.DependencyInjection;
 using Sirenix.Utilities;
 using UnityEngine;
 
-namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations
+namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.FireBoost
 {
     public class FireBallBoost : Boost
     {
         private IBoostManager _boostManager;
         private IBallManager _ballManager;
-        private FireBall _fireBallService;
-        
+
         [SerializeField] private float duration;
         [SerializeField] private FireEffect fireEffect;
+        [SerializeField] private Color color;
         
         public override float Duration => duration;
         
@@ -29,25 +29,21 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         public override void Enable()
         {
             var boosts = _boostManager.GetActiveBoost<FireBallBoost>();
-            if (boosts != null)
+            var actionHandlers = boosts?.ToList();
+            if (actionHandlers?.Any(a => a.Valid) ?? false)
             {
-                boosts.ForEach(h => h.ChangeTime(duration));
+                actionHandlers.ForEach(h => h.ChangeTime(duration));
             }
             else
             {
-                if (_fireBallService != null) Disable();
-            
-                _fireBallService = new FireBall();
-                _ballManager.AddBallService(_fireBallService);
-                _ballManager.AddBallEffect(fireEffect);
+                var action = new FireBallSetUpAction(fireEffect, color);
+                _ballManager.BallSetUpManager.AddAction(action);
             }
         }
 
         public override void Disable()
         {
-            _ballManager.RemoveBallService(_fireBallService);
-            _ballManager.RemoveBallEffect(fireEffect);
-            _fireBallService = null;
+            _ballManager.BallSetUpManager.RemoveAction(typeof(FireBallSetUpAction));
         }
     }
 }
