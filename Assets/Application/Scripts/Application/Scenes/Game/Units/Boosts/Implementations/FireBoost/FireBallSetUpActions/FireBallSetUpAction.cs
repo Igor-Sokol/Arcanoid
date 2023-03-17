@@ -12,7 +12,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private readonly FireEffect _fireEffect;
         private readonly Color _color;
 
-        private readonly Color _previousColor;
+        private Color _previousColor;
         
         public FireBallSetUpAction(FireEffect fireEffect, Color color)
         {
@@ -25,6 +25,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         {
             ball.BallHitManager.AddService(_fireBall);
             ball.BallEffectManager.AddService(_fireEffect);
+            _previousColor = ball.BallView.SpriteColor;
             ball.BallView.SpriteColor = _color;
         }
 
