@@ -1,4 +1,3 @@
-using System;
 using Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents.BallHitServices.Contracts;
 using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.ServiceCollections;
@@ -8,7 +7,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
 {
     public class BallHitManager : ServiceCollection<IBallHitService>, IReusable
     {
-        [SerializeField] private Ball ball;
+        private Ball _ball;
+
+        public void Initialize(Ball ball)
+        {
+            _ball = ball;
+        }
         
         public void PrepareReuse()
         {
@@ -19,7 +23,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         {
             foreach (var service in Services)
             {
-                service.OnCollisionAction(col, ball);
+                service.OnCollisionAction(col, _ball);
             }
         }
 
@@ -27,7 +31,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         {
             foreach (var service in Services)
             {
-                service.OnTriggerAction(col, ball);
+                service.OnTriggerAction(col, _ball);
             }
         }
     }

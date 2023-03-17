@@ -28,6 +28,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls
             moveController.PrepareReuse();
             TimeManager.ClearTimeScales();
             BallHitManager.PrepareReuse();
+            BallHitManager.Initialize(this);
             EnableCollision = true;
             EnableTrigger = true;
         }
