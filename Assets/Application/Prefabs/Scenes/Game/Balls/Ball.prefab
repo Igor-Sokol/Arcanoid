@@ -44,6 +44,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScales: []
+--- !u!1 &7389716480793891784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7306690325486620376}
+  - component: {fileID: 6575567127547309781}
+  m_Layer: 6
+  m_Name: Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7306690325486620376
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389716480793891784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8025559415471671174}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6575567127547309781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7389716480793891784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a0b47c0e2c844b9bdb50cd55018fb24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 7306690325486620376}
+  effects: []
 --- !u!1 &8025559415471671172
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,6 +124,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6679546133719893495}
+  - {fileID: 7306690325486620376}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -202,6 +248,7 @@ MonoBehaviour:
   moveController: {fileID: 375709413}
   timeManager: {fileID: 3235218726259321232}
   ballHitManager: {fileID: 4296485177949528460}
+  ballEffectManager: {fileID: 6575567127547309781}
   collisionCollider: {fileID: 8025559415471671175}
   triggerCollider: {fileID: 3655949322944863381}
 --- !u!114 &375709413
@@ -232,4 +279,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d935777fc40808b0d02f01e383b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 375709414}

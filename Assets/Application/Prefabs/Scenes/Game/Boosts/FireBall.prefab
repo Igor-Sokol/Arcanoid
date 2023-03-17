@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 5
+  fireEffect: {fileID: 4267879081487850499, guid: e64d20ebfb7cdb447abd77afa11c816f, type: 3}
 --- !u!1 &2941291563772869006
 GameObject:
   m_ObjectHideFlags: 0

@@ -448,7 +448,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 23.15
+  m_fontSize: 33.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1154,7 +1154,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.55
+  m_fontSize: 35.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1379,6 +1379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 512119126}
   - component: {fileID: 512119125}
+  - component: {fileID: 512119127}
   m_Layer: 0
   m_Name: DefaultBallServices
   m_TagString: Untagged
@@ -1412,6 +1413,18 @@ Transform:
   m_Father: {fileID: 1014367156}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &512119127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512119124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e57e50652782455b81ba043ca3db9b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1614,7 +1627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPack: {fileID: 11400000, guid: 615138ef7036e3a4f9d54afae6f6eec5, type: 2}
-  levelIndex: 0
+  levelIndex: 1
 --- !u!1 &562433554
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,6 +2584,7 @@ MonoBehaviour:
   ballProvider: {fileID: 1419262391}
   ballTimeManager: {fileID: 1014367158}
   ballHitManager: {fileID: 512119125}
+  ballEffectContainer: {fileID: 512119127}
 --- !u!114 &1014367158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2924,7 +2938,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 27.35
+  m_fontSize: 39.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
