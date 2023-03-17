@@ -17,5 +17,5 @@ MonoBehaviour:
   levelReader: {fileID: 6235085592498098452, guid: 88c0a43da8ee0db468de432857125f81, type: 3}
   packPath: LevelManagement/Levels/Pack1/
   levelNames:
-  - Level1
   - Level2
+  - Level1

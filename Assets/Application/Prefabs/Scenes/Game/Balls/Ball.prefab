@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 375709414}
   - component: {fileID: 375709413}
   - component: {fileID: 4296485177949528460}
+  - component: {fileID: 6622452730430770072}
   m_Layer: 6
   m_Name: Ball
   m_TagString: Untagged
@@ -249,6 +250,7 @@ MonoBehaviour:
   timeManager: {fileID: 3235218726259321232}
   ballHitManager: {fileID: 4296485177949528460}
   ballEffectManager: {fileID: 6575567127547309781}
+  ballView: {fileID: 6622452730430770072}
   collisionCollider: {fileID: 8025559415471671175}
   triggerCollider: {fileID: 3655949322944863381}
 --- !u!114 &375709413
@@ -279,3 +281,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422d935777fc40808b0d02f01e383b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6622452730430770072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8025559415471671172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9210b4300d142988d2ad912733e7f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 8025559415471671173}
