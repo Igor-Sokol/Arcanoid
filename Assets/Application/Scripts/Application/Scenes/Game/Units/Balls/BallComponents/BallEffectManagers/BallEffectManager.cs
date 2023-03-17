@@ -28,8 +28,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
 
         public override void AddService(BallEffect service)
         {
-            var instance = Instantiate(service, container);
-            base.AddService(instance);
+            if (Services.All(s => s.GetType() != service.GetType()))
+            {
+                var instance = Instantiate(service, container);
+                base.AddService(instance);
+            }
         }
 
         public override void RemoveService(BallEffect service)

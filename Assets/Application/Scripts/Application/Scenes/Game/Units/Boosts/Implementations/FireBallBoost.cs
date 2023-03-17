@@ -28,12 +28,19 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         
         public override void Enable()
         {
-            _boostManager.GetActiveBoost<FireBallBoost>()?.ForEach(h => h.Stop());
-            if (_fireBallService != null) Disable();
+            var boosts = _boostManager.GetActiveBoost<FireBallBoost>();
+            if (boosts != null)
+            {
+                boosts.ForEach(h => h.ChangeTime(duration));
+            }
+            else
+            {
+                if (_fireBallService != null) Disable();
             
-            _fireBallService = new FireBall();
-            _ballManager.AddBallService(_fireBallService);
-            _ballManager.AddBallEffect(fireEffect);
+                _fireBallService = new FireBall();
+                _ballManager.AddBallService(_fireBallService);
+                _ballManager.AddBallEffect(fireEffect);
+            }
         }
 
         public override void Disable()
