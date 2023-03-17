@@ -12,8 +12,6 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
     {
         int BallsCount { get; }
         IEnumerable<Ball> Balls { get; }
-        BallHitManager BallHitManager { get; }
-        TimeManager BallTimeManager { get; }
         event Action OnAllBallRemoved;
         void AddBallEffect<T>(T effect) where T : BallEffect;
         void RemoveBallEffect<T>(T effect) where T : BallEffect;
