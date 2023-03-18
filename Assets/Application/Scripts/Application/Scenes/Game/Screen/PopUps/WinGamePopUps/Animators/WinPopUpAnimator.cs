@@ -4,6 +4,7 @@ using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
 using Application.Scripts.Application.Scenes.Shared.UI.StringViews;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using Application.Scripts.Library.PopUpManagers.AnimationContracts;
+using Application.Scripts.Library.ScreenInfo;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         private string _packName;
         private int _packProgress;
         private int _packLevelCount;
-        
+
         [SerializeField] private RectTransform popUp;
         [SerializeField] private Image popUpImage;
         [SerializeField] private Vector2 popUpPositionOffset;
@@ -45,20 +46,20 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         
         public override void ShowAnimation()
         {
-            var pixelRect = popUpImage.canvas.pixelRect;
+            var pixelRect = (popUpImage.canvas.transform as RectTransform)?.rect ?? popUpImage.canvas.pixelRect;
             var rect = popUp.rect;
             var lossyScale = popUp.lossyScale.x;
-            float rightOffscreenPosition = rect.width * lossyScale / 2 + pixelRect.width;
-            float leftOffscreenPosition = 0 - rect.width * lossyScale / 2;
-            float downOffscreenPosition = 0 - rect.height * lossyScale / 2;
-            Vector2 center = new Vector2(pixelRect.width / 2, pixelRect.height / 2);
-            
+            float rightOffscreenPosition = (rect.width + pixelRect.width) / 2 * lossyScale;
+            float leftOffscreenPosition = -rightOffscreenPosition;
+            float downOffscreenPosition = -(rect.height + pixelRect.height) / 2 * lossyScale;
+            Vector2 center = Vector2.zero;
+
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
 
             _activeAnimation.Append(popUpImage.transform
-                .DOMove(center + popUpPositionOffset, popUpDuration)
-                .From(new Vector3(center.x, downOffscreenPosition, 0)));
+                .DOMoveY(center.y + popUpPositionOffset.y * lossyScale, popUpDuration)
+                .From(downOffscreenPosition));
             
             _activeAnimation.Append(title.DOScale(1, titleDuration).From(0).SetEase(Ease.OutBounce));
 
@@ -95,8 +96,10 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
 
         public override void HideAnimation()
         {
-            float rightOffscreenPosition = popUp.rect.width * popUp.lossyScale.x / 2 +
-                                           popUpImage.canvas.pixelRect.width;
+            var pixelRect = (popUpImage.canvas.transform as RectTransform)?.rect ?? popUpImage.canvas.pixelRect;
+            var rect = popUp.rect;
+            var lossyScale = popUp.lossyScale.x;
+            float rightOffscreenPosition = (rect.width + pixelRect.width) / 2 * lossyScale;
             
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
