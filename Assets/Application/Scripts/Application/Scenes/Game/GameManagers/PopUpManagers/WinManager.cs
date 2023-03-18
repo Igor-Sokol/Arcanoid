@@ -94,11 +94,12 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         
         private void OnContinue()
         {
+            levelPackManager.TrySetNextLevel();
+            _winGamePopUp.WinPopUpAnimator.Configure(levelPackManager.GetCurrentPackInfo(), _localizationManager);
             _winGamePopUp.Hide();
             _winGamePopUp.OnHidden += () =>
             {
                 levelPackManager.RenderView();
-                levelPackManager.TrySetNextLevel();
                 levelPackManager.RenderView();
                 gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
             };

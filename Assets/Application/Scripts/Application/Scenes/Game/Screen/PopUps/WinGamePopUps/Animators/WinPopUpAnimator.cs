@@ -4,7 +4,6 @@ using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
 using Application.Scripts.Application.Scenes.Shared.UI.StringViews;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using Application.Scripts.Library.PopUpManagers.AnimationContracts;
-using Application.Scripts.Library.ScreenInfo;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -30,6 +29,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         [SerializeField] private EnergyView energyView;
         [SerializeField] private RectTransform packBackground;
         [SerializeField] private Image packImage;
+        [SerializeField] private Image fadePackImage;
         [SerializeField] private ParticleSystem particle;
         [SerializeField] private TMP_Text packName;
         [SerializeField] private ProgressView packProgress;
@@ -39,6 +39,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         [SerializeField] private float textDuration;
         [SerializeField] private float energyShowDuration;
         [SerializeField] private float packBackgroundDuration;
+        [SerializeField] private float changePackImageDuration;
         [SerializeField] private float buttonDelay;
         [SerializeField] private float hideDelay;
         
@@ -108,6 +109,20 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
             _activeAnimation = DOTween.Sequence();
 
             _activeAnimation.AppendInterval(hideDelay);
+
+            if (packName.text != _packName)
+            {
+                fadePackImage.sprite = _packImage;
+                _activeAnimation.Append(packImage.DOFade(0, changePackImageDuration));
+                _activeAnimation.Join(packName.DOText(_packName, textDuration));
+                _activeAnimation.Join(packProgress.SetProgress(0, _packLevelCount));
+                _activeAnimation.AppendCallback(() =>
+                {
+                    packImage.sprite = _packImage;
+                    packImage.color = Color.white;
+                });
+            }
+            
             _activeAnimation.Append(popUpImage.transform
                 .DOMoveX(rightOffscreenPosition, popUpDuration));
 
