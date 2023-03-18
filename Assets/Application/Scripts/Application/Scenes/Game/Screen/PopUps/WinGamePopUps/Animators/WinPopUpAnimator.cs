@@ -33,9 +33,9 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         [SerializeField] private ProgressView packProgress;
         [SerializeField] private Button[] buttons;
         [SerializeField] private float popUpDuration;
+        [SerializeField] private float titleDuration;
         [SerializeField] private float textDuration;
         [SerializeField] private float energyShowDuration;
-        [SerializeField] private float addedEnergyInterval;
         [SerializeField] private float packBackgroundDuration;
         [SerializeField] private float buttonDelay;
         [SerializeField] private float hideDelay;
@@ -59,10 +59,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
             _activeAnimation.Append(popUpImage.transform
                 .DOMove(center + popUpPositionOffset, popUpDuration)
                 .From(new Vector3(center.x, downOffscreenPosition, 0)));
-
-            string titleText = title.text;
-            title.text = string.Empty;
-            _activeAnimation.Append(title.DOText(titleText, textDuration));
+            
+            _activeAnimation.Append(title.DOScale(1, titleDuration).From(0).SetEase(Ease.OutBounce));
 
             packImage.sprite = _packImage;
             _activeAnimation.Append(packBackground.transform
@@ -75,13 +73,11 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
             packProgress.SetProgressImmediately(_packProgress - 1, _packLevelCount);
             _activeAnimation.Append(packProgress.SetProgress(_packProgress, _packLevelCount));
             
-            energyView.SetProgressImmediately(0, _maxEnergy);
+            energyView.SetProgressImmediately(_startEnergy, _maxEnergy);
             energyView.SetTimeLeft(0);
             _activeAnimation.Append(energyView.transform
                 .DOMoveX(center.x, energyShowDuration)
                 .From(rightOffscreenPosition));
-            _activeAnimation.Append(energyView.SetProgress(_startEnergy, _maxEnergy));
-            _activeAnimation.AppendInterval(addedEnergyInterval);
             _activeAnimation.Append(energyView.SetProgress(_startEnergy + _addedEnergy, _maxEnergy));
             _activeAnimation.AppendInterval(0);
 
