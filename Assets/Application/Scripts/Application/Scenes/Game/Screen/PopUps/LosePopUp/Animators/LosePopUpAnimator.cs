@@ -42,9 +42,10 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
 
+            popUp.anchoredPosition = Vector2.zero;
             _activeAnimation.Append(popUpImage.transform
-                .DOMove(center + popUpPositionOffset, popUpDuration)
-                .From(new Vector3(center.x, downOffscreenPosition, 0)));
+                .DOMoveY(center.y + popUpPositionOffset.y * lossyScale, popUpDuration)
+                .From(downOffscreenPosition));
 
             string titleText = title.text;
             title.text = string.Empty;
