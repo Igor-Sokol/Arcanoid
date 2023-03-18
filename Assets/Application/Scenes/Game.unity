@@ -3512,8 +3512,8 @@ MonoBehaviour:
   edgeCollider2d: {fileID: 1498065948}
   percentagePositions:
   - {x: 0, y: 0}
-  - {x: 0, y: -0.1}
-  - {x: 1, y: -0.1}
+  - {x: 0, y: -0.03}
+  - {x: 1, y: -0.03}
   - {x: 1, y: 0}
 --- !u!114 &1498065950
 MonoBehaviour:
