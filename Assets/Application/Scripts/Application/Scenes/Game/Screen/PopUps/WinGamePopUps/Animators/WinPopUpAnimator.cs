@@ -30,6 +30,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         [SerializeField] private EnergyView energyView;
         [SerializeField] private RectTransform packBackground;
         [SerializeField] private Image packImage;
+        [SerializeField] private ParticleSystem particle;
         [SerializeField] private TMP_Text packName;
         [SerializeField] private ProgressView packProgress;
         [SerializeField] private Button[] buttons;
@@ -56,7 +57,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
 
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
-
+            
+            popUp.anchoredPosition = Vector2.zero;
             _activeAnimation.Append(popUpImage.transform
                 .DOMoveY(center.y + popUpPositionOffset.y * lossyScale, popUpDuration)
                 .From(downOffscreenPosition));
@@ -67,6 +69,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
             _activeAnimation.Append(packBackground.transform
                 .DOMoveX(center.x, packBackgroundDuration)
                 .From(leftOffscreenPosition));
+            _activeAnimation.AppendCallback(() => particle.Play());
             
             packName.text = string.Empty;
             _activeAnimation.Append(packName.DOText(_packName, textDuration));
@@ -115,7 +118,9 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
                 _activeAnimation.Join(button.transform
                     .DOMoveX(rightOffscreenPosition, popUpDuration + buttonDelay * i));
             }
-            
+
+            _activeAnimation.AppendCallback(() =>
+                particle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear));
             _activeAnimation.AppendCallback(() => OnAnimationHidden?.Invoke());
             _activeAnimation.SetEase(Ease.InQuad);
         }
