@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.BoostActions;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
@@ -8,6 +9,7 @@ using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Reusable;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
@@ -83,6 +85,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
             {
                 boosts.Value.RemoveAll(h => !h.Valid);
             }
+        }
+
+        private void OnDisable()
+        {
+            _boosts.SelectMany(a => a.Value).ForEach(a => a.Stop());
         }
     }
 }

@@ -1,4 +1,4 @@
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
+using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
 using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
@@ -8,7 +8,6 @@ using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.TimeManagers.Contracts;
-using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.WeaponBoost
@@ -45,20 +44,22 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         
         public override void Enable()
         {
-            _boostManager.GetActiveBoost<WeaponPlatform>()?.ForEach(h => h.Stop());
-            
-            _actionHandler.Stop();
-            _actionHandler = _gameActionManager.StartAction(
-                new WeaponPlatformAction(_gameTimeScale, _ballProvider, _platform, shootCooldown, ballSpeed, damage, bulletBallKey), -1f,
-                actionTimeManager);
+            var boosts = _boostManager.GetActiveBoost<WeaponPlatform>();
+            var actionHandlers = boosts?.ToList();
+            if (actionHandlers?.Any(a => a.Valid) ?? false)
+            {
+                actionHandlers.ForEach(h => h.ChangeTime(duration));
+            }
+            else
+            {
+                _actionHandler.Stop();
+                _actionHandler = _gameActionManager.StartAction(
+                    new WeaponPlatformAction(_gameTimeScale, _ballProvider, _platform, shootCooldown, ballSpeed, damage, bulletBallKey), -1f,
+                    actionTimeManager);
+            }
         }
 
         public override void Disable()
-        {
-            _actionHandler.Stop();
-        }
-
-        private void OnDestroy()
         {
             _actionHandler.Stop();
         }
