@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4ad9f148ab479691c3a7e74e68d101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballDirection: {x: 0, y: -1}
 --- !u!1 &2941291563772869006
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +118,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 792409655
-  m_SortingLayer: 4
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ed46fad0310bb374caf44ad1b82f3f4e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

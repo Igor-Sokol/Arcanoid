@@ -1,5 +1,3 @@
-using System.Linq;
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Library.DependencyInjection;
@@ -10,6 +8,8 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
     public class DoubleBall : Boost
     {
         private IBallManager _ballManager;
+
+        [SerializeField] private Vector2 ballDirection;
         
         public override void Initialize()
         {
@@ -28,7 +28,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
                     var newBall = _ballManager.GetBall();
                     newBall.transform.position = ball.transform.position;
                     newBall.MoveController.PhysicActive = true;
-                    newBall.MoveController.SetDirection(Vector2.up);
+                    newBall.MoveController.SetDirection(ballDirection);
                 }
             }
         }
