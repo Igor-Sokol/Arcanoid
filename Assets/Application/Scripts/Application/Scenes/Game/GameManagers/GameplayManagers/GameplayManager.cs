@@ -1,3 +1,4 @@
+using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers;
@@ -27,6 +28,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
         [SerializeField] private BlockManager blockManager;
         [SerializeField] private BlockProgressManager blockProgressManager;
         [SerializeField] private BallsManager ballsManager;
+        [SerializeField] private ActiveBallManager activeBallManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private Platform platform;
@@ -45,6 +47,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
             ballsManager.PrepareReuse();
             boostObjectManager.PrepareReuse();
             boostManager.PrepareReuse();
+            activeBallManager.PrepareReuse();
 
             blockManager.SetBlocks(levelInfo.LevelReader.ReadPack(levelInfo));
             blockProgressManager.PrepareReuse();

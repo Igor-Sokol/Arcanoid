@@ -1,3 +1,5 @@
+using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers;
@@ -26,6 +28,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyI
         [SerializeField] private TimeScaleManager timeScaleManager;
         [SerializeField] private BallsManager ballManager;
         [SerializeField] private BallProvider ballProvider;
+        [SerializeField] private ActiveBallManager activeBallManager;
         
         public void Initialize()
         {
@@ -37,6 +40,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyI
             ProjectContext.Instance.SetService<ITimeScaleManager, TimeScaleManager>(timeScaleManager);
             ProjectContext.Instance.SetService<IBallManager, BallsManager>(ballManager);
             ProjectContext.Instance.SetService<IBallProvider, BallProvider>(ballProvider);
+            ProjectContext.Instance.SetService<IActiveBallManager, ActiveBallManager>(activeBallManager);
         }
     }
 }

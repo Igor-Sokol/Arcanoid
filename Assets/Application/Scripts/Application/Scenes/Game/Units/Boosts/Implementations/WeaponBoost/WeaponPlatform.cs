@@ -1,7 +1,7 @@
 using System.Linq;
+using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
-using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.WeaponBoost.GameActions;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
 using Application.Scripts.Library.DependencyInjection;
@@ -18,7 +18,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private IBoostManager _boostManager;
         private ITimeScaleManager _timeScaleManager;
         private GameTimeScale _gameTimeScale;
-        private IBallProvider _ballProvider;
+        private IActiveBallManager _activeBallManager;
         private Platform.Platform _platform;
         private ActionHandler _actionHandler;
 
@@ -35,7 +35,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         {
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             _boostManager = ProjectContext.Instance.GetService<IBoostManager>();
-            _ballProvider = ProjectContext.Instance.GetService<IBallProvider>();
+            _activeBallManager = ProjectContext.Instance.GetService<IActiveBallManager>();
             _platform = ProjectContext.Instance.GetService<Platform.Platform>();
             _timeScaleManager = ProjectContext.Instance.GetService<ITimeScaleManager>();
             _gameTimeScale = _timeScaleManager.GetTimeScale<GameTimeScale>();
@@ -54,7 +54,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             {
                 _actionHandler.Stop();
                 _actionHandler = _gameActionManager.StartAction(
-                    new WeaponPlatformAction(_gameTimeScale, _ballProvider, _platform, shootCooldown, ballSpeed, damage, bulletBallKey), -1f,
+                    new WeaponPlatformAction(_gameTimeScale, _activeBallManager, _platform, shootCooldown, ballSpeed, damage, bulletBallKey), -1f,
                     actionTimeManager);
             }
         }

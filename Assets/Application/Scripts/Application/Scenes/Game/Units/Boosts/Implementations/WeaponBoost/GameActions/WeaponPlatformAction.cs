@@ -1,6 +1,4 @@
-using System.Collections.Generic;
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
-using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
+using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
 using Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents.BallHitServices.Implementations;
 using Application.Scripts.Library.GameActionManagers.Contracts;
@@ -12,10 +10,8 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 {
     public class WeaponPlatformAction : IGameAction
     {
-        private readonly List<Ball> _activeBalls = new List<Ball>();
-        
         private readonly TimeScaler _timeScaler;
-        private readonly IBallProvider _ballProvider;
+        private readonly IActiveBallManager _activeBallManager;
         private readonly Platform.Platform _platform;
         private readonly float _shootCooldown;
         private readonly float _ballSpeed;
@@ -24,11 +20,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         
         private float _timer;
 
-        public WeaponPlatformAction(TimeScaler timeScaler, IBallProvider ballProvider, Platform.Platform platform,
+        public WeaponPlatformAction(TimeScaler timeScaler, IActiveBallManager activeBallManager, Platform.Platform platform,
             float shootCooldown, float ballSpeed, int damage, string ballKey)
         {
             _timeScaler = timeScaler;
-            _ballProvider = ballProvider;
+            _activeBallManager = activeBallManager;
             _platform = platform;
             _shootCooldown = shootCooldown;
             _ballSpeed = ballSpeed;
@@ -69,17 +65,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 
         public void OnStop(ActionInfo actionInfo)
         {
-            foreach (var ball in _activeBalls)
-            {
-                ball.PrepareReuse();
-                _ballProvider.Return(ball);
-            }
-            _activeBalls.Clear();
         }
 
         private Ball GetBall()
         {
-            var ball = _ballProvider.GetBall(_ballKey);
+            var ball = _activeBallManager.GetBall(_ballKey);
             ball.PrepareReuse();
 
             ball.TimeManager.AddTimeScaler(_timeScaler);
@@ -89,16 +79,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             ball.MoveController.SetSpeed(_ballSpeed);
             ball.MoveController.PhysicActive = true;
 
-            _activeBalls.Add(ball);
-            
             return ball;
         }
 
         private void OnBulletHit(Ball ball)
         {
-            ball.PrepareReuse();
-            _activeBalls.Remove(ball);
-            _ballProvider.Return(ball);
+            _activeBallManager.Return(ball);
         }
     }
 }
