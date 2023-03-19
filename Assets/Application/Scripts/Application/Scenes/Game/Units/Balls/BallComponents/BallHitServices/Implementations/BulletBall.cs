@@ -1,6 +1,5 @@
+using System;
 using System.Linq;
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
-using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents.BallHitServices.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.BlockServices.Implementation;
@@ -11,12 +10,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
 {
     public class BulletBall : IBallHitService
     {
-        private readonly IBallProvider _ballProvider;
+        private readonly Action<Ball> _onHitAction;
         private readonly int _damage;
         
-        public BulletBall(IBallProvider ballProvider, int damage)
+        public BulletBall(Action<Ball> onHitAction, int damage)
         {
-            _ballProvider = ballProvider;
+            _onHitAction = onHitAction;
             _damage = damage;
         }
         
@@ -42,8 +41,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
                 }
             }
             
-            ball.PrepareReuse();
-            _ballProvider.Return(ball);
+            _onHitAction?.Invoke(ball);
         }
     }
 }

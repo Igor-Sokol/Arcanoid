@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
@@ -11,6 +12,8 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 {
     public class WeaponPlatformAction : IGameAction
     {
+        private readonly List<Ball> _activeBalls = new List<Ball>();
+        
         private readonly TimeScaler _timeScaler;
         private readonly IBallProvider _ballProvider;
         private readonly Platform.Platform _platform;
@@ -18,7 +21,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private readonly float _ballSpeed;
         private readonly int _damage;
         private readonly string _ballKey;
-
+        
         private float _timer;
 
         public WeaponPlatformAction(TimeScaler timeScaler, IBallProvider ballProvider, Platform.Platform platform,
@@ -66,6 +69,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 
         public void OnStop(ActionInfo actionInfo)
         {
+            foreach (var ball in _activeBalls)
+            {
+                ball.PrepareReuse();
+                _ballProvider.Return(ball);
+            }
+            _activeBalls.Clear();
         }
 
         private Ball GetBall()
@@ -76,11 +85,20 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             ball.TimeManager.AddTimeScaler(_timeScaler);
             
             ball.EnableCollision = false;
-            ball.BallHitManager.AddService(new BulletBall(_ballProvider, _damage));
+            ball.BallHitManager.AddService(new BulletBall(OnBulletHit, _damage));
             ball.MoveController.SetSpeed(_ballSpeed);
             ball.MoveController.PhysicActive = true;
 
+            _activeBalls.Add(ball);
+            
             return ball;
+        }
+
+        private void OnBulletHit(Ball ball)
+        {
+            ball.PrepareReuse();
+            _activeBalls.Remove(ball);
+            _ballProvider.Return(ball);
         }
     }
 }
