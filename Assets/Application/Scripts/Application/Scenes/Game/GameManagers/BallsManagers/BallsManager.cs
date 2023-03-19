@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.BallSetUpServices;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.BallSetUpServices.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
@@ -17,7 +18,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
         private readonly SafeList<Ball> _activeBalls = new SafeList<Ball>();
 
         [SerializeField] private Ball ballKey;
-        [SerializeField] private BallProvider ballProvider;
+        [SerializeField] private ActiveBallManager activeBallManager;
         [SerializeField] private TimeManager ballTimeManager;
         [SerializeField] private BallSetUpManager ballSetUpManager;
 
@@ -28,7 +29,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
 
         public Ball GetBall()
         {
-            var ball = ballProvider.GetBall(ballKey.Key);
+            var ball = activeBallManager.GetBall(ballKey.Key);
             _activeBalls.Add(ball);
             ball.PrepareReuse();
 
@@ -50,7 +51,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
             if (_activeBalls.Count > 0)
             {
                 _activeBalls.Remove(ball);
-                ballProvider.Return(ball);
+                activeBallManager.Return(ball);
 
                 if (_activeBalls.Count <= 0)
                 {
@@ -63,7 +64,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
         {
             foreach (var ball in _activeBalls)
             {
-                ballProvider.Return(ball);
+                activeBallManager.Return(ball);
             }
             _activeBalls.Clear();
             ballSetUpManager.PrepareReuse();
