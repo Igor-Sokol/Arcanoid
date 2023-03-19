@@ -1,3 +1,4 @@
+using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
@@ -36,7 +37,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private BlockProgressManager progressManager;
-        
+        [SerializeField] private ActiveBallManager activeBallManager;
         public void Initialize()
         {
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
@@ -61,6 +62,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             ballsManager.PrepareReuse();
             boostObjectManager.PrepareReuse();
             boostManager.PrepareReuse();
+            activeBallManager.PrepareReuse();
 
             _winGamePopUp = _popUpManager.Get<WinGamePopUp>();
             _winGamePopUp.WinPopUpAnimator.Configure(levelPackManager.GetCurrentPackInfo(), _localizationManager);

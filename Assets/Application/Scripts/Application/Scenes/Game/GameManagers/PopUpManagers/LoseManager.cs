@@ -1,3 +1,4 @@
+using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
@@ -32,6 +33,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
+        [SerializeField] private ActiveBallManager activeBallManager;
 
         public void Initialize()
         {
@@ -45,6 +47,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             ballsManager.PrepareReuse();
             boostObjectManager.PrepareReuse();
             boostManager.PrepareReuse();
+            activeBallManager.PrepareReuse();
             
             _loseGamePopUp = _popUpManager.Get<LoseGamePopUp>();
             _loseGamePopUp.LosePopUpAnimator.Configure(_energyManager.CurrentEnergy, _energyManager.MaxEnergy);
