@@ -9,7 +9,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
         public abstract float Duration { get; }
         public abstract void Initialize();
         public virtual void Configure(Block block) => Block = block;
-        public abstract void Enable();
-        public abstract void Disable();
+        public virtual void Enable() {}
+        public virtual void Disable() {}
     }
 }

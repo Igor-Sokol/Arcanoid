@@ -17,7 +17,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls
         [SerializeField] private BallEffectManager ballEffectManager;
         [SerializeField] private BallView ballView;
         [SerializeField] private CircleCollider2D collisionCollider;
-        [SerializeField] private CircleCollider2D triggerCollider;
+        [SerializeField] private Collider2D triggerCollider;
 
         public string Key => key;
         public MoveController MoveController => moveController;
