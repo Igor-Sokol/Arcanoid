@@ -31,7 +31,7 @@ namespace Application.Scripts.Library.GameActionManagers
 
         public ActionHandler StartAction(IGameAction gameAction, float time, IActionTimeScale timeScale = null)
         {
-            ActionTimer counter = GetTimer<IGameAction>();
+            ActionTimer counter = GetTimer(gameAction.GetType());
             return counter.Start(gameAction, time, timeScale);
         }
 
@@ -46,27 +46,25 @@ namespace Application.Scripts.Library.GameActionManagers
             return null;
         }
         
-        private ActionTimer GetTimer<T>() 
-            where T : IGameAction
+        private ActionTimer GetTimer(Type type) 
         {
             ActionTimer counter = null;
             
-            if (_timers.TryGetValue(typeof(T), out List<ActionTimer> timers))
+            if (_timers.TryGetValue(type, out List<ActionTimer> timers))
             {
                 counter = timers.FirstOrDefault(t => !t.Active);
             }
 
-            return counter ??= CreateTimer<T>();
+            return counter ?? CreateTimer(type);
         }
         
-        private ActionTimer CreateTimer<T>() 
-            where T : IGameAction
+        private ActionTimer CreateTimer(Type type)
         {
             ActionTimer counter = new ActionTimer();
 
             if (!_counting)
             {
-                Type key = typeof(T);
+                Type key = type;
                 if (_timers.ContainsKey(key))
                 {
                     _timers[key].Add(counter);
