@@ -183,7 +183,7 @@ MonoBehaviour:
   energyShowDuration: 1
   packBackgroundDuration: 0.6
   changePackImageDuration: 1
-  buttonDelay: 0.3
+  buttonDelay: 0.1
   hideDelay: 0
 --- !u!1 &3264632543536690252
 GameObject:
