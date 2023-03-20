@@ -28,7 +28,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
                 var pack = packs[i - 1];
 
                 var startPosition = pack.PackContainer.position;
-                pack.PackContainer.position = new Vector3(screenInfo.ScreenSize.x / 2 + screenInfo.ScreenRightUpper.y,
+                pack.PackContainer.position = new Vector3(screenInfo.ScreenSize.x / 2 + screenInfo.ScreenRightUpper.x,
                     startPosition.y, startPosition.z);
 
                 _showAnimation.Join(pack.PackContainer
@@ -42,7 +42,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
         {
             _hideAnimation?.Kill();
             _hideAnimation = DOTween.Sequence();
-            _hideAnimation.Append(pack.PackContainer.DOMoveX(screenInfo.ScreenSize.x / 2 + screenInfo.ScreenRightUpper.y,
+            _hideAnimation.Append(pack.PackContainer.DOMoveX(screenInfo.ScreenSize.x / 2 + screenInfo.ScreenRightUpper.x,
                 packDelay));
             _hideAnimation.AppendCallback(() => OnAnimationHidden?.Invoke());
         }
