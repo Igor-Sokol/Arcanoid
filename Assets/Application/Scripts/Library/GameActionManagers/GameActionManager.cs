@@ -88,7 +88,7 @@ namespace Application.Scripts.Library.GameActionManagers
         {
             foreach (var actionTimer in _timersToInstall)
             {
-                if (actionTimer != null)
+                if (actionTimer is { Active: true })
                 {
                     Type key = actionTimer.GameAction.GetType();
                     if (_timers.ContainsKey(key))

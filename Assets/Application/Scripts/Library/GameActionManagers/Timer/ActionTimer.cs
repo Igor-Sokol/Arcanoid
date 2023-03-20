@@ -21,7 +21,7 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
             Time = time;
             _looped = time < 0;
 
-            _gameAction?.OnBegin(new ActionInfo(time, 0f, 0f));
+            _gameAction?.OnBegin(new ActionInfo(time, 0f, 0f, ActionHandler));
             
             return ActionHandler = new ActionHandler(this);
         }
@@ -38,7 +38,7 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
 
             Time -= _looped ? 0 : scaledTime;
             
-            _gameAction?.OnUpdate(new ActionInfo(Time, scaledTime, time));
+            _gameAction?.OnUpdate(new ActionInfo(Time, scaledTime, time, ActionHandler));
 
             if (Time <= 0f && !_looped && Active)
             {
@@ -48,7 +48,7 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
 
         public void Stop()
         {
-            _gameAction.OnStop(new ActionInfo(Time, 0f, 0f));
+            _gameAction.OnStop(new ActionInfo(Time, 0f, 0f, ActionHandler));
             _gameAction = null;
             ActionHandler = default;
             Active = false;
@@ -59,7 +59,7 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
         {
             var gameAction = _gameAction;
             Stop();
-            gameAction.OnComplete(new ActionInfo(Time, 0f, 0f));
+            gameAction.OnComplete(new ActionInfo(Time, 0f, 0f, ActionHandler));
         }
     }
 }
