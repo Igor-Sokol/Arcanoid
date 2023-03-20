@@ -50,6 +50,7 @@ namespace Application.Scripts.Library.GameActionManagers.Timer
         {
             _gameAction.OnStop(new ActionInfo(Time, 0f, 0f, ActionHandler));
             _gameAction = null;
+            _timeScale = null;
             ActionHandler = default;
             Active = false;
             _looped = false;
