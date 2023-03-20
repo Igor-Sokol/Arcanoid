@@ -21,6 +21,9 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         private string _packName;
         private int _packProgress;
         private int _packLevelCount;
+        private Sprite _nextPackImage;
+        private string _nextPackName;
+        private int _nextPackLevelCount;
 
         [SerializeField] private RectTransform popUp;
         [SerializeField] private Image popUpImage;
@@ -29,10 +32,10 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         [SerializeField] private EnergyView energyView;
         [SerializeField] private RectTransform packBackground;
         [SerializeField] private Image packImage;
-        [SerializeField] private Image fadePackImage;
         [SerializeField] private ParticleSystem particle;
         [SerializeField] private TMP_Text packName;
         [SerializeField] private ProgressView packProgress;
+        [SerializeField] private Transform packInfoContainer;
         [SerializeField] private Button[] buttons;
         [SerializeField] private float popUpDuration;
         [SerializeField] private float titleDuration;
@@ -84,8 +87,20 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
                 .DOMoveX(center.x, energyShowDuration)
                 .From(rightOffscreenPosition));
             _activeAnimation.Append(energyView.SetProgress(_startEnergy + _addedEnergy, _maxEnergy));
+            
+            if (_packName != _nextPackName)
+            {
+                _activeAnimation.Append(packInfoContainer.DOScale(0, changePackImageDuration));
+                _activeAnimation.AppendCallback(() =>
+                {
+                    packName.text = _nextPackName;
+                    packImage.sprite = _nextPackImage;
+                    packProgress.SetProgressImmediately(0, _nextPackLevelCount);
+                });
+                _activeAnimation.Append(packInfoContainer.DOScale(1, changePackImageDuration));
+            }
+            
             _activeAnimation.AppendInterval(0);
-
             for (int i = 1; i <= buttons.Length; i++)
             {
                 var button = buttons[i - 1];
@@ -110,19 +125,6 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
 
             _activeAnimation.AppendInterval(hideDelay);
 
-            if (packName.text != _packName)
-            {
-                fadePackImage.sprite = _packImage;
-                _activeAnimation.Append(packImage.DOFade(0, changePackImageDuration));
-                _activeAnimation.Join(packName.DOText(_packName, textDuration));
-                _activeAnimation.Join(packProgress.SetProgress(0, _packLevelCount));
-                _activeAnimation.AppendCallback(() =>
-                {
-                    packImage.sprite = _packImage;
-                    packImage.color = Color.white;
-                });
-            }
-            
             _activeAnimation.Append(popUpImage.transform
                 .DOMoveX(rightOffscreenPosition, popUpDuration));
 
@@ -147,12 +149,15 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
             _addedEnergy = addedEnergy;
         }
         
-        public void Configure(IPackInfo packInfo, ILocalizationManager localizationManager)
+        public void Configure(IPackInfo currentPackInfo, IPackInfo nextPackInfo, ILocalizationManager localizationManager)
         {
-            _packImage = packInfo.LevelPack.PackImage;
-            _packName = localizationManager.GetString(packInfo.LevelPack.PackNameKey) ?? string.Empty;
-            _packProgress = packInfo.CurrentLevelIndex + 1;
-            _packLevelCount = packInfo.LevelPack.LevelCount;
+            _packImage = currentPackInfo.LevelPack.PackImage;
+            _packName = localizationManager.GetString(currentPackInfo.LevelPack.PackNameKey) ?? string.Empty;
+            _packProgress = currentPackInfo.CurrentLevelIndex + 1;
+            _packLevelCount = currentPackInfo.LevelPack.LevelCount;
+            _nextPackImage = nextPackInfo.LevelPack.PackImage;
+            _nextPackName = localizationManager.GetString(nextPackInfo.LevelPack.PackNameKey) ?? string.Empty;
+            _nextPackLevelCount = nextPackInfo.LevelPack.LevelCount;
         }
     }
 }

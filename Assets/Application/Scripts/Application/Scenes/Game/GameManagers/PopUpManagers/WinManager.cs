@@ -3,7 +3,6 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
-using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManagers;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps;
@@ -65,7 +64,6 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             activeBallManager.PrepareReuse();
 
             _winGamePopUp = _popUpManager.Get<WinGamePopUp>();
-            _winGamePopUp.WinPopUpAnimator.Configure(levelPackManager.GetCurrentPackInfo(), _localizationManager);
             _winGamePopUp.WinPopUpAnimator.Configure(_energyManager.CurrentEnergy, _energyManager.MaxEnergy,
                 energyPriceConfig.WinGift);
 
@@ -90,14 +88,20 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
                 _energyManager.OnEnergyRemoved -= UpdateEnergy;
                 _energyManager.OnFillTimeChanged -= UpdateEnergyTime;
             };
+
+            var currentPack = levelPackManager.GetCurrentPackInfo();
+            var nextPack = currentPack;
+            if (levelPackManager.TrySetNextLevel())
+            {
+                nextPack = levelPackManager.GetCurrentPackInfo();
+            }
+            _winGamePopUp.WinPopUpAnimator.Configure(currentPack, nextPack, _localizationManager);
             
             _winGamePopUp.Show();
         }
         
         private void OnContinue()
         {
-            levelPackManager.TrySetNextLevel();
-            _winGamePopUp.WinPopUpAnimator.Configure(levelPackManager.GetCurrentPackInfo(), _localizationManager);
             _winGamePopUp.Hide();
             _winGamePopUp.OnHidden += () =>
             {
