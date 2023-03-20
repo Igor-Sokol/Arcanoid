@@ -11,6 +11,7 @@
   "choose.pack.closeName" : "Не обнаружена",
   "game.popup.menu.restart" : "Рестарт",
   "game.popup.menu.continue" : "Продолжить",
+  "game.popup.menu.skip" : "Пропустить",
   "game.popup.lose.title" : "Вы проиграли!",
   "game.popup.win.title" : "Вы выиграли!",
   "game.popup.menu.next" : "Далее",

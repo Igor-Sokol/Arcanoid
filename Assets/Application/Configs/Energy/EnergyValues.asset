@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: EnergyValues
   m_EditorClassIdentifier: 
   levelPrice: 5
+  skipPrice: 0
   healthPrice: 10
   winGift: 15

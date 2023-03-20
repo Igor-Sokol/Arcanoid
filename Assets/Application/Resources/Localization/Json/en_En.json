@@ -11,6 +11,7 @@
   "choose.pack.closeName" : "Not detected",
   "game.popup.menu.restart" : "Restart",
   "game.popup.menu.continue" : "continue",
+  "game.popup.menu.skip" : "Skip",
   "game.popup.lose.title" : "You lose!",
   "game.popup.win.title" : "You win!",
   "game.popup.menu.next" : "continue",
