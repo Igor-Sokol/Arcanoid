@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.Configs;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.GameActions;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlaceAnimators;
@@ -8,6 +9,8 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.Pa
 using Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Screen.UI.PlayerInputs;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
+using Application.Scripts.Application.Scenes.Game.Units.Blocks.Configs;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
@@ -20,6 +23,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
 {
     public class BlockManager : MonoBehaviour, IBlockManager, IReusable, IInitializing
     {
+        private readonly Dictionary<string, BlockConfig> _blockConfigs = new Dictionary<string, BlockConfig>();
+
         private IGameActionManager _gameActionManager;
         private ActionHandler _destroyAllAction;
         private Block[][] _blocks;
@@ -29,6 +34,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         [SerializeField] private PackPlacer packPlacer;
         [SerializeField] private PackPlaceAnimator packPlaceAnimator;
         [SerializeField] private ActionTimeManager actionTimeManager;
+        [SerializeField] private BlockScriptableConfig[] blockConfigs;
         [SerializeField] private float forceDestroyTime;
 
         public IEnumerable<Block> Blocks => _blocks?.SelectMany(blocks => blocks);
@@ -38,6 +44,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         public void Initialize()
         {
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
+
+            foreach (var config in blockConfigs)
+            {
+                _blockConfigs.Add(config.ConfigKey, config.Config);
+            }
         }
         
         public Vector2 GetBlockIndex(Block block)
@@ -71,7 +82,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                 _blocks = null;
             }
         }
-        public void SetBlocks(string[][] blockKeys)
+        public void SetBlocks(BlockInfo[][] blockKeys)
         {
             _blocks = new Block[blockKeys.Length][];
 
@@ -80,8 +91,14 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                 _blocks[i] = new Block[blockKeys[i].Length];
                 for (int j = 0; j < blockKeys[i].Length; j++)
                 {
-                    var block = blockProvider.GetBlock(blockKeys[i][j]);
+                    var block = blockProvider.GetBlock(blockKeys[i][j].BlockKey);
                     if (block) block.PrepareReuse();
+
+                    if (blockKeys[i][j].ConfigKey != null)
+                    {
+                        block.Configure(_blockConfigs[blockKeys[i][j].ConfigKey]);
+                    }
+                    
                     _blocks[i][j] = block;
                 }
             }
@@ -107,14 +124,12 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                 }
             }
         }
-
         public void DestroyAllBlocks()
         {
             _destroyAllAction.Stop();
             _destroyAllAction = _gameActionManager.StartAction(new DestroyAllBlocks(this, forceDestroyTime / _blocks.Length),
                 -1, actionTimeManager);
         }
-
         private void OnDisable()
         {
             _destroyAllAction.Stop();

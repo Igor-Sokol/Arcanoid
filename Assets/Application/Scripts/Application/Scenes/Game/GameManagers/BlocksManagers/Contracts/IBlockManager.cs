@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
+using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.Contracts
@@ -11,7 +13,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         Block[][] BlockArray { get; }
         Vector2 GetBlockIndex(Block block);
         event Action<Block> OnBlockRemoved;
-        void SetBlocks(string[][] blockKeys);
+        void SetBlocks(BlockInfo[][] blockKeys);
         void RemoveBlock(Block block);
     }
 }

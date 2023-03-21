@@ -2,6 +2,7 @@ using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.B
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.BlockViews;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.DestroyServices;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.HitServices;
+using Application.Scripts.Application.Scenes.Game.Units.Blocks.Configs;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
@@ -22,8 +23,14 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks
         public DestroyServiceManager DestroyServiceManager => destroyServiceManager;
         public BlockServiceManager BlockServiceManager => blockServiceManager;
 
+        public void Configure(BlockConfig config)
+        {
+            blockView.Sprite = config.BlockImage;
+        }
+        
         public void PrepareReuse()
         {
+            blockView.PrepareReuse();
             blockServiceManager.PrepareReuse();
             HitServiceManager.PrepareReuse();
             destroyServiceManager.PrepareReuse();
@@ -31,6 +38,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks
 
         public void Initialize()
         {
+            blockView.Initialize();
             destroyServiceManager.Initialize();
         }
     }

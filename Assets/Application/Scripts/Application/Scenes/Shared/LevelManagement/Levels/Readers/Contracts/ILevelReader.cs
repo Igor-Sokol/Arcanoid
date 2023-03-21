@@ -1,7 +1,9 @@
+using Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Contracts;
+
 namespace Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts
 {
     public interface ILevelReader
     {
-        string[][] ReadPack(LevelInfo level);
+        BlockInfo[][] ReadPack(LevelInfo level);
     }
 }
