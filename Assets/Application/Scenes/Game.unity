@@ -364,6 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 62773538}
   - component: {fileID: 62773539}
+  - component: {fileID: 62773540}
   m_Layer: 0
   m_Name: SceneInitializer
   m_TagString: Untagged
@@ -397,6 +398,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79f303893315425b98e99dddf43c2386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initializer: {fileID: 62773540}
+--- !u!114 &62773540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62773537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba19aa66ea40ecb6811a841f5a2987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initializing:

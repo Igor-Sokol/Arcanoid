@@ -1,14 +1,14 @@
-using Application.Scripts.Library.InitializeManager.Contracts;
+using UnityEngine;
 
 namespace Application.Scripts.Library.InitializeManager
 {
-    public class StartInitializer : Initializer
+    public class StartInitializer : MonoBehaviour
     {
-        private IInitializing[] _initializing;
+        [SerializeField] private MonoBehaviour initializer;
 
         private void Start()
         {
-            Initialize();
+            (initializer as Initializer)?.Initialize();
         }
     }
 }
