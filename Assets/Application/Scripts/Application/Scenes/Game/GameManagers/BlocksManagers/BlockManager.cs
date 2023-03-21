@@ -57,6 +57,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         }
         public void PrepareReuse()
         {
+            _destroyAllAction.Stop();
             if (_blocks != null)
             {
                 foreach (var block in Blocks)
