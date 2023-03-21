@@ -1,5 +1,6 @@
 using System;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps.Animators;
+using Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps.Animators.WinAnimator;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
 using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
 using Application.Scripts.Library.PopUpManagers.PopUpContracts;

@@ -177,14 +177,7 @@ MonoBehaviour:
   buttons:
   - {fileID: 6210219324018781299}
   - {fileID: 6694266665868133482}
-  popUpDuration: 0.8
-  titleDuration: 0.6
-  textDuration: 0.6
-  energyShowDuration: 1
-  packBackgroundDuration: 0.6
-  changePackImageDuration: 1
-  buttonDelay: 0.1
-  hideDelay: 0
+  animatorConfig: {fileID: 11400000, guid: a656471c4b79b2f43834cf8a8eb4e7ba, type: 2}
 --- !u!1 &3264632543536690252
 GameObject:
   m_ObjectHideFlags: 0
