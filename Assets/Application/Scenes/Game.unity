@@ -4079,6 +4079,12 @@ MonoBehaviour:
   packPlacer: {fileID: 1364741565}
   packPlaceAnimator: {fileID: 1615502427}
   actionTimeManager: {fileID: 1892767361}
+  blockConfigs:
+  - {fileID: 11400000, guid: 4df36363b9991804b95d6f977b379edc, type: 2}
+  - {fileID: 11400000, guid: 87aec9ca4564a584d87a905a34cb19a0, type: 2}
+  - {fileID: 11400000, guid: 62f93c2b832905d49b3525a199a392d0, type: 2}
+  - {fileID: 11400000, guid: 2681b88c21f110c48bdf69e1cb375b22, type: 2}
+  - {fileID: 11400000, guid: f1f0910f43c54ae4f855a938453fdbac, type: 2}
   forceDestroyTime: 0.5
 --- !u!114 &1892767361
 MonoBehaviour:

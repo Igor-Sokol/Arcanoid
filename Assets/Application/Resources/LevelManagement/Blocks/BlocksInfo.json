@@ -52,6 +52,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"BigPlatform"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Blue"
         }]
     },
     {
@@ -79,6 +84,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"Death"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Red"
         }]
     },
     {
@@ -88,6 +98,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"DoubleBall"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Blue"
         }]
     },
     {
@@ -97,6 +112,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"FastBall"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Blue"
         }]
     },
     {
@@ -106,6 +126,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"FastPlatform"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Red"
         }]
     },
     {
@@ -115,6 +140,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"FireBall"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Yellow"
         }]
     },
     {
@@ -133,6 +163,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"Life"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Green"
         }]
     },
     {
@@ -142,6 +177,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"SlowBall"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Yellow"
         }]
     },
     {
@@ -151,6 +191,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"SlowPlatform"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Green"
         }]
     },
     {
@@ -160,6 +205,11 @@
           "name":"BlockKey",
           "type":"string",
           "value":"SmallPlatform"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Red"
         }]
     },
     {
@@ -178,6 +228,39 @@
           "name":"BlockKey",
           "type":"string",
           "value":"WeaponPlatform"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Green"
+        }]
+    },
+    {
+      "id":20,
+      "properties":[
+        {
+          "name":"BlockKey",
+          "type":"string",
+          "value":"WeaponPlatform"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Red"
+        }]
+    },
+    {
+      "id":21,
+      "properties":[
+        {
+          "name":"BlockKey",
+          "type":"string",
+          "value":"WeaponPlatform"
+        },
+        {
+          "name":"ConfigKey",
+          "type":"string",
+          "value":"Blue"
         }]
     }]
 }
