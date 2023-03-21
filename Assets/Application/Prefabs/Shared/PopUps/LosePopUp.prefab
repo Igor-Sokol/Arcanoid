@@ -463,7 +463,7 @@ MonoBehaviour:
   popUpDuration: 0.6
   textDuration: 0.4
   energyShowDuration: 0.5
-  buttonDelay: 0.3
+  buttonDelay: 0.07
   hideDelay: 0
 --- !u!1001 &1164283680286884454
 PrefabInstance:
