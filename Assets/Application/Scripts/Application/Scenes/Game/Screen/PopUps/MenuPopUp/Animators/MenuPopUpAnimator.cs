@@ -1,6 +1,7 @@
 using System;
 using Application.Scripts.Library.PopUpManagers.AnimationContracts;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,18 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp.An
         
         public override event Action OnAnimationShown;
         public override event Action OnAnimationHidden;
+        
+        [Button("PlayShowAnimation")]
+        private void PlayShowAnimation()
+        {
+            ShowAnimation();
+        }
+        
+        [Button("PlayHideAnimation")]
+        private void PlayHideAnimation()
+        {
+            HideAnimation();
+        }
         
         public override void ShowAnimation()
         {

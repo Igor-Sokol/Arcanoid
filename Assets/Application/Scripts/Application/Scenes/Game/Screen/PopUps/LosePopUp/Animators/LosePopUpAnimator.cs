@@ -2,6 +2,7 @@ using System;
 using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
 using Application.Scripts.Library.PopUpManagers.AnimationContracts;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,24 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
         
         public override event Action OnAnimationShown;
         public override event Action OnAnimationHidden;
+        
+        public void Configure(int startEnergy, int maxEnergy)
+        {
+            _startEnergy = startEnergy;
+            _maxEnergy = maxEnergy;
+        }
+        
+        [Button("PlayShowAnimation")]
+        private void PlayShowAnimation()
+        {
+            ShowAnimation();
+        }
+        
+        [Button("PlayHideAnimation")]
+        private void PlayHideAnimation()
+        {
+            HideAnimation();
+        }
         
         public override void ShowAnimation()
         {
@@ -95,12 +114,6 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
             
             _activeAnimation.AppendCallback(() => OnAnimationHidden?.Invoke());
             _activeAnimation.SetEase(Ease.InQuad);
-        }
-
-        public void Configure(int startEnergy, int maxEnergy)
-        {
-            _startEnergy = startEnergy;
-            _maxEnergy = maxEnergy;
         }
     }
 }
