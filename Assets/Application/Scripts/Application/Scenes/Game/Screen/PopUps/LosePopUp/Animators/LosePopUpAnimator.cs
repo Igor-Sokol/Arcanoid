@@ -21,11 +21,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
         [SerializeField] private TMP_Text title;
         [SerializeField] private EnergyView energyView;
         [SerializeField] private Button[] buttons;
-        [SerializeField] private float popUpDuration;
-        [SerializeField] private float textDuration;
-        [SerializeField] private float energyShowDuration;
-        [SerializeField] private float buttonDelay;
-        [SerializeField] private float hideDelay;
+        [SerializeField] private LosePopUpAnimatorScriptableConfig animatorConfig;
         
         public override event Action OnAnimationShown;
         public override event Action OnAnimationHidden;
@@ -63,17 +59,17 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
 
             popUp.anchoredPosition = Vector2.zero;
             _activeAnimation.Append(popUpImage.transform
-                .DOMoveY(center.y + popUpPositionOffset.y * lossyScale, popUpDuration)
+                .DOMoveY(center.y + popUpPositionOffset.y * lossyScale, animatorConfig.AnimatorConfig.PopUpDuration)
                 .From(downOffscreenPosition));
 
             string titleText = title.text;
             title.text = string.Empty;
-            _activeAnimation.Append(title.DOText(titleText, textDuration));
+            _activeAnimation.Append(title.DOText(titleText, animatorConfig.AnimatorConfig.TextDuration));
 
             energyView.SetProgressImmediately(0, _maxEnergy);
             energyView.SetTimeLeft(0);
             _activeAnimation.Append(energyView.transform
-                .DOMoveX(center.x, energyShowDuration)
+                .DOMoveX(center.x, animatorConfig.AnimatorConfig.EnergyShowDuration)
                 .From(rightOffscreenPosition));
             _activeAnimation.Append(energyView.SetProgress(_startEnergy, _maxEnergy));
             _activeAnimation.AppendInterval(0);
@@ -83,7 +79,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
                 var button = buttons[i - 1];
                 
                 _activeAnimation.Join(button.transform
-                    .DOMoveX(center.x, popUpDuration + buttonDelay * i)
+                    .DOMoveX(center.x, animatorConfig.AnimatorConfig.PopUpDuration + animatorConfig.AnimatorConfig.ButtonDelay * i)
                     .From(leftOffscreenPosition));
             }
             
@@ -100,16 +96,16 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp.An
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
 
-            _activeAnimation.AppendInterval(hideDelay);
+            _activeAnimation.AppendInterval(animatorConfig.AnimatorConfig.HideDelay);
             _activeAnimation.Append(popUpImage.transform
-                .DOMoveX(rightOffscreenPosition, popUpDuration));
+                .DOMoveX(rightOffscreenPosition, animatorConfig.AnimatorConfig.PopUpDuration));
 
             for (int i = 1; i <= buttons.Length; i++)
             {
                 var button = buttons[i - 1];
                 
                 _activeAnimation.Join(button.transform
-                    .DOMoveX(rightOffscreenPosition, popUpDuration + buttonDelay * i));
+                    .DOMoveX(rightOffscreenPosition, animatorConfig.AnimatorConfig.PopUpDuration + animatorConfig.AnimatorConfig.ButtonDelay * i));
             }
             
             _activeAnimation.AppendCallback(() => OnAnimationHidden?.Invoke());

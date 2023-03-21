@@ -460,11 +460,7 @@ MonoBehaviour:
   - {fileID: 5985172426178247746}
   - {fileID: 1164283679812772206}
   - {fileID: 1937018793581513079}
-  popUpDuration: 0.6
-  textDuration: 0.4
-  energyShowDuration: 0.5
-  buttonDelay: 0.07
-  hideDelay: 0
+  animatorConfig: {fileID: 11400000, guid: 3766e0a1e0c63b54dacd3d640921771a, type: 2}
 --- !u!1001 &1164283680286884454
 PrefabInstance:
   m_ObjectHideFlags: 0
