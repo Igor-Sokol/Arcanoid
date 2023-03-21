@@ -330,8 +330,8 @@ RectTransform:
   m_Children:
   - {fileID: 6304754751407161093}
   - {fileID: 6752879945363265308}
-  - {fileID: 6752879945160618282}
   - {fileID: 2650904568580164461}
+  - {fileID: 6752879945160618282}
   m_Father: {fileID: 6304754749958678589}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -448,8 +448,8 @@ MonoBehaviour:
   buttons:
   - {fileID: 6304754751407161114}
   - {fileID: 6752879945363265283}
-  - {fileID: 6752879945160618293}
   - {fileID: 2650904568580164466}
+  - {fileID: 6752879945160618293}
   popUpDuration: 0.5
   buttonDelay: 0.05
 --- !u!222 &-6174470370873537589
@@ -485,7 +485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 777417954968357646, guid: 26508f20d47eb5b4abb3f6ae7493b831, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 777417954968357646, guid: 26508f20d47eb5b4abb3f6ae7493b831, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1030,6 +1030,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26508f20d47eb5b4abb3f6ae7493b831, type: 3}
+--- !u!224 &6752879945363265308 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 777417954968357646, guid: 26508f20d47eb5b4abb3f6ae7493b831, type: 3}
+  m_PrefabInstance: {fileID: 6304754751613099026}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6752879945363265283 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 777417954968357649, guid: 26508f20d47eb5b4abb3f6ae7493b831, type: 3}
@@ -1041,11 +1046,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &6752879945363265308 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 777417954968357646, guid: 26508f20d47eb5b4abb3f6ae7493b831, type: 3}
-  m_PrefabInstance: {fileID: 6304754751613099026}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6304754751813597732
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1071,7 +1071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 777417954968357646, guid: 26508f20d47eb5b4abb3f6ae7493b831, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 777417954968357646, guid: 26508f20d47eb5b4abb3f6ae7493b831, type: 3}
       propertyPath: m_AnchorMax.x
