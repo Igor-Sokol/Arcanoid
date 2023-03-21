@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
 using Application.Scripts.Library.SceneManagers.Contracts.Loading;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
@@ -16,6 +17,11 @@ namespace Application.Scripts.Library.SceneManagers
         
         [SerializeField] private SceneLoading[] loadings;
         [SerializeField] private Dictionary<Scene, string> scenes;
+
+        public void LoadScene(Scene scene)
+        {
+            LoadScene<DefaultSceneLoading>(scene);
+        }
         
         public void LoadScene<TLoading>(Scene scene)
             where TLoading : SceneLoading

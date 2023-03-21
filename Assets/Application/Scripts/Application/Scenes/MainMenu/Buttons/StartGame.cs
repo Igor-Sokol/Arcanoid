@@ -32,7 +32,7 @@ namespace Application.Scripts.Application.Scenes.MainMenu.Buttons
 
         private void LoadChoosePack()
         {
-            _sceneManager.LoadScene<DefaultSceneLoading>(Scene.ChoosePack);
+            _sceneManager.LoadScene(Scene.ChoosePack);
         }
     }
 }

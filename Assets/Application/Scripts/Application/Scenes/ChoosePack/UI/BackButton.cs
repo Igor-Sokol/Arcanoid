@@ -23,7 +23,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.UI
 
         private void OnClick()
         {
-            ProjectContext.Instance.GetService<ISceneManager>().LoadScene<DefaultSceneLoading>(Scene.MainMenu);
+            ProjectContext.Instance.GetService<ISceneManager>().LoadScene(Scene.MainMenu);
         }
     }
 }

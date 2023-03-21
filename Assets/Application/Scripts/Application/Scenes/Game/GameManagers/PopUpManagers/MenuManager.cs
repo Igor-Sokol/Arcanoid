@@ -80,7 +80,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void OnMenu()
         {
             _menuPopUp.Hide();
-            _menuPopUp.OnHidden += () => _sceneManager.LoadScene<DefaultSceneLoading>(Scene.ChoosePack);
+            _menuPopUp.OnHidden += () => _sceneManager.LoadScene(Scene.ChoosePack);
         }
 
         private void OnContinue()

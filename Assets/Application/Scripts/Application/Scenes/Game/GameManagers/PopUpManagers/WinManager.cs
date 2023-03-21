@@ -113,7 +113,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void OnMenu()
         {
             _winGamePopUp.Hide();
-            _winGamePopUp.OnHidden += () => _sceneManager.LoadScene<DefaultSceneLoading>(Scene.ChoosePack);
+            _winGamePopUp.OnHidden += () => _sceneManager.LoadScene(Scene.ChoosePack);
         }
         private void UpdateEnergy()
         {

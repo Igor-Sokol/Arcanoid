@@ -141,7 +141,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
             
             packViewAnimator.Hide(packView);
             graphicRayBlock.enabled = true;
-            packViewAnimator.OnAnimationHidden += () => _sceneManager.LoadScene<DefaultSceneLoading>(Scene.Game);
+            packViewAnimator.OnAnimationHidden += () => _sceneManager.LoadScene(Scene.Game);
         }
 
         private void PackStateUpdate()
