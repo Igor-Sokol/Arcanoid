@@ -25,6 +25,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 
         [SerializeField] private BombWay bombWay;
         [SerializeField] private ActionTimeManager actionTimeManager;
+        [SerializeField] private ParticleSystem effect;
         [SerializeField] private float blockDestroyDelay;
         [SerializeField] private int damage;
         [SerializeField] private Block[] ignoreBlocks;
@@ -44,7 +45,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             var indexes = bombWay.GetIndexes(_blockManager.BlockArray, _blockManager.GetBlockIndex(Block), _ignoreKeys);
 
             _actionHandler = _gameActionManager.StartAction(
-                new BombGameAction(_blockManager, indexes, blockDestroyDelay, damage, StopBombAction), -1f, actionTimeManager);
+                new BombGameAction(_blockManager, indexes, blockDestroyDelay, damage, StopBombAction, effect), -1f, actionTimeManager);
         }
 
         public override void Disable()

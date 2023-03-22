@@ -6,6 +6,7 @@ using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.B
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.Bomb.GameAction
 {
@@ -16,17 +17,19 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private readonly int _damage;
         private readonly Action _onComplete;
         private readonly List<List<Vector2>> _indexes;
+        private readonly ParticleSystem _particle;
         
         private float _timer;
         
         public BombGameAction(IBlockManager blockManager, IEnumerable<IEnumerable<Vector2>> indexes, 
-            float blockRemoveDelay, int damage, Action onComplete)
+            float blockRemoveDelay, int damage, Action onComplete, ParticleSystem particle)
         {
             _blockManager = blockManager;
             _blockRemoveDelay = blockRemoveDelay;
             _damage = damage;
             _onComplete = onComplete;
             _indexes = new List<List<Vector2>>();
+            _particle = particle;
 
             if (indexes != null)
             {
@@ -79,6 +82,9 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
                         {
                             if (health) health.RemoveHealth();
                         }
+
+                        var instance = Object.Instantiate(_particle, block.transform.position, Quaternion.identity);
+                        instance.Play();
                     }
 
                     asyncIndexes.RemoveAt(0);
