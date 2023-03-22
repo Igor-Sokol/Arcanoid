@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -15,6 +14,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         {
             _animation?.Kill();
             _animation = DOTween.Sequence();
+
+            packContainer.localScale = Vector3.one;
             _animation.Append(packContainer.DOScale(animatorConfig.Scale, animatorConfig.ScaleTime).SetEase(Ease.InOutSine));
             _animation.Append(packContainer.DOScale(Vector3.one, animatorConfig.ScaleTime).SetEase(Ease.InOutSine));
             _animation.SetLoops(-1);
