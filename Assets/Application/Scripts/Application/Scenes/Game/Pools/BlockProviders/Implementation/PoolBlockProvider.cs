@@ -30,7 +30,7 @@ namespace Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Imple
         
         public override Block GetBlock(string key)
         {
-            if (_blockPool.TryGetValue(key, out var pool))
+            if (!string.IsNullOrEmpty(key) && _blockPool.TryGetValue(key, out var pool))
             {
                 var block = pool.Get();
                 block.PrepareReuse();
