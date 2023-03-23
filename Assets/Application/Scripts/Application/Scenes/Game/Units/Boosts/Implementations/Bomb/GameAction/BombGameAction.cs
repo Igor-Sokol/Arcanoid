@@ -16,19 +16,19 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private readonly float _blockRemoveDelay;
         private readonly int _damage;
         private readonly Action _onComplete;
-        private readonly List<List<Vector2>> _indexes;
+        private readonly List<List<Vector2Int>> _indexes;
         private readonly ParticleSystem _particle;
         
         private float _timer;
         
-        public BombGameAction(IBlockManager blockManager, IEnumerable<IEnumerable<Vector2>> indexes, 
+        public BombGameAction(IBlockManager blockManager, IEnumerable<IEnumerable<Vector2Int>> indexes, 
             float blockRemoveDelay, int damage, Action onComplete, ParticleSystem particle)
         {
             _blockManager = blockManager;
             _blockRemoveDelay = blockRemoveDelay;
             _damage = damage;
             _onComplete = onComplete;
-            _indexes = new List<List<Vector2>>();
+            _indexes = new List<List<Vector2Int>>();
             _particle = particle;
 
             if (indexes != null)
@@ -73,7 +73,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
                 if (asyncIndexes.Count > 0)
                 {
                     var index = asyncIndexes[0];
-                    var block = _blockManager.BlockArray[(int)index.y][(int)index.x];
+                    var block = _blockManager.BlockArray[index.y][index.x];
                     
                     if (block)
                     {

@@ -11,7 +11,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
     {
         IEnumerable<Block> Blocks { get; }
         Block[][] BlockArray { get; }
-        Vector2 GetBlockIndex(Block block);
+        Vector2Int GetBlockIndex(Block block);
         event Action<Block> OnBlockRemoved;
         void SetBlocks(BlockInfo[][] blockKeys);
         void RemoveBlock(Block block);

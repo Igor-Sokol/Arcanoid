@@ -6,6 +6,6 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 {
     public abstract class BombWay : MonoBehaviour
     {
-        public abstract IEnumerable<IEnumerable<Vector2>> GetIndexes(Block[][] blocks, Vector2 startIndex, IEnumerable<string> ignoreKeys);
+        public abstract IEnumerable<IEnumerable<Vector2Int>> GetIndexes(Block[][] blocks, Vector2Int startIndex, IEnumerable<string> ignoreKeys);
     }
 }

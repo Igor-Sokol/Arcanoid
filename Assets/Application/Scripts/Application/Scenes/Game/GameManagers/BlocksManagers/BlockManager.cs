@@ -51,7 +51,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
             }
         }
         
-        public Vector2 GetBlockIndex(Block block)
+        public Vector2Int GetBlockIndex(Block block)
         {
             for (int i = 0; i < _blocks.Length; i++)
             {
@@ -59,12 +59,12 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                 {
                     if (_blocks[i][j] == block)
                     {
-                        return new Vector2(j, i);
+                        return new Vector2Int(j, i);
                     }
                 }
             }
 
-            return new Vector2(-1, -1);
+            return new Vector2Int(-1, -1);
         }
         public void PrepareReuse()
         {

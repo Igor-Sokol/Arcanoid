@@ -9,15 +9,15 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 {
     public class LineBombWay : BombWay
     {
-        [SerializeField] private Vector2[] directions;
+        [SerializeField] private Vector2Int[] directions;
         [SerializeField] private int range;
         
-        public override IEnumerable<IEnumerable<Vector2>> GetIndexes(Block[][] blocks, Vector2 startIndex, IEnumerable<string> ignoreKeys)
+        public override IEnumerable<IEnumerable<Vector2Int>> GetIndexes(Block[][] blocks, Vector2Int startIndex, IEnumerable<string> ignoreKeys)
         {
             foreach (var direction in directions)
             {
                 yield return ChainFinder.GetChain(blocks, startIndex, 
-                    new[] { new Vector2(direction.x, -direction.y) }, range, b =>
+                    new[] { new Vector2Int(direction.x, -direction.y) }, range, b =>
                     {
                         if (b)
                         {

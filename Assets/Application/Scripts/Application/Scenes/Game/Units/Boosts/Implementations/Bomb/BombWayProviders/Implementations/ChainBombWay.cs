@@ -9,9 +9,9 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 {
     public class ChainBombWay : BombWay
     {
-        [SerializeField] private Vector2[] moveRules;
+        [SerializeField] private Vector2Int[] moveRules;
         
-        public override IEnumerable<IEnumerable<Vector2>> GetIndexes(Block[][] blocks, Vector2 startIndex, IEnumerable<string> ignoreKeys)
+        public override IEnumerable<IEnumerable<Vector2Int>> GetIndexes(Block[][] blocks, Vector2Int startIndex, IEnumerable<string> ignoreKeys)
         {
             yield return ChainFinder.GetLongestChain(blocks, b => b.Key, (b) => b && !ignoreKeys.Contains(b.Key),
                 startIndex, moveRules)?.Skip(1);
