@@ -11,6 +11,7 @@ using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Application.Scripts.Library.TimeManagers;
+using Plugins.MobileBlur;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
     public class MenuManager : MonoBehaviour, IInitializing
     {
+        private IBlur _blur;
         private IEnergyManager _energyManager;
         private IPopUpManager _popUpManager;
         private ISceneManager _sceneManager;
@@ -34,6 +36,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 
         public void Initialize()
         {
+            _blur = ProjectContext.Instance.GetService<IBlur>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
@@ -68,6 +71,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _menuPopUp.OnSkipSelected += OnSkip;
 
             _menuPopUp.Show();
+            _blur.Enable();
         }
         
         private void OnRestart()
@@ -78,6 +82,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
                 _pauseTimeScale.Scale = 1;
             };
             _menuPopUp.Hide();
+            _blur.Disable();
             gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
         }
 
@@ -95,6 +100,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
                 _pauseTimeScale.Scale = 1;
             };
             _menuPopUp.Hide();
+            _blur.Disable();
         }
 
         private void OnSkip()
@@ -105,6 +111,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
                 _pauseTimeScale.Scale = 1;
             };
             _menuPopUp.Hide();
+            _blur.Disable();
             _energyManager.RemoveEnergy(energyPriceConfig.SkipPrice);
             blockManager.DestroyAllBlocks();
         }

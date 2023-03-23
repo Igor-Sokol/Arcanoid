@@ -14,6 +14,7 @@ using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.TimeManagers;
 using Application.Scripts.Library.TimeManagers.Contracts;
+using Plugins.MobileBlur;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyInjection
@@ -29,6 +30,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyI
         [SerializeField] private BallsManager ballManager;
         [SerializeField] private BallProvider ballProvider;
         [SerializeField] private ActiveBallManager activeBallManager;
+        [SerializeField] private MobileBlur mobileBlur;
         
         public void Initialize()
         {
@@ -41,6 +43,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyI
             ProjectContext.Instance.SetService<IBallManager, BallsManager>(ballManager);
             ProjectContext.Instance.SetService<IBallProvider, BallProvider>(ballProvider);
             ProjectContext.Instance.SetService<IActiveBallManager, ActiveBallManager>(activeBallManager);
+            ProjectContext.Instance.SetService<IBlur, MobileBlur>(mobileBlur);
         }
     }
 }

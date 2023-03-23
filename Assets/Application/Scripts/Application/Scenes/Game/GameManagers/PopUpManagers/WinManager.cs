@@ -21,12 +21,14 @@ using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
+using Plugins.MobileBlur;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
     public class WinManager : MonoBehaviour, IInitializing, IReusable
     {
+        private IBlur _blur;
         private IGameActionManager _gameActionManager;
         private IEnergyManager _energyManager;
         private IPackProgressManager _packProgressManager;
@@ -52,6 +54,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             
         public void Initialize()
         {
+            _blur = ProjectContext.Instance.GetService<IBlur>();
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
@@ -127,10 +130,12 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _winGamePopUp.WinPopUpAnimator.Configure(currentPack, nextPack, _localizationManager);
             
             _winGamePopUp.Show();
+            _blur.Enable();
         }
         private void OnContinue()
         {
             _winGamePopUp.Hide();
+            _blur.Disable();
             _winGamePopUp.OnHidden += () =>
             {
                 levelPackManager.RenderView();
@@ -157,6 +162,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         public void PrepareReuse()
         {
             _freezeAction.Stop();
+            _blur.Disable();
         }
     }
 }

@@ -5,22 +5,22 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManage
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers;
-using Application.Scripts.Application.Scenes.Game.Screen.PopUps;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
-using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
+using Plugins.MobileBlur;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
     public class LoseManager : MonoBehaviour, IInitializing
     {
+        private IBlur _blur;
         private ISceneManager _sceneManager;
         private IEnergyManager _energyManager;
         private IPopUpManager _popUpManager;
@@ -40,6 +40,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
+            _blur = ProjectContext.Instance.GetService<IBlur>();
         }
 
         public void PlayerLose()
@@ -77,11 +78,13 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             };
             
             _loseGamePopUp.Show();
+            _blur.Enable();
         }
         
         private void OnAddHealth()
         {
             _loseGamePopUp.Hide();
+            _blur.Disable();
             _energyManager.RemoveEnergy(energyPriceConfig.HealthPrice);
             healthManager.AddHealth();
             _loseGamePopUp.OnHidden += () => gameplayManager.SetBall();
@@ -89,6 +92,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void OnRestart()
         {
             _loseGamePopUp.Hide();
+            _blur.Disable();
             _loseGamePopUp.OnHidden += () => gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
         }
         private void OnMenu()
