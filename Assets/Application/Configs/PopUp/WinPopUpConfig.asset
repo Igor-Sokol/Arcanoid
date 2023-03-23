@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: WinPopUpConfig
   m_EditorClassIdentifier: 
   animatorConfig:
-    popUpDuration: 0.8
+    popUpDuration: 0.7
     titleDuration: 0.6
     textDuration: 0.6
     energyShowDuration: 1
     packBackgroundDuration: 0.6
-    changePackImageDuration: 1
+    changePackImageDuration: 0.5
     buttonDelay: 0.1
     hideDelay: 0
