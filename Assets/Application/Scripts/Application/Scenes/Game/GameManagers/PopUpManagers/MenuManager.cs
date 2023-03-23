@@ -2,13 +2,10 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
-using Application.Scripts.Application.Scenes.Game.Screen.PopUps;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
-using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
 using Application.Scripts.Library.DependencyInjection;
-using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
@@ -26,6 +23,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private ISceneManager _sceneManager;
         private MenuPopUp _menuPopUp;
         private GameTimeScale _gameTimeScale;
+        private PauseTimeScale _pauseTimeScale;
 
         [SerializeField] private Button button;
         [SerializeField] private GameplayManager gameplayManager;
@@ -40,6 +38,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _gameTimeScale = timeScaleManager.GetTimeScale<GameTimeScale>();
+            _pauseTimeScale = timeScaleManager.GetTimeScale<PauseTimeScale>();
         }
         
         private void OnEnable()
@@ -55,6 +54,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void OpenMenu()
         {
             _gameTimeScale.Scale = 0;
+            _pauseTimeScale.Scale = 0;
             _menuPopUp = _popUpManager.Get<MenuPopUp>();
 
             _menuPopUp.RestartActive = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
@@ -72,7 +72,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         
         private void OnRestart()
         {
-            _menuPopUp.OnHidden += () => _gameTimeScale.Scale = 1;
+            _menuPopUp.OnHidden += () =>
+            {
+                _gameTimeScale.Scale = 1;
+                _pauseTimeScale.Scale = 1;
+            };
             _menuPopUp.Hide();
             gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
         }
@@ -85,13 +89,21 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 
         private void OnContinue()
         {
-            _menuPopUp.OnHidden += () => _gameTimeScale.Scale = 1;
+            _menuPopUp.OnHidden += () =>
+            {
+                _gameTimeScale.Scale = 1;
+                _pauseTimeScale.Scale = 1;
+            };
             _menuPopUp.Hide();
         }
 
         private void OnSkip()
         {
-            _menuPopUp.OnHidden += () => _gameTimeScale.Scale = 1;
+            _menuPopUp.OnHidden += () =>
+            {
+                _gameTimeScale.Scale = 1;
+                _pauseTimeScale.Scale = 1;
+            };
             _menuPopUp.Hide();
             _energyManager.RemoveEnergy(energyPriceConfig.SkipPrice);
             blockManager.DestroyAllBlocks();

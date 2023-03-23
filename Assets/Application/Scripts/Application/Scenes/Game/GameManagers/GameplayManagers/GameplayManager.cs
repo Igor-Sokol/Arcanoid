@@ -14,7 +14,6 @@ using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers
 {
@@ -27,12 +26,14 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
         [SerializeField] private HealthManager healthManager;
         [SerializeField] private BlockManager blockManager;
         [SerializeField] private BlockProgressManager blockProgressManager;
+        [SerializeField] private GameProcessManager gameProcessManager;
         [SerializeField] private BallsManager ballsManager;
         [SerializeField] private ActiveBallManager activeBallManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private Platform platform;
         [SerializeField] private LoseManager loseManager;
+        [SerializeField] private WinManager winManager;
 
         public void Initialize()
         {
@@ -42,6 +43,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
         public void StartGame(LevelInfo levelInfo)
         {
             _energyManager.RemoveEnergy(energyPriceConfig.LevelPrice);
+            gameProcessManager.PrepareReuse();
+            winManager.PrepareReuse();
             healthManager.PrepareReuse();
             blockManager.PrepareReuse();
             ballsManager.PrepareReuse();

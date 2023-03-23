@@ -4,41 +4,55 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers.GameActions;
 using Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
-using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
+using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;
 using Application.Scripts.Library.DependencyInjection;
+using Application.Scripts.Library.GameActionManagers.Contracts;
+using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using Application.Scripts.Library.PopUpManagers;
+using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
-    public class WinManager : MonoBehaviour, IInitializing
+    public class WinManager : MonoBehaviour, IInitializing, IReusable
     {
+        private IGameActionManager _gameActionManager;
         private IEnergyManager _energyManager;
         private IPackProgressManager _packProgressManager;
         private ILocalizationManager _localizationManager;
         private IPopUpManager _popUpManager;
         private ISceneManager _sceneManager;
         private WinGamePopUp _winGamePopUp;
+        private ActionHandler _freezeAction;
 
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private GameplayManager gameplayManager;
+        [SerializeField] private GameProcessManager gameProcessManager;
         [SerializeField] private BallsManager ballsManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private BlockProgressManager progressManager;
         [SerializeField] private ActiveBallManager activeBallManager;
+        [SerializeField] private GameTimeScale gameTimeScale;
+        [SerializeField] private ActionTimeManager actionTimeManager;
+        [SerializeField] private float freezeTime;
+        [SerializeField] private Vector2 freezeScale;
+            
         public void Initialize()
         {
+            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
@@ -53,9 +67,24 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void OnDisable()
         {
             progressManager.OnAllBlockBroken -= PlayerWin;
+            _freezeAction.Stop();
         }
         
         private void PlayerWin()
+        {
+            var winGameAction = new WinGameAction(gameTimeScale, freezeScale);
+            _freezeAction = _gameActionManager.StartAction(winGameAction, freezeTime, actionTimeManager);
+            gameProcessManager.IgnoreBall = true;
+            
+            winGameAction.OnCompleteAction += () =>
+            {
+                gameTimeScale.Scale = 1f;
+                gameProcessManager.IgnoreBall = false;
+                ShowPopUp();
+            };
+        }
+
+        private void ShowPopUp()
         {
             _packProgressManager.CompleteLevel(levelPackManager.GetCurrentPackInfo());
             ballsManager.PrepareReuse();
@@ -99,7 +128,6 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             
             _winGamePopUp.Show();
         }
-        
         private void OnContinue()
         {
             _winGamePopUp.Hide();
@@ -124,6 +152,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void UpdateEnergyTime(float time)
         {
             _winGamePopUp.EnergyView.SetTimeLeft(time);
+        }
+
+        public void PrepareReuse()
+        {
+            _freezeAction.Stop();
         }
     }
 }

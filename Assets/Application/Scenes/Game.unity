@@ -812,12 +812,14 @@ MonoBehaviour:
   healthManager: {fileID: 2115584323}
   blockManager: {fileID: 1892767360}
   blockProgressManager: {fileID: 826214863}
+  gameProcessManager: {fileID: 2013369119}
   ballsManager: {fileID: 1014367157}
   activeBallManager: {fileID: 8320811}
   boostManager: {fileID: 2018377715}
   boostObjectManager: {fileID: 53067910}
   platform: {fileID: 2064026646}
   loseManager: {fileID: 490119684}
+  winManager: {fileID: 1401460643}
 --- !u!1 &257514048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +1011,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397341247}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &278029921
 MonoBehaviour:
@@ -1308,6 +1310,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1734229471}
   - {fileID: 1870447183}
   - {fileID: 278029920}
   - {fileID: 936353950}
@@ -1332,6 +1335,7 @@ MonoBehaviour:
   - {fileID: 278029921}
   - {fileID: 936353951}
   - {fileID: 2085961348}
+  - {fileID: 1734229472}
 --- !u!1 &490119682
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,7 +2369,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397341247}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &936353951
 MonoBehaviour:
@@ -3268,6 +3272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1401460642}
   - component: {fileID: 1401460643}
+  - component: {fileID: 1401460644}
   m_Layer: 0
   m_Name: Win
   m_TagString: Untagged
@@ -3303,12 +3308,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelPackManager: {fileID: 1832296592}
   gameplayManager: {fileID: 255428928}
+  gameProcessManager: {fileID: 2013369119}
   ballsManager: {fileID: 1014367157}
   boostObjectManager: {fileID: 53067910}
   boostManager: {fileID: 2018377715}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
   progressManager: {fileID: 826214863}
   activeBallManager: {fileID: 8320811}
+  gameTimeScale: {fileID: 1870447184}
+  actionTimeManager: {fileID: 1401460644}
+  freezeTime: 2
+  freezeScale: {x: 1, y: 0}
+--- !u!114 &1401460644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401460641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c3808c4a9764065971d82c0689be10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScales:
+  - {fileID: 1734229472}
 --- !u!1 &1419262389
 GameObject:
   m_ObjectHideFlags: 0
@@ -3829,6 +3853,50 @@ Transform:
   m_Father: {fileID: 226589756}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1734229470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1734229471}
+  - component: {fileID: 1734229472}
+  m_Layer: 0
+  m_Name: PauseScale
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1734229471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734229470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 397341247}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734229472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734229470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64689fd83f0f492d82921557d85f01d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1
 --- !u!1 &1747601525
 GameObject:
   m_ObjectHideFlags: 0
@@ -4013,7 +4081,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397341247}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1870447184
 MonoBehaviour:
@@ -4099,7 +4167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeScales:
-  - {fileID: 1870447184}
+  - {fileID: 1734229472}
 --- !u!1 &1922612354
 GameObject:
   m_ObjectHideFlags: 0
@@ -4176,7 +4244,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameplayManager: {fileID: 255428928}
-  healthManager: {fileID: 2115584323}
   ballsManager: {fileID: 1014367157}
 --- !u!1 &2018377713
 GameObject:
@@ -4399,7 +4466,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 397341247}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2085961348
 MonoBehaviour:

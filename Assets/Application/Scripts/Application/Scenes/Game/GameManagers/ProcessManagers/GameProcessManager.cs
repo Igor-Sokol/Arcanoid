@@ -1,16 +1,23 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
+using Application.Scripts.Library.Reusable;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManagers
 {
-    public class GameProcessManager : MonoBehaviour
+    public class GameProcessManager : MonoBehaviour, IReusable
     {
         [SerializeField] private GameplayManager gameplayManager;
-        [SerializeField] private HealthManager healthManager;
         [SerializeField] private BallsManager ballsManager;
 
+        public bool IgnoreBall { get; set; }
+        
+        public void PrepareReuse()
+        {
+            IgnoreBall = false;
+        }
+        
         private void OnEnable()
         {
             ballsManager.OnAllBallRemoved += OnMissedBalls;
@@ -22,6 +29,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManage
         
         private void OnMissedBalls()
         {
+            if (IgnoreBall) return;
+            
             gameplayManager.SetBall();
         }
     }
