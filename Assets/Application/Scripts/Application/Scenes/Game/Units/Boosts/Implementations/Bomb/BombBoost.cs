@@ -22,6 +22,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private IBlockManager _blockManager;
         private List<string> _ignoreKeys;
         private ActionHandler _actionHandler;
+        private ActionHandler _boostHandler;
 
         [SerializeField] private BombWay bombWay;
         [SerializeField] private ActionTimeManager actionTimeManager;
@@ -39,7 +40,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             _ignoreKeys = new List<string>(ignoreBlocks.Select(b => b.Key));
         }
 
-        public override float Duration => 0f;
+        public override void RegisterHandler(ActionHandler handler)
+        {
+            _boostHandler = handler;
+        }
+
+        public override float Duration => -1f;
         public override void Enable()
         {
             var indexes = bombWay.GetIndexes(_blockManager.BlockArray, _blockManager.GetBlockIndex(Block), _ignoreKeys);
@@ -50,13 +56,18 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 
         public override void Disable()
         {
+            _actionHandler.Stop();
         }
 
         private void OnDestroy()
         {
-            StopBombAction();
+            Disable();
         }
 
-        private void StopBombAction() => _actionHandler.Stop();
+        private void StopBombAction()
+        {
+            _actionHandler.Stop();
+            _boostHandler.Stop();
+        }
     }
 }

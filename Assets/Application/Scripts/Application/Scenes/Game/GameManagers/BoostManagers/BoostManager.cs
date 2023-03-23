@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.BoostActions;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
@@ -54,6 +53,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
             
             boost.Initialize();
             var handler = _gameActionManager.StartAction(new BoostGameAction(boost), boost.Duration, actionTimeManager);
+            boost.RegisterHandler(handler);
 
             var type = boost.GetType();
             if (_boosts.TryGetValue(type, out var list))
