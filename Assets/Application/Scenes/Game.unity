@@ -1750,7 +1750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &574805285
 Transform:
   m_ObjectHideFlags: 0
@@ -3657,7 +3657,7 @@ MonoBehaviour:
   activeBallManager: {fileID: 8320811}
   gameTimeScale: {fileID: 1870447184}
   actionTimeManager: {fileID: 1401460644}
-  freezeTime: 2
+  freezeTime: 1
   freezeScale: {x: 1, y: 0}
 --- !u!114 &1401460644
 MonoBehaviour:
