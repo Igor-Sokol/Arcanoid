@@ -3657,7 +3657,7 @@ MonoBehaviour:
   activeBallManager: {fileID: 8320811}
   gameTimeScale: {fileID: 1870447184}
   actionTimeManager: {fileID: 1401460644}
-  freezeTime: 1
+  freezeTime: 2
   freezeScale: {x: 1, y: 0}
 --- !u!114 &1401460644
 MonoBehaviour:
