@@ -7,6 +7,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers
 using Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers.GameActions;
 using Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
+using Application.Scripts.Application.Scenes.Game.Screen.PlayingField.Effectors;
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
@@ -49,6 +50,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private ActiveBallManager activeBallManager;
         [SerializeField] private GameTimeScale gameTimeScale;
         [SerializeField] private ActionTimeManager actionTimeManager;
+        [SerializeField] private EffectorManager effectorManager;
         [SerializeField] private float freezeTime;
         [SerializeField] private Vector2 freezeScale;
             
@@ -75,6 +77,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         
         private void PlayerWin()
         {
+            effectorManager.Play();
             var winGameAction = new WinGameAction(gameTimeScale, freezeScale);
             _freezeAction = _gameActionManager.StartAction(winGameAction, freezeTime, actionTimeManager);
             gameProcessManager.IgnoreBall = true;
@@ -84,6 +87,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
                 gameTimeScale.Scale = 1f;
                 gameProcessManager.IgnoreBall = false;
                 ShowPopUp();
+                effectorManager.Stop();
             };
         }
 
