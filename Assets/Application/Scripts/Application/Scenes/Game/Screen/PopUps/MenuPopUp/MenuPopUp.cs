@@ -78,6 +78,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp
             OnRestartSelected = null;
             OnBackSelected = null;
             OnContinueSelected = null;
+            OnSkipSelected = null;
         }
         private void RestartSelected() => OnRestartSelected?.Invoke();
         private void BackSelected() => OnBackSelected?.Invoke();
