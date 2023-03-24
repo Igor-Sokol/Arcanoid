@@ -15,10 +15,13 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Background
         private IGameActionManager _gameActionManager;
         private Sequence _animation;
         private ActionHandler _animationHandler;
+        private int _colorIndex;
     
         [SerializeField] private Image image;
         [SerializeField] private ActionTimeManager actionTimeManager;
+        [SerializeField] private Color[] colors;
         [SerializeField] private float stepDuration;
+        [SerializeField] private float fadeTime;
         
         public void Initialize()
         {
@@ -34,9 +37,19 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Background
 
             image.fillAmount = 0;
             _animation.Append(image.DOFillAmount(1, stepDuration).SetEase(Ease.Linear));
-            _animation.AppendCallback(() => image.fillOrigin = 0);
-            _animation.Append(image.DOFillAmount(0, stepDuration).SetEase(Ease.Linear));
-            _animation.AppendCallback(() => image.fillOrigin = 1);
+            _animation.Append(image.DOFade(0, fadeTime).SetEase(Ease.Linear));
+            _animation.AppendCallback(() =>
+            {
+                if (_colorIndex >= colors.Length)
+                {
+                    _colorIndex = 0;
+                }
+                
+                image.fillAmount = 0;
+                image.color = colors[_colorIndex];
+
+                _colorIndex++;
+            });
             _animation.SetLoops(-1);
             
             _animationHandler = _gameActionManager.StartAction(new DoTweenGameAction(_animation), -1, actionTimeManager);

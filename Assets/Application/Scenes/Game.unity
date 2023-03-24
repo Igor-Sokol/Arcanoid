@@ -2900,8 +2900,8 @@ GameObject:
   - component: {fileID: 1084000654}
   - component: {fileID: 1084000653}
   - component: {fileID: 1084000652}
-  - component: {fileID: 1084000655}
   - component: {fileID: 1084000656}
+  - component: {fileID: 1084000655}
   m_Layer: 0
   m_Name: MoveLines
   m_TagString: Untagged
@@ -2955,7 +2955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.024262428, g: 0, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2994,7 +2994,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 1084000653}
   actionTimeManager: {fileID: 1084000656}
+  colors:
+  - {r: 0, g: 1, b: 1, a: 1}
+  - {r: 0.1393305, g: 1, b: 0, a: 1}
+  - {r: 0.02745098, g: 0, b: 1, a: 1}
   stepDuration: 1
+  fadeTime: 0.5
 --- !u!114 &1084000656
 MonoBehaviour:
   m_ObjectHideFlags: 0
