@@ -1,10 +1,11 @@
 using System.Collections.Generic;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Localization.Configs;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using TMPro;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.MainMenu.LocalizationChangeViews
 {
@@ -14,10 +15,15 @@ namespace Application.Scripts.Application.Scenes.MainMenu.LocalizationChangeView
         private ILocalizationManager _localizationManager;
 
         [SerializeField] private TMP_Dropdown tmpDropdown;
+
+        [Inject]
+        public void Construct(ILocalizationManager localizationManager)
+        {
+            _localizationManager = localizationManager;
+        }
         
         public void Initialize()
         {
-            _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
             GenerateOptions();
             tmpDropdown.value = _languages.IndexOf(_localizationManager.CurrentLanguage.LanguageInfo);
         }

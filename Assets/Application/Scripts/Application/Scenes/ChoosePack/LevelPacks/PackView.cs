@@ -1,18 +1,20 @@
 using System;
 using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Components;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPacks;
+using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.Localization.LocalizeEvents;
 using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
 using Application.Scripts.Application.Scenes.Shared.UI.StringViews;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
 {
-    public class PackView : MonoBehaviour, IInitializing
+    public class PackView : MonoBehaviour
     {
         private ILocalizationManager _localizationManager;
         private LevelPack _levelPack;
@@ -30,6 +32,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
         [SerializeField] private Sprite closePackImage;
         [SerializeField] private string closePackNameKey;
         [SerializeField] private EnergyPriceView priceView;
+        [SerializeField] private LocalizeString galaxy;
 
         public bool Interactable { get => button.interactable; set => button.interactable = value; }
 
@@ -39,14 +42,15 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.LevelPacks
         public PackState State => _packState;
         public event Action<PackView, LevelPack> OnSelected;
 
-        public void Initialize()
+        [Inject]
+        public void Construct(ILocalizationManager localizationManager)
         {
-            _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
+            _localizationManager = localizationManager;
+            galaxy.Construct(localizationManager);
         }
-        
+
         public void Configure(LevelPack levelPack, PackState packState, int completedLevel, int price)
         {
-            Initialize();
             _packState = packState;
             _levelPack = levelPack;
             priceView.SetPrice(price);

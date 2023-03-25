@@ -1,7 +1,7 @@
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Shared.LibraryImplementations.Localization.LocalizeEvents
 {
@@ -12,11 +12,18 @@ namespace Application.Scripts.Application.Scenes.Shared.LibraryImplementations.L
         [SerializeField] private TMP_Text updateString;
         [SerializeField] private string stringKey;
 
+        [Inject]
+        public void Construct(ILocalizationManager localizationManager)
+        {
+            _localizationManager = localizationManager;
+            SetLocalizationManager(_localizationManager);
+        }
+        
         private void OnEnable()
         {
             if (_localizationManager == null)
             {
-                SetLocalizationManager(ProjectContext.Instance.GetService<ILocalizationManager>());
+                SetLocalizationManager(_localizationManager);
             }
             
             if (_localizationManager != null)

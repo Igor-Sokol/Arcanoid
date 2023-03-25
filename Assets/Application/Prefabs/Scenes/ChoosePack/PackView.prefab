@@ -763,6 +763,7 @@ MonoBehaviour:
   closePackImage: {fileID: 21300000, guid: 808eb3941a346044186516c9600cdf2b, type: 3}
   closePackNameKey: choose.pack.closeName
   priceView: {fileID: 5578730500105460353}
+  galaxy: {fileID: 1035053528}
 --- !u!1001 &1295297828759201009
 PrefabInstance:
   m_ObjectHideFlags: 0
