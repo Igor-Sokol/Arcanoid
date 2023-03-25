@@ -29,6 +29,8 @@ namespace Editor.LevelFormat
         [MenuItem("Assets/Fix Level Format", true)]
         private static bool CorrectLevelFormatValidation()
         {
+            if (!Selection.activeObject) return false;
+            
             return Selection.activeObject.GetType() == typeof(TextAsset);
         }
         
