@@ -5,7 +5,6 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
@@ -14,6 +13,8 @@ using Application.Scripts.Library.TimeManagers;
 using Plugins.MobileBlur;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
@@ -34,11 +35,16 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private BlockManager blockManager;
 
+        [Inject]
+        private void Construct(IPopUpManager popUpManager)
+        {
+            _popUpManager = popUpManager;
+        }
+        
         public void Initialize()
         {
             _blur = ProjectContext.Instance.GetService<IBlur>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
-            _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _gameTimeScale = timeScaleManager.GetTimeScale<GameTimeScale>();
             _pauseTimeScale = timeScaleManager.GetTimeScale<PauseTimeScale>();
