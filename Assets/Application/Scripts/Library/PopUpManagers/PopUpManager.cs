@@ -12,6 +12,7 @@ namespace Application.Scripts.Library.PopUpManagers
 
         [SerializeField] private PopUp[] popUpPrefabs;
         [SerializeField] private Transform container;
+        [SerializeField] private PopUpFactory popUpFactory;
 
         public IEnumerable<IPopUp> ActivePopUps =>
             GetActivePopups().OrderBy(p => ((MonoBehaviour)p).transform.GetSiblingIndex());
@@ -41,7 +42,7 @@ namespace Application.Scripts.Library.PopUpManagers
 
             if (prefab)
             {
-                var instance = Instantiate(prefab, container);
+                var instance = popUpFactory.Create(prefab, container);
                 instance.gameObject.SetActive(false);
                 instance.transform.SetSiblingIndex(0);
 

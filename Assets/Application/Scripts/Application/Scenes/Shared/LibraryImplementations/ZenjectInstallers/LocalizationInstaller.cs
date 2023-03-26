@@ -11,7 +11,6 @@ namespace Application.Scripts.Application.Scenes.Shared.LibraryImplementations.Z
         public override void InstallBindings()
         {
             localizationManager.LoadLanguage();
-            
             Container.Bind<ILocalizationManager>()
                 .FromInstance(localizationManager)
                 .AsSingle()
