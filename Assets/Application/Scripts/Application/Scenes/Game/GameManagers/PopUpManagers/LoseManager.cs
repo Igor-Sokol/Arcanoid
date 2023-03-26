@@ -8,13 +8,14 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Plugins.MobileBlur;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
@@ -35,11 +36,16 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private ActiveBallManager activeBallManager;
 
+        [Inject]
+        private void Construct(IPopUpManager popUpManager)
+        {
+            _popUpManager = popUpManager;
+        }
+        
         public void Initialize()
         {
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
-            _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
             _blur = ProjectContext.Instance.GetService<IBlur>();
         }
 

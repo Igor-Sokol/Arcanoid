@@ -13,7 +13,6 @@ using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
@@ -25,6 +24,8 @@ using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Plugins.MobileBlur;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
@@ -56,14 +57,19 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private float freezeTime;
         [SerializeField] private Vector2 freezeScale;
             
+        [Inject]
+        private void Construct(IPopUpManager popUpManager, ILocalizationManager localizationManager)
+        {
+            _popUpManager = popUpManager;
+            _localizationManager = localizationManager;
+        }
+        
         public void Initialize()
         {
             _blur = ProjectContext.Instance.GetService<IBlur>();
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
-            _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
-            _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
             _packProgressManager = ProjectContext.Instance.GetService<IPackProgressManager>();
         }
         
