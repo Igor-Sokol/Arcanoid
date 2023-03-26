@@ -36,16 +36,16 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private BlockManager blockManager;
 
         [Inject]
-        private void Construct(IPopUpManager popUpManager)
+        private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager)
         {
             _popUpManager = popUpManager;
+            _sceneManager = sceneManager;
         }
         
         public void Initialize()
         {
             _blur = ProjectContext.Instance.GetService<IBlur>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
-            _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _gameTimeScale = timeScaleManager.GetTimeScale<GameTimeScale>();
             _pauseTimeScale = timeScaleManager.GetTimeScale<PauseTimeScale>();
         }

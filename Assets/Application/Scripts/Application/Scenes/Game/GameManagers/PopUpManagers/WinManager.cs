@@ -58,17 +58,17 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private Vector2 freezeScale;
             
         [Inject]
-        private void Construct(IPopUpManager popUpManager, ILocalizationManager localizationManager)
+        private void Construct(IPopUpManager popUpManager, ILocalizationManager localizationManager, ISceneManager sceneManager)
         {
             _popUpManager = popUpManager;
             _localizationManager = localizationManager;
+            _sceneManager = sceneManager;
         }
         
         public void Initialize()
         {
             _blur = ProjectContext.Instance.GetService<IBlur>();
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
-            _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _packProgressManager = ProjectContext.Instance.GetService<IPackProgressManager>();
         }

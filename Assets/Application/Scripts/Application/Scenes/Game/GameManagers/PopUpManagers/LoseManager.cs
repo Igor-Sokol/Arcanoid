@@ -37,9 +37,10 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private ActiveBallManager activeBallManager;
 
         [Inject]
-        private void Construct(IPopUpManager popUpManager)
+        private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager)
         {
             _popUpManager = popUpManager;
+            _sceneManager = sceneManager;
         }
         
         public void Initialize()

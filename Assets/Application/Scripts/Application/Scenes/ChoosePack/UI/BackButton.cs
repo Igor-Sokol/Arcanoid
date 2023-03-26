@@ -1,16 +1,25 @@
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.UI
 {
     public class BackButton : MonoBehaviour
     {
+        private ISceneManager _sceneManager;
+        
         [SerializeField] private Button button;
 
+        [Inject]
+        private void Construct(ISceneManager sceneManager)
+        {
+            _sceneManager = sceneManager;
+        }
+        
         private void OnEnable()
         {
             button.onClick.AddListener(OnClick);
@@ -23,7 +32,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.UI
 
         private void OnClick()
         {
-            ProjectContext.Instance.GetService<ISceneManager>().LoadScene(Scene.MainMenu);
+            _sceneManager.LoadScene(Scene.MainMenu);
         }
     }
 }
