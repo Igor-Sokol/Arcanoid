@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.BoostActions;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
-using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
 {
-    public class BoostManager : MonoBehaviour, IBoostManager, IInitializing, IReusable
+    public class BoostManager : MonoBehaviour, IBoostManager, IReusable
     {
         private readonly Dictionary<Type, List<ActionHandler>> _boosts = new Dictionary<Type, List<ActionHandler>>();
         private IGameActionManager _gameActionManager;
 
         [SerializeField] private ActionTimeManager actionTimeManager;
 
-        public void Initialize()
+        [Inject]
+        private void Construct(IGameActionManager gameActionManager)
         {
-            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
+            _gameActionManager = gameActionManager;
         }
-        
+
         public void PrepareReuse()
         {
             foreach (var boosts in _boosts)

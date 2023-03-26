@@ -12,12 +12,13 @@ using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.Configs;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels.Readers.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers
 {
@@ -41,10 +42,14 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         public Block[][] BlockArray => _blocks;
         public event Action<Block> OnBlockRemoved;
 
+        [Inject]
+        private void Construct(IGameActionManager gameActionManager)
+        {
+            _gameActionManager = gameActionManager;
+        }
+        
         public void Initialize()
         {
-            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
-
             foreach (var config in blockConfigs)
             {
                 _blockConfigs.Add(config.ConfigKey, config.Config);

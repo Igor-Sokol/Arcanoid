@@ -1,18 +1,27 @@
 using System.Collections.Generic;
 using Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Contracts;
+using Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Factory;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.ObjectPools;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Implementation
 {
     public class PoolBlockProvider : BlockProvider, IInitializing
     {
         private Dictionary<string, ObjectPoolMono<Block>> _blockPool;
+        private IBlockFactory _blockFactory;
 
         [SerializeField] private Transform container;
         [SerializeField] private Block[] prefabs;
+
+        [Inject]
+        private void Construct(IBlockFactory blockFactory)
+        {
+            _blockFactory = blockFactory;
+        }
         
         public void Initialize()
         {
@@ -21,7 +30,7 @@ namespace Application.Scripts.Application.Scenes.Game.Pools.BlockProviders.Imple
             foreach (var block in prefabs)
             {
                 _blockPool.Add(block.Key, new ObjectPoolMono<Block>(() => {
-                    var instance = Instantiate(block);
+                    var instance = _blockFactory.Create(block);
                     instance.Initialize();
                     return instance;
                 }, container));

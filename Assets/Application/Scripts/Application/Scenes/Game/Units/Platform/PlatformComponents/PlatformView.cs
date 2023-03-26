@@ -1,15 +1,14 @@
 using Application.Scripts.Application.Scenes.Shared.DoTweenGameActions;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
-using Application.Scripts.Library.InitializeManager.Contracts;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformComponents
 {
-    public class PlatformView : MonoBehaviour, IInitializing
+    public class PlatformView : MonoBehaviour
     {
         private IGameActionManager _gameActionManager;
         private ActionHandler _sizeAnimationHandler;
@@ -21,12 +20,13 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         [SerializeField] private float changeSizeTime;
 
         public Vector2 ViewSize => wingSpriteRenderer.size;
-        
-        public void Initialize()
+
+        [Inject]
+        private void Construct(IGameActionManager gameActionManager)
         {
-            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
+            _gameActionManager = gameActionManager;
         }
-        
+
         private void OnEnable()
         {
             platformSize.OnSizeChanged += OnPlatformSizeChanged;

@@ -3,16 +3,17 @@ using System.Linq;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Application.Scenes.Shared.DoTweenGameActions;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlaceAnimators
 {
-    public class PackPlaceAnimator : MonoBehaviour, IInitializing
+    public class PackPlaceAnimator : MonoBehaviour
     {
         private IGameActionManager _gameActionManager;
         private Sequence _activeAnimation;
@@ -23,9 +24,10 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         
         public event Action OnEndAnimation;
         
-        public void Initialize()
+        [Inject]
+        private void Construct(IGameActionManager gameActionManager)
         {
-            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
+            _gameActionManager = gameActionManager;
         }
 
         public void Place(Block[][] blocks, Vector3[][] positions)

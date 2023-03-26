@@ -7,11 +7,12 @@ using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.Bomb.BombWayProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.Bomb.GameAction;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.Bomb
 {
@@ -31,9 +32,14 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         [SerializeField] private int damage;
         [SerializeField] private Block[] ignoreBlocks;
         
+        [Inject]
+        private void Construct(IGameActionManager gameActionManager)
+        {
+            _gameActionManager = gameActionManager;
+        }
+        
         public override void Initialize()
         {
-            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             _timeScaleManager = ProjectContext.Instance.GetService<ITimeScaleManager>();
             actionTimeManager.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
             _blockManager = ProjectContext.Instance.GetService<IBlockManager>();

@@ -21,7 +21,6 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform
         
         public void Initialize()
         {
-            platformView.Initialize();
             platformSize.Initialize();
             platformMover.Initialize();
         }

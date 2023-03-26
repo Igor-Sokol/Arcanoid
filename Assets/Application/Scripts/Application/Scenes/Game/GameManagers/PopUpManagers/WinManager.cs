@@ -56,19 +56,20 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private Image menuRayBlock;
         [SerializeField] private float freezeTime;
         [SerializeField] private Vector2 freezeScale;
-            
+
         [Inject]
-        private void Construct(IPopUpManager popUpManager, ILocalizationManager localizationManager, ISceneManager sceneManager)
+        private void Construct(IPopUpManager popUpManager, ILocalizationManager localizationManager,
+            ISceneManager sceneManager, IGameActionManager gameActionManager)
         {
             _popUpManager = popUpManager;
             _localizationManager = localizationManager;
             _sceneManager = sceneManager;
+            _gameActionManager = gameActionManager;
         }
         
         public void Initialize()
         {
             _blur = ProjectContext.Instance.GetService<IBlur>();
-            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _packProgressManager = ProjectContext.Instance.GetService<IPackProgressManager>();
         }

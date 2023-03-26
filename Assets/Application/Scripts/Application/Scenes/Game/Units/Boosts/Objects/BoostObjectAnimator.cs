@@ -1,7 +1,6 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
 using Application.Scripts.Application.Scenes.Shared.DoTweenGameActions;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
@@ -9,6 +8,8 @@ using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects
 {
@@ -21,13 +22,17 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects
         [SerializeField] private Transform boostView;
         [SerializeField] private float speed;
         [SerializeField] private ActionTimeManager actionTimeManager;
+
+        [Inject]
+        private void Construct(IGameActionManager gameActionManager)
+        {
+            _gameActionManager = gameActionManager;
+        }
         
         public void Initialize()
         {
             _timeScaleManager = ProjectContext.Instance.GetService<ITimeScaleManager>();
             actionTimeManager.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
-            
-            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
         }
 
         public void PrepareReuse()
