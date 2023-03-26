@@ -2,16 +2,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks;
 using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Components;
+using Application.Scripts.Application.Scenes.ChoosePack.LevelPacks.Factory;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.LevelPacks;
-using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Implementations;
-using Application.Scripts.Application.Scenes.Shared.UI.Header;
 using Application.Scripts.Library.InitializeManager.Contracts;
-using Application.Scripts.Library.Localization.LocalizationManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using DG.Tweening;
@@ -26,7 +24,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
     {
         private readonly List<PackView> _packs = new List<PackView>();
 
-        private ILocalizationManager _localizationManager;
+        private IPackViewFactory _packViewFactory;
         private IPackProgressManager _packProgressManager;
         private ISceneManager _sceneManager;
         private IEnergyManager _energyManager;
@@ -43,9 +41,9 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         [SerializeField] private float scrollTime;
 
         [Inject]
-        public void Construct(ILocalizationManager localizationManager)
+        private void Construct(IPackViewFactory packViewFactory)
         {
-            _localizationManager = localizationManager;
+            _packViewFactory = packViewFactory;
         }
         
         public void Initialize()
@@ -93,8 +91,7 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
             {
                 if (levelPack == _packInfo.LevelPack) packState = PackState.Current;
 
-                var packView = Instantiate(packViewPrefab, viewContainer);
-                packView.Construct(_localizationManager);
+                var packView = _packViewFactory.Create(packViewPrefab, viewContainer);
                 _packs.Add(packView);
                 packView.transform.SetSiblingIndex(0);
                 packView.OnSelected += LoadPack;
