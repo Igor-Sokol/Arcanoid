@@ -3,11 +3,12 @@ using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.Energy.EnergyGameActions;
 using Application.Scripts.Application.Scenes.Shared.Energy.Repository.Contracts;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Shared.Energy
 {
@@ -24,11 +25,16 @@ namespace Application.Scripts.Application.Scenes.Shared.Energy
         
         public event Action OnEnergyAdded;
         public event Action OnEnergyRemoved;
-        public event Action<float> OnFillTimeChanged; 
+        public event Action<float> OnFillTimeChanged;
 
+        [Inject]
+        private void Construct(IGameActionManager gameActionManager)
+        {
+            _gameActionManager = gameActionManager;
+        }
+        
         public void Initialize()
         {
-            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             LoadEnergy();
         }
         

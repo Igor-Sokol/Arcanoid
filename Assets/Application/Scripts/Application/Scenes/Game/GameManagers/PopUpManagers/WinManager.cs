@@ -59,18 +59,18 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 
         [Inject]
         private void Construct(IPopUpManager popUpManager, ILocalizationManager localizationManager,
-            ISceneManager sceneManager, IGameActionManager gameActionManager)
+            ISceneManager sceneManager, IGameActionManager gameActionManager, IEnergyManager energyManager)
         {
             _popUpManager = popUpManager;
             _localizationManager = localizationManager;
             _sceneManager = sceneManager;
             _gameActionManager = gameActionManager;
+            _energyManager = energyManager;
         }
         
         public void Initialize()
         {
             _blur = ProjectContext.Instance.GetService<IBlur>();
-            _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _packProgressManager = ProjectContext.Instance.GetService<IPackProgressManager>();
         }
         

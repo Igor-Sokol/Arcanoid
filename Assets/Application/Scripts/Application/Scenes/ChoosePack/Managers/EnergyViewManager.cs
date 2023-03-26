@@ -1,9 +1,10 @@
 using System;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
 {
@@ -13,10 +14,14 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         
         [SerializeField] private EnergyView energyView;
 
+        [Inject]
+        private void Construct(IEnergyManager energyManager)
+        {
+            _energyManager = energyManager;
+        }
+        
         public void Initialize()
         {
-            _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
-            
             _energyManager.OnEnergyAdded += EnergyUpdate;
             _energyManager.OnEnergyRemoved += EnergyUpdate;
             _energyManager.OnFillTimeChanged += EnergyTimeUpdate;

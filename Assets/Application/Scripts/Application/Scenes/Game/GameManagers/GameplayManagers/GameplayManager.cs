@@ -11,13 +11,14 @@ using Application.Scripts.Application.Scenes.Game.Units.Platform;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers
 {
-    public class GameplayManager : MonoBehaviour, IInitializing
+    public class GameplayManager : MonoBehaviour
     {
         private IEnergyManager _energyManager;
 
@@ -35,11 +36,12 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
         [SerializeField] private LoseManager loseManager;
         [SerializeField] private WinManager winManager;
 
-        public void Initialize()
+        [Inject]
+        private void Construct(IEnergyManager energyManager)
         {
-            _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
+            _energyManager = energyManager;
         }
-        
+
         public void StartGame(LevelInfo levelInfo)
         {
             _energyManager.RemoveEnergy(energyPriceConfig.LevelPrice);

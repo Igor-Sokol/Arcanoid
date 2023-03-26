@@ -37,16 +37,15 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private ActiveBallManager activeBallManager;
 
         [Inject]
-        private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager)
+        private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager, IEnergyManager energyManager)
         {
             _popUpManager = popUpManager;
             _sceneManager = sceneManager;
+            _energyManager = energyManager;
         }
         
         public void Initialize()
         {
-            _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
-            _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _blur = ProjectContext.Instance.GetService<IBlur>();
         }
 
