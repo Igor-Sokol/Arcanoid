@@ -4,11 +4,12 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Con
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
 using Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.WeaponBoost.GameActions;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
-using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using UnityEngine;
+using Zenject;
+using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.WeaponBoost
 {
@@ -30,10 +31,15 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         [SerializeField] private string bulletBallKey;
 
         public override float Duration => duration;
+
+        [Inject]
+        private void Construct(IGameActionManager gameActionManager)
+        {
+            _gameActionManager = gameActionManager;
+        }
         
         public override void Initialize()
         {
-            _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             _boostManager = ProjectContext.Instance.GetService<IBoostManager>();
             _activeBallManager = ProjectContext.Instance.GetService<IActiveBallManager>();
             _platform = ProjectContext.Instance.GetService<Platform.Platform>();
