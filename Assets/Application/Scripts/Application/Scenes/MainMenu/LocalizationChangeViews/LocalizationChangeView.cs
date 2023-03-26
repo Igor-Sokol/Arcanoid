@@ -5,7 +5,6 @@ using Application.Scripts.Library.Localization.LocalizationManagers;
 using TMPro;
 using UnityEngine;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.MainMenu.LocalizationChangeViews
 {

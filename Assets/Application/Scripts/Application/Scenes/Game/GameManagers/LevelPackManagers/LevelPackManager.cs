@@ -7,6 +7,7 @@ using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgres
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers
 {
@@ -23,10 +24,15 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackMana
         public int CurrentLevelIndex => _currentLevelIndex;
         public int LevelsCount => _levels.Count;
 
+        [Inject]
+        private void Construct(IPackProgressManager packProgressManager)
+        {
+            _packProgressManager = packProgressManager;
+        }
+        
         public void Initialize()
         {
-            _packProgressManager = ProjectContext.Instance.GetService<IPackProgressManager>();
-            var pack = ProjectContext.Instance.GetService<IPackInfo>() ?? defaultPackInfo;
+            var pack = _packProgressManager.SelectedPackInfo ?? defaultPackInfo;
             LoadPack(pack);
             RenderView();
         }

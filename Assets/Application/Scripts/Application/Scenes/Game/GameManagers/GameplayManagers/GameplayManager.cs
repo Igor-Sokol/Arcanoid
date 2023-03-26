@@ -14,7 +14,6 @@ using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers
 {

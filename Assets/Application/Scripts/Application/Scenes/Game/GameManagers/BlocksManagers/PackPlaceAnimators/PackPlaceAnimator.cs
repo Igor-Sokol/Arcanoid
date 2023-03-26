@@ -5,11 +5,9 @@ using Application.Scripts.Application.Scenes.Shared.DoTweenGameActions;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
-using Application.Scripts.Library.InitializeManager.Contracts;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlaceAnimators
 {

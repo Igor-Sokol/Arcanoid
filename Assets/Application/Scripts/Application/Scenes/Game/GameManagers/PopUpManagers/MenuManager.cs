@@ -14,7 +14,6 @@ using Plugins.MobileBlur;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
@@ -36,16 +35,17 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private BlockManager blockManager;
 
         [Inject]
-        private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager, IEnergyManager energyManager)
+        private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager, IEnergyManager energyManager,
+            IBlur blur)
         {
             _popUpManager = popUpManager;
             _sceneManager = sceneManager;
             _energyManager = energyManager;
+            _blur = blur;
         }
         
         public void Initialize()
         {
-            _blur = ProjectContext.Instance.GetService<IBlur>();
             _gameTimeScale = timeScaleManager.GetTimeScale<GameTimeScale>();
             _pauseTimeScale = timeScaleManager.GetTimeScale<PauseTimeScale>();
         }

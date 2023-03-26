@@ -1,11 +1,7 @@
-using System;
-using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
-using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 using Scene = Application.Scripts.Library.SceneManagers.Contracts.SceneInfo.Scene;
 
 namespace Application.Scripts.Application.Scenes.MainMenu.Buttons

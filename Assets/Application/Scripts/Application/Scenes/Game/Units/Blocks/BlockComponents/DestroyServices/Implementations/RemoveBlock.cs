@@ -2,6 +2,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.Co
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.DestroyServices.Contracts;
 using Application.Scripts.Library.DependencyInjection;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.DestroyServices.Implementations
 {
@@ -10,10 +11,15 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
         private IBlockManager _blockManager;
 
         [SerializeField] private Block block;
+
+        [Inject]
+        private void Construct(IBlockManager blockManager)
+        {
+            _blockManager = blockManager;
+        }
         
         public override void Initialize()
         {
-            _blockManager = ProjectContext.Instance.GetService<IBlockManager>();
         }
         
         public override void PrepareReuse()

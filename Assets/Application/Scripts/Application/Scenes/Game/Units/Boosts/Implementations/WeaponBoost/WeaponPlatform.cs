@@ -9,7 +9,6 @@ using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using UnityEngine;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.WeaponBoost
 {
@@ -33,17 +32,18 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         public override float Duration => duration;
 
         [Inject]
-        private void Construct(IGameActionManager gameActionManager)
+        private void Construct(IGameActionManager gameActionManager, IBoostManager boostManager, ITimeScaleManager timeScaleManager,
+            Platform.Platform platform, IActiveBallManager activeBallManager)
         {
             _gameActionManager = gameActionManager;
+            _boostManager = boostManager;
+            _timeScaleManager = timeScaleManager;
+            _platform = platform;
+            _activeBallManager = activeBallManager;
         }
         
         public override void Initialize()
         {
-            _boostManager = ProjectContext.Instance.GetService<IBoostManager>();
-            _activeBallManager = ProjectContext.Instance.GetService<IActiveBallManager>();
-            _platform = ProjectContext.Instance.GetService<Platform.Platform>();
-            _timeScaleManager = ProjectContext.Instance.GetService<ITimeScaleManager>();
             _gameTimeScale = _timeScaleManager.GetTimeScale<GameTimeScale>();
             actionTimeManager.AddTimeScaler(_gameTimeScale);
         }

@@ -8,18 +8,16 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
-using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Plugins.MobileBlur;
 using UnityEngine;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
-    public class LoseManager : MonoBehaviour, IInitializing
+    public class LoseManager : MonoBehaviour
     {
         private IBlur _blur;
         private ISceneManager _sceneManager;
@@ -37,16 +35,13 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private ActiveBallManager activeBallManager;
 
         [Inject]
-        private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager, IEnergyManager energyManager)
+        private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager, IEnergyManager energyManager,
+            IBlur blur)
         {
             _popUpManager = popUpManager;
             _sceneManager = sceneManager;
             _energyManager = energyManager;
-        }
-        
-        public void Initialize()
-        {
-            _blur = ProjectContext.Instance.GetService<IBlur>();
+            _blur = blur;
         }
 
         public void PlayerLose()

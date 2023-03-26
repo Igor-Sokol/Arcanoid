@@ -2,6 +2,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Con
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Library.DependencyInjection;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations
 {
@@ -10,10 +11,15 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private IHealthManager _healthManager;
 
         [SerializeField] private int lifeCount;
+
+        [Inject]
+        private void Construct(IHealthManager healthManager)
+        {
+            _healthManager = healthManager;
+        }
         
         public override void Initialize()
         {
-            _healthManager = ProjectContext.Instance.GetService<IHealthManager>();
         }
 
         public override float Duration => 0f;

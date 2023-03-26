@@ -15,7 +15,6 @@ using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeM
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
-using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Localization.LocalizationManagers;
 using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.Reusable;
@@ -25,11 +24,10 @@ using Plugins.MobileBlur;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 {
-    public class WinManager : MonoBehaviour, IInitializing, IReusable
+    public class WinManager : MonoBehaviour, IReusable
     {
         private IBlur _blur;
         private IGameActionManager _gameActionManager;
@@ -60,7 +58,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [Inject]
         private void Construct(IPopUpManager popUpManager, ILocalizationManager localizationManager,
             ISceneManager sceneManager, IGameActionManager gameActionManager, IEnergyManager energyManager,
-            IPackProgressManager packProgressManager)
+            IPackProgressManager packProgressManager, IBlur blur)
         {
             _popUpManager = popUpManager;
             _localizationManager = localizationManager;
@@ -68,13 +66,9 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _gameActionManager = gameActionManager;
             _energyManager = energyManager;
             _packProgressManager = packProgressManager;
+            _blur = blur;
         }
-        
-        public void Initialize()
-        {
-            _blur = ProjectContext.Instance.GetService<IBlur>();
-        }
-        
+
         private void OnEnable()
         {
             progressManager.OnAllBlockBroken += PlayerWin;

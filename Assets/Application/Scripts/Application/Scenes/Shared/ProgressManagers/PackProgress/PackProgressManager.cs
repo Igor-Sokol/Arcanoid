@@ -17,6 +17,8 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
         [SerializeField] private PackProgressRepository progressRepository;
         [SerializeField] private PackManager levelPacks;
 
+        public IPackInfo SelectedPackInfo { get; set; }
+
         public IEnumerable<LevelPack> LevelPacks => levelPacks.LevelPacks;
 
         public IPackInfo GetCurrentLevel()

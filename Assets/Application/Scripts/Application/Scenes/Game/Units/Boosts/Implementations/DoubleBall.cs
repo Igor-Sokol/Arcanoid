@@ -2,6 +2,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Con
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Library.DependencyInjection;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations
 {
@@ -10,10 +11,15 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private IBallManager _ballManager;
 
         [SerializeField] private Vector2 ballDirection;
+
+        [Inject]
+        private void Construct(IBallManager ballManager)
+        {
+            _ballManager = ballManager;
+        }
         
         public override void Initialize()
         {
-            _ballManager = ProjectContext.Instance.GetService<IBallManager>();
         }
 
         public override float Duration => 0f;

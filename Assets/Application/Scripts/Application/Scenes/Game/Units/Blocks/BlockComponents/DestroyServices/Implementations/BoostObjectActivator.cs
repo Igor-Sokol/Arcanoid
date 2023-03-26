@@ -3,6 +3,7 @@ using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.D
 using Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects;
 using Application.Scripts.Library.DependencyInjection;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.DestroyServices.Implementations
 {
@@ -12,9 +13,14 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
         
         [SerializeField] private BoostObject boostObject;
 
+        [Inject]
+        private void Construct(IBoostObjectManager boostObjectManager)
+        {
+            _boostObjectManager = boostObjectManager;
+        }
+        
         public override void Initialize()
         {
-            _boostObjectManager = ProjectContext.Instance.GetService<IBoostObjectManager>();
         }
 
         public override void PrepareReuse()

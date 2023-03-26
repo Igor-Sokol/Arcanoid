@@ -18,7 +18,7 @@ namespace Application.Scripts.Library.DependencyInjection
 
                     if (!_instance)
                     {
-                        var contextResource = Resources.Load<ProjectContext>("ProjectContextOld/ProjectContextOld");
+                        var contextResource = Resources.Load<ProjectContext>("ProjectContext/ProjectContext");
                         ProjectContext context;
                         
                         if (contextResource is null)

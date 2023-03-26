@@ -1,10 +1,8 @@
-using System;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.UI.EnergyViews;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
 {

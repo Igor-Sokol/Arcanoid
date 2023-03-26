@@ -6,6 +6,7 @@ using Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.F
 using Application.Scripts.Library.DependencyInjection;
 using Sirenix.Utilities;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.FireBoost
 {
@@ -19,11 +20,16 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         [SerializeField] private Color color;
         
         public override float Duration => duration;
+
+        [Inject]
+        private void Construct(IBallManager ballManager, IBoostManager boostManager)
+        {
+            _ballManager = ballManager;
+            _boostManager = boostManager;
+        }
         
         public override void Initialize()
         {
-            _ballManager = ProjectContext.Instance.GetService<IBallManager>();
-            _boostManager = ProjectContext.Instance.GetService<IBoostManager>();
         }
         
         public override void Enable()

@@ -7,6 +7,7 @@ namespace Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackPro
     public interface IPackProgressManager
     {
         IEnumerable<LevelPack> LevelPacks { get; }
+        IPackInfo SelectedPackInfo { get; set; }
         IPackInfo GetCurrentLevel();
         void CompleteLevel(IPackInfo packInfo);
         bool TryGetPackIndex(LevelPack pack, out int index);

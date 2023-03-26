@@ -12,7 +12,6 @@ using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using UnityEngine;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.Bomb
 {
@@ -33,16 +32,16 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         [SerializeField] private Block[] ignoreBlocks;
         
         [Inject]
-        private void Construct(IGameActionManager gameActionManager)
+        private void Construct(IGameActionManager gameActionManager, ITimeScaleManager timeScaleManager, IBlockManager blockManager)
         {
             _gameActionManager = gameActionManager;
+            _timeScaleManager = timeScaleManager;
+            _blockManager = blockManager;
         }
         
         public override void Initialize()
         {
-            _timeScaleManager = ProjectContext.Instance.GetService<ITimeScaleManager>();
             actionTimeManager.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
-            _blockManager = ProjectContext.Instance.GetService<IBlockManager>();
             _ignoreKeys = new List<string>(ignoreBlocks.Select(b => b.Key));
         }
 

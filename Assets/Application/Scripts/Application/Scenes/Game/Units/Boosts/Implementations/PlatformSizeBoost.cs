@@ -2,6 +2,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Con
 using Application.Scripts.Library.DependencyInjection;
 using Sirenix.Utilities;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations
 {
@@ -12,11 +13,16 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 
         [SerializeField] private float duration;
         [SerializeField][Range(0f, 1f)] private float platformSizePercentage;
+
+        [Inject]
+        private void Construct(IBoostManager boostManager, Platform.Platform platform)
+        {
+            _boostManager = boostManager;
+            _platform = platform;
+        }
         
         public override void Initialize()
         {
-            _boostManager = ProjectContext.Instance.GetService<IBoostManager>();
-            _platform = ProjectContext.Instance.GetService<Platform.Platform>();
         }
 
         public override float Duration => duration;

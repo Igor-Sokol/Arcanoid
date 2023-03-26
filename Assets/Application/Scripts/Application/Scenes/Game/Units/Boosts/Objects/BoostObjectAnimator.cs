@@ -9,7 +9,6 @@ using Application.Scripts.Library.TimeManagers.Contracts;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects
 {
@@ -24,14 +23,14 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects
         [SerializeField] private ActionTimeManager actionTimeManager;
 
         [Inject]
-        private void Construct(IGameActionManager gameActionManager)
+        private void Construct(IGameActionManager gameActionManager, ITimeScaleManager timeScaleManager)
         {
             _gameActionManager = gameActionManager;
+            _timeScaleManager = timeScaleManager;
         }
         
         public void Initialize()
         {
-            _timeScaleManager = ProjectContext.Instance.GetService<ITimeScaleManager>();
             actionTimeManager.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
         }
 

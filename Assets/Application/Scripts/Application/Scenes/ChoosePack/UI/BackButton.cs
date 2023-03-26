@@ -1,10 +1,8 @@
-using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.SceneManagers.Loading;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.UI
 {

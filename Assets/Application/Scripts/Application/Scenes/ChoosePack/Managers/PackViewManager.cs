@@ -16,7 +16,6 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
 {
@@ -139,11 +138,11 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
 
             if (levelPack == _packInfo.LevelPack)
             {
-                ProjectContext.Instance.SetService<IPackInfo, IPackInfo>(_packInfo);
+                _packProgressManager.SelectedPackInfo = _packInfo;
             }
             else
             {
-                ProjectContext.Instance.SetService<IPackInfo, PackInfo>(new PackInfo(levelPack, 0));
+                _packProgressManager.SelectedPackInfo = new PackInfo(levelPack, 0);
             }
             
             packViewAnimator.Hide(packView);

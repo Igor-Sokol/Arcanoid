@@ -18,7 +18,6 @@ using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
 using Zenject;
-using ProjectContext = Application.Scripts.Library.DependencyInjection.ProjectContext;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers
 {

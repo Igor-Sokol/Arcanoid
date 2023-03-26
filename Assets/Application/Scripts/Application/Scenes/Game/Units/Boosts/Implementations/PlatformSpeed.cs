@@ -4,6 +4,7 @@ using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using Sirenix.Utilities;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations
 {
@@ -15,12 +16,18 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         
         [SerializeField] private float duration;
         [SerializeField] private float speedMultiple;
+
+        [Inject]
+        private void Construct(ITimeScaleManager timeScaleManager, IBoostManager boostManager)
+        {
+            _timeScaleManager = timeScaleManager;
+            _boostManager = boostManager;
+
+        }
         
         public override void Initialize()
         {
-            _timeScaleManager = ProjectContext.Instance.GetService<ITimeScaleManager>();
             _platformTimeScale = _timeScaleManager.GetTimeScale<PlatformTimeScale>();
-            _boostManager = ProjectContext.Instance.GetService<IBoostManager>();
         }
 
         public override float Duration => duration;
