@@ -50,7 +50,8 @@ namespace Application.Scripts.Library.DependencyInjection
         private void Init()
         {
             _services = new Dictionary<Type, object>();
-            
+
+            if (serviceInstallers is null) return;
             foreach (var serviceInstaller in serviceInstallers)
             {
                 serviceInstaller.ProjectContext = this;

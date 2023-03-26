@@ -41,17 +41,17 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         [SerializeField] private float scrollTime;
 
         [Inject]
-        private void Construct(IPackViewFactory packViewFactory, ISceneManager sceneManager, IEnergyManager energyManager)
+        private void Construct(IPackViewFactory packViewFactory, ISceneManager sceneManager,
+            IEnergyManager energyManager, IPackProgressManager packProgressManager)
         {
             _packViewFactory = packViewFactory;
             _sceneManager = sceneManager;
             _energyManager = energyManager;
+            _packProgressManager = packProgressManager;
         }
         
         public void Initialize()
         {
-            _packProgressManager = ProjectContext.Instance.GetService<IPackProgressManager>();
-
             GenerateViews();
             SetViewsPosition();
             PackStateUpdate();
