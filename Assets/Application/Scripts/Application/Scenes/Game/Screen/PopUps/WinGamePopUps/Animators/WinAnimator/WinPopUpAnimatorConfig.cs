@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUps.Animators.WinAnimator
 {
@@ -12,7 +13,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         [SerializeField] private float energyShowDuration;
         [SerializeField] private float packBackgroundDuration;
         [SerializeField] private float changePackImageDuration;
-        [SerializeField] private float buttonDelay;
+        [SerializeField] private float itemMoveDelay;
         [SerializeField] private float hideDelay;
 
         public float PopUpDuration => popUpDuration;
@@ -21,7 +22,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
         public float EnergyShowDuration => energyShowDuration;
         public float PackBackgroundDuration => packBackgroundDuration;
         public float ChangePackImageDuration => changePackImageDuration;
-        public float ButtonDelay => buttonDelay;
+        public float ItemMoveDelay => itemMoveDelay;
         public float HideDelay => hideDelay;
     }
 }

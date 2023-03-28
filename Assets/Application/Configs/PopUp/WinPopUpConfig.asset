@@ -19,5 +19,5 @@ MonoBehaviour:
     energyShowDuration: 1
     packBackgroundDuration: 0.6
     changePackImageDuration: 0.5
-    buttonDelay: 0.1
+    itemHideDelay: 0.1
     hideDelay: 0

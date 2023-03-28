@@ -129,7 +129,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
                 var button = buttons[i - 1];
                 
                 _activeAnimation.Join(button.transform
-                    .DOMoveX(center.x, animatorConfig.AnimatorConfig.PopUpDuration + animatorConfig.AnimatorConfig.ButtonDelay * i)
+                    .DOMoveX(center.x, animatorConfig.AnimatorConfig.PopUpDuration + animatorConfig.AnimatorConfig.ItemMoveDelay * i)
                     .From(leftOffscreenPosition));
             }
             
@@ -151,12 +151,23 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PopUps.WinGamePopUp
             _activeAnimation.Append(popUpImage.transform
                 .DOMoveX(rightOffscreenPosition, animatorConfig.AnimatorConfig.PopUpDuration));
 
-            for (int i = 1; i <= buttons.Length; i++)
+            var hideDelay = animatorConfig.AnimatorConfig.ItemMoveDelay;
+            var popUpDuration = animatorConfig.AnimatorConfig.PopUpDuration;
+            
+            int i = 0;
+            _activeAnimation.Join(energyView.transform
+                .DOMoveX(rightOffscreenPosition, popUpDuration + hideDelay * ++i));
+            _activeAnimation.Join(title.transform
+                .DOMoveX(rightOffscreenPosition, popUpDuration + hideDelay * ++i));
+            _activeAnimation.Join(packBackground.transform
+                .DOMoveX(rightOffscreenPosition, popUpDuration + hideDelay * ++i));
+            
+            for (int j = 0; j < buttons.Length; j++, i++)
             {
-                var button = buttons[i - 1];
+                var button = buttons[j];
                 
                 _activeAnimation.Join(button.transform
-                    .DOMoveX(rightOffscreenPosition, animatorConfig.AnimatorConfig.PopUpDuration + animatorConfig.AnimatorConfig.ButtonDelay * i));
+                    .DOMoveX(rightOffscreenPosition, popUpDuration + hideDelay * i));
             }
 
             _activeAnimation.AppendCallback(() =>
