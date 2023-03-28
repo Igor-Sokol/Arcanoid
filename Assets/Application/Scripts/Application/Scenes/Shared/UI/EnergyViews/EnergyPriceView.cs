@@ -1,15 +1,15 @@
-using TMPro;
+using Application.Scripts.Application.Scenes.Shared.UI.StringViews;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Shared.UI.EnergyViews
 {
     public class EnergyPriceView : MonoBehaviour
     {
-        [SerializeField] private TMP_Text priceText;
+        [SerializeField] private TextValue priceText;
 
         public void SetPrice(int price)
         {
-            priceText.text = price.ToString();
+            priceText.SetValue(price);
         }
     }
 }
