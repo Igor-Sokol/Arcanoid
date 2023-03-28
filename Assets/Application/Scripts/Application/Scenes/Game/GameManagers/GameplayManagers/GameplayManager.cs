@@ -11,9 +11,7 @@ using Application.Scripts.Application.Scenes.Game.Units.Platform;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
-using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers
@@ -21,14 +19,14 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
     public class GameplayManager : MonoBehaviour
     {
         private IEnergyManager _energyManager;
+        private IHealthManager _healthManager;
 
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private DifficultyManager difficultyManager;
-        [SerializeField] private HealthManager healthManager;
         [SerializeField] private BlockManager blockManager;
         [SerializeField] private BlockProgressManager blockProgressManager;
         [SerializeField] private GameProcessManager gameProcessManager;
-        [FormerlySerializedAs("ballsManager")] [SerializeField] private BallManager ballManager;
+        [SerializeField] private BallManager ballManager;
         [SerializeField] private ActiveBallManager activeBallManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
@@ -37,9 +35,10 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
         [SerializeField] private WinManager winManager;
 
         [Inject]
-        private void Construct(IEnergyManager energyManager)
+        private void Construct(IEnergyManager energyManager, IHealthManager healthManager)
         {
             _energyManager = energyManager;
+            _healthManager = healthManager;
         }
 
         public void StartGame(LevelInfo levelInfo)
@@ -47,7 +46,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
             _energyManager.RemoveEnergy(energyPriceConfig.LevelPrice);
             gameProcessManager.PrepareReuse();
             winManager.PrepareReuse();
-            healthManager.PrepareReuse();
+            _healthManager.PrepareReuse();
             blockManager.PrepareReuse();
             ballManager.PrepareReuse();
             boostObjectManager.PrepareReuse();
@@ -63,10 +62,10 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
 
         public void SetBall()
         {
-            if (healthManager.CurrentHealth > 0)
+            if (_healthManager.CurrentHealth > 0)
             {
                 platform.BallLauncher.SetBall(ballManager.GetBall());
-                healthManager.RemoveHealth();
+                _healthManager.RemoveHealth();
             }
             else
             {

@@ -1,28 +1,32 @@
 using System;
-using Application.Scripts.Library.InitializeManager.Contracts;
-using Application.Scripts.Library.Reusable;
+using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers.HealthConfig;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers
 {
-    public class HealthManager : MonoBehaviour, IHealthManager, IInitializing, IReusable
+    public class HealthManager : IHealthManager, IInitializable
     {
         private int _currentHealth;
-        
-        [SerializeField] private int maxHealth;
-        [SerializeField] private int startHealth;
+        private IHealthConfig _healthConfig;
 
         public int CurrentHealth => _currentHealth;
-        public int MaxHealth => maxHealth;
+        public int MaxHealth => _healthConfig.MaxHealth;
 
         public event Action OnHealthAdded;
         public event Action OnHealthRemoved;
         public event Action OnDead;
         public event Action OnPrepareReuse;
 
+        [Inject]
+        private void Construct(IHealthConfig healthConfig)
+        {
+            _healthConfig = healthConfig;
+        }
+        
         public void Initialize()
         {
-            _currentHealth = Mathf.Clamp(startHealth, 0, maxHealth);
+            _currentHealth = Mathf.Clamp(_healthConfig.StartHealth, 0, _healthConfig.MaxHealth);
         }
 
         public void PrepareReuse()

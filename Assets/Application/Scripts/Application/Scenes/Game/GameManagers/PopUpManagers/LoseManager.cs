@@ -24,12 +24,12 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private ISceneManager _sceneManager;
         private IEnergyManager _energyManager;
         private IPopUpManager _popUpManager;
+        private IHealthManager _healthManager;
         private LoseGamePopUp _loseGamePopUp;
         
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private GameplayManager gameplayManager;
-        [SerializeField] private HealthManager healthManager;
-        [FormerlySerializedAs("ballsManager")] [SerializeField] private BallManager ballManager;
+        [SerializeField] private BallManager ballManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
@@ -37,12 +37,13 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 
         [Inject]
         private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager, IEnergyManager energyManager,
-            IBlur blur)
+            IBlur blur, IHealthManager healthManager)
         {
             _popUpManager = popUpManager;
             _sceneManager = sceneManager;
             _energyManager = energyManager;
             _blur = blur;
+            _healthManager = healthManager;
         }
 
         public void PlayerLose()
@@ -88,7 +89,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _loseGamePopUp.Hide();
             _blur.Disable();
             _energyManager.RemoveEnergy(energyPriceConfig.HealthPrice);
-            healthManager.AddHealth();
+            _healthManager.AddHealth();
             _loseGamePopUp.OnHidden += () => gameplayManager.SetBall();
         }
         private void OnRestart()

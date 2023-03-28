@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializing:
-  - {fileID: 2115584323}
+  - {fileID: 0}
   - {fileID: 1832296592}
   - {fileID: 255428928}
   - {fileID: 35500677}
@@ -838,11 +838,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
   difficultyManager: {fileID: 620360442}
-  healthManager: {fileID: 2115584323}
   blockManager: {fileID: 1892767360}
   blockProgressManager: {fileID: 826214863}
   gameProcessManager: {fileID: 2013369119}
-  ballsManager: {fileID: 1014367157}
+  ballManager: {fileID: 1014367157}
   activeBallManager: {fileID: 8320811}
   boostManager: {fileID: 2018377715}
   boostObjectManager: {fileID: 53067910}
@@ -1432,8 +1431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelPackManager: {fileID: 1832296592}
   gameplayManager: {fileID: 255428928}
-  healthManager: {fileID: 2115584323}
-  ballsManager: {fileID: 1014367157}
+  ballManager: {fileID: 1014367157}
   boostObjectManager: {fileID: 53067910}
   boostManager: {fileID: 2018377715}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
@@ -1928,7 +1926,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 938823439}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &620360442
 MonoBehaviour:
@@ -1989,7 +1987,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthViewPrefab: {fileID: 3536710447100988652, guid: 22dbfa4270f62c24e907951147e2845e, type: 3}
-  healthManager: {fileID: 2115584323}
   rectTransform: {fileID: 970394130}
   gridLayoutGroup: {fileID: 520393764}
   container: {fileID: 520393763}
@@ -2691,7 +2688,6 @@ Transform:
   - {fileID: 255428927}
   - {fileID: 1226823527}
   - {fileID: 1832296591}
-  - {fileID: 2115584322}
   - {fileID: 620360441}
   m_Father: {fileID: 226589756}
   m_RootOrder: 0
@@ -3743,7 +3739,6 @@ MonoBehaviour:
   button: {fileID: 710778616}
   gameplayManager: {fileID: 255428928}
   levelPackManager: {fileID: 1832296592}
-  timeScaleManager: {fileID: 397341248}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
   blockManager: {fileID: 1892767360}
 --- !u!1 &1303730893
@@ -4148,7 +4143,7 @@ MonoBehaviour:
   levelPackManager: {fileID: 1832296592}
   gameplayManager: {fileID: 255428928}
   gameProcessManager: {fileID: 2013369119}
-  ballsManager: {fileID: 1014367157}
+  ballManager: {fileID: 1014367157}
   boostObjectManager: {fileID: 53067910}
   boostManager: {fileID: 2018377715}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
@@ -4457,7 +4452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f9b116c7524d2d8911f4b0eb0b830b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballsManager: {fileID: 1014367157}
+  ballManager: {fileID: 1014367157}
 --- !u!114 &1498065951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5067,7 +5062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24d44cbf2f843e39e32eb22738af9b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthManager: {fileID: 2115584323}
+  healthConfig: {fileID: 11400000, guid: 9c01e82a590620e4eaac0b6460191a89, type: 2}
 --- !u!1 &1734229470
 GameObject:
   m_ObjectHideFlags: 0
@@ -5549,7 +5544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameplayManager: {fileID: 255428928}
-  ballsManager: {fileID: 1014367157}
+  ballManager: {fileID: 1014367157}
 --- !u!1 &2018377713
 GameObject:
   m_ObjectHideFlags: 0
@@ -5932,51 +5927,6 @@ Canvas:
   m_SortingLayerID: 595937299
   m_SortingOrder: 1
   m_TargetDisplay: 0
---- !u!1 &2115584321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2115584322}
-  - component: {fileID: 2115584323}
-  m_Layer: 0
-  m_Name: HealthManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2115584322
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115584321}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 938823439}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2115584323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115584321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3eb41c4744141a387bf9de23ba9f4ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  startHealth: 3
 --- !u!1001 &2136928600
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ using Application.Scripts.Library.ObjectPools;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthViewManagers
 {
@@ -15,18 +16,24 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthVie
         private readonly List<HealthView> _healthViews = new List<HealthView>();
         private ObjectPoolMono<HealthView> _healthViewPool;
         private Vector2 _viewImageSize;
+        private IHealthManager _healthManager;
 
         [SerializeField] private HealthView healthViewPrefab;
-        [SerializeField] private HealthManager healthManager;
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private GridLayoutGroup gridLayoutGroup;
         [SerializeField] private Transform container;
         [SerializeField] private Vector2 spacePercentage;
 
+        [Inject]
+        private void Construct(IHealthManager healthManager)
+        {
+            _healthManager = healthManager;
+        }
+        
         public void Initialize()
         {
             _healthViewPool = new ObjectPoolMono<HealthView>(() => Instantiate(healthViewPrefab, container), container);
-            healthManager.OnPrepareReuse += PrepareReuse;
+            _healthManager.OnPrepareReuse += PrepareReuse;
             PrepareReuse();
         }
         
@@ -38,21 +45,21 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Health.HealthVie
             }
             _healthViews.Clear();
             
-            SetViewScale(healthManager.MaxHealth);
-            GenerateViews(healthManager.MaxHealth);
-            InitViews(healthManager.CurrentHealth);
+            SetViewScale(_healthManager.MaxHealth);
+            GenerateViews(_healthManager.MaxHealth);
+            InitViews(_healthManager.CurrentHealth);
         }
 
         private void OnEnable()
         {
-            healthManager.OnHealthAdded += OnHealthAdded;
-            healthManager.OnHealthRemoved += OnHealthRemoved;
+            _healthManager.OnHealthAdded += OnHealthAdded;
+            _healthManager.OnHealthRemoved += OnHealthRemoved;
         }
 
         private void OnDisable()
         {
-            healthManager.OnHealthAdded -= OnHealthAdded;
-            healthManager.OnHealthRemoved -= OnHealthRemoved;
+            _healthManager.OnHealthAdded -= OnHealthAdded;
+            _healthManager.OnHealthRemoved -= OnHealthRemoved;
         }
 
         private void InitViews(int currentHealth)
