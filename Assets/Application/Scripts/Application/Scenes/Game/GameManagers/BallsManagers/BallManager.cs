@@ -13,7 +13,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
 {
-    public class BallsManager : MonoBehaviour, IBallManager, IReusable
+    public class BallManager : MonoBehaviour, IBallManager, IReusable
     {
         private readonly SafeList<Ball> _activeBalls = new SafeList<Ball>();
 

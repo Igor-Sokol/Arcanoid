@@ -13,6 +13,7 @@ using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Plugins.MobileBlur;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
@@ -28,7 +29,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private GameplayManager gameplayManager;
         [SerializeField] private HealthManager healthManager;
-        [SerializeField] private BallsManager ballsManager;
+        [FormerlySerializedAs("ballsManager")] [SerializeField] private BallManager ballManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
@@ -46,7 +47,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 
         public void PlayerLose()
         {
-            ballsManager.PrepareReuse();
+            ballManager.PrepareReuse();
             boostObjectManager.PrepareReuse();
             boostManager.PrepareReuse();
             activeBallManager.PrepareReuse();

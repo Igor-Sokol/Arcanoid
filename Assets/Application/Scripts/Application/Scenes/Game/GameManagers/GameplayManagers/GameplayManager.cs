@@ -13,6 +13,7 @@ using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LevelManagement.Levels;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers
@@ -27,7 +28,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
         [SerializeField] private BlockManager blockManager;
         [SerializeField] private BlockProgressManager blockProgressManager;
         [SerializeField] private GameProcessManager gameProcessManager;
-        [SerializeField] private BallsManager ballsManager;
+        [FormerlySerializedAs("ballsManager")] [SerializeField] private BallManager ballManager;
         [SerializeField] private ActiveBallManager activeBallManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
@@ -48,7 +49,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
             winManager.PrepareReuse();
             healthManager.PrepareReuse();
             blockManager.PrepareReuse();
-            ballsManager.PrepareReuse();
+            ballManager.PrepareReuse();
             boostObjectManager.PrepareReuse();
             boostManager.PrepareReuse();
             activeBallManager.PrepareReuse();
@@ -57,14 +58,14 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
             blockProgressManager.PrepareReuse();
             difficultyManager.PrepareReuse();
             
-            platform.BallLauncher.SetBall(ballsManager.GetBall());
+            platform.BallLauncher.SetBall(ballManager.GetBall());
         }
 
         public void SetBall()
         {
             if (healthManager.CurrentHealth > 0)
             {
-                platform.BallLauncher.SetBall(ballsManager.GetBall());
+                platform.BallLauncher.SetBall(ballManager.GetBall());
                 healthManager.RemoveHealth();
             }
             else

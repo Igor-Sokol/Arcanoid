@@ -10,6 +10,7 @@ using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Application.Scripts.Library.TimeManagers;
+using Application.Scripts.Library.TimeManagers.Contracts;
 using Plugins.MobileBlur;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private IEnergyManager _energyManager;
         private IPopUpManager _popUpManager;
         private ISceneManager _sceneManager;
+        private ITimeScaleManager _timeScaleManager;
         private MenuPopUp _menuPopUp;
         private GameTimeScale _gameTimeScale;
         private PauseTimeScale _pauseTimeScale;
@@ -30,24 +32,24 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private Button button;
         [SerializeField] private GameplayManager gameplayManager;
         [SerializeField] private LevelPackManager levelPackManager;
-        [SerializeField] private TimeScaleManager timeScaleManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private BlockManager blockManager;
 
         [Inject]
         private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager, IEnergyManager energyManager,
-            IBlur blur)
+            IBlur blur, ITimeScaleManager timeScaleManager)
         {
             _popUpManager = popUpManager;
             _sceneManager = sceneManager;
             _energyManager = energyManager;
             _blur = blur;
+            _timeScaleManager = timeScaleManager;
         }
         
         public void Initialize()
         {
-            _gameTimeScale = timeScaleManager.GetTimeScale<GameTimeScale>();
-            _pauseTimeScale = timeScaleManager.GetTimeScale<PauseTimeScale>();
+            _gameTimeScale = _timeScaleManager.GetTimeScale<GameTimeScale>();
+            _pauseTimeScale = _timeScaleManager.GetTimeScale<PauseTimeScale>();
         }
         
         private void OnEnable()

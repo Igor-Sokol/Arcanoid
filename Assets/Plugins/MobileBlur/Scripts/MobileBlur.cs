@@ -1,8 +1,7 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Plugins.MobileBlur
+namespace Plugins.MobileBlur.Scripts
 {
     [ExecuteInEditMode]
     public class MobileBlur : MonoBehaviour, IBlur

@@ -1,4 +1,5 @@
 using Plugins.MobileBlur;
+using Plugins.MobileBlur.Scripts;
 using UnityEngine;
 using Zenject;
 

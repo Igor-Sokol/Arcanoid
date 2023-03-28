@@ -4,13 +4,14 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyInjection
 {
     public class BallServiceInstaller : MonoInstaller
     {
-        [SerializeField] private BallsManager ballManager;
+        [SerializeField] private BallManager ballManager;
         [SerializeField] private BallProvider ballProvider;
         [SerializeField] private ActiveBallManager activeBallManager;
         
