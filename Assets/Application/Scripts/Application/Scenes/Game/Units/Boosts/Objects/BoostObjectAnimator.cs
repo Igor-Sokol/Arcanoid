@@ -8,6 +8,7 @@ using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects
@@ -20,7 +21,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects
 
         [SerializeField] private Transform boostView;
         [SerializeField] private float speed;
-        [SerializeField] private ActionTimeManager actionTimeManager;
+        [FormerlySerializedAs("actionTimeManager")] [SerializeField] private ActionTimeManagerMono actionTimeManagerMono;
 
         [Inject]
         private void Construct(IGameActionManager gameActionManager, ITimeScaleManager timeScaleManager)
@@ -31,7 +32,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects
         
         public void Initialize()
         {
-            actionTimeManager.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
+            actionTimeManagerMono.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
         }
 
         public void PrepareReuse()
@@ -43,7 +44,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Objects
                 .SetLoops(-1, LoopType.Incremental)
                 .SetEase(Ease.Linear);
             
-            _animation = _gameActionManager.StartAction(new DoTweenGameAction(tween), -1, actionTimeManager);
+            _animation = _gameActionManager.StartAction(new DoTweenGameAction(tween), -1, actionTimeManagerMono);
         }
         
         private void OnDisable()

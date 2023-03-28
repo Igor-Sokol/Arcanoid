@@ -7,6 +7,7 @@ using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlaceAnimators
@@ -18,7 +19,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         private ActionHandler _animation;
 
         [SerializeField] private float placeDuration;
-        [SerializeField] private ActionTimeManager timeManager;
+        [FormerlySerializedAs("timeManager")] [SerializeField] private ActionTimeManagerMono timeManagerMono;
         
         public event Action OnEndAnimation;
         
@@ -56,7 +57,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
             });
             _activeAnimation.OnComplete(StopTweenAction);
 
-            _animation = _gameActionManager.StartAction(new DoTweenGameAction(_activeAnimation), -1, timeManager);
+            _animation = _gameActionManager.StartAction(new DoTweenGameAction(_activeAnimation), -1, timeManagerMono);
         }
 
         private void OnDisable()

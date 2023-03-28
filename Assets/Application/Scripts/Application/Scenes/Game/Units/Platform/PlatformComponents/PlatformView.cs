@@ -4,6 +4,7 @@ using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformComponents
@@ -16,7 +17,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         [SerializeField] private BoxCollider2D boxCollider2d;
         [SerializeField] private SpriteRenderer wingSpriteRenderer;
         [SerializeField] private PlatformSize platformSize;
-        [SerializeField] private ActionTimeManager actionTimeManager;
+        [FormerlySerializedAs("actionTimeManager")] [SerializeField] private ActionTimeManagerMono actionTimeManagerMono;
         [SerializeField] private float changeSizeTime;
 
         public Vector2 ViewSize => wingSpriteRenderer.size;
@@ -51,7 +52,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
             sizeAnimation.OnComplete(StopAnimation);
 
             _sizeAnimationHandler =
-                _gameActionManager.StartAction(new DoTweenGameAction(sizeAnimation), -1f, actionTimeManager);
+                _gameActionManager.StartAction(new DoTweenGameAction(sizeAnimation), -1f, actionTimeManagerMono);
         }
         
         private void StopAnimation() => _sizeAnimationHandler.Stop();

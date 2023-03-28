@@ -17,6 +17,7 @@ using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers
@@ -33,7 +34,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         [SerializeField] private BlockProvider blockProvider;
         [SerializeField] private PackPlacer packPlacer;
         [SerializeField] private PackPlaceAnimator packPlaceAnimator;
-        [SerializeField] private ActionTimeManager actionTimeManager;
+        [FormerlySerializedAs("actionTimeManager")] [SerializeField] private ActionTimeManagerMono actionTimeManagerMono;
         [SerializeField] private BlockScriptableConfig[] blockConfigs;
         [SerializeField] private float forceDestroyTime;
 
@@ -132,7 +133,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         {
             _destroyAllAction.Stop();
             _destroyAllAction = _gameActionManager.StartAction(new DestroyAllBlocks(this, forceDestroyTime / _blocks.Length),
-                -1, actionTimeManager);
+                -1, actionTimeManagerMono);
         }
         private void OnDisable()
         {

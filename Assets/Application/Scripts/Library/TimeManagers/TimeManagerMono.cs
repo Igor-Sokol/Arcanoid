@@ -4,35 +4,35 @@ using UnityEngine;
 
 namespace Application.Scripts.Library.TimeManagers
 {
-    public class TimeManager
+    public class TimeManagerMono : MonoBehaviour
     {
-        private readonly List<TimeScaler> _timeScales = new List<TimeScaler>();
+        [SerializeField] private List<TimeScaler> timeScales;
 
-        public IEnumerable<TimeScaler> TimeScales => _timeScales;
+        public IEnumerable<TimeScaler> TimeScales => timeScales;
         public float DeltaTime => Time.deltaTime * Scale;
         public float FixedDeltaTime => Time.fixedDeltaTime * Scale;
         public float Scale => GetScale();
 
         public void AddTimeScaler(TimeScaler scaler)
         {
-            _timeScales.Add(scaler);
+            timeScales.Add(scaler);
         }
 
         public void RemoveTimeScaler(TimeScaler scaler)
         {
-            _timeScales.Remove(scaler);
+            timeScales.Remove(scaler);
         }
 
         public void ClearTimeScales()
         {
-            _timeScales.Clear();
+            timeScales.Clear();
         }
 
         private float GetScale()
         {
             float scale = 1f;
 
-            foreach (var scaler in _timeScales)
+            foreach (var scaler in timeScales)
             {
                 scale *= scaler.Scale;
             }

@@ -72,7 +72,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             var ball = _activeBallManager.GetBall(_ballKey);
             ball.PrepareReuse();
 
-            ball.TimeManager.AddTimeScaler(_timeScaler);
+            ball.TimeManagerMono.AddTimeScaler(_timeScaler);
             
             ball.EnableCollision = false;
             ball.BallHitManager.AddService(new BulletBall(OnBulletHit, _damage));

@@ -8,6 +8,7 @@ using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.WeaponBoost
@@ -22,7 +23,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private Platform.Platform _platform;
         private ActionHandler _actionHandler;
 
-        [SerializeField] private ActionTimeManager actionTimeManager;
+        [FormerlySerializedAs("actionTimeManager")] [SerializeField] private ActionTimeManagerMono actionTimeManagerMono;
         [SerializeField] private float duration;
         [SerializeField] private float shootCooldown;
         [SerializeField] private float ballSpeed;
@@ -45,7 +46,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         public override void Initialize()
         {
             _gameTimeScale = _timeScaleManager.GetTimeScale<GameTimeScale>();
-            actionTimeManager.AddTimeScaler(_gameTimeScale);
+            actionTimeManagerMono.AddTimeScaler(_gameTimeScale);
         }
         
         public override void Enable()
@@ -61,7 +62,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
                 _actionHandler.Stop();
                 _actionHandler = _gameActionManager.StartAction(
                     new WeaponPlatformAction(_gameTimeScale, _activeBallManager, _platform, shootCooldown, ballSpeed, damage, bulletBallKey), -1f,
-                    actionTimeManager);
+                    actionTimeManagerMono);
             }
         }
 

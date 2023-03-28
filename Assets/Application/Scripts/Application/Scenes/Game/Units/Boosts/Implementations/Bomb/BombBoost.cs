@@ -11,6 +11,7 @@ using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.TimeManagers.Contracts;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.Bomb
@@ -25,7 +26,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private ActionHandler _boostHandler;
 
         [SerializeField] private BombWay bombWay;
-        [SerializeField] private ActionTimeManager actionTimeManager;
+        [FormerlySerializedAs("actionTimeManager")] [SerializeField] private ActionTimeManagerMono actionTimeManagerMono;
         [SerializeField] private ParticleSystem effect;
         [SerializeField] private float blockDestroyDelay;
         [SerializeField] private int damage;
@@ -41,7 +42,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         
         public override void Initialize()
         {
-            actionTimeManager.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
+            actionTimeManagerMono.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
             _ignoreKeys = new List<string>(ignoreBlocks.Select(b => b.Key));
         }
 
@@ -56,7 +57,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             var indexes = bombWay.GetIndexes(_blockManager.BlockArray, _blockManager.GetBlockIndex(Block), _ignoreKeys);
 
             _actionHandler = _gameActionManager.StartAction(
-                new BombGameAction(_blockManager, indexes, blockDestroyDelay, damage, StopBombAction, effect), -1f, actionTimeManager);
+                new BombGameAction(_blockManager, indexes, blockDestroyDelay, damage, StopBombAction, effect), -1f, actionTimeManagerMono);
         }
 
         public override void Disable()

@@ -22,6 +22,7 @@ using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Plugins.MobileBlur;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -49,7 +50,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private BlockProgressManager progressManager;
         [SerializeField] private ActiveBallManager activeBallManager;
         [SerializeField] private GameTimeScale gameTimeScale;
-        [SerializeField] private ActionTimeManager actionTimeManager;
+        [FormerlySerializedAs("actionTimeManager")] [SerializeField] private ActionTimeManagerMono actionTimeManagerMono;
         [SerializeField] private EffectorManager effectorManager;
         [SerializeField] private Image menuRayBlock;
         [SerializeField] private float freezeTime;
@@ -84,7 +85,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         {
             effectorManager.Play();
             var winGameAction = new WinGameAction(gameTimeScale, freezeScale);
-            _freezeAction = _gameActionManager.StartAction(winGameAction, freezeTime, actionTimeManager);
+            _freezeAction = _gameActionManager.StartAction(winGameAction, freezeTime, actionTimeManagerMono);
             gameProcessManager.IgnoreBall = true;
             menuRayBlock.enabled = true;
             

@@ -7,6 +7,7 @@ using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
@@ -16,7 +17,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
         private readonly Dictionary<Type, List<ActionHandler>> _boosts = new Dictionary<Type, List<ActionHandler>>();
         private IGameActionManager _gameActionManager;
 
-        [SerializeField] private ActionTimeManager actionTimeManager;
+        [FormerlySerializedAs("actionTimeManager")] [SerializeField] private ActionTimeManagerMono actionTimeManagerMono;
 
         [Inject]
         private void Construct(IGameActionManager gameActionManager)
@@ -52,7 +53,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers
             ClearInvalid();
             
             boost.Initialize();
-            var handler = _gameActionManager.StartAction(new BoostGameAction(boost), boost.Duration, actionTimeManager);
+            var handler = _gameActionManager.StartAction(new BoostGameAction(boost), boost.Duration, actionTimeManagerMono);
             boost.RegisterHandler(handler);
 
             var type = boost.GetType();

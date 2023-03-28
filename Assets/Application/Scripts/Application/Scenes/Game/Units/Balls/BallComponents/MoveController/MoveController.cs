@@ -2,6 +2,7 @@ using Application.Scripts.Library.Extensions.Vector;
 using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents.MoveController
 {
@@ -12,7 +13,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         private float _speed;
 
         [SerializeField] private Rigidbody2D rigidbody2d;
-        [SerializeField] private TimeManager ballTimeManager;
+        [FormerlySerializedAs("ballTimeManager")] [SerializeField] private TimeManagerMono ballTimeManagerMono;
         [SerializeField] private float defaultSpeed;
         [SerializeField] private float minBounceAngel;
         
@@ -37,7 +38,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
         public void SetDirection(Vector2 direction)
         {
             direction = direction.normalized;
-            rigidbody2d.velocity = direction * (_speed * ballTimeManager.FixedDeltaTime);
+            rigidbody2d.velocity = direction * (_speed * ballTimeManagerMono.FixedDeltaTime);
             _currentDirection = direction;
         }
 
@@ -50,7 +51,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
                     SetDirection(_currentDirection.sqrMagnitude > 0f ? _currentDirection : Random.insideUnitCircle);
                 }
             
-                rigidbody2d.velocity = rigidbody2d.velocity.normalized * (_speed * ballTimeManager.FixedDeltaTime);
+                rigidbody2d.velocity = rigidbody2d.velocity.normalized * (_speed * ballTimeManagerMono.FixedDeltaTime);
             }
         }
 

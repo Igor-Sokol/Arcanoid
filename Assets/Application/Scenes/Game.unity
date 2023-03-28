@@ -841,7 +841,6 @@ MonoBehaviour:
   blockManager: {fileID: 1892767360}
   blockProgressManager: {fileID: 826214863}
   gameProcessManager: {fileID: 2013369119}
-  ballManager: {fileID: 1014367157}
   activeBallManager: {fileID: 8320811}
   boostManager: {fileID: 2018377715}
   boostObjectManager: {fileID: 53067910}
@@ -1431,7 +1430,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelPackManager: {fileID: 1832296592}
   gameplayManager: {fileID: 255428928}
-  ballManager: {fileID: 1014367157}
   boostObjectManager: {fileID: 53067910}
   boostManager: {fileID: 2018377715}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
@@ -2850,7 +2848,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1014367156}
   - component: {fileID: 1014367157}
-  - component: {fileID: 1014367158}
   m_Layer: 0
   m_Name: BallsManager
   m_TagString: Untagged
@@ -2884,24 +2881,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc4e6043de245caa490d093eec23dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballKey: {fileID: 375709414, guid: 09e85c7178cd386468ddb1033e6bea5b, type: 3}
-  ballTimeManager: {fileID: 1014367158}
---- !u!114 &1014367158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014367155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35ca015889014054b32aaaba2aae382d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeScales:
-  - {fileID: 1870447184}
-  - {fileID: 278029921}
-  - {fileID: 936353951}
 --- !u!1 &1018498811
 GameObject:
   m_ObjectHideFlags: 0
@@ -3240,7 +3219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1084000653}
-  actionTimeManager: {fileID: 1084000656}
+  actionTimeManagerMono: {fileID: 1084000656}
   colors:
   - {r: 0, g: 1, b: 1, a: 1}
   - {r: 0.1393305, g: 1, b: 0, a: 1}
@@ -4128,14 +4107,13 @@ MonoBehaviour:
   levelPackManager: {fileID: 1832296592}
   gameplayManager: {fileID: 255428928}
   gameProcessManager: {fileID: 2013369119}
-  ballManager: {fileID: 1014367157}
   boostObjectManager: {fileID: 53067910}
   boostManager: {fileID: 2018377715}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
   progressManager: {fileID: 826214863}
   activeBallManager: {fileID: 8320811}
   gameTimeScale: {fileID: 1870447184}
-  actionTimeManager: {fileID: 1401460644}
+  actionTimeManagerMono: {fileID: 1401460644}
   effectorManager: {fileID: 1395874313}
   menuRayBlock: {fileID: 852247328}
   freezeTime: 2
@@ -4437,7 +4415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f9b116c7524d2d8911f4b0eb0b830b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballManager: {fileID: 1014367157}
 --- !u!114 &1498065951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4816,7 +4793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeDuration: 1
-  timeManager: {fileID: 1615502428}
+  timeManagerMono: {fileID: 1615502428}
 --- !u!114 &1615502428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5135,6 +5112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9a2fcfe8d84ce6ae93589ef6532a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballManagerConfig: {fileID: 11400000, guid: a5f3657d2e674984d91c9e10aab8f4ff, type: 2}
   ballManager: {fileID: 1014367157}
   ballProvider: {fileID: 1419262391}
   activeBallManager: {fileID: 8320811}
@@ -5430,7 +5408,7 @@ MonoBehaviour:
   blockProvider: {fileID: 2055855771}
   packPlacer: {fileID: 1364741565}
   packPlaceAnimator: {fileID: 1615502427}
-  actionTimeManager: {fileID: 1892767361}
+  actionTimeManagerMono: {fileID: 1892767361}
   blockConfigs:
   - {fileID: 11400000, guid: 4df36363b9991804b95d6f977b379edc, type: 2}
   - {fileID: 11400000, guid: 87aec9ca4564a584d87a905a34cb19a0, type: 2}
@@ -5529,7 +5507,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameplayManager: {fileID: 255428928}
-  ballManager: {fileID: 1014367157}
 --- !u!1 &2018377713
 GameObject:
   m_ObjectHideFlags: 0
@@ -5574,7 +5551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5376b4ffc154d9aaed15887222cd2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionTimeManager: {fileID: 2018377716}
+  actionTimeManagerMono: {fileID: 2018377716}
 --- !u!114 &2018377716
 MonoBehaviour:
   m_ObjectHideFlags: 0

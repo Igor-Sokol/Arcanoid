@@ -3,7 +3,7 @@ using Application.Scripts.Library.TimeManagers;
 
 namespace Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers
 {
-    public class ActionTimeManager : TimeManager, IActionTimeScale
+    public class ActionTimeManagerMono : TimeManagerMono, IActionTimeScale
     {
         public float TimeScale => base.Scale;
     }

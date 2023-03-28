@@ -5,6 +5,7 @@ using Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents.Mov
 using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Balls
 {
@@ -12,7 +13,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls
     {
         [SerializeField] private string key;
         [SerializeField] private MoveController moveController;
-        [SerializeField] private TimeManager timeManager;
+        [FormerlySerializedAs("timeManager")] [SerializeField] private TimeManagerMono timeManagerMono;
         [SerializeField] private BallHitManager ballHitManager;
         [SerializeField] private BallEffectManager ballEffectManager;
         [SerializeField] private BallView ballView;
@@ -21,7 +22,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls
 
         public string Key => key;
         public MoveController MoveController => moveController;
-        public TimeManager TimeManager => timeManager;
+        public TimeManagerMono TimeManagerMono => timeManagerMono;
         public BallHitManager BallHitManager => ballHitManager;
         public BallEffectManager BallEffectManager => ballEffectManager;
         public BallView BallView => ballView;
@@ -32,7 +33,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls
         public void PrepareReuse()
         {
             moveController.PrepareReuse();
-            TimeManager.ClearTimeScales();
+            TimeManagerMono.ClearTimeScales();
             BallHitManager.PrepareReuse();
             BallHitManager.Initialize(this);
             ballEffectManager.PrepareReuse();

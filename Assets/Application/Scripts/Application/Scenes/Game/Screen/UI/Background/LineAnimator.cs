@@ -4,6 +4,7 @@ using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -17,7 +18,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Background
         private int _colorIndex;
     
         [SerializeField] private Image image;
-        [SerializeField] private ActionTimeManager actionTimeManager;
+        [FormerlySerializedAs("actionTimeManager")] [SerializeField] private ActionTimeManagerMono actionTimeManagerMono;
         [SerializeField] private Color[] colors;
         [SerializeField] private float stepDuration;
         [SerializeField] private float fadeTime;
@@ -52,7 +53,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.UI.Background
             });
             _animation.SetLoops(-1);
             
-            _animationHandler = _gameActionManager.StartAction(new DoTweenGameAction(_animation), -1, actionTimeManager);
+            _animationHandler = _gameActionManager.StartAction(new DoTweenGameAction(_animation), -1, actionTimeManagerMono);
         }
 
         private void Stop()
