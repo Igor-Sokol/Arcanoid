@@ -1,5 +1,5 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers;
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
@@ -22,7 +22,6 @@ using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Plugins.MobileBlur;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 
@@ -37,13 +36,13 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private ILocalizationManager _localizationManager;
         private IPopUpManager _popUpManager;
         private ISceneManager _sceneManager;
+        private IBallManager _ballManager;
         private WinGamePopUp _winGamePopUp;
         private ActionHandler _freezeAction;
 
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private GameplayManager gameplayManager;
         [SerializeField] private GameProcessManager gameProcessManager;
-        [FormerlySerializedAs("ballsManager")] [SerializeField] private BallManager ballManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
@@ -59,7 +58,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [Inject]
         private void Construct(IPopUpManager popUpManager, ILocalizationManager localizationManager,
             ISceneManager sceneManager, IGameActionManager gameActionManager, IEnergyManager energyManager,
-            IPackProgressManager packProgressManager, IBlur blur)
+            IPackProgressManager packProgressManager, IBlur blur, IBallManager ballManager)
         {
             _popUpManager = popUpManager;
             _localizationManager = localizationManager;
@@ -68,6 +67,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _energyManager = energyManager;
             _packProgressManager = packProgressManager;
             _blur = blur;
+            _ballManager = ballManager;
         }
 
         private void OnEnable()
@@ -101,7 +101,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void ShowPopUp()
         {
             _packProgressManager.CompleteLevel(levelPackManager.GetCurrentPackInfo());
-            ballManager.PrepareReuse();
+            _ballManager.PrepareReuse();
             boostObjectManager.PrepareReuse();
             boostManager.PrepareReuse();
             activeBallManager.PrepareReuse();

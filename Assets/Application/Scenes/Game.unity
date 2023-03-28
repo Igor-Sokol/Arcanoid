@@ -2851,7 +2851,6 @@ GameObject:
   - component: {fileID: 1014367156}
   - component: {fileID: 1014367157}
   - component: {fileID: 1014367158}
-  - component: {fileID: 1014367159}
   m_Layer: 0
   m_Name: BallsManager
   m_TagString: Untagged
@@ -2886,9 +2885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballKey: {fileID: 375709414, guid: 09e85c7178cd386468ddb1033e6bea5b, type: 3}
-  activeBallManager: {fileID: 8320811}
   ballTimeManager: {fileID: 1014367158}
-  ballSetUpManager: {fileID: 1014367159}
 --- !u!114 &1014367158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2905,18 +2902,6 @@ MonoBehaviour:
   - {fileID: 1870447184}
   - {fileID: 278029921}
   - {fileID: 936353951}
---- !u!114 &1014367159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014367155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46b243bfd86c4bd8add5089c87b5f48b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1018498811
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.BallSetUpServices;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.BallSetUpServices.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using UnityEngine;
@@ -29,6 +31,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyI
             
             Container.Bind<IActiveBallManager>()
                 .FromInstance(activeBallManager)
+                .AsSingle()
+                .NonLazy();
+            
+            Container.Bind<IBallSetUpManager>()
+                .To<BallSetUpManager>()
                 .AsSingle()
                 .NonLazy();
         }

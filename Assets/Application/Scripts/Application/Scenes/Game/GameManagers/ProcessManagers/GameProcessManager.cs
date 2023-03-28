@@ -1,18 +1,24 @@
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
-using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Library.Reusable;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManagers
 {
     public class GameProcessManager : MonoBehaviour, IReusable
     {
+        private IBallManager _ballManager;
+        
         [SerializeField] private GameplayManager gameplayManager;
-        [SerializeField] private BallManager ballManager;
 
         public bool IgnoreBall { get; set; }
+
+        [Inject]
+        private void Construct(IBallManager ballManager)
+        {
+            _ballManager = ballManager;
+        }
         
         public void PrepareReuse()
         {
@@ -21,11 +27,11 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.ProcessManage
         
         private void OnEnable()
         {
-            ballManager.OnAllBallRemoved += OnMissedBall;
+            _ballManager.OnAllBallRemoved += OnMissedBall;
         }
         private void OnDisable()
         {
-            ballManager.OnAllBallRemoved -= OnMissedBall;
+            _ballManager.OnAllBallRemoved -= OnMissedBall;
         }
         
         private void OnMissedBall()

@@ -1,19 +1,25 @@
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.Screen.PlayingField.Borders
 {
     public class BallDeadZone : MonoBehaviour
     {
-        [FormerlySerializedAs("ballsManager")] [SerializeField] private BallManager ballManager;
+        private IBallManager _ballManager;
 
+        [Inject]
+        private void Construct(IBallManager ballManager)
+        {
+            _ballManager = ballManager;
+        }
+        
         private void OnCollisionEnter2D(Collision2D col)
         {
             if (col.collider.TryGetComponent<Ball>(out var ball))
             {
-                ballManager.ReturnBall(ball);
+                _ballManager.ReturnBall(ball);
             }
         }
     }

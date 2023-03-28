@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.BallSetUpServices
 {
-    public class BallSetUpManager : MonoBehaviour, IReusable
+    public class BallSetUpManager : IBallSetUpManager
     {
         private readonly Dictionary<Type, IBallSetUpAction> _ballActions = new Dictionary<Type, IBallSetUpAction>();
 

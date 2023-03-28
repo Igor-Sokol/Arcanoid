@@ -1,5 +1,5 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers;
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
+using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManagers;
@@ -13,7 +13,6 @@ using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using Plugins.MobileBlur;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
@@ -26,10 +25,10 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private IPopUpManager _popUpManager;
         private IHealthManager _healthManager;
         private LoseGamePopUp _loseGamePopUp;
+        private IBallManager _ballManager;
         
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private GameplayManager gameplayManager;
-        [SerializeField] private BallManager ballManager;
         [SerializeField] private BoostObjectManager boostObjectManager;
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
@@ -37,18 +36,19 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 
         [Inject]
         private void Construct(IPopUpManager popUpManager, ISceneManager sceneManager, IEnergyManager energyManager,
-            IBlur blur, IHealthManager healthManager)
+            IBlur blur, IHealthManager healthManager, IBallManager ballManager)
         {
             _popUpManager = popUpManager;
             _sceneManager = sceneManager;
             _energyManager = energyManager;
             _blur = blur;
             _healthManager = healthManager;
+            _ballManager = ballManager;
         }
 
         public void PlayerLose()
         {
-            ballManager.PrepareReuse();
+            _ballManager.PrepareReuse();
             boostObjectManager.PrepareReuse();
             boostManager.PrepareReuse();
             activeBallManager.PrepareReuse();

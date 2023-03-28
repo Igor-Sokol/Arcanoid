@@ -1,39 +1,44 @@
 using System;
 using System.Collections.Generic;
-using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers;
-using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.BallSetUpServices;
+using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.BallSetUpServices.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
-using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
 using Application.Scripts.Library.EnumerableSafeCollections;
-using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
+using Zenject;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
 {
-    public class BallManager : MonoBehaviour, IBallManager, IReusable
+    public class BallManager : MonoBehaviour, IBallManager
     {
         private readonly SafeList<Ball> _activeBalls = new SafeList<Ball>();
+        private IActiveBallManager _activeBallManager;
+        private IBallSetUpManager _ballSetUpManager;
 
         [SerializeField] private Ball ballKey;
-        [SerializeField] private ActiveBallManager activeBallManager;
         [SerializeField] private TimeManager ballTimeManager;
-        [SerializeField] private BallSetUpManager ballSetUpManager;
 
         public int BallsCount => _activeBalls.Count;
         public IEnumerable<Ball> Balls => _activeBalls;
-        public BallSetUpManager BallSetUpManager => ballSetUpManager;
+        public IBallSetUpManager BallSetUpManager => _ballSetUpManager;
         public event Action OnAllBallRemoved;
 
+        [Inject]
+        private void Construct(IActiveBallManager activeBallManager, IBallSetUpManager ballSetUpManager)
+        {
+            _activeBallManager = activeBallManager;
+            _ballSetUpManager = ballSetUpManager;
+        }
+        
         public Ball GetBall()
         {
-            var ball = activeBallManager.GetBall(ballKey.Key);
+            var ball = _activeBallManager.GetBall(ballKey.Key);
             _activeBalls.Add(ball);
             ball.PrepareReuse();
 
-            foreach (var action in ballSetUpManager.BallSetUpActions)
+            foreach (var action in _ballSetUpManager.BallSetUpActions)
             {
                 action.Install(ball);
             }
@@ -51,7 +56,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
             if (_activeBalls.Count > 0)
             {
                 _activeBalls.Remove(ball);
-                activeBallManager.Return(ball);
+                _activeBallManager.Return(ball);
 
                 if (_activeBalls.Count <= 0)
                 {
@@ -64,10 +69,10 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
         {
             foreach (var ball in _activeBalls)
             {
-                activeBallManager.Return(ball);
+                _activeBallManager.Return(ball);
             }
             _activeBalls.Clear();
-            ballSetUpManager.PrepareReuse();
+            _ballSetUpManager.PrepareReuse();
         }
 
         private void OnEnable()
