@@ -29,7 +29,7 @@ namespace Application.Scripts.Application.Scenes.Shared.Effects
 
         private void OnDisable()
         {
-            _animation?.Kill();
+            _animation?.Complete();
         }
     }
 }

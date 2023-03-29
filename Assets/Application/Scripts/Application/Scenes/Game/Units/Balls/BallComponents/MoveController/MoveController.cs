@@ -52,6 +52,10 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
             
                 rigidbody2d.velocity = rigidbody2d.velocity.normalized * (_speed * ballTimeManager.FixedDeltaTime);
             }
+            else
+            {
+                rigidbody2d.velocity = Vector3.zero;
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D col)

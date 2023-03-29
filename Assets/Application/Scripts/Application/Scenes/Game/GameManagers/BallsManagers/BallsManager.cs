@@ -4,7 +4,6 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.ActiveBallManager
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.BallSetUpServices;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.BallSetUpServices.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers.Contracts;
-using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
 using Application.Scripts.Library.EnumerableSafeCollections;
 using Application.Scripts.Library.Reusable;
@@ -48,6 +47,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers
 
         public void ReturnBall(Ball ball)
         {
+            ball.PrepareReuse();
+            
             if (_activeBalls.Count > 0)
             {
                 _activeBalls.Remove(ball);
