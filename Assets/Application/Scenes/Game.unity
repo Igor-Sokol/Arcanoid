@@ -4256,6 +4256,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballsManager: {fileID: 1014367157}
+  screenInfo: {fileID: 1043646897}
+  deadParticles: {fileID: 4696471439279256812, guid: ddc44b4038443f549ba5fb577c6e67c8, type: 3}
+  screenPosition: {x: 0, y: 0}
 --- !u!114 &1498065951
 MonoBehaviour:
   m_ObjectHideFlags: 0
