@@ -45,6 +45,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
                 {
                     hitEffect.OnHitAction(col.transform.position);
                 }
+                
+                var shakeService = block.HitServiceManager.Services.OfType<ShakeService>().FirstOrDefault();
+                if (shakeService)
+                {
+                    shakeService.OnHitAction();
+                }
             }
             
             _onHitAction?.Invoke(ball);

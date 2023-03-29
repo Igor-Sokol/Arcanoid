@@ -22,5 +22,10 @@ namespace Application.Scripts.Application.Scenes.Shared.Effects
             _animation?.Complete();
             _animation = shakeTransform.DOShakePosition(duration, strength, vibrato, randomness, snapping, fadeOut);
         }
+
+        public void Stop()
+        {
+            _animation?.Complete();
+        }
     }
 }
