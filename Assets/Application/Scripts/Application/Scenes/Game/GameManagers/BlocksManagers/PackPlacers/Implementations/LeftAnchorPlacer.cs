@@ -53,6 +53,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
                     if (block)
                     {
                         var blockTransform = block.transform;
+                        blockTransform.position = position;
                         positions[row][column] = position;
                         
                         Vector2 blockSize = block.BlockView.Sprite.bounds.size;

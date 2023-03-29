@@ -9,9 +9,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
         private Sprite _defaultSprite;
         
         [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer[] sprites;
 
         public Sprite Sprite { get => spriteRenderer.sprite; set => spriteRenderer.sprite = value; }
-        
+        public SpriteRenderer[] Sprites => sprites;
+
         public void Initialize()
         {
             _defaultSprite = Sprite;

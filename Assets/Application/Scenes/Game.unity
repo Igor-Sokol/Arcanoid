@@ -4633,7 +4633,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96fbb9371973482cb11e5d6372204876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeDuration: 1
+  blockPlaceDuration: 0.06
+  placeDuration: 2
+  additionScale: {x: 0.5, y: 0.5, z: 0.5}
   timeManager: {fileID: 1615502428}
 --- !u!114 &1615502428
 MonoBehaviour:

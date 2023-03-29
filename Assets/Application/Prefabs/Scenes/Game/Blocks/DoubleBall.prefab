@@ -5320,6 +5320,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 7432533128270861925}
+  sprites:
+  - {fileID: 7432533128270861925}
+  - {fileID: 5625594239742238595}
 --- !u!114 &7597205172337806056
 MonoBehaviour:
   m_ObjectHideFlags: 0

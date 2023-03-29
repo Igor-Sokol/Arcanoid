@@ -8,6 +8,7 @@ using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
 using Application.Scripts.Library.InitializeManager.Contracts;
 using DG.Tweening;
+using Sirenix.Utilities;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.PackPlaceAnimators
@@ -18,7 +19,9 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         private Sequence _activeAnimation;
         private ActionHandler _animation;
 
+        [SerializeField] private float blockPlaceDuration;
         [SerializeField] private float placeDuration;
+        [SerializeField] private Vector3 additionScale;
         [SerializeField] private ActionTimeManager timeManager;
         
         public event Action OnEndAnimation;
@@ -34,19 +37,42 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
             
             _activeAnimation?.Kill();
             _activeAnimation = DOTween.Sequence();
-
-            float blockPlaceDuration = placeDuration / blocks.Sum(b => b.Length);
             
+            var sum = blocks.Sum(b => b.Length);
+            var blockTime = placeDuration / sum;
+            float blockDuration = blockPlaceDuration * sum > blockTime ? blockTime : blockPlaceDuration;
+
             for (int i = 0; i < blocks.Length; i++)
             {
+                Sequence rowAnimation = DOTween.Sequence();
+                rowAnimation.AppendInterval(blockDuration * i);
                 for (int j = 0; j < blocks[i].Length; j++)
                 {
-                    if (blocks[i][j])
+                    var block = blocks[i][j];
+                    
+                    if (block)
                     {
-                        blocks[i][j].transform.position = Vector3.zero;
-                        _activeAnimation.Append(blocks[i][j].transform.DOMove(positions[i][j], blockPlaceDuration));
+                        var blockTransform = block.transform;
+                        var blockScale = blockTransform.localScale;
+                        var targetScale = blockScale;
+                        
+                        blockScale += additionScale;
+                        
+                        blockTransform.localScale = blockScale;
+                        block.BlockView.Sprites.ForEach(image => image.color = Color.clear);
+
+                        rowAnimation.AppendInterval(blockDuration);
+                        block.BlockView.Sprites.ForEach(image =>
+                        {
+                            rowAnimation.Join(image.DOColor(Color.white, blockDuration)
+                                    .SetEase(Ease.InOutQuad));
+                            rowAnimation.Join(blockTransform.DOScale(targetScale, blockDuration)
+                                .SetEase(Ease.InOutQuad));
+                        });
                     }
                 }
+
+                _activeAnimation.Join(rowAnimation).SetEase(Ease.Linear);
             }
 
             _activeAnimation.AppendCallback(() =>
