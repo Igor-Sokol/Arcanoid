@@ -4634,8 +4634,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockPlaceDuration: 0.06
-  placeDuration: 2
-  additionScale: {x: 0.5, y: 0.5, z: 0.5}
+  placeDuration: 1.5
+  additionScale: {x: 2, y: 2, z: 2}
   timeManager: {fileID: 1615502428}
 --- !u!114 &1615502428
 MonoBehaviour:
