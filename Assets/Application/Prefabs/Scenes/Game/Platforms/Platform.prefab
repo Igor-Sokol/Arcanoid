@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3808c4a9764065971d82c0689be10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScales: []
+  timeScales:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &4132521967951366230
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +115,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -335081987
-  m_SortingLayer: 4
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_Sprite: {fileID: -5303247421530120293, guid: 2154a37ae3dd10a46a9978eb4ec5edb4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -195,7 +197,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -335081987
-  m_SortingLayer: 4
+  m_SortingLayer: -3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: afa3a075393c7f2449fd83797d739164, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -222,6 +224,7 @@ GameObject:
   - component: {fileID: 2136928609}
   - component: {fileID: 2136928608}
   - component: {fileID: 7373051976029042777}
+  - component: {fileID: 8379257844499118025}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -343,6 +346,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boostManager: {fileID: 0}
   boostObjectManager: {fileID: 0}
+--- !u!114 &8379257844499118025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4132521968533964732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6334edbcc4cc44808dc2ed81d7b12f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  puncher: {fileID: 6842288489695581674}
 --- !u!1 &4132521969056398906
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +370,7 @@ GameObject:
   - component: {fileID: 4132521969056398909}
   - component: {fileID: 4262270438567086402}
   - component: {fileID: 1925565881761074099}
+  - component: {fileID: 6842288489695581674}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -410,6 +427,24 @@ MonoBehaviour:
   maxSizePercentage: {x: 1, y: 1}
   startSizePercentage: {x: 0.74, y: 1}
   maxSize: {x: 1.6, y: 0.384}
+--- !u!114 &6842288489695581674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4132521969056398906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0cc4391bb4246dbb28b54d455d7752e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punchTransform: {fileID: 4132521969056398909}
+  punch: {x: 0, y: -0.1, z: 0}
+  duration: 0.2
+  vibrato: 0
+  elasticity: 0
+  snapping: 0
 --- !u!1 &7304863887221703823
 GameObject:
   m_ObjectHideFlags: 0

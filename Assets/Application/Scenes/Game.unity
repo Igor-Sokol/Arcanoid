@@ -5587,26 +5587,6 @@ PrefabInstance:
       propertyPath: playerInput
       value: 
       objectReference: {fileID: 188974905}
-    - target: {fileID: 3131256224245986529, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
-      propertyPath: timeScales.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3131256224245986529, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
-      propertyPath: timeScales.Array.data[0]
-      value: 
-      objectReference: {fileID: 1870447184}
-    - target: {fileID: 3209099813021784711, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
-      propertyPath: timeScales.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3209099813021784711, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
-      propertyPath: timeScales.Array.data[0]
-      value: 
-      objectReference: {fileID: 1870447184}
-    - target: {fileID: 3209099813021784711, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
-      propertyPath: timeScales.Array.data[1]
-      value: 
-      objectReference: {fileID: 2085961348}
     - target: {fileID: 4132521968533964732, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
       propertyPath: m_Name
       value: Platform
@@ -5654,10 +5634,6 @@ PrefabInstance:
     - target: {fileID: 4132521968533964735, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959153680506870715, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
-      propertyPath: timeScales.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4959153680506870715, guid: b66a3f3dea37f7f458fb20a803bf644f, type: 3}
       propertyPath: timeScales.Array.data[0]

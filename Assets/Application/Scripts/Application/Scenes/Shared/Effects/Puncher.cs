@@ -1,27 +1,25 @@
-using System;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Shared.Effects
 {
-    public class Shaker : MonoBehaviour
+    public class Puncher : MonoBehaviour
     {
         private Tween _animation;
 
-        [SerializeField] private Transform shakeTransform;
+        [SerializeField] private Transform punchTransform;
+        [SerializeField] private Vector3 punch;
         [SerializeField] private float duration;
-        [SerializeField] private float  strength = 1f;
         [SerializeField] private int vibrato = 10;
-        [SerializeField] private float randomness = 90f;
+        [SerializeField] private float elasticity = 1F;
         [SerializeField] private bool snapping = false;
-        [SerializeField] private bool fadeOut = true;
     
-        [Button("Shake")]
-        public void Shake()
+        [Button("Punch")]
+        public void Punch()
         {
             _animation?.Complete();
-            _animation = shakeTransform.DOShakePosition(duration, strength, vibrato, randomness, snapping, fadeOut);
+            _animation = punchTransform.DOPunchPosition(punch, duration, vibrato, elasticity, snapping);
         }
 
         public void Stop()
