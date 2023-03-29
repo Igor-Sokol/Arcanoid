@@ -9,8 +9,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
         
         public override void OnHitAction(Collision2D col)
         {
-            var parent = transform;
-            var instance = Instantiate(particle, col.GetContact(0).point, Quaternion.identity, parent);
+            OnHitAction(col.GetContact(0).point);
+        }
+
+        public void OnHitAction(Vector3 position)
+        {
+            var instance = Instantiate(particle, position, Quaternion.identity);
             instance.Play();
         }
 
