@@ -24,7 +24,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
         {
             foreach (var service in Services)
             {
-                service.OnHitAction();
+                service.OnHitAction(col);
             }
         }
     }

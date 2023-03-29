@@ -1,16 +1,17 @@
-using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.BlockServices.Implementation;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.HitServices.Contracts;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.HitServices.Implementations
 {
-    public class BlockHealthService : HitService
+    public class HitParticleService : HitService
     {
-        [SerializeField] private BlockHealth blockHealth;
-
+        [SerializeField] private ParticleSystem particle;
+        
         public override void OnHitAction(Collision2D col)
         {
-            blockHealth.RemoveHealth();
+            var parent = transform;
+            var instance = Instantiate(particle, col.GetContact(0).point, Quaternion.identity, parent);
+            instance.Play();
         }
 
         public override void PrepareReuse()

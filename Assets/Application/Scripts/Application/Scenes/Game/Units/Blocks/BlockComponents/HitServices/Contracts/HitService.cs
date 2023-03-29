@@ -4,7 +4,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponen
 {
     public abstract class HitService : MonoBehaviour, IHitService
     {
-        public abstract void OnHitAction();
+        public abstract void OnHitAction(Collision2D col);
         public abstract void PrepareReuse();
     }
 }
