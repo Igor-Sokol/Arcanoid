@@ -1,4 +1,5 @@
 using Application.Scripts.Application.Scenes.Game.GameManagers.BallsManagers;
+using Application.Scripts.Application.Scenes.Game.Screen.Effects.EnvironmentShakers;
 using Application.Scripts.Application.Scenes.Game.Units.Balls;
 using Application.Scripts.Library.ScreenInfo;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PlayingField.Border
     public class BallDeadZone : MonoBehaviour
     {
         [SerializeField] private BallsManager ballsManager;
+        [SerializeField] private EnvironmentShake environmentShake;
         [SerializeField] private ScreenInfo screenInfo;
         [SerializeField] private ParticleSystem deadParticles;
         [SerializeField] private Vector2 screenPosition;
@@ -19,6 +21,8 @@ namespace Application.Scripts.Application.Scenes.Game.Screen.PlayingField.Border
                 Instantiate(deadParticles,
                     new Vector3(ball.transform.position.x, screenInfo.PositionFromPercentage(screenPosition).y),
                     Quaternion.identity);
+                
+                environmentShake.Shake();
                 
                 ballsManager.ReturnBall(ball);
             }

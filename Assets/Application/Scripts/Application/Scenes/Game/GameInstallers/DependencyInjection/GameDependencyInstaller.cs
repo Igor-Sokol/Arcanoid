@@ -9,6 +9,7 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Con
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostObjectManagers;
 using Application.Scripts.Application.Scenes.Game.GameManagers.HealthManagers;
 using Application.Scripts.Application.Scenes.Game.Pools.BallProviders.Contracts;
+using Application.Scripts.Application.Scenes.Game.Screen.Effects.EnvironmentShakers;
 using Application.Scripts.Application.Scenes.Game.Units.Platform;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
@@ -31,6 +32,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyI
         [SerializeField] private BallProvider ballProvider;
         [SerializeField] private ActiveBallManager activeBallManager;
         [SerializeField] private MobileBlur mobileBlur;
+        [SerializeField] private EnvironmentShake environmentShake;
         
         public void Initialize()
         {
@@ -44,6 +46,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameInstallers.DependencyI
             ProjectContext.Instance.SetService<IBallProvider, BallProvider>(ballProvider);
             ProjectContext.Instance.SetService<IActiveBallManager, ActiveBallManager>(activeBallManager);
             ProjectContext.Instance.SetService<IBlur, MobileBlur>(mobileBlur);
+            ProjectContext.Instance.SetService<IEnvironmentShake, EnvironmentShake>(environmentShake);
         }
     }
 }
