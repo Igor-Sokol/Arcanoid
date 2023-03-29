@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.Contracts;
+using Application.Scripts.Application.Scenes.Game.Screen.Effects.EnvironmentShakers;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks.BlockComponents.BlockServices.Implementation;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
@@ -13,6 +14,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
     public class BombGameAction : IGameAction
     {
         private readonly IBlockManager _blockManager;
+        private readonly IEnvironmentShake _environmentShake;
         private readonly float _blockRemoveDelay;
         private readonly int _damage;
         private readonly Action _onComplete;
@@ -21,10 +23,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         
         private float _timer;
         
-        public BombGameAction(IBlockManager blockManager, IEnumerable<IEnumerable<Vector2Int>> indexes, 
+        public BombGameAction(IBlockManager blockManager, IEnvironmentShake environmentShake, IEnumerable<IEnumerable<Vector2Int>> indexes, 
             float blockRemoveDelay, int damage, Action onComplete, ParticleSystem particle)
         {
             _blockManager = blockManager;
+            _environmentShake = environmentShake;
             _blockRemoveDelay = blockRemoveDelay;
             _damage = damage;
             _onComplete = onComplete;
@@ -85,6 +88,8 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
 
                         var instance = Object.Instantiate(_particle, block.transform.position, Quaternion.identity);
                         instance.Play();
+                        
+                        _environmentShake.Shake();
                     }
 
                     asyncIndexes.RemoveAt(0);

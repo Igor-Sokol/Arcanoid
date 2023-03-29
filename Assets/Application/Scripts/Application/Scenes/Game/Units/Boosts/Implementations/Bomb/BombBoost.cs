@@ -3,6 +3,7 @@ using System.Linq;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.BoostManagers.Contracts;
 using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers;
+using Application.Scripts.Application.Scenes.Game.Screen.Effects.EnvironmentShakers;
 using Application.Scripts.Application.Scenes.Game.Units.Blocks;
 using Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.Bomb.BombWayProviders.Contracts;
 using Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementations.Bomb.GameAction;
@@ -20,6 +21,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         private ITimeScaleManager _timeScaleManager;
         private IGameActionManager _gameActionManager;
         private IBlockManager _blockManager;
+        private IEnvironmentShake _environmentShake;
         private List<string> _ignoreKeys;
         private ActionHandler _actionHandler;
         private ActionHandler _boostHandler;
@@ -33,6 +35,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
         
         public override void Initialize()
         {
+            _environmentShake = ProjectContext.Instance.GetService<IEnvironmentShake>();
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
             _timeScaleManager = ProjectContext.Instance.GetService<ITimeScaleManager>();
             actionTimeManager.AddTimeScaler(_timeScaleManager.GetTimeScale<GameTimeScale>());
@@ -51,7 +54,8 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Boosts.Implementatio
             var indexes = bombWay.GetIndexes(_blockManager.BlockArray, _blockManager.GetBlockIndex(Block), _ignoreKeys);
 
             _actionHandler = _gameActionManager.StartAction(
-                new BombGameAction(_blockManager, indexes, blockDestroyDelay, damage, StopBombAction, effect), -1f, actionTimeManager);
+                new BombGameAction(_blockManager, _environmentShake, indexes, blockDestroyDelay, damage, StopBombAction,
+                    effect), -1f, actionTimeManager);
         }
 
         public override void Disable()
