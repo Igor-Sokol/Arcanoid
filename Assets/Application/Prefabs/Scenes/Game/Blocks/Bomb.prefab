@@ -423,6 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitServices:
   - {fileID: 7656105543484782539}
+  - {fileID: 2904775704058260490}
 --- !u!1 &8025752197536601655
 GameObject:
   m_ObjectHideFlags: 0
