@@ -9,9 +9,16 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Balls.BallComponents
     {
         private Ball _ball;
 
+        [SerializeField] private BallHitService[] ballHitServices;
+
         public void Initialize(Ball ball)
         {
             _ball = ball;
+
+            foreach (var ballHitService in ballHitServices)
+            {
+                AddService(ballHitService);
+            }
         }
         
         public void PrepareReuse()
