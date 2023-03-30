@@ -29,6 +29,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.BlocksManager
         public void Initialize()
         {
             _gameActionManager = ProjectContext.Instance.GetService<IGameActionManager>();
+            DOTween.SetTweensCapacity(500, 50);
         }
 
         public void Place(Block[][] blocks, Vector3[][] positions)
