@@ -11,6 +11,7 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         [SerializeField] private Vector2 defaultLaunchDirection;
         [SerializeField] private PlayerInput playerInput;
         [SerializeField] private PlatformMover platformMover;
+        [SerializeField] private bool directionDependsOnSpeed;
 
         public void SetBall(Ball ball)
         {
@@ -29,8 +30,13 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         {
             if (_ball)
             {
-                if (direction == default) direction = defaultLaunchDirection + platformMover.Velocity;
+                if (direction == default) direction = defaultLaunchDirection;
 
+                if (directionDependsOnSpeed)
+                {
+                    direction += platformMover.Velocity;
+                }
+                
                 _ball.MoveController.PhysicActive = true;
                 _ball.transform.SetParent(null);
                 _ball.MoveController.SetDirection(direction);
