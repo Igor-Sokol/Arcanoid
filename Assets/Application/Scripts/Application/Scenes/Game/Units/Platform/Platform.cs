@@ -1,11 +1,12 @@
 using Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformComponents;
 using Application.Scripts.Library.InitializeManager.Contracts;
+using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Platform
 {
-    public class Platform : MonoBehaviour, IInitializing
+    public class Platform : MonoBehaviour, IInitializing, IReusable
     {
         [SerializeField] private PlatformMover platformMover;
         [SerializeField] private PlatformSize platformSize;
@@ -24,6 +25,11 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform
             platformView.Initialize();
             platformSize.Initialize();
             platformMover.Initialize();
+        }
+
+        public void PrepareReuse()
+        {
+            PlatformMover.PrepareReuse();
         }
     }
 }

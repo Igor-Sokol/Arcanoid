@@ -56,6 +56,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.GameplayManag
             blockProgressManager.PrepareReuse();
             difficultyManager.PrepareReuse();
             
+            platform.PrepareReuse();
             platform.BallLauncher.SetBall(ballsManager.GetBall());
         }
 

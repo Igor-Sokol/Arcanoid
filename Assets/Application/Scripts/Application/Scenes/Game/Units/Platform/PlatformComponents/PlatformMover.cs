@@ -1,12 +1,13 @@
 using Application.Scripts.Application.Scenes.Game.Screen.UI.PlayerInputs;
 using Application.Scripts.Library.InitializeManager.Contracts;
+using Application.Scripts.Library.Reusable;
 using Application.Scripts.Library.ScreenInfo;
 using Application.Scripts.Library.TimeManagers;
 using UnityEngine;
 
 namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformComponents
 {
-    public class PlatformMover : MonoBehaviour, IInitializing
+    public class PlatformMover : MonoBehaviour, IInitializing, IReusable
     {
         private float _direction;
         private Vector2 _targetPosition;
@@ -78,6 +79,12 @@ namespace Application.Scripts.Application.Scenes.Game.Units.Platform.PlatformCom
         private void OnStopTouching(Vector2 position)
         {
             _targetPosition = rigidbody2d.position + new Vector2(_direction, 0);
+        }
+
+        public void PrepareReuse()
+        {
+            _direction = default;
+            _targetPosition = default;
         }
     }
 }
