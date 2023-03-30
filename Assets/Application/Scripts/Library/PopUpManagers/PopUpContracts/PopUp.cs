@@ -14,7 +14,7 @@ namespace Application.Scripts.Library.PopUpManagers.PopUpContracts
         protected abstract void HideAction();
         public void Show()
         {
-            transform.SetSiblingIndex(0);
+            transform.SetAsLastSibling();
             ShowAction();
         }
 

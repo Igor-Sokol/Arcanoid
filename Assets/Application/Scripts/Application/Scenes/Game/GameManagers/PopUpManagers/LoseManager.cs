@@ -8,8 +8,10 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.LevelPackManagers
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.LosePopUp;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
+using Application.Scripts.Application.Scenes.Shared.UI.PopUps.MessagePopUp;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
+using Application.Scripts.Library.Localization.LocalizationManagers;
 using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
@@ -25,6 +27,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private IEnergyManager _energyManager;
         private IPopUpManager _popUpManager;
         private LoseGamePopUp _loseGamePopUp;
+        private ILocalizationManager _localizationManager;
         
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private GameplayManager gameplayManager;
@@ -34,6 +37,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private BoostManager boostManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private ActiveBallManager activeBallManager;
+        [SerializeField] private string noEnergyKey;
 
         public void Initialize()
         {
@@ -41,6 +45,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
             _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
             _blur = ProjectContext.Instance.GetService<IBlur>();
+            _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
         }
 
         public void PlayerLose()
@@ -52,9 +57,6 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             
             _loseGamePopUp = _popUpManager.Get<LoseGamePopUp>();
             _loseGamePopUp.LosePopUpAnimator.Configure(_energyManager.CurrentEnergy, _energyManager.MaxEnergy);
-
-            _loseGamePopUp.AddHealthActive = _energyManager.CurrentEnergy >= energyPriceConfig.HealthPrice;
-            _loseGamePopUp.RestartActive = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
 
             _loseGamePopUp.HealthPrice.SetPrice(energyPriceConfig.HealthPrice);
             _loseGamePopUp.RestartPrice.SetPrice(energyPriceConfig.LevelPrice);
@@ -83,17 +85,31 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         
         private void OnAddHealth()
         {
-            _loseGamePopUp.Hide();
-            _blur.Disable();
-            _energyManager.RemoveEnergy(energyPriceConfig.HealthPrice);
-            healthManager.AddHealth();
-            _loseGamePopUp.OnHidden += () => gameplayManager.SetBall();
+            if (_energyManager.CurrentEnergy >= energyPriceConfig.HealthPrice)
+            {
+                _loseGamePopUp.Hide();
+                _blur.Disable();
+                _energyManager.RemoveEnergy(energyPriceConfig.HealthPrice);
+                healthManager.AddHealth();
+                _loseGamePopUp.OnHidden += () => gameplayManager.SetBall();
+            }
+            else
+            {
+                ShowNoEnergyPopUp();
+            }
         }
         private void OnRestart()
         {
-            _loseGamePopUp.Hide();
-            _blur.Disable();
-            _loseGamePopUp.OnHidden += () => gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
+            if (_energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice)
+            {
+                _loseGamePopUp.Hide();
+                _blur.Disable();
+                _loseGamePopUp.OnHidden += () => gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
+            }
+            else
+            {
+                ShowNoEnergyPopUp();
+            }
         }
         private void OnMenu()
         {
@@ -109,6 +125,16 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void UpdateEnergyTime(float time)
         {
             _loseGamePopUp.EnergyView.SetTimeLeft(time);
+        }
+
+        private void ShowNoEnergyPopUp()
+        {
+            var messagePopup = _popUpManager.Get<MessagePopUp>();
+            messagePopup.Configure(_localizationManager.GetString(noEnergyKey));
+
+            messagePopup.OnContinueSelected += messagePopup.Hide;
+            
+            messagePopup.Show();
         }
     }
 }

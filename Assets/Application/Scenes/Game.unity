@@ -1494,6 +1494,7 @@ MonoBehaviour:
   boostManager: {fileID: 2018377715}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
   activeBallManager: {fileID: 8320811}
+  noEnergyKey: message.notEnoughEnergy
 --- !u!1 &492798634
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,7 +1778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelPack: {fileID: 11400000, guid: 6a1131b074d64c44cb77b83b8b217a01, type: 2}
-  levelIndex: 1
+  levelIndex: 4
 --- !u!1 &562433554
 GameObject:
   m_ObjectHideFlags: 0
@@ -3683,6 +3684,7 @@ MonoBehaviour:
   timeScaleManager: {fileID: 397341248}
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
   blockManager: {fileID: 1892767360}
+  noEnergyKey: message.notEnoughEnergy
 --- !u!1 &1303730893
 GameObject:
   m_ObjectHideFlags: 0
@@ -4010,6 +4012,8 @@ MonoBehaviour:
   menuRayBlock: {fileID: 852247328}
   freezeTime: 2
   freezeScale: {x: 1, y: 0}
+  noEnergyKey: message.notEnoughEnergy
+  noLevelsKey: message.noLevels
 --- !u!114 &1401460644
 MonoBehaviour:
   m_ObjectHideFlags: 0

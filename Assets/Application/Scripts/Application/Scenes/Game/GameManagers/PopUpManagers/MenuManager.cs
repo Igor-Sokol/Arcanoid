@@ -5,8 +5,10 @@ using Application.Scripts.Application.Scenes.Game.GameManagers.TimeScaleManagers
 using Application.Scripts.Application.Scenes.Game.Screen.PopUps.MenuPopUp;
 using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
+using Application.Scripts.Application.Scenes.Shared.UI.PopUps.MessagePopUp;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
+using Application.Scripts.Library.Localization.LocalizationManagers;
 using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
@@ -26,6 +28,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private MenuPopUp _menuPopUp;
         private GameTimeScale _gameTimeScale;
         private PauseTimeScale _pauseTimeScale;
+        private ILocalizationManager _localizationManager;
 
         [SerializeField] private Button button;
         [SerializeField] private GameplayManager gameplayManager;
@@ -33,6 +36,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private TimeScaleManager timeScaleManager;
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private BlockManager blockManager;
+        [SerializeField] private string noEnergyKey;
 
         public void Initialize()
         {
@@ -42,6 +46,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
             _gameTimeScale = timeScaleManager.GetTimeScale<GameTimeScale>();
             _pauseTimeScale = timeScaleManager.GetTimeScale<PauseTimeScale>();
+            _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
         }
         
         private void OnEnable()
@@ -60,7 +65,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
             _pauseTimeScale.Scale = 0;
             _menuPopUp = _popUpManager.Get<MenuPopUp>();
 
-            _menuPopUp.RestartActive = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
+            //_menuPopUp.RestartActive = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
             _menuPopUp.RestartPrice.SetPrice(energyPriceConfig.LevelPrice);
             _menuPopUp.SkipActive = _energyManager.CurrentEnergy >= energyPriceConfig.SkipPrice;
             _menuPopUp.SkipPrice.SetPrice(energyPriceConfig.SkipPrice);
@@ -76,14 +81,21 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         
         private void OnRestart()
         {
-            _menuPopUp.OnHidden += () =>
+            if (_energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice)
             {
-                _gameTimeScale.Scale = 1;
-                _pauseTimeScale.Scale = 1;
-            };
-            _menuPopUp.Hide();
-            _blur.Disable();
-            gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
+                _menuPopUp.OnHidden += () =>
+                {
+                    _gameTimeScale.Scale = 1;
+                    _pauseTimeScale.Scale = 1;
+                };
+                _menuPopUp.Hide();
+                _blur.Disable();
+                gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
+            }
+            else
+            {
+                ShowNoEnergyPopUp();
+            }
         }
 
         private void OnMenu()
@@ -105,15 +117,32 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
 
         private void OnSkip()
         {
-            _menuPopUp.OnHidden += () =>
+            if (_energyManager.CurrentEnergy >= energyPriceConfig.SkipPrice)
             {
-                _gameTimeScale.Scale = 1;
-                _pauseTimeScale.Scale = 1;
-            };
-            _menuPopUp.Hide();
-            _blur.Disable();
-            _energyManager.RemoveEnergy(energyPriceConfig.SkipPrice);
-            blockManager.DestroyAllBlocks();
+                _menuPopUp.OnHidden += () =>
+                {
+                    _gameTimeScale.Scale = 1;
+                    _pauseTimeScale.Scale = 1;
+                };
+                _menuPopUp.Hide();
+                _blur.Disable();
+                _energyManager.RemoveEnergy(energyPriceConfig.SkipPrice);
+                blockManager.DestroyAllBlocks();
+            }
+            else
+            {
+                ShowNoEnergyPopUp();
+            }
+        }
+        
+        private void ShowNoEnergyPopUp()
+        {
+            var messagePopup = _popUpManager.Get<MessagePopUp>();
+            messagePopup.Configure(_localizationManager.GetString(noEnergyKey));
+
+            messagePopup.OnContinueSelected += messagePopup.Hide;
+            
+            messagePopup.Show();
         }
     }
 }

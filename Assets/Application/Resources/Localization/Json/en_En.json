@@ -15,5 +15,7 @@
   "game.popup.lose.title" : "You lose!",
   "game.popup.win.title" : "You win!",
   "game.popup.menu.next" : "continue",
-  "game.button.health" : "Buy health"
+  "game.button.health" : "Buy health",
+  "message.notEnoughEnergy" : "Not enough energy!",
+  "message.noLevels" : "No levels left!"
 }

@@ -15,5 +15,7 @@
   "game.popup.lose.title" : "Вы проиграли!",
   "game.popup.win.title" : "Вы выиграли!",
   "game.popup.menu.next" : "Далее",
-  "game.button.health" : "Купить жизнь"
+  "game.button.health" : "Купить жизнь",
+  "message.notEnoughEnergy" : "Недостаточно энергии!",
+  "message.noLevels" : "Уровней не осталось!"
 }

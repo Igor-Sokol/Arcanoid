@@ -1020,6 +1020,7 @@ MonoBehaviour:
   energyPriceConfig: {fileID: 11400000, guid: ef3972bd3a95e4d41ada8e43634abbbb, type: 2}
   graphicRayBlock: {fileID: 1166224975}
   scrollTime: 0.4
+  noEnergyKey: message.notEnoughEnergy
 --- !u!1 &1059036797
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ using Application.Scripts.Application.Scenes.Shared.Energy.Config;
 using Application.Scripts.Application.Scenes.Shared.Energy.Contracts;
 using Application.Scripts.Application.Scenes.Shared.LibraryImplementations.TimeManagers;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.Contracts;
+using Application.Scripts.Application.Scenes.Shared.UI.PopUps.MessagePopUp;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.GameActionManagers.Contracts;
 using Application.Scripts.Library.GameActionManagers.Timer;
@@ -39,6 +40,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private ISceneManager _sceneManager;
         private WinGamePopUp _winGamePopUp;
         private ActionHandler _freezeAction;
+        private bool _nextLevelExist;
 
         [SerializeField] private LevelPackManager levelPackManager;
         [SerializeField] private GameplayManager gameplayManager;
@@ -55,6 +57,8 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         [SerializeField] private Image menuRayBlock;
         [SerializeField] private float freezeTime;
         [SerializeField] private Vector2 freezeScale;
+        [SerializeField] private string noEnergyKey;
+        [SerializeField] private string noLevelsKey;
             
         public void Initialize()
         {
@@ -108,8 +112,7 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
                 energyPriceConfig.WinGift);
 
             _energyManager.AddEnergy(energyPriceConfig.WinGift);
-            _winGamePopUp.ContinueActive = levelPackManager.NextLevelExists() &&
-                                           _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
+            _nextLevelExist = levelPackManager.NextLevelExists();
             _winGamePopUp.ContinuePrice.SetPrice(energyPriceConfig.LevelPrice);
             
             _winGamePopUp.OnContinueSelected += OnContinue;
@@ -142,14 +145,25 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         }
         private void OnContinue()
         {
-            _winGamePopUp.Hide();
-            _blur.Disable();
-            _winGamePopUp.OnHidden += () =>
+            if(!_nextLevelExist)
             {
-                levelPackManager.RenderView();
-                levelPackManager.RenderView();
-                gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
-            };
+                ShowNoLevels();
+            }
+            else if (_energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice)
+            {
+                _winGamePopUp.Hide();
+                _blur.Disable();
+                _winGamePopUp.OnHidden += () =>
+                {
+                    levelPackManager.RenderView();
+                    levelPackManager.RenderView();
+                    gameplayManager.StartGame(levelPackManager.GetCurrentLevel());
+                };
+            }
+            else
+            {
+                ShowNoEnergyPopUp();
+            }
         }
         private void OnMenu()
         {
@@ -159,8 +173,6 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         private void UpdateEnergy()
         {
             _winGamePopUp.EnergyView.SetProgress(_energyManager.CurrentEnergy, _energyManager.MaxEnergy);
-            _winGamePopUp.ContinueActive = levelPackManager.NextLevelExists() &&
-                                           _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
         }
         private void UpdateEnergyTime(float time)
         {
@@ -171,6 +183,26 @@ namespace Application.Scripts.Application.Scenes.Game.GameManagers.PopUpManagers
         {
             _freezeAction.Stop();
             _blur.Disable();
+        }
+        
+        private void ShowNoEnergyPopUp()
+        {
+            var messagePopup = _popUpManager.Get<MessagePopUp>();
+            messagePopup.Configure(_localizationManager.GetString(noEnergyKey));
+
+            messagePopup.OnContinueSelected += messagePopup.Hide;
+            
+            messagePopup.Show();
+        }
+        
+        private void ShowNoLevels()
+        {
+            var messagePopup = _popUpManager.Get<MessagePopUp>();
+            messagePopup.Configure(_localizationManager.GetString(noLevelsKey));
+
+            messagePopup.OnContinueSelected += messagePopup.Hide;
+            
+            messagePopup.Show();
         }
     }
 }

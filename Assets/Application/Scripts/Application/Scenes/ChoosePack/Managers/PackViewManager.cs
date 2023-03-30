@@ -10,8 +10,11 @@ using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgres
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Contracts;
 using Application.Scripts.Application.Scenes.Shared.ProgressManagers.PackProgress.PacksInfo.Implementations;
 using Application.Scripts.Application.Scenes.Shared.UI.Header;
+using Application.Scripts.Application.Scenes.Shared.UI.PopUps.MessagePopUp;
 using Application.Scripts.Library.DependencyInjection;
 using Application.Scripts.Library.InitializeManager.Contracts;
+using Application.Scripts.Library.Localization.LocalizationManagers;
+using Application.Scripts.Library.PopUpManagers;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneInfo;
 using Application.Scripts.Library.SceneManagers.Contracts.SceneManagers;
 using DG.Tweening;
@@ -28,6 +31,8 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         private ISceneManager _sceneManager;
         private IEnergyManager _energyManager;
         private IPackInfo _packInfo;
+        private IPopUpManager _popUpManager;
+        private ILocalizationManager _localizationManager;
         private Tween _activeAnimation;
         
         [SerializeField] private PackView packViewPrefab;
@@ -38,12 +43,15 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
         [SerializeField] private EnergyValueConfig energyPriceConfig;
         [SerializeField] private Image graphicRayBlock;
         [SerializeField] private float scrollTime;
+        [SerializeField] private string noEnergyKey;
         
         public void Initialize()
         {
             _packProgressManager = ProjectContext.Instance.GetService<IPackProgressManager>();
             _sceneManager = ProjectContext.Instance.GetService<ISceneManager>();
+            _popUpManager = ProjectContext.Instance.GetService<IPopUpManager>();
             _energyManager = ProjectContext.Instance.GetService<IEnergyManager>();
+            _localizationManager = ProjectContext.Instance.GetService<ILocalizationManager>();
 
             GenerateViews();
             SetViewsPosition();
@@ -128,29 +136,46 @@ namespace Application.Scripts.Application.Scenes.ChoosePack.Managers
 
         private void LoadPack(PackView packView, LevelPack levelPack)
         {
-            packView.OnSelected -= LoadPack;
-
-            if (levelPack == _packInfo.LevelPack)
+            if (_energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice)
             {
-                ProjectContext.Instance.SetService<IPackInfo, IPackInfo>(_packInfo);
+                packView.OnSelected -= LoadPack;
+
+                if (levelPack == _packInfo.LevelPack)
+                {
+                    ProjectContext.Instance.SetService<IPackInfo, IPackInfo>(_packInfo);
+                }
+                else
+                {
+                    ProjectContext.Instance.SetService<IPackInfo, PackInfo>(new PackInfo(levelPack, 0));
+                }
+            
+                packViewAnimator.Hide(packView);
+                graphicRayBlock.enabled = true;
+                packViewAnimator.OnAnimationHidden += () => _sceneManager.LoadScene(Scene.Game);
             }
             else
             {
-                ProjectContext.Instance.SetService<IPackInfo, PackInfo>(new PackInfo(levelPack, 0));
+                ShowNoEnergyPopUp();
             }
-            
-            packViewAnimator.Hide(packView);
-            graphicRayBlock.enabled = true;
-            packViewAnimator.OnAnimationHidden += () => _sceneManager.LoadScene(Scene.Game);
         }
 
         private void PackStateUpdate()
         {
-            bool interactable = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
-            foreach (var pack in _packs.Where(p => p.State != PackState.Closed))
-            {
-                pack.Interactable = interactable;
-            }
+            // bool interactable = _energyManager.CurrentEnergy >= energyPriceConfig.LevelPrice;
+            // foreach (var pack in _packs.Where(p => p.State != PackState.Closed))
+            // {
+            //     pack.Interactable = interactable;
+            // }
+        }
+        
+        private void ShowNoEnergyPopUp()
+        {
+            var messagePopup = _popUpManager.Get<MessagePopUp>();
+            messagePopup.Configure(_localizationManager.GetString(noEnergyKey));
+
+            messagePopup.OnContinueSelected += messagePopup.Hide;
+            
+            messagePopup.Show();
         }
     }
 }
